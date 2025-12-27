@@ -1,0 +1,63 @@
+<?php
+// Get product ID from URL, default to 701 if missing or invalid
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 701;
+
+// Capture product output to get access to variables like $name
+ob_start();
+include 'product_template.php';
+$product_html = ob_get_clean();
+
+// Fallback if name is not set
+$page_title = isset($name) ? $name : "Product Details";
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
+    <title><?php echo htmlspecialchars($page_title); ?> - IMarket</title>
+</head>
+
+<body>
+    <nav>
+        <?php
+        $path_prefix = '../../';
+        include '../../Components/header.php';
+        ?>
+    </nav>
+
+    <div style="text-align: center; margin: 30px 0 10px;">
+        <img src="../../image/Logo.png" alt="iMarket Logo"
+            style="height: 40px; vertical-align: middle; margin-right: 10px;">
+        <span
+            style="font-size: 24px; font-weight: bold; color: #2A3B7E; vertical-align: middle; font-family: sans-serif;">Sports
+            & Outdoor
+            | IMarket</span>
+    </div>
+
+    <div class="content">
+        <div class="product">
+
+            <?php echo $product_html; ?>
+        </div>
+    </div>
+
+    <div class="reviews">
+        <?php
+        // Ensure product_id is set for the reviews section to use
+        // $product_id is already set above
+        include 'reviews_section.php';
+        ?>
+    </div>
+
+    <footer>
+        <?php
+        $path_prefix = '../../';
+        include '../../Components/footer.php';
+        ?>
+    </footer>
+</body>
+
+</html>
