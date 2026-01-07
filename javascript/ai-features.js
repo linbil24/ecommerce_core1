@@ -258,6 +258,7 @@ async function captureAndSearch() {
 }
 
 function openVoiceCommand() {
+    stopCamera(); // Ensure camera is off
     const modal = document.getElementById('ai-modal-overlay');
     const content = document.getElementById('ai-modal-content-inject');
 
@@ -275,18 +276,68 @@ function openVoiceCommand() {
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
-            <p class="voice-status">Listening...</p>
-            <p style="color:#999; font-size: 0.8rem;">Try saying "Show me red hoodies"</p>
+            <p class="voice-status" id="voice-status-text">Listening...</p>
+            <p style="color:#999; font-size: 0.8rem;">Try saying "Hello" or "Best Sellers"</p>
         </div>
     `;
 
-    setTimeout(() => {
-        document.querySelector('.voice-status').innerText = "Processing: 'Best Sellers'";
-        setTimeout(() => {
-            closeAiModal();
-            window.location.href = '../Shop-now/index.php?store=UrbanWear+PH&search_query=best+sellers';
-        }, 1500);
-    }, 3000);
+    // Check browser support
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        document.getElementById('voice-status-text').innerText = "Browser does not support Voice API.";
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-US'; // Default to English but it usually picks up simple Tagalog/English mix
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        console.log("Voice Result:", transcript);
+
+        const statusText = document.getElementById('voice-status-text');
+        statusText.innerText = `You said: "${transcript}"`;
+
+        if (transcript.includes('hello') || transcript.includes('hi')) {
+            speakResponse("Hello! How can I help you today?");
+            statusText.innerText = "Hello! How can I help you?";
+        }
+        else if (transcript.includes('best selling') || transcript.includes('best seller') || transcript.includes('best sellers')) {
+            speakResponse("Showing you our Best Selling products.");
+            statusText.innerText = "Opening Best Sellers...";
+
+            setTimeout(() => {
+                closeAiModal();
+                window.location.href = '../Shop-now/index.php?store=UrbanWear+PH&search_query=best+sellers';
+            }, 1500);
+        }
+        else {
+            speakResponse("Sorry, I didn't catch that command.");
+        }
+    };
+
+    recognition.onerror = (event) => {
+        document.getElementById('voice-status-text').innerText = "Error occurred in recognition: " + event.error;
+    };
+
+    recognition.onend = () => {
+        // Optionally restart or just let it stop
+    };
+}
+
+function speakResponse(text) {
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        // Optional: Set voice
+        // const voices = window.speechSynthesis.getVoices();
+        // utterance.voice = voices[0]; 
+        window.speechSynthesis.speak(utterance);
+    }
 }
 
 function closeAiModal() {
