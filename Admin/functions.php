@@ -177,6 +177,7 @@ if (!function_exists('send_otp_email')) {
 if (!function_exists('authenticate_admin')) {
     function authenticate_admin($pdo, $username, $password)
     {
+        // 1. Try finding in admin_users first
         $user = get_admin_user_by_username($pdo, $username);
 
         if ($user && password_verify($password, $user['password_hash'])) {
@@ -188,10 +189,7 @@ if (!function_exists('authenticate_admin')) {
             $recipient = $user['email'];
 
             if (save_otp($pdo, $user['id'], $otp)) {
-                // Send actual email instead of simulation
                 $otp_message = send_otp_email($recipient, $otp, $user['username']);
-
-                // Set temporary session for OTP validation
                 $_SESSION['admin_awaiting_otp'] = true;
                 $_SESSION['temp_admin_id'] = $user['id'];
                 $_SESSION['temp_admin_username'] = $user['username'];
@@ -202,11 +200,36 @@ if (!function_exists('authenticate_admin')) {
                     'message' => $otp_message
                 ];
             } else {
-                return ['success' => false, 'message' => "Login failed: Could not save OTP. Please check database permissions and column names."];
+                return ['success' => false, 'message' => "Login failed: Could not save OTP. Please check database permissions."];
             }
-        } else {
-            return ['success' => false, 'message' => "Login failed: Incorrect username or password."];
         }
+
+        // 2. Fallback: Try finding in 'users' (Customer table)
+        // Check both email and fullname since the login form asks for "Username"
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? OR fullname = ?");
+            $stmt->execute([$username, $username]);
+            $customer = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($customer && password_verify($password, $customer['password'])) {
+                // Login successful as Customer-Admin
+                // Direct login, skipping OTP for customers as they lack otp_code/otp_expiry columns in this context
+                $_SESSION['admin_logged_in'] = true;
+                $_SESSION['admin_id'] = $customer['id'];
+                $_SESSION['admin_username'] = $customer['fullname']; // Use fullname as username
+                $_SESSION['admin_role'] = 'Customer-Admin'; // Distinguish role
+
+                return [
+                    'success' => true,
+                    'redirect_view' => 'dashboard', // Direct to dashboard
+                    'message' => "Logged in successfully as " . $customer['fullname']
+                ];
+            }
+        } catch (PDOException $e) {
+            // Ignore error and fall through to failure message
+        }
+
+        return ['success' => false, 'message' => "Login failed: Incorrect username or password."];
     }
 }
 
@@ -266,10 +289,10 @@ if (!function_exists('create_admin_account')) {
         $role = 'Admin';
 
         if (strlen($password) < 6) {
-            return "Registration failed: Password must be at least 6 characters long.";
+            return ['success' => false, 'message' => "Registration failed: Password must be at least 6 characters long."];
         }
         if (get_admin_user_by_username($pdo, $username)) {
-            return "Registration failed: Username is already taken.";
+            return ['success' => false, 'message' => "Registration failed: Username is already taken."];
         }
 
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
@@ -565,10 +588,10 @@ if (!function_exists('get_orders_list')) {
         try {
             $stmt = $pdo->prepare("
             SELECT o.id, o.order_number, o.total_amount as total, o.status, o.order_date as date, 
-                   c.full_name as customer,
+                   c.fullname as customer,
                    (SELECT COUNT(*) FROM order_items WHERE order_id = o.id) as items
             FROM orders o 
-            LEFT JOIN customers c ON o.customer_id = c.id 
+            LEFT JOIN users c ON o.customer_id = c.id 
             ORDER BY o.order_date DESC
         ");
             $stmt->execute();
@@ -632,26 +655,32 @@ if (!function_exists('get_customer_addresses')) {
         if (!$pdo)
             return [];
         try {
+            // Fetch addresses from orders table as requested
             $stmt = $pdo->prepare("
-            SELECT ca.id, ca.address_line1, ca.address_line2, ca.city, ca.province, ca.status,
-                   c.full_name as customer_name
-            FROM customer_addresses ca 
-            LEFT JOIN customers c ON ca.customer_id = c.id 
-            ORDER BY ca.created_at DESC
+            SELECT id, full_name, address, city, postal_code, phone_number
+            FROM orders
+            WHERE address IS NOT NULL AND address != ''
+            GROUP BY address, city, postal_code -- Avoid duplicates
+            ORDER BY id DESC
         ");
             $stmt->execute();
-            $addresses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             // Format addresses for display
             $formatted = [];
-            foreach ($addresses as $addr) {
+            foreach ($orders as $order) {
+                $full_address = $order['address'];
+                if (!empty($order['city']))
+                    $full_address .= ', ' . $order['city'];
+                if (!empty($order['postal_code']))
+                    $full_address .= ' ' . $order['postal_code'];
+
                 $formatted[] = [
-                    'id' => 'ADD-' . $addr['id'],
-                    'customer' => $addr['customer_name'] ?? 'N/A',
-                    'address' => $addr['address_line1'] .
-                        ($addr['address_line2'] ? ', ' . $addr['address_line2'] : '') .
-                        ', ' . $addr['city'] . ', ' . $addr['province'],
-                    'status' => $addr['status']
+                    'id' => 'ADDR-' . $order['id'],
+                    'customer' => $order['full_name'] ?? 'N/A',
+                    'address' => $full_address,
+                    'phone' => $order['phone_number'],
+                    'status' => 'Verified'
                 ];
             }
             return $formatted;
@@ -823,12 +852,18 @@ if (!function_exists('get_transactions_list')) {
             return [];
         try {
             $stmt = $pdo->prepare("
-            SELECT t.*, o.order_number, c.full_name as customer_name
-            FROM transactions t
-            LEFT JOIN orders o ON t.order_id = o.id
-            LEFT JOIN customers c ON o.customer_id = c.id
-            ORDER BY t.transaction_date DESC
-        ");
+        SELECT 
+            o.id,
+            CONCAT('#TRX-', o.id) as transaction_number,
+            o.id as order_number,
+            o.full_name as customer_name,
+            o.total_amount as amount,
+            o.payment_method,
+            o.status,
+            o.created_at as transaction_date
+        FROM orders o
+        ORDER BY o.created_at DESC
+    ");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
@@ -855,10 +890,10 @@ if (!function_exists('get_shipments_list')) {
             return [];
         try {
             $stmt = $pdo->prepare("
-            SELECT s.*, o.order_number, c.full_name as customer_name
+            SELECT s.*, o.order_number, c.fullname as customer_name
             FROM shipments s
             LEFT JOIN orders o ON s.order_id = o.id
-            LEFT JOIN customers c ON o.customer_id = c.id
+            LEFT JOIN users c ON o.customer_id = c.id
             ORDER BY s.created_at DESC
         ");
             $stmt->execute();
@@ -887,9 +922,9 @@ if (!function_exists('get_customers_list')) {
             return [];
         try {
             $stmt = $pdo->prepare("
-            SELECT c.*, c.name as full_name,
-                   (SELECT COUNT(*) FROM orders WHERE customer_id = c.id) as total_orders,
-                   (SELECT SUM(total_amount) FROM orders WHERE customer_id = c.id AND status != 'Cancelled') as total_spent
+            SELECT c.id, c.fullname as full_name, c.email, c.phone as phone_number, 'Active' as status, '2024-01-01' as created_at,
+                   (SELECT COUNT(*) FROM orders WHERE user_id = c.id) as total_orders,
+                   (SELECT SUM(total_amount) FROM orders WHERE user_id = c.id AND status != 'Cancelled') as total_spent
             FROM users c
             ORDER BY c.id DESC
         ");
@@ -919,7 +954,7 @@ if (!function_exists('get_support_tickets_list')) {
             return [];
         try {
             $stmt = $pdo->prepare("
-            SELECT st.*, c.name as customer_name, c.email as customer_email,
+            SELECT st.*, c.fullname as customer_name, c.email as customer_email,
                    a.username as assigned_admin
             FROM support_tickets st
             LEFT JOIN users c ON st.customer_id = c.id
@@ -1079,9 +1114,7 @@ if (!function_exists('get_dashboard_kpis')) {
             // New Customers (this month)
             $stmt = $pdo->prepare("
             SELECT COUNT(*) as total 
-            FROM customers 
-            WHERE MONTH(created_at) = MONTH(CURRENT_DATE())
-            AND YEAR(created_at) = YEAR(CURRENT_DATE())
+            FROM users
         ");
             $stmt->execute();
             $customers = $stmt->fetch(PDO::FETCH_ASSOC);

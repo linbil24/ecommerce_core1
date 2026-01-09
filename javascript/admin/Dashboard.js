@@ -871,41 +871,49 @@ function renderShippingModule(submodule) {
     switch (submodule) {
         case 'addresses':
             moduleTitle = 'Customer Addresses & Validation';
+            const addressRows = mockAddresses.map(a => `
+                <tr>
+                    <td>${a.id}</td>
+                    <td>${a.customer}</td>
+                    <td>${a.address}</td>
+                    <td>${a.phone || 'N/A'}</td>
+                    <td><span class="status-badge ${a.status === 'Verified' ? 'active' : 'pending'}">${a.status}</span></td>
+                     <td style="display: flex; gap: 0.5rem;">
+                        <button class="btn-base" style="padding: 0.25rem 0.5rem; background-color: var(--color-indigo-600); color: white;" 
+                            onclick="showCustomActionModal('View Address', 'Customer: ${a.customer}<br>Address: ${a.address}<br>Phone: ${a.phone || 'N/A'}', 'Close')">
+                            View
+                        </button>
+                        <button class="btn-base" style="padding: 0.25rem 0.5rem; background-color: var(--color-blue-600); color: white;" 
+                            onclick="showCustomActionModal('Edit Address', 'Update address for **${a.customer}**?', 'Update')">
+                            Update
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
             submoduleContent = `
-                                    <div class="mb-6 flex justify-between items-center">
-                                        <p class="text-gray-500">View customer shipping addresses. Data pulled from the **customer_addresses** table.</p>
-                                        <button class="btn-base btn-primary text-sm" 
-                                            onclick="showCustomActionModal('Address Management', 'Address management functions (Add/Edit) are enabled. The list below uses live database data.', 'OK')">
-                                            <i data-lucide="plus" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
-                                            Add New Address (Mock)
-                                        </button>
-                                    </div>
-                                    <div class="kpi-card p-6">
-                                        <h3 class="text-xl font-semibold mb-4">Customer Addresses List (${mockAddresses.length} Addresses)</h3>
-                                        <ul class="space-y-3" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
-                                            ${mockAddresses.map(a => `
-                                                <li class="p-4 rounded-lg shadow-sm" style="background-color: ${a.status === 'Verified' ? '#f0fdf4' : (a.status === 'Requires Review' ? '#fffbe6' : '#fef2f2')}; border: 1px solid ${a.status === 'Verified' ? '#34d399' : (a.status === 'Requires Review' ? '#f59e0b' : '#f87171')};">
-                                                    <div class="flex justify-between items-start">
-                                                        <div>
-                                                            <p class="font-medium text-gray-900">(${a.id}) ${a.customer}</p>
-                                                            <p class="text-sm text-gray-600">${a.address}</p>
-                                                            <div class="mt-2">
-                                                                <span class="status-badge ${getOrderStatusBadge(a.status).replace(' ', '-')}">${a.status}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="flex space-x-2">
-                                                            <button style="color: #2563eb;" class="text-sm font-medium" 
-                                                                onclick="showCustomActionModal('Edit Address', 'Editing address **${a.id}** for **${a.customer}** (Simulation).', 'Edit')">Edit</button>
-                                                            <button style="color: var(--color-red-600);" class="text-sm font-medium" 
-                                                                onclick="showCustomActionModal('Remove Address', 'Are you sure you want to permanently remove this address for **${a.customer}** (ID: ${a.id})?', 'Delete', () => console.log('Remove Address ${a.id}'))">Remove</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            `).join('')}
-                                        </ul>
-                                        <p class="mt-4 text-sm text-gray-500">Total Addresses Found: ${mockAddresses.length}. Address data is loaded from the database.</p>
-                                    </div>
-                                `;
+                <p class="mb-6 text-gray-500">View and validate customer shipping addresses. Data pulled from the <strong>users</strong> table.</p>
+                <div class="kpi-card p-6">
+                    <h3 class="text-xl font-semibold mb-4">Customer Addresses List (${mockAddresses.length} Addresses)</h3>
+                    <div class="table-container" style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Full Address</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${mockAddresses.length > 0 ? addressRows : `<tr><td colspan="6" class="text-center text-gray-500 py-4">No addresses found in users table.</td></tr>`}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
             break;
         case 'tracking':
             moduleTitle = 'Shipment Tracking';

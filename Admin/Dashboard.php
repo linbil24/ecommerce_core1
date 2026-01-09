@@ -327,39 +327,74 @@ if ($is_logged_in && isset($_SESSION['admin_id'])) {
 
 // Fetch data from database for display
 if ($is_logged_in) {
+    // Initialize all variables with defaults first
+    $mock_products = [];
+    $mock_orders = [];
+    $mockAddresses = [];
+    $mock_categories = [];
+    $mock_transactions = [];
+    $mock_shipments = [];
+    $mock_customers = [];
+    $mock_support_tickets = [];
+    $mock_admin_users = [];
+    $kpi_data = [
+        'totalRevenue' => 0,
+        'totalOrders' => 0,
+        'lowStockCount' => 0,
+        'newCustomers' => 0,
+        'topProducts' => []
+    ];
+
+    // Fetch data individually with error handling
     try {
-        // Fetch data from database
         $mock_products = get_products_list($pdo);
-        $mock_orders = get_orders_list($pdo);
-        $kpi_data = get_dashboard_kpis($pdo);
-        $mock_categories = get_categories_list($pdo);
-        $mock_transactions = get_transactions_list($pdo);
-        $mock_shipments = get_shipments_list($pdo);
-        $mock_customers = get_customers_list($pdo);
-        $mock_support_tickets = get_support_tickets_list($pdo);
-        $mock_admin_users = get_admin_users_list($pdo);
-
-        // Fetch addresses for the Shipping Module
-        $mockAddresses = get_customer_addresses($pdo);
-
     } catch (Exception $e) {
-        error_log("Error fetching dashboard data: " . $e->getMessage());
-        $mock_products = [];
-        $mock_orders = [];
-        $mockAddresses = [];
-        $mock_categories = [];
-        $mock_transactions = [];
-        $mock_shipments = [];
-        $mock_customers = [];
-        $mock_support_tickets = [];
-        $mock_admin_users = [];
-        $kpi_data = [
-            'totalRevenue' => 0,
-            'totalOrders' => 0,
-            'lowStockCount' => 0,
-            'newCustomers' => 0,
-            'topProducts' => []
-        ];
+        error_log("Error fetching products: " . $e->getMessage());
+    }
+    try {
+        $mock_orders = get_orders_list($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching orders: " . $e->getMessage());
+    }
+    try {
+        $kpi_data = get_dashboard_kpis($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching KPIs: " . $e->getMessage());
+    }
+    try {
+        $mock_categories = get_categories_list($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching categories: " . $e->getMessage());
+    }
+    try {
+        $mock_transactions = get_transactions_list($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching transactions: " . $e->getMessage());
+    }
+    try {
+        $mock_shipments = get_shipments_list($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching shipments: " . $e->getMessage());
+    }
+    try {
+        $mock_customers = get_customers_list($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching customers: " . $e->getMessage());
+    }
+    try {
+        $mock_support_tickets = get_support_tickets_list($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching tickets: " . $e->getMessage());
+    }
+    try {
+        $mock_admin_users = get_admin_users_list($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching admins: " . $e->getMessage());
+    }
+    try {
+        $mockAddresses = get_customer_addresses($pdo);
+    } catch (Exception $e) {
+        error_log("Error fetching addresses: " . $e->getMessage());
     }
 } else {
     $mock_products = [];
