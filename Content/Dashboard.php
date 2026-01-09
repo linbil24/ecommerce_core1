@@ -1,9 +1,29 @@
 <?php
 session_start();
+
+// 1. The Gatekeeper: Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../php/login.php");
     exit();
 }
+
+// 2. The Time Limit (Session Timeout): Auto-logout after 30 minutes of inactivity
+$timeout_duration = 1800; // 30 minutes in seconds
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    header("Location: ../php/login.php?timeout=1");
+    exit();
+}
+$_SESSION['last_activity'] = time(); // Update last activity time
+
+// 3. The Invisible Shield (Security Headers)
+// Prevents other sites from putting your site in a frame (Clickjacking)
+header("X-Frame-Options: DENY");
+// Helps prevent Cross-Site Scripting (XSS)
+header("X-XSS-Protection: 1; mode=block");
+// Prevents the browser from guessing the media type (Mime Sniffing)
+header("X-Content-Type-Options: nosniff");
 ?>
 <!DOCTYPE html>
 <html lang="en">

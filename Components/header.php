@@ -2,6 +2,38 @@
 if (session_status() === PHP_SESSION_NONE && !headers_sent()) {
     session_start();
 }
+
+// SECURITY: Global Headers (The Invisible Shield)
+// Only send if headers haven't been sent yet
+if (!headers_sent()) {
+    header("X-Frame-Options: DENY");
+    header("X-XSS-Protection: 1; mode=block");
+    header("X-Content-Type-Options: nosniff");
+}
+
+// SECURITY: Session Timeout (The Stopwatch)
+// Only applies if user is logged in
+if (isset($_SESSION['user_id'])) {
+    $timeout_duration = 1800; // 30 minutes
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+
+        // Redirect to login with timeout message
+        // Use path_prefix if available, else default to relative
+        $redirect_path = (isset($path_prefix) ? $path_prefix : '../') . 'php/login.php?timeout=1';
+
+        if (!headers_sent()) {
+            header("Location: " . $redirect_path);
+        } else {
+            // Fallback for when headers are already sent (e.g. inside body)
+            echo "<script>window.location.href='" . $redirect_path . "';</script>";
+        }
+        exit();
+    }
+    $_SESSION['last_activity'] = time(); // Reset timer
+}
+
 if (!isset($path_prefix)) {
     $path_prefix = '../';
 }

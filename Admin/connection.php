@@ -8,7 +8,7 @@
 // Database Connection Configuration
 // *** UPDATE THESE WITH YOUR SERVER DETAILS ***
 // *** DATABASE NAME: core1 ***
-$host = getenv('DB_HOST') !== false ? getenv('DB_HOST') : 'localhost:3306';
+$host = getenv('DB_HOST') !== false ? getenv('DB_HOST') : '127.0.0.1';
 $port = getenv('DB_PORT') !== false ? getenv('DB_PORT') : '3306';
 $db_name = getenv('DB_NAME') !== false ? getenv('DB_NAME') : 'ecommerce';      // Using the database name 'core1'
 $username = getenv('DB_USERNAME') !== false ? getenv('DB_USERNAME') : 'root';      // REPLACE THIS if needed
