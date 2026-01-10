@@ -683,6 +683,10 @@ function viewOrderDetails(orderId) {
                             <div style="padding: 1.5rem;">
                                 <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">Order Details #${order.id}</h3>
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                                    <div style="grid-column: span 2;">
+                                        <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.25rem;">Shipment Tracking Number (OTP)</p>
+                                        <p style="font-weight: 700; color: #4f46e5; font-size: 1.1rem; letter-spacing: 0.05em; background: #eef2ff; padding: 0.5rem; border-radius: 0.375rem; display: inline-block; border: 1px dashed #6366f1;">${order.tracking_number || 'Generating...'}</p>
+                                    </div>
                                     <div>
                                         <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.25rem;">Customer</p>
                                         <p style="font-weight: 600; color: #1f2937;">${order.customer}</p>
@@ -703,6 +707,9 @@ function viewOrderDetails(orderId) {
                                 <div style="border-top: 1px solid #e5e7eb; padding-top: 1rem; margin-top: 1rem;">
                                     <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">Order Items</p>
                                     <p style="color: #1f2937;">Product details and items will be displayed here.</p>
+                                </div>
+                                <div style="margin-top: 2rem; display: flex; justify-content: flex-end;">
+                                    <button onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" class="btn-base btn-secondary" style="padding: 0.5rem 1.5rem;">Close</button>
                                 </div>
                             </div>
                         `;

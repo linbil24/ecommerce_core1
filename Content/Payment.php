@@ -75,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     $create_table = "CREATE TABLE IF NOT EXISTS orders (
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
+        tracking_number VARCHAR(50),
         product_name VARCHAR(255) NOT NULL,
         quantity INT NOT NULL,
         price DECIMAL(10,2) NOT NULL,
@@ -91,6 +92,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     )";
     mysqli_query($conn, $create_table);
 
+    // Ensure tracking_number column exists (for existing tables)
+    $check_col = mysqli_query($conn, "SHOW COLUMNS FROM orders LIKE 'tracking_number'");
+    if (mysqli_num_rows($check_col) == 0) {
+        mysqli_query($conn, "ALTER TABLE orders ADD COLUMN tracking_number VARCHAR(50) AFTER id");
+    }
+
+    // Generate Tracking Number (OTP for Shipment Tracking)
+    $tracking_number = "TRK-" . date("Ymd") . "-" . str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);
+
     // Prepare data for Order
     $all_product_names = [];
     foreach ($order_items as $itm) {
@@ -105,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
 
     $first_image = isset($order_items[0]['image']) ? mysqli_real_escape_string($conn, $order_items[0]['image']) : '';
 
-    $sql = "INSERT INTO orders (user_id, product_name, quantity, price, total_amount, full_name, phone_number, address, city, postal_code, payment_method, status, image_url)
-            VALUES ('$user_id', '$product_name_str', '$total_qty', '$subtotal', '$total', '$full_name', '$phone_number', '$address', '$city', '$postal_code', '$payment_method', '$status', '$first_image')";
+    $sql = "INSERT INTO orders (user_id, tracking_number, product_name, quantity, price, total_amount, full_name, phone_number, address, city, postal_code, payment_method, status, image_url)
+            VALUES ('$user_id', '$tracking_number', '$product_name_str', '$total_qty', '$subtotal', '$total', '$full_name', '$phone_number', '$address', '$city', '$postal_code', '$payment_method', '$status', '$first_image')";
 
     if (mysqli_query($conn, $sql)) {
         $last_order_id = mysqli_insert_id($conn);

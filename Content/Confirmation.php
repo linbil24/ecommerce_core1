@@ -260,6 +260,12 @@ if (!$order) {
                 </div>
 
                 <div class="detail-row">
+                    <span class="detail-label">Tracking Number:</span>
+                    <span class="detail-value"
+                        style="color: #2A3B7E; font-weight: 700;"><?php echo htmlspecialchars($order['tracking_number'] ?? 'Pending'); ?></span>
+                </div>
+
+                <div class="detail-row">
                     <span class="detail-label">Order Date:</span>
                     <span
                         class="detail-value"><?php echo date("M d, Y @ h:i A", strtotime($order['created_at'])); ?></span>

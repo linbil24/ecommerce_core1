@@ -587,12 +587,11 @@ if (!function_exists('get_orders_list')) {
             return [];
         try {
             $stmt = $pdo->prepare("
-            SELECT o.id, o.order_number, o.total_amount as total, o.status, o.order_date as date, 
-                   c.fullname as customer,
-                   (SELECT COUNT(*) FROM order_items WHERE order_id = o.id) as items
+            SELECT o.id, o.tracking_number, o.total_amount as total, o.status, o.created_at as date, 
+                   o.full_name as customer,
+                   o.quantity as items
             FROM orders o 
-            LEFT JOIN users c ON o.customer_id = c.id 
-            ORDER BY o.order_date DESC
+            ORDER BY o.created_at DESC
         ");
             $stmt->execute();
             $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -602,6 +601,7 @@ if (!function_exists('get_orders_list')) {
             foreach ($orders as $order) {
                 $formatted[] = [
                     'id' => $order['id'],
+                    'tracking_number' => $order['tracking_number'] ?? 'N/A',
                     'customer' => $order['customer'] ?? 'N/A',
                     'total' => floatval($order['total']),
                     'status' => $order['status'],
@@ -889,12 +889,19 @@ if (!function_exists('get_shipments_list')) {
         if (!$pdo)
             return [];
         try {
+            // Fetch tracking data directly from orders
             $stmt = $pdo->prepare("
-            SELECT s.*, o.order_number, c.fullname as customer_name
-            FROM shipments s
-            LEFT JOIN orders o ON s.order_id = o.id
-            LEFT JOIN users c ON o.customer_id = c.id
-            ORDER BY s.created_at DESC
+            SELECT 
+                tracking_number, 
+                id as order_number, 
+                full_name as customer_name,
+                'Standard Courier' as courier, 
+                status, 
+                CONCAT(city, ', ', postal_code) as current_location, 
+                DATE_ADD(created_at, INTERVAL 5 DAY) as estimated_delivery
+            FROM orders
+            WHERE tracking_number IS NOT NULL AND tracking_number != ''
+            ORDER BY created_at DESC
         ");
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
