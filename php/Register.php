@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
                     $mail->addAddress($email, $fullname);
 
                     // Attach Logo
-                    $mail->addEmbeddedImage('../Image/Logo/logo.png', 'logo_img');
+                    $mail->addEmbeddedImage('../Image/logo.png', 'logo_img');
 
                     $mail->isHTML(true);
                     $mail->Subject = 'Verify Your Account - iMarket';
