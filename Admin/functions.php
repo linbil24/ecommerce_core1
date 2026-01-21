@@ -127,8 +127,8 @@ if (!function_exists('send_otp_email')) {
             $mail->SMTPAuth = true;
             $mail->Username = 'linbilcelestre31@gmail.com';  // Updated credentials
             $mail->Password = 'erdrvfcuoeibstxo';         // Updated credentials
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = 465;
 
             // Fix for XAMPP SSL issues
             $mail->SMTPOptions = array(

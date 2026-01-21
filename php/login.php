@@ -38,6 +38,15 @@ if (isset($_POST['resend'])) {
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port = 465;
 
+                // Fix for XAMPP SSL issues
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+
                 $mail->setFrom('linbilcelestre31@gmail.com', 'iMarket');
                 $mail->addAddress($email);
 
@@ -88,6 +97,15 @@ if (isset($_POST['login'])) {
                     $mail->Password = 'erdrvfcuoeibstxo';
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                     $mail->Port = 465;
+
+                    // Fix for XAMPP SSL issues
+                    $mail->SMTPOptions = array(
+                        'ssl' => array(
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                            'allow_self_signed' => true
+                        )
+                    );
 
                     $mail->setFrom('linbilcelestre31@gmail.com', 'iMarket');
                     $mail->addAddress($email);

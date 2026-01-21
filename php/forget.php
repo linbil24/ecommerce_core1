@@ -30,9 +30,18 @@ if (isset($_POST['reset'])) {
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
                 $mail->Username = 'linbilcelestre31@gmail.com';
-                $mail->Password = 'bigj djbm wdrs nrhf';
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-                $mail->Port = 587;
+                $mail->Password = 'erdrvfcuoeibstxo';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port = 465;
+
+                // Fix for XAMPP SSL issues
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
 
                 //Recipients
                 $mail->setFrom('linbilcelestre31@gmail.com', 'iMarket Support');
