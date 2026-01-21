@@ -1,9 +1,9 @@
 <?php
 
 $host = "127.0.0.1:3307";
-$user = "root";
-$password = "";
-$db = "ecommerce";
+$user = "core1_marketph";
+$password = "123";
+$db = "core1_marketph";
 
 $conn = new mysqli($host, $user, $password, $db);
 
