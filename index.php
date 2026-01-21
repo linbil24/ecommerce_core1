@@ -1,5 +1,5 @@
 <?php
-// iMarket Loading Page v2.2 (Cache-Bypass Version)
+// iMarket Loading Page v2.3 (Zero-JS Version)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
-    <link rel="icon" type="image/png" href="image/logo.png?v=2.2">
+    <meta http-equiv="refresh" content="2;url=php/login.php">
+    <link rel="icon" type="image/png" href="image/logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -50,7 +51,6 @@
             font-weight: 700;
             margin-bottom: 5px;
             letter-spacing: 1px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .tagline {
@@ -90,42 +90,18 @@
                 transform: scale(1.05);
             }
         }
-
-        .fade-in {
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
 
 <body>
-    <div class="loader-container fade-in">
-        <img src="image/logo.png?v=2.2" alt="iMarket Logo" class="logo-img" onerror="this.src='image/logo.png';">
+    <div class="loader-container">
+        <img src="image/logo.png" alt="iMarket Logo" class="logo-img">
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
             <p class="tagline">Your Market, Your Choice</p>
         </div>
         <div class="spinner"></div>
     </div>
-    <script>
-        (function () {
-            var path = "php/login.php";
-            setTimeout(function () {
-                window.location.href = path;
-            }, 2500);
-        })();
-    </script>
 </body>
 
 </html>
