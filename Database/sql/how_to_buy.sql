@@ -1,3 +1,6 @@
+-- Database: `core1_marketph`
+USE `core1_marketph`;
+
 CREATE TABLE IF NOT EXISTS `buying_steps` (
     `step_id` INT(11) NOT NULL AUTO_INCREMENT,
     `step_order` INT(11) NOT NULL,

@@ -1,3 +1,6 @@
+-- Database: `core1_marketph`
+USE `core1_marketph`;
+
 CREATE TABLE IF NOT EXISTS `reviews` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,

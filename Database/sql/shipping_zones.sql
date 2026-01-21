@@ -1,3 +1,6 @@
+-- Database: `core1_marketph`
+USE `core1_marketph`;
+
 CREATE TABLE IF NOT EXISTS `shipping_zones` (
     `zone_id` INT(11) NOT NULL AUTO_INCREMENT,
     `region_name` VARCHAR(100) NOT NULL,
