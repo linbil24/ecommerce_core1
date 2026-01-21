@@ -1,5 +1,8 @@
 <?php
-// iMarket Loading Page v3.5 (Cache-Bypass Version)
+// iMarket Loading Page v3.6 (Hard Cache-Break Version)
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,10 +11,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
-    <!-- Automatic redirect to login page -->
+    <!-- Use root-relative paths for maximum reliability -->
     <meta http-equiv="refresh" content="2;url=php/login.php">
-    <!-- Icon with versioning to bust cache -->
-    <link rel="icon" type="image/png" href="image/logo.png?v=3.5">
+    <link rel="icon" type="image/png" href="logo.png?v=3.6">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -97,8 +99,8 @@
 
 <body>
     <div class="loader-container">
-        <!-- Logo with versioning and absolute fallback -->
-        <img src="image/logo.png?v=3.5" alt="iMarket Logo" class="logo-img" onerror="this.src='/image/logo.png';">
+        <!-- Using the root logo.png we just created -->
+        <img src="logo.png?v=3.6" alt="iMarket Logo" class="logo-img">
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
             <p class="tagline">Your Market, Your Choice</p>

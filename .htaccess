@@ -1,0 +1,9 @@
+# Disable caching for index files to fix persistent errors
+<FilesMatch "^(index\.html|index\.php)$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</FilesMatch>
+
+# Prioritize index.php over index.html
+DirectoryIndex index.php index.html
