@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
+    <!-- Favicon link with absolute root path for reliability -->
     <link rel="icon" type="image/png" href="image/logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
@@ -18,7 +19,6 @@
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
-            /* Matched with Login Page Brand Section */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -40,7 +40,6 @@
             height: auto;
             margin-bottom: 20px;
             animation: pulse 2s infinite ease-in-out;
-            /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); Remove box shadow if using transparent logo mostly */
             filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
         }
 
@@ -60,7 +59,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Modern Spinner */
         .spinner {
             width: 50px;
             height: 50px;
@@ -70,7 +68,6 @@
             animation: spin 1s linear infinite;
         }
 
-        /* Animations */
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
@@ -82,7 +79,9 @@
         }
 
         @keyframes pulse {
-            0% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
             }
@@ -90,11 +89,6 @@
             50% {
                 transform: scale(1.05);
                 filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
-            }
-
-            100% {
-                transform: scale(1);
-                filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
             }
         }
 
@@ -117,30 +111,36 @@
 </head>
 
 <body>
-
+    <!-- v2.1 -->
     <div class="loader-container fade-in">
-        <!-- Logo -->
-        <img src="image/logo.png" alt="iMarket Logo" class="logo-img" onerror="this.style.display='none'">
+        <img src="image/logo.png" alt="iMarket Logo" class="logo-img" onerror="this.src='../image/logo.png';">
 
-        <!-- Text Content -->
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
             <p class="tagline">Your Market, Your Choice</p>
         </div>
 
-        <!-- Spinner -->
         <div class="spinner"></div>
     </div>
 
     <noscript>
         <meta http-equiv="refresh" content="3;url=php/login.php">
     </noscript>
+
     <script>
-        window.addEventListener("load", function () {
-            setTimeout(function () {
+        (function () {
+            var redirected = false;
+            function doRedirect() {
+                if (redirected) return;
+                redirected = true;
                 window.location.replace("php/login.php");
-            }, 2500);
-        });
+            }
+            window.onload = function () {
+                setTimeout(doRedirect, 2500);
+            };
+            // Fallback if onload doesn't fire
+            setTimeout(doRedirect, 5000);
+        })();
     </script>
 </body>
 
