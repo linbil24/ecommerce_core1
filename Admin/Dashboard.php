@@ -417,7 +417,7 @@ if ($is_logged_in) {
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="icon" type="image/x-icon" href="../Image/logo.png">
+<link rel="icon" type="image/png" href="../Image/logo.png">
 
 <head>
     <meta charset="UTF-8">

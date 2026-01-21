@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
-    <link rel="icon" type="image/x-icon" href="ecommerce_core1/Image/logo.png">
+    <link rel="icon" type="image/png" href="Image/logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -120,8 +120,7 @@
 
     <div class="loader-container fade-in">
         <!-- Logo -->
-        <img src="ecommerce_core1/Image/logo.png" alt="iMarket Logo" class="logo-img"
-            onerror="this.style.display='none'">
+        <img src="Image/logo.png" alt="iMarket Logo" class="logo-img" onerror="this.style.display='none'">
 
         <!-- Text Content -->
         <div class="text-content">
@@ -134,12 +133,9 @@
     </div>
 
     <script>
-        // Wait for page to load
-        window.addEventListener('load', () => {
-            // Set delay before redirecting (e.g., 2500ms = 2.5 seconds)
-            setTimeout(() => {
-                // Redirect to the login page
-                window.location.href = 'ecommerce_core1/php/login.php';
+        window.addEventListener("load", function () {
+            setTimeout(function () {
+                window.location.href = "php/login.php";
             }, 2500);
         });
     </script>
