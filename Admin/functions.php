@@ -122,13 +122,15 @@ if (!function_exists('send_otp_email')) {
         $mail = new PHPMailer(true);
         try {
             // Server settings
+            $mail->SMTPDebug = 2; // Enable verbose debug output
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
+            $mail->Host = gethostbyname('smtp.gmail.com');
             $mail->SMTPAuth = true;
-            $mail->Username = 'linbilcelestre31@gmail.com';  // Updated credentials
-            $mail->Password = 'erdrvfcuoeibstxo';         // Updated credentials
+            $mail->Username = 'linbilcelestre31@gmail.com';
+            $mail->Password = 'erdrvfcuoeibstxo';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465;
+            $mail->Timeout = 20;
 
             // Fix for XAMPP SSL issues
             $mail->SMTPOptions = array(

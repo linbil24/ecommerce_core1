@@ -30,13 +30,15 @@ if (isset($_POST['resend'])) {
 
             $mail = new PHPMailer(true);
             try {
+                $mail->SMTPDebug = 2;
                 $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';
+                $mail->Host = gethostbyname('smtp.gmail.com');
                 $mail->SMTPAuth = true;
                 $mail->Username = 'linbilcelestre31@gmail.com';
                 $mail->Password = 'erdrvfcuoeibstxo';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port = 465;
+                $mail->Timeout = 20;
 
                 // Fix for XAMPP SSL issues
                 $mail->SMTPOptions = array(
@@ -90,13 +92,15 @@ if (isset($_POST['login'])) {
                 // Send email only when generating a NEW code
                 $mail = new PHPMailer(true);
                 try {
+                    $mail->SMTPDebug = 2;
                     $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
+                    $mail->Host = gethostbyname('smtp.gmail.com');
                     $mail->SMTPAuth = true;
                     $mail->Username = 'linbilcelestre31@gmail.com';
                     $mail->Password = 'erdrvfcuoeibstxo';
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                     $mail->Port = 465;
+                    $mail->Timeout = 20;
 
                     // Fix for XAMPP SSL issues
                     $mail->SMTPOptions = array(
