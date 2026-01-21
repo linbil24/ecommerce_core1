@@ -1,6 +1,6 @@
 <?php
-require_once 'Admin/connection.php';
-require_once 'Admin/functions.php';
+require_once 'admin/connection.php';
+require_once 'admin/functions.php';
 
 try {
     $pdo = get_db_connection();
@@ -30,3 +30,5 @@ try {
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
+
+

@@ -131,11 +131,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
             }
         }
 
-        // Redirect to Confirmation (Categories/Best-selling/Confirmation.php as it has the latest updates)
-        // Or Shop/Confirmation.php. The user mentioned integrating, so sticking to one Confirmation is good.
-        // I will link to ../Categories/Best-selling/Confirmation.php as requested by recent context clues,
-        // or safer: ../Shop/Confirmation.php which is classic.
-        // Let's use ../Shop/Confirmation.php for now.
+        // Redirect to Confirmation (Categories/best-selling/Confirmation.php as it has the latest updates)
+        // Or shop/Confirmation.php. The user mentioned integrating, so sticking to one Confirmation is good.
+        // I will link to ../Categories/best-selling/Confirmation.php as requested by recent context clues,
+        // or safer: ../shop/Confirmation.php which is classic.
+        // Let's use ../shop/Confirmation.php for now.
         // Redirect to unified Confirmation in Content/
         header("Location: Confirmation.php?order_id=" . $last_order_id);
         exit();
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     <title>Payment</title>
     <link rel="icon" type="image/x-icon" href="../image/logo.png">
     <!-- Use Shop CSS -->
-    <link rel="stylesheet" href="../Css/Shop/payment.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/shop/payment.css?v=<?php echo time(); ?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../Components/header.php';
+        include '../components/header.php';
         ?>
     </nav>
 
@@ -312,7 +312,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                                             '../image/Groceries/' . $filename,
                                             '../image/Toys & Games/' . $filename,
                                             '../image/New-arrivals/' . $filename,
-                                            '../image/Shop/' . $filename,
+                                            '../image/shop/' . $filename,
                                         ];
                                         foreach ($candidates as $cand) {
                                             if (file_exists($cand)) {
@@ -369,8 +369,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                                 <?php echo htmlspecialchars($d_address); ?><br>
                                 <?php echo htmlspecialchars($d_city); ?>, <?php echo htmlspecialchars($d_zip); ?>
                             </div>
-                            <!-- Link to User Account setting. Where is it? Categories/Best-selling/user-account.php seems to be the one. -->
-                            <a href="../Categories/Best-selling/user-account.php?return_url=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
+                            <!-- Link to User Account setting. Where is it? Categories/best-selling/user-account.php seems to be the one. -->
+                            <a href="../Categories/best-selling/user-account.php?return_url=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
                                 class="address-change-link">Change</a>
                         </div>
 
@@ -452,7 +452,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     </div>
 
     <footer>
-        <?php include '../Components/footer.php'; ?>
+        <?php include '../components/footer.php'; ?>
     </footer>
 
     <script>
@@ -466,3 +466,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
 </body>
 
 </html>
+
+
+

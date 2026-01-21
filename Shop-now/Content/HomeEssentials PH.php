@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Quikfab 5-Tier Steel Storage Rack',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/HomeEssentials PH/Quikfab 5-Tier Steel Storage Rack.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Quikfab 5-Tier Steel Storage Rack.jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Megabox 5-Layer Drawer (Beige)',
             'price' => '₱899.00',
             'raw_price' => 899.00,
-            'image' => '../image/Shop/HomeEssentials PH/Megabox 5-Layer Drawer (Beige).jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Megabox 5-Layer Drawer (Beige).jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Our Home Copenhagen Sectional Sofa',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../image/Shop/HomeEssentials PH/Our Home Copenhagen Sectional Sofa.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Our Home Copenhagen Sectional Sofa.jpeg',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'IKEA RÖDFLIK Desk Lamp',
             'price' => '₱2,800.00',
             'raw_price' => 2800.00,
-            'image' => '../image/Shop/HomeEssentials PH/IKEA RÖDFLIK Desk Lamp.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/IKEA RÖDFLIK Desk Lamp.jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Nordic Wood Legs Coffee Table',
             'price' => '₱750.00',
             'raw_price' => 750.00,
-            'image' => '../image/Shop/HomeEssentials PH/Nordic Wood Legs Coffee Table.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Nordic Wood Legs Coffee Table.jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => '13-Piece Non-Stick Cookware Set',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/HomeEssentials PH/13-Piece Non-Stick Cookware Set.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/13-Piece Non-Stick Cookware Set.jpeg',
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'HODEKT Electric Water Kettle (2.3L)',
             'price' => '₱1,500.00',
             'raw_price' => 1500.00,
-            'image' => '../image/Shop/HomeEssentials PH/HODEKT Electric Water Kettle (2.3L).jpeg',
+            'image' => '../image/shop/HomeEssentials PH/HODEKT Electric Water Kettle (2.3L).jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Home Essentials Silver Metal Coffee Press',
             'price' => '₱350.00',
             'raw_price' => 350.00,
-            'image' => '../image/Shop/HomeEssentials PH/Home Essentials Silver Metal Coffee Press.jpeg', // Using stylized image
+            'image' => '../image/shop/HomeEssentials PH/Home Essentials Silver Metal Coffee Press.jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Orocan 45L Ice Box (Insulated)',
             'price' => '₱1,100.00',
             'raw_price' => 1100.00,
-            'image' => '../image/Shop/HomeEssentials PH/Orocan 45L Ice Box (Insulated).jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Orocan 45L Ice Box (Insulated).jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Westinghouse Electronic Bathroom Scale',
             'price' => '₱850.00',
             'raw_price' => 850.00,
-            'image' => '../image/Shop/HomeEssentials PH/Westinghouse Electronic Bathroom Scale.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Westinghouse Electronic Bathroom Scale.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Wall-Mounted Vegetable & Spice Organizer',
             'price' => '₱1,800.00',
             'raw_price' => 1800.00,
-            'image' => '../image/Shop/HomeEssentials PH/Wall-Mounted Vegetable & Spice Organizer.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Wall-Mounted Vegetable & Spice Organizer.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Eko 12L Stella Step Bin',
             'price' => '₱1,350.00',
             'raw_price' => 1350.00,
-            'image' => '../image/Shop/HomeEssentials PH/Eko 12L Stella Step Bin.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Eko 12L Stella Step Bin.jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Scrub Daddy (The Original Sponge)',
             'price' => '₱450.00',
             'raw_price' => 450.00,
-            'image' => '../image/Shop/HomeEssentials PH/Scrub Daddy (The Original Sponge).jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Scrub Daddy (The Original Sponge).jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'ACE Mop Bucket & Wringer (19L)',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/HomeEssentials PH/ACE Mop Bucket & Wringer (19L).jpeg',
+            'image' => '../image/shop/HomeEssentials PH/ACE Mop Bucket & Wringer (19L).jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Hava Asia Stainless Steel Towel Shelf',
             'price' => '₱299.00',
             'raw_price' => 299.00,
-            'image' => '../image/Shop/HomeEssentials PH/Hava Asia Stainless Steel Towel Shelf.jpeg',
+            'image' => '../image/shop/HomeEssentials PH/Hava Asia Stainless Steel Towel Shelf.jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
@@ -176,3 +176,5 @@ if (isset($definingProducts) && $definingProducts) {
     return; // Stop processing
 }
 ?>
+
+

@@ -142,7 +142,7 @@ if (isset($_POST['change_password'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password - iMarket</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../Css/Login-Reg-Forget/forget.css">
+    <link rel="stylesheet" href="../css/login-reg-forget/forget.css">
     <style>
         .alert {
             padding: 10px;
@@ -227,3 +227,6 @@ if (isset($_POST['change_password'])) {
 </body>
 
 </html>
+
+
+

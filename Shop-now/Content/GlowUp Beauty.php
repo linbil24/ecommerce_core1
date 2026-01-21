@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Glow Up Facial Serum (30ml)',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/GlowUp Beauty/Glow Up Facial Serum (30ml).jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Glow Up Facial Serum (30ml).jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Secret Glow Tone Up Cream ',
             'price' => '₱899.00',
             'raw_price' => 899.00,
-            'image' => '../image/Shop/GlowUp Beauty/Secret Glow Tone Up Cream.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Secret Glow Tone Up Cream.jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'SevenGlow Brightening Soap',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../image/Shop/GlowUp Beauty/SevenGlow Brightening Soap.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/SevenGlow Brightening Soap.jpeg',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Shantahl Ultimate Glow Up Set',
             'price' => '₱2,800.00',
             'raw_price' => 2800.00,
-            'image' => '../image/Shop/GlowUp Beauty/Shantahl Ultimate Glow Up Set.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Shantahl Ultimate Glow Up Set.jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'I White Korea Glow-Up Whip',
             'price' => '₱750.00',
             'raw_price' => 750.00,
-            'image' => '../image/Shop/GlowUp Beauty/I White Korea Glow-Up Whip.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/I White Korea Glow-Up Whip.jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Hey Skin Glow Up Serum',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/GlowUp Beauty/Hey Skin Glow Up Serum.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Hey Skin Glow Up Serum.jpeg',
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Glow Up Night Cream (15ml)',
             'price' => '₱1,500.00',
             'raw_price' => 1500.00,
-            'image' => '../image/Shop/GlowUp Beauty/Glow Up Night Cream (15ml).jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Glow Up Night Cream (15ml).jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'SkinTouch Magic Set A',
             'price' => '₱350.00',
             'raw_price' => 350.00,
-            'image' => '../image/Shop/GlowUp Beauty/SkinTouch Magic Set A.jpeg', // Using stylized image
+            'image' => '../image/shop/GlowUp Beauty/SkinTouch Magic Set A.jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Avocado Papaya Collagen Drink',
             'price' => '₱1,100.00',
             'raw_price' => 1100.00,
-            'image' => '../image/Shop/GlowUp Beauty/Avocado Papaya Collagen Drink.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Avocado Papaya Collagen Drink.jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Mango Melon Creamy Collagen',
             'price' => '₱850.00',
             'raw_price' => 850.00,
-            'image' => '../image/Shop/GlowUp Beauty/Mango Melon Creamy Collagen.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Mango Melon Creamy Collagen.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Strawberry Banana Collagen',
             'price' => '₱1,800.00',
             'raw_price' => 1800.00,
-            'image' => '../image/Shop/GlowUp Beauty/Strawberry Banana Collagen.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Strawberry Banana Collagen.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'AiBeauty Glow Up Iced Tea',
             'price' => '₱1,350.00',
             'raw_price' => 1350.00,
-            'image' => '../image/Shop/GlowUp Beauty/AiBeauty Glow Up Iced Tea.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/AiBeauty Glow Up Iced Tea.jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Glow Up Magic Blusher (30ml)',
             'price' => '₱450.00',
             'raw_price' => 450.00,
-            'image' => '../image/Shop/GlowUp Beauty/Glow Up Magic Blusher (30ml).jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Glow Up Magic Blusher (30ml).jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Yeoubi Glow Up Whitening Soap',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/GlowUp Beauty/Yeoubi Glow Up Whitening Soap.jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Yeoubi Glow Up Whitening Soap.jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Sevendays Sun Protect (Pouch)',
             'price' => '₱299.00',
             'raw_price' => 299.00,
-            'image' => '../image/Shop/GlowUp Beauty/Sevendays Sun Protect (Pouch).jpeg',
+            'image' => '../image/shop/GlowUp Beauty/Sevendays Sun Protect (Pouch).jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
@@ -176,3 +176,5 @@ if (isset($definingProducts) && $definingProducts) {
     return; // Stop processing
 }
 ?>
+
+

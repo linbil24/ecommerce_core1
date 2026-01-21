@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Adjustable Vest Top',
             'price' => '₱480.00',
             'raw_price' => 480.00,
-            'image' => '../image/Shop/StyleHub Manila/Adjustable Vest Top.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Adjustable Vest Top.jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Korean Style Oversized Shirt',
             'price' => '₱650.00',
             'raw_price' => 650.00,
-            'image' => '../image/Shop/StyleHub Manila/Korean Style Oversized Shirt.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Korean Style Oversized Shirt.jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Summer Floral Dress',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../image/Shop/StyleHub Manila/Summer Floral Dress.jpeg', // Fallback as I don't have a dress img, reusing generic or similar
+            'image' => '../image/shop/StyleHub Manila/Summer Floral Dress.jpeg', // Fallback as I don't have a dress img, reusing generic or similar
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Ivana Puff Sleeve Formal Dress',
             'price' => '₱3,999.00',
             'raw_price' => 3999.00,
-            'image' => '../image/Shop/StyleHub Manila/Ivana Puff Sleeve Formal Dress.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Ivana Puff Sleeve Formal Dress.jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Tyla Linen Dress',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../image/Shop/StyleHub Manila/Tyla Linen Dress.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Tyla Linen Dress.jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'HUILISHI Korean Plain Men’s Long Sleeve Shirt',
             'price' => '₱2,250.00',
             'raw_price' => 2250.00,
-            'image' => '../image/Shop/StyleHub Manila/HUILISHI Korean Plain Men’s Long Sleeve Shirt.jpeg', // Fallback
+            'image' => '../image/shop/StyleHub Manila/HUILISHI Korean Plain Men’s Long Sleeve Shirt.jpeg', // Fallback
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'INCERUN Korean Style Men Casual Shirt',
             'price' => '₱4,601.00',
             'raw_price' => 4601.00,
-            'image' => '../image/Shop/StyleHub Manila/INCERUN Korean Style Men Casual Shirt.jpeg',
+            'image' => '../image/shop/StyleHub Manila/INCERUN Korean Style Men Casual Shirt.jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Giordano Korean Style Summer Men’s Polo',
             'price' => '₱2,980.00',
             'raw_price' => 2980.00,
-            'image' => '../image/Shop/StyleHub Manila/Giordano Korean Style Summer Men’s Polo.jpeg', // Using stylized image
+            'image' => '../image/shop/StyleHub Manila/Giordano Korean Style Summer Men’s Polo.jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Chicly Korean Men’s Casual Long Sleeve Polo',
             'price' => '₱2,290.00',
             'raw_price' => 1100.00,
-            'image' => '../image/Shop/StyleHub Manila/Chicly Korean Men’s Casual Long Sleeve Polo.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Chicly Korean Men’s Casual Long Sleeve Polo.jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Korea Floral Polo For Men',
             'price' => '₱3,490.00',
             'raw_price' => 2290.00,
-            'image' => '../image/Shop/StyleHub Manila/Korea Floral Polo For Men.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Korea Floral Polo For Men.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Denim Streetwear Jacket',
             'price' => '₱6,400.00',
             'raw_price' => 6400.00,
-            'image' => '../image/Shop/StyleHub Manila/Denim Streetwear Jacket.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Denim Streetwear Jacket.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Graphic Tee (Astig Design)',
             'price' => '₱7,550.00',
             'raw_price' => 7550.00,
-            'image' => '../image/Shop/StyleHub Manila/Graphic Tee (Astig Design).jpeg',
+            'image' => '../image/shop/StyleHub Manila/Graphic Tee (Astig Design).jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Bucket Hat (Streetwear)',
             'price' => '₱8,450.00',
             'raw_price' => 1450.00,
-            'image' => '../image/Shop/StyleHub Manila/Bucket Hat (Streetwear).jpeg',
+            'image' => '../image/shop/StyleHub Manila/Bucket Hat (Streetwear).jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Ripped Jogger Pants',
             'price' => '₱11,302.00',
             'raw_price' => 11302.00,
-            'image' => '../image/Shop/StyleHub Manila/Ripped Jogger Pants.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Ripped Jogger Pants.jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Button‑Up Street Shirt',
             'price' => '₱24,999.00',
             'raw_price' => 12999.00,
-            'image' => '../image/Shop/StyleHub Manila/Button‑Up Street Shirt.jpeg',
+            'image' => '../image/shop/StyleHub Manila/Button‑Up Street Shirt.jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
@@ -176,3 +176,5 @@ if (isset($definingProducts) && $definingProducts) {
     return; // Stop processing
 }
 ?>
+
+

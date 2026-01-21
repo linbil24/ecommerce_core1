@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Pro-Bass TWS Earbuds (V5.3)',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/GadgetLab PH/Pro-Bass TWS Earbuds (V5.3).jpeg',
+            'image' => '../image/shop/GadgetLab PH/Pro-Bass TWS Earbuds (V5.3).jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Ultra-Slim 10,000mAh Powerbank',
             'price' => '₱899.00',
             'raw_price' => 899.00,
-            'image' => '../image/Shop/GadgetLab PH/Ultra-Slim 10,000mAh Powerbank.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Ultra-Slim 10,000mAh Powerbank.jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Smart LED Sunset Lamp',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../image/Shop/GadgetLab PH/Smart LED Sunset Lamp.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Smart LED Sunset Lamp.jpeg',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'RGB Mechanical Gaming Keyboard',
             'price' => '₱2,800.00',
             'raw_price' => 2800.00,
-            'image' => '../image/Shop/GadgetLab PH/RGB Mechanical Gaming Keyboard.jpeg',
+            'image' => '../image/shop/GadgetLab PH/RGB Mechanical Gaming Keyboard.jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'HD 1080p Web Camera (Built-in Mic)',
             'price' => '₱750.00',
             'raw_price' => 750.00,
-            'image' => '../image/Shop/GadgetLab PH/HD 1080p Web Camera (Built-in Mic).jpeg',
+            'image' => '../image/shop/GadgetLab PH/HD 1080p Web Camera (Built-in Mic).jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Magnetic Wireless Car Charger',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/GadgetLab PH/Magnetic Wireless Car Charger.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Magnetic Wireless Car Charger.jpeg',
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Portable Mini Humidifier (USB)',
             'price' => '₱1,500.00',
             'raw_price' => 1500.00,
-            'image' => '../image/Shop/GadgetLab PH/Portable Mini Humidifier (USB).jpeg',
+            'image' => '../image/shop/GadgetLab PH/Portable Mini Humidifier (USB).jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => '65W GaN Fast Charger Adaptor',
             'price' => '₱350.00',
             'raw_price' => 350.00,
-            'image' => '../image/Shop/GadgetLab PH/65W GaN Fast Charger Adaptor.jpeg', // Using stylized image
+            'image' => '../image/shop/GadgetLab PH/65W GaN Fast Charger Adaptor.jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Vertical Ergonomic Wireless Mouse',
             'price' => '₱1,100.00',
             'raw_price' => 1100.00,
-            'image' => '../image/Shop/GadgetLab PH/Vertical Ergonomic Wireless Mouse.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Vertical Ergonomic Wireless Mouse.jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Clip-on Reading Ring Light',
             'price' => '₱850.00',
             'raw_price' => 850.00,
-            'image' => '../image/Shop/GadgetLab PH/Clip-on Reading Ring Light.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Clip-on Reading Ring Light.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Bluetooth Smart Fitness Tracker',
             'price' => '₱1,800.00',
             'raw_price' => 1800.00,
-            'image' => '../image/Shop/GadgetLab PH/Bluetooth Smart Fitness Tracker.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Bluetooth Smart Fitness Tracker.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Noise-Cancelling Wired Headset',
             'price' => '₱1,350.00',
             'raw_price' => 1350.00,
-            'image' => '../image/Shop/GadgetLab PH/Noise-Cancelling Wired Headset.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Noise-Cancelling Wired Headset.jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Multi-Port USB-C Hub (5-in-1)',
             'price' => '₱450.00',
             'raw_price' => 450.00,
-            'image' => '../image/Shop/GadgetLab PH/Multi-Port USB-C Hub (5-in-1).jpeg',
+            'image' => '../image/shop/GadgetLab PH/Multi-Port USB-C Hub (5-in-1).jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Foldable Laptop Desk Stand',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/Shop/GadgetLab PH/Foldable Laptop Desk Stand.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Foldable Laptop Desk Stand.jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Universal Stylus Pen',
             'price' => '₱299.00',
             'raw_price' => 299.00,
-            'image' => '../image/Shop/GadgetLab PH/Universal Stylus Pen.jpeg',
+            'image' => '../image/shop/GadgetLab PH/Universal Stylus Pen.jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
@@ -176,3 +176,5 @@ if (isset($definingProducts) && $definingProducts) {
     return; // Stop processing
 }
 ?>
+
+

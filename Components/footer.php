@@ -3,8 +3,8 @@ if (!isset($path_prefix)) {
     $path_prefix = '../';
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="<?php echo $path_prefix; ?>Css/Components/footer.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0../css/all.min.css">
+<link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/footer.css">
 
 <footer class="footer">
     <div class="footer-container">
@@ -12,11 +12,11 @@ if (!isset($path_prefix)) {
         <div class="footer-column">
             <h4>Customer Care</h4>
             <ul>
-                <li><a href="<?php echo $path_prefix; ?>Services/Customer_Service.php">Customer Service</a></li>
-                <li><a href="<?php echo $path_prefix; ?>Services/How_to_buy.php">How to Buy</a></li>
-                <li><a href="<?php echo $path_prefix; ?>Services/Shipping & Delivery.php">Shipping & Delivery</a></li>
-                <li><a href="<?php echo $path_prefix; ?>Services/Return & Refund.php">Return & Refund</a></li>
-                <li><a href="<?php echo $path_prefix; ?>Services/Contact Us.php">Contact Us</a></li>
+                <li><a href="<?php echo $path_prefix; ?>services/Customer_Service.php">Customer Service</a></li>
+                <li><a href="<?php echo $path_prefix; ?>services/How_to_buy.php">How to Buy</a></li>
+                <li><a href="<?php echo $path_prefix; ?>services/Shipping & Delivery.php">Shipping & Delivery</a></li>
+                <li><a href="<?php echo $path_prefix; ?>services/Return & Refund.php">Return & Refund</a></li>
+                <li><a href="<?php echo $path_prefix; ?>services/Contact Us.php">Contact Us</a></li>
             </ul>
         </div>
 
@@ -24,10 +24,10 @@ if (!isset($path_prefix)) {
         <div class="footer-column">
             <h4>About ImarketPH</h4>
             <ul>
-                <li><a href="<?php echo $path_prefix; ?>About/about_us.php">About Us</a></li>
-                <li><a href="<?php echo $path_prefix; ?>About/Careers.php">Careers</a></li>
-                <li><a href="<?php echo $path_prefix; ?>About/Terms & Conditions.php">Terms & Conditions</a></li>
-                <li><a href="<?php echo $path_prefix; ?>About/Privacy Policy.php">Privacy Policy</a></li>
+                <li><a href="<?php echo $path_prefix; ?>about/about_us.php">About Us</a></li>
+                <li><a href="<?php echo $path_prefix; ?>about/Careers.php">Careers</a></li>
+                <li><a href="<?php echo $path_prefix; ?>about/Terms & Conditions.php">Terms & Conditions</a></li>
+                <li><a href="<?php echo $path_prefix; ?>about/Privacy Policy.php">Privacy Policy</a></li>
             </ul>
         </div>
 
@@ -73,3 +73,5 @@ if (!isset($path_prefix)) {
         <p>&copy; 2025 All Rights Reserved by ImarketPH</p>
     </div>
 </footer>
+
+

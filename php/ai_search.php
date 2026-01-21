@@ -81,3 +81,5 @@ function callOpenAIVision($imagePath, $apiKey)
     return [];
 }
 ?>
+
+

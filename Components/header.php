@@ -38,8 +38,8 @@ if (!isset($path_prefix)) {
     $path_prefix = '../';
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="<?php echo $path_prefix; ?>Css/Components/header.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0../css/all.min.css">
+<link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/header.css">
 
 <header class="header">
     <div class="header-container">
@@ -60,7 +60,7 @@ if (!isset($path_prefix)) {
                     <a href="#" class="dropdown-toggle"><i class="fas fa-list"></i> Categories <i
                             class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Best-selling/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/best-selling/index.php"><i
                                     class="fas fa-fire"></i> Best Selling</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/New-arrivals/index.php"><i
                                     class="fas fa-star"></i> New Arrivals</a></li>
@@ -182,3 +182,5 @@ if (!isset($path_prefix)) {
         });
     });
 </script>
+
+

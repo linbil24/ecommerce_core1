@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #AEE6F6;
+    /* Light blue background from image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+}
+
+.login-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    overflow: hidden;
+    min-height: 600px;
+}
+
+/* Left Side: Branding */
+.brand-section {
+    width: 50%;
+    background-color: #3B5D85;
+    /* Dark blue fallback */
+    background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
+    /* Approximation of geometric bg */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    /* You could add a background-image here if the user provides the geometric pattern */
+}
+
+.brand-content {
+    z-index: 2;
+}
+
+.brand-logo {
+    width: 100%;
+    /* Adjust based on actual image size */
+    margin-bottom: 20px;
+}
+
+.brand-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.brand-section p {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Right Side: Form */
+.form-section {
+    width: 50%;
+    padding: 40px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #E2EDF5;
+    /* Light grey/blue tint for form area */
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-header h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 1px;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.input-group input:focus {
+    outline: 2px solid #4AB7E5;
+}
+
+/* Actions: Remember Me & Forgot Password */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    margin-bottom: 25px;
+    color: #666;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: #4AB7E5;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.password-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.toggle-password:hover {
+    color: #4AB7E5;
+}
+
+/* Buttons */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background-color: #4AB7E5;
+    /* Light blue button */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #3AA0C9;
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+}
+
+.divider span {
+    padding: 0 10px;
+}
+
+/* Social Buttons */
+.social-login {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.btn-social {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.1s;
+}
+
+.btn-social:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-social i {
+    font-size: 1.1rem;
+}
+
+.fa-google {
+    background: conic-gradient(from -45deg, #ea4335 110deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg) 73% 55%/150% 150% no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.fa-facebook-f {
+    color: #1877F2;
+}
+
+/* Footer */
+.form-footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #777;
+    line-height: 1.5;
+}
+
+.form-footer a {
+    color: #4AB7E5;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-card {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .brand-section {
+        width: 100%;
+        padding: 40px 20px;
+        min-height: 200px;
+    }
+
+    .form-section {
+        width: 100%;
+        padding: 30px;
+    }
+}
+
+

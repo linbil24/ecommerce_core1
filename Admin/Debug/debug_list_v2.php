@@ -1,6 +1,6 @@
 <?php
-require_once 'Admin/connection.php';
-// require_once 'Admin/functions.php'; // Skipping to avoid path issues
+require_once 'admin/connection.php';
+// require_once 'admin/functions.php'; // Skipping to avoid path issues
 
 try {
     $pdo = get_db_connection();
@@ -38,3 +38,5 @@ try {
 } catch (Exception $e) {
     echo "Connection error: " . $e->getMessage();
 }
+
+

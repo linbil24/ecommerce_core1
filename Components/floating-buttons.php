@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="../Css/Components/floating-buttons.css">
-<link rel="stylesheet" href="../Css/Components/ai-features.css">
+<link rel="stylesheet" href="../css/components/floating-buttons.css">
+<link rel="stylesheet" href="../css/components/ai-features.css">
 
 <!-- Background Modal Overlay -->
 <div id="ai-modal-overlay" class="ai-modal-overlay">
@@ -25,3 +25,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
 
 <script src="../javascript/ai-features.js"></script>
+
+

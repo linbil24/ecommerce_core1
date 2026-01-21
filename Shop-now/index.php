@@ -13,12 +13,12 @@
 <body>
     <nav>
         <?php $path_prefix = '../';
-        include '../Components/header.php'; ?>
+        include '../components/header.php'; ?>
     </nav>
 
     <!-- Link Shop CSS after header to ensure it takes precedence or cascades correctly -->
-    <link rel="stylesheet" href="../Css/Shop/shop.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="../Css/Shop/shop_landing.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/shop/shop.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/shop/shop_landing.css?v=<?php echo time(); ?>">
 
     <div class="content">
         <div class="shop-container">
@@ -363,7 +363,7 @@
                         <!-- Item 1 -->
                         <div class="featured-card">
                             <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" alt="H&M Hoodie"
+                                <img src="../image/shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" alt="H&M Hoodie"
                                     style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 0; margin-bottom: 0;">
                             </a>
                         </div>
@@ -371,7 +371,7 @@
                         <!-- Item 2 -->
                         <div class="featured-card">
                             <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../image/Shop/UrbanWear PH/Pilipinas Hoodie.avif" alt="Pilipinas Hoodie"
+                                <img src="../image/shop/UrbanWear PH/Pilipinas Hoodie.avif" alt="Pilipinas Hoodie"
                                     style="width: 100%; height: 350px; object-fit: cover; object-position: center; border-radius: 0; margin-bottom: 0;">
                             </a>
                         </div>
@@ -379,7 +379,7 @@
                         <!-- Item 3 -->
                         <div class="featured-card">
                             <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../image/Shop/UrbanWear PH/Team SKOOP Denim Jacket.jpeg" alt="Team SKOOP"
+                                <img src="../image/shop/UrbanWear PH/Team SKOOP Denim Jacket.jpeg" alt="Team SKOOP"
                                     style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 0; margin-bottom: 0;">
                             </a>
                         </div>
@@ -395,7 +395,7 @@
         </div>
     </div>
     <footer>
-        <?php include '../Components/footer.php'; ?>
+        <?php include '../components/footer.php'; ?>
     </footer>
 
     <!-- Product Detail Modal -->
@@ -577,3 +577,5 @@
 </body>
 
 </html>
+
+

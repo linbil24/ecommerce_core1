@@ -23,12 +23,12 @@ if (!isset($path_prefix)) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Custom CSS (Shared) -->
-    <link rel="stylesheet" href="<?php echo $path_prefix; ?>Css/About/about_us.css">
+    <link rel="stylesheet" href="<?php echo $path_prefix; ?>css/about/about_us.css">
 </head>
 
 <body>
 
-    <?php include '../Components/header.php'; ?>
+    <?php include '../components/header.php'; ?>
 
     <main class="legal-wrapper">
         <div class="legal-header">
@@ -101,8 +101,11 @@ if (!isset($path_prefix)) {
         </div>
     </main>
 
-    <?php include '../Components/footer.php'; ?>
+    <?php include '../components/footer.php'; ?>
 
 </body>
 
 </html>
+
+
+

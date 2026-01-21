@@ -180,3 +180,5 @@ if (!isset($_GET['code'])) {
     //Use this to get a new access token if the old one expires
     echo 'Refresh Token: ', htmlspecialchars($token->getRefreshToken());
 }
+
+

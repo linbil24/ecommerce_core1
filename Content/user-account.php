@@ -166,7 +166,7 @@ $uzip = $u['zip'] ?? '';
     <nav>
         <?php
         $path_prefix = '../';
-        include $path_prefix . 'Components/header.php';
+        include $path_prefix . 'components/header.php';
         ?>
     </nav>
 
@@ -240,9 +240,11 @@ $uzip = $u['zip'] ?? '';
 
     <footer>
         <?php
-        include $path_prefix . 'Components/footer.php';
+        include $path_prefix . 'components/footer.php';
         ?>
     </footer>
 </body>
 
 </html>
+
+

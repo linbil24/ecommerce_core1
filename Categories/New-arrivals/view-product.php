@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
-    <link rel="stylesheet" href="../../Css/Best-selling/Best.css">
+    <link rel="stylesheet" href="../../css/best-selling/best.css">
     <?php
     $page_title = isset($_GET['name']) ? $_GET['name'] : 'Product Details';
     ?>
@@ -16,7 +16,7 @@
     <nav>
         <?php
         $path_prefix = '../../';
-        include '../../Components/header.php';
+        include '../../components/header.php';
         ?>
     </nav>
 
@@ -54,9 +54,11 @@
     <footer>
         <?php
         $path_prefix = '../../';
-        include '../../Components/footer.php';
+        include '../../components/footer.php';
         ?>
     </footer>
 </body>
 
 </html>
+
+

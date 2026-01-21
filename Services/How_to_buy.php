@@ -31,7 +31,7 @@ if (mysqli_num_rows($check_table) > 0) {
     <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../Css/Services/how_to_buy.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/services/how_to_buy.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -39,7 +39,7 @@ if (mysqli_num_rows($check_table) > 0) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../Components/header.php';
+        include '../components/header.php';
         ?>
     </nav>
 
@@ -94,8 +94,11 @@ if (mysqli_num_rows($check_table) > 0) {
     </div>
 
     <footer>
-        <?php include '../Components/footer.php'; ?>
+        <?php include '../components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
+
+
+

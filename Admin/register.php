@@ -1,5 +1,5 @@
 <?php
-// Admin/register.php
+// admin/register.php
 
 // 1. DATABASE CONNECTION & FUNCTIONS
 require_once 'connection.php';
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Custom Auth CSS -->
-    <link rel="stylesheet" href="../Css/Admin/auth.css">
+    <link rel="stylesheet" href="../css/admin/auth.css">
 </head>
 
 <body>
@@ -174,3 +174,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
+
+

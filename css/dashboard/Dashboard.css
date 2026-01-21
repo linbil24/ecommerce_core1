@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Custom Scrollbar - kept just in case content overflows internally */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 6px;
+    border: 3px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    flex: 1;
+    /* height: 100vh; Removed to prevent overflow */
+    /* min-height: 600px; Removed to ensure fit on screen */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    /* Ensure slides don't overflow */
+}
+
+/* Slider Styles */
+.hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Overlay for better text visibility */
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.hero-content {
+    position: absolute;
+    top: 20px;
+    max-width: 700px;
+    padding: 20px;
+    z-index: 2;
+}
+
+.welcome-text {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.brand-title {
+    font-size: 60px;
+    font-weight: 800;
+    margin: 0 0 15px;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    display: inline-block;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 40px;
+    backdrop-filter: blur(3px);
+}
+
+/* Stats */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.stat-box {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-width: 100px;
+}
+
+.stat-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-box p {
+    font-size: 12px;
+    margin: 5px 0 0;
+    opacity: 0.8;
+}
+
+/* Hero Buttons */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-shop {
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(221, 36, 118, 0.4);
+    transition: transform 0.3s;
+}
+
+.btn-shop:hover {
+    transform: translateY(-3px);
+}
+
+.btn-best {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.3s;
+}
+
+.btn-best:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Slider Indicators */
+.slider-indicators {
+    position: absolute;
+    top: 92%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+    /* Ensure on top of slider */
+}
+
+.indicator {
+    width: 40px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    /* Add pointer cursor */
+    transition: background 0.3s;
+}
+
+.indicator.active {
+    background: white;
+}
+
+/* Floating Buttons */
+.floating-buttons {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+    padding: 0 40px;
+    pointer-events: none;
+    /* Let clicks pass through container */
+    z-index: 10;
+    /* Ensure on top of slider */
+}
+
+.btn-float {
+    pointer-events: auto;
+    background: rgba(100, 100, 255, 0.8);
+    backdrop-filter: blur(5px);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
+    /* Rounded pill shape */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-camera {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    /* Smoother box radius */
+    padding: 0;
+    justify-content: center;
+    border-bottom-left-radius: 20px;
+    /* Match design slightly */
+}
+
+.btn-voice {
+    border-bottom-right-radius: 20px;
+}
+
+.btn-float:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .brand-title {
+        font-size: 40px;
+    }
+
+    .stats-container {
+        flex-wrap: wrap;
+    }
+
+    .floating-buttons {
+        padding: 0 20px;
+    }
+}
+
+

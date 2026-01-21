@@ -34,3 +34,5 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'SMTP Connect() fejlede.';
 $PHPMAILER_LANG['smtp_detail']          = 'Detalje: ';
 $PHPMAILER_LANG['smtp_error']           = 'SMTP server fejl: ';
 $PHPMAILER_LANG['variable_set']         = 'Kunne ikke definere eller nulstille variablen: ';
+
+

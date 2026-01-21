@@ -194,7 +194,7 @@ if (!$order) {
     <nav>
         <?php
         $path_prefix = '../';
-        include $path_prefix . 'Components/header.php';
+        include $path_prefix . 'components/header.php';
         ?>
     </nav>
 
@@ -294,7 +294,7 @@ if (!$order) {
                 <a href="Order-history.php" class="btn-orders"><i class="fas fa-list"></i> View All Orders</a>
                 <!-- Dynamic Continue Shopping Link -->
                 <?php
-                $continue_url = $is_best_selling_confirm ? '../Categories/Best-selling/view-product.php' : '../Shop/index.php';
+                $continue_url = $is_best_selling_confirm ? '../Categories/best-selling/view-product.php' : '../shop/index.php';
                 ?>
                 <a href="<?php echo $continue_url; ?>" class="btn-home"><i class="fas fa-home"></i> Continue
                     Shopping</a>
@@ -303,9 +303,12 @@ if (!$order) {
     </div>
 
     <footer>
-        <?php include $path_prefix . 'Components/footer.php'; ?>
+        <?php include $path_prefix . 'components/footer.php'; ?>
     </footer>
 
 </body>
 
 </html>
+
+
+

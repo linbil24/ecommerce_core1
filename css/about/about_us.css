@@ -1,0 +1,855 @@
+/* Global Defaults */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --primary-color: #2A3B7E;
+    /* Deep Royal Blue */
+    --accent-color: #FFB43A;
+    /* Warm Amber */
+    --text-dark: #1E293B;
+    --text-light: #64748B;
+    --bg-white: #FFFFFF;
+    --bg-light: #F8FAFC;
+    --gradient-hero: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Wrapper to avoid conflicting with global styles if any */
+.about-us-wrapper,
+.careers-wrapper {
+    overflow-x: hidden;
+}
+
+/* =========================================
+   Hero Section
+   ========================================= */
+.about-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 10%;
+    background: var(--gradient-hero);
+    min-height: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 24px;
+}
+
+.hero-content p {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.btn-explore {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(42, 59, 126, 0.3);
+}
+
+.btn-explore:hover {
+    background-color: #1e2b5e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(42, 59, 126, 0.4);
+}
+
+.hero-image-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Abstract Shape behind logo */
+.hero-shape {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    animation: morph 8s ease-in-out infinite;
+    z-index: 1;
+    box-shadow: 0 0 40px rgba(42, 59, 126, 0.05);
+}
+
+.hero-img-floating {
+    position: relative;
+    width: 250px;
+    /* Adjust based on logo needs */
+    z-index: 2;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+    animation: float 6s ease-in-out infinite;
+}
+
+/* =========================================
+   Stats Strip
+   ========================================= */
+.stats-strip {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    padding: 40px 10%;
+    background: #fff;
+    margin-top: -50px;
+    /* Overlap hero */
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    z-index: 10;
+    border-radius: 20px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stat-item {
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+}
+
+.stat-item i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.stat-item h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.stat-item p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin: 5px 0 0;
+}
+
+/* =========================================
+   Our Story
+   ========================================= */
+.section-story {
+    padding: 100px 10%;
+    background-color: #fff;
+}
+
+.story-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-text h2 {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.story-text h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--accent-color);
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+.story-text p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.signature h4 {
+    margin: 0;
+    font-family: 'Dancing Script', cursive;
+    /* Optional if available, otherwise fallback */
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.story-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.visual-card {
+    width: 80%;
+    aspect-ratio: 1/1;
+    background: var(--gradient-hero);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transform: rotate(3deg);
+    transition: transform 0.4s ease;
+}
+
+.visual-card:hover {
+    transform: rotate(0deg);
+}
+
+.visual-card i {
+    font-size: 8rem;
+    color: rgba(42, 59, 126, 0.1);
+}
+
+/* =========================================
+   Mission & Vision
+   ========================================= */
+.section-mission-vision {
+    padding: 80px 10%;
+    background-color: var(--bg-light);
+}
+
+.mv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.mv-card {
+    background: #fff;
+    padding: 60px 40px;
+    border-radius: 24px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mv-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.mv-card .icon-box {
+    width: 80px;
+    height: 80px;
+    background: var(--bg-light);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 30px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.mv-card:hover .icon-box {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.mv-card h3 {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.mv-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* =========================================
+   Values
+   ========================================= */
+.section-values {
+    padding: 100px 10%;
+    background: #fff;
+    text-align: center;
+}
+
+.section-values h2 {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 60px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.value-item {
+    padding: 30px;
+}
+
+.value-item .val-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.value-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.value-item p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   CTA Section
+   ========================================= */
+.section-cta {
+    padding: 100px 10%;
+    background: var(--primary-color);
+    text-align: center;
+    color: #fff;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.btn-shop-now {
+    display: inline-block;
+    padding: 16px 48px;
+    background: #fff;
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+}
+
+.btn-shop-now:hover {
+    transform: scale(1.05);
+}
+
+/* =========================================
+   Animations & Responsive
+   ========================================= */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes morph {
+    0% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+
+    50% {
+        border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    100% {
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    }
+}
+
+@media (max-width: 968px) {
+    .about-hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 40px;
+    }
+
+    .hero-content {
+        margin-top: 40px;
+    }
+
+    .story-container {
+        flex-direction: column;
+    }
+
+    .stats-strip {
+        flex-direction: column;
+        gap: 30px;
+        width: 90%;
+        padding: 30px;
+    }
+
+    .hero-shape {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* =========================================
+   CAREERS PAGE STYLES
+   ========================================= */
+
+.careers-hero {
+    position: relative;
+    height: 60vh;
+    min-height: 400px;
+    background: url('../../image/logo.png') no-repeat center center/contain, var(--gradient-hero);
+    /* Using logo as placeholder if no actual office image */
+    background-blend-mode: overlay;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(42, 59, 126, 0.85);
+    /* Primary color overlay */
+}
+
+.careers-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.careers-hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.careers-hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Reusing .btn-explore but forcing white border/text for dark bg */
+.careers-hero-content .btn-explore {
+    background: #fff;
+    color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.careers-hero-content .btn-explore:hover {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+/* Perks Section */
+.section-perks {
+    padding: 80px 10%;
+    background: #fff;
+    text-align: center;
+}
+
+.section-header {
+    max-width: 700px;
+    margin: 0 auto 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 16px;
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.perks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.perk-card {
+    background: var(--bg-light);
+    padding: 40px 30px;
+    border-radius: 16px;
+    transition: transform 0.3s;
+}
+
+.perk-card:hover {
+    transform: translateY(-5px);
+}
+
+.perk-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.perk-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.perk-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+/* Positions Section */
+.section-positions {
+    padding: 80px 10%;
+    background: var(--bg-light);
+}
+
+.jobs-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.job-category {
+    margin-bottom: 50px;
+}
+
+.job-category h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.job-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.job-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.job-info h4 {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin: 0 0 8px 0;
+}
+
+.job-info span {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-right: 15px;
+}
+
+.job-info i {
+    color: var(--accent-color);
+    margin-right: 5px;
+}
+
+.btn-apply {
+    display: inline-block;
+    padding: 10px 24px;
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.btn-apply:hover {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Culture/Gallery Section */
+.section-culture {
+    padding: 80px 10%;
+    background: #fff;
+    text-align: center;
+}
+
+.culture-content {
+    margin-bottom: 50px;
+}
+
+.culture-content h2 {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+}
+
+.culture-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    height: 400px;
+}
+
+.gallery-item {
+    background: #ccc;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Placeholder colors for gallery */
+.item-1 {
+    background-color: #dbeafe;
+    grid-column: span 2;
+}
+
+.item-2 {
+    background-color: #fce7f3;
+}
+
+.item-3 {
+    background-color: #fef3c7;
+    grid-column: span 3;
+    height: 180px;
+}
+
+
+/* Careers Footer CTA */
+.careers-footer-cta {
+    background: var(--text-dark);
+    color: #fff;
+    padding: 80px 10%;
+    text-align: center;
+}
+
+.careers-footer-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.careers-footer-cta p {
+    color: #94a3b8;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+}
+
+.btn-outline-white {
+    display: inline-block;
+    padding: 14px 32px;
+    border: 2px solid #fff;
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.btn-outline-white:hover {
+    background: #fff;
+    color: var(--text-dark);
+}
+
+@media (max-width: 768px) {
+    .careers-hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .job-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .btn-apply {
+        width: 100%;
+        text-align: center;
+    }
+
+    .culture-gallery {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .item-1,
+    .item-3 {
+        grid-column: span 1;
+        height: 200px;
+    }
+}
+
+/* =========================================
+   LEGAL PAGES STYLES (Privacy Policy / Terms)
+   ========================================= */
+
+.legal-header {
+    background: var(--primary-color);
+    padding: 80px 10%;
+    text-align: center;
+    color: #fff;
+    /* Optional pattern or gradient */
+    background: linear-gradient(135deg, var(--primary-color) 0%, #1e2b5e 100%);
+}
+
+.legal-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.legal-header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+}
+
+.legal-content-wrapper {
+    background: var(--bg-light);
+    padding: 60px 10%;
+    min-height: 50vh;
+}
+
+.legal-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.legal-container h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 10px;
+}
+
+.legal-container h2:first-child {
+    margin-top: 0;
+}
+
+.legal-container p {
+    line-height: 1.8;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.legal-container ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.legal-container li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.legal-container strong {
+    color: var(--primary-color);
+}
+
+.last-updated {
+    display: block;
+    margin-bottom: 30px;
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .legal-header {
+        padding: 60px 5%;
+    }
+
+    .legal-content-wrapper {
+        padding: 40px 5%;
+    }
+
+    .legal-container {
+        padding: 30px;
+    }
+
+    .legal-header h1 {
+        font-size: 2rem;
+    }
+}
+
+

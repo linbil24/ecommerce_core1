@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../Css/Services/contact.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/services/contact.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Fix for Header Styles if necessary -->
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../Components/header.php';
+        include '../components/header.php';
         ?>
     </nav>
 
@@ -154,8 +154,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <footer>
-        <?php include '../Components/footer.php'; ?>
+        <?php include '../components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
+
+
+

@@ -57,7 +57,7 @@ if ($user_id) {
     <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../Css/Services/customer_service.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/services/customer_service.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -65,7 +65,7 @@ if ($user_id) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../Components/header.php';
+        include '../components/header.php';
         ?>
     </nav>
 
@@ -248,8 +248,11 @@ if ($user_id) {
     </div>
 
     <footer>
-        <?php include '../Components/footer.php'; ?>
+        <?php include '../components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
+
+
+

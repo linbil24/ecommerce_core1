@@ -31,3 +31,5 @@ $PHPMAILER_LANG['smtp_connect_failed']  = 'Wywołanie funkcji SMTP Connect() zos
 $PHPMAILER_LANG['smtp_detail']          = 'Szczegóły: ';
 $PHPMAILER_LANG['smtp_error']           = 'Błąd SMTP: ';
 $PHPMAILER_LANG['variable_set']         = 'Nie można ustawić lub zmodyfikować zmiennej: ';
+
+

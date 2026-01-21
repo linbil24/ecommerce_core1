@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../Css/Dashboard/Reviews.css">
+<link rel="stylesheet" href="../../css/dashboard/reviews.css">
 <div class="reviews-container">
     <div class="reviews-header">
         Product Ratings
@@ -155,3 +155,5 @@
         }
     }
 </script>
+
+

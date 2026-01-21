@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GROCERIES | IMARKETPH</title>
     <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
-    <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../../css/best-selling/best.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../Components/header.php'; ?>
+        include '../../components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -106,8 +106,10 @@
     </script>
 
     <footer>
-        <?php include '../../Components/footer.php'; ?>
+        <?php include '../../components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
+
+

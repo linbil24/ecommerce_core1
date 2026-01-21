@@ -1206,7 +1206,7 @@ function renderUserModule(submodule) {
             submoduleContent = `
                 <p class="mb-6 text-gray-500">Manage admin accounts and role-based access control.</p>
                     <div class="kpi-card p-6">
-                        <h3 class="text-xl font-semibold mb-4">Admin/Staff List (${adminUsersData.length} Admins)</h3>
+                        <h3 class="text-xl font-semibold mb-4">admin/Staff List (${adminUsersData.length} Admins)</h3>
                         <div class="table-container" style="overflow-x: auto;">
                             <table class="data-table">
                                 <thead>
@@ -1970,4 +1970,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ensure icons are rendered for the sidebar/static content
     lucide.createIcons();
 });
+
+
 

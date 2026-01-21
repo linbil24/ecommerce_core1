@@ -107,7 +107,7 @@ if (isset($_POST['submit'])) {
     <title>Register - iMarket</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="../image/logo.png">
-    <link rel="stylesheet" href="../css/Login-Reg-Forget/Register.css">
+    <link rel="stylesheet" href="../css/login-reg-forget/register.css">
     <style>
         .alert-error {
             color: #721c24;

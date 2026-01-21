@@ -1,5 +1,5 @@
 <?php
-// Admin/login.php
+// admin/login.php
 
 // 1. DATABASE CONNECTION & FUNCTIONS
 require_once 'connection.php';
@@ -115,7 +115,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Custom Auth CSS -->
-    <link rel="stylesheet" href="../Css/Admin/auth.css">
+    <link rel="stylesheet" href="../css/admin/auth.css">
 </head>
 
 <body>
@@ -216,3 +216,5 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
 </body>
 
 </html>
+
+

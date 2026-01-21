@@ -98,7 +98,7 @@ if (!isset($timeline_events)) {
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../Css/Best-selling/tracking.css"> <!-- Updated path -->
+    <link rel="stylesheet" href="../css/best-selling/tracking.css"> <!-- Updated path -->
     <style>
         /* Embedding crucial styles to ensure look */
         body {
@@ -284,7 +284,7 @@ if (!isset($timeline_events)) {
     <nav>
         <?php
         $path_prefix = '../';
-        include $path_prefix . 'Components/header.php';
+        include $path_prefix . 'components/header.php';
         ?>
     </nav>
 
@@ -340,7 +340,7 @@ if (!isset($timeline_events)) {
             <?php
             $buy_again_pid = isset($order_data['product_id']) ? $order_data['product_id'] : 1;
             ?>
-            <a href="../Categories/Best-selling/index.php?id=<?php echo $buy_again_pid; ?>" class="btn btn-primary">Buy
+            <a href="../Categories/best-selling/index.php?id=<?php echo $buy_again_pid; ?>" class="btn btn-primary">Buy
                 Again</a>
             <a href="#" class="btn btn-secondary">Contact Seller</a>
         </div>
@@ -401,8 +401,11 @@ if (!isset($timeline_events)) {
     </div>
 
     <footer>
-        <?php include $path_prefix . 'Components/footer.php'; ?>
+        <?php include $path_prefix . 'components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
+
+
+

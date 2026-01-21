@@ -50,7 +50,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- External CSS - We should unify this, but for now using the request's style source -->
-    <link rel="stylesheet" href="../Css/Best-selling/checkout_cart.css">
+    <link rel="stylesheet" href="../css/best-selling/checkout_cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- User requested Montserrat font -->
@@ -96,7 +96,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../Components/header.php';
+        include '../components/header.php';
         ?>
     </nav>
 
@@ -118,7 +118,7 @@ if ($result && mysqli_num_rows($result) > 0) {
             <form action="" method="POST" id="cartForm">
                 <!-- Items List -->
                 <?php foreach ($cart_items as $item):
-                    // Determine Shop/Brand Display
+                    // Determine shop/Brand Display
                     $is_best_selling = false;
                     $img_check = strtolower($item['image']);
                     $bs_keywords = ['bag-women', 'bag-men', 'notebooks', 'earphone', 'shoes', 'watch', 'best-selling'];
@@ -159,26 +159,26 @@ if ($result && mysqli_num_rows($result) > 0) {
                             '../image/Toys & Games/' . $clean_img_name,
                             '../image/Groceries/' . $clean_img_name,
                             // Specific Shop Directories in image/Shop
-                            '../image/Shop/CozyLiving Store/' . $clean_img_name,
-                            '../image/Shop/DailyFits Co/' . $clean_img_name,
-                            '../image/Shop/FreshLook PH/' . $clean_img_name,
-                            '../image/Shop/GadgetLab PH/' . $clean_img_name,
-                            '../image/Shop/GlowUp Beauty/' . $clean_img_name,
-                            '../image/Shop/HomeEssentials PH/' . $clean_img_name,
-                            '../image/Shop/Luxe Basics/' . $clean_img_name,
-                            '../image/Shop/SmartGear Store/' . $clean_img_name,
-                            '../image/Shop/StyleHub Manila/' . $clean_img_name,
-                            '../image/Shop/TechZone PH/' . $clean_img_name,
-                            '../image/Shop/TrendyBags PH/' . $clean_img_name,
-                            '../image/Shop/UrbanWear PH/' . $clean_img_name,
+                            '../image/shop/CozyLiving Store/' . $clean_img_name,
+                            '../image/shop/DailyFits Co/' . $clean_img_name,
+                            '../image/shop/FreshLook PH/' . $clean_img_name,
+                            '../image/shop/GadgetLab PH/' . $clean_img_name,
+                            '../image/shop/GlowUp Beauty/' . $clean_img_name,
+                            '../image/shop/HomeEssentials PH/' . $clean_img_name,
+                            '../image/shop/Luxe Basics/' . $clean_img_name,
+                            '../image/shop/SmartGear Store/' . $clean_img_name,
+                            '../image/shop/StyleHub Manila/' . $clean_img_name,
+                            '../image/shop/TechZone PH/' . $clean_img_name,
+                            '../image/shop/TrendyBags PH/' . $clean_img_name,
+                            '../image/shop/UrbanWear PH/' . $clean_img_name,
                             // Legacy/Generic
                             '../image/Best/' . $clean_img_name,
-                            '../image/Shop/' . $clean_img_name,
+                            '../image/shop/' . $clean_img_name,
                             '../image/' . $clean_img_name,
-                            '../Categories/Best-selling/image/' . $clean_img_name,
-                            '../Shop/image/' . $clean_img_name,
-                            '../Shop/image/UrbanWear PH/' . $clean_img_name, // Legacy specific
-                            '../Shop/image/' . $clean_img_name,
+                            '../Categories/best-selling/image/' . $clean_img_name,
+                            '../shop/image/' . $clean_img_name,
+                            '../shop/image/UrbanWear PH/' . $clean_img_name, // Legacy specific
+                            '../shop/image/' . $clean_img_name,
                             $display_img
                         ];
 
@@ -265,7 +265,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <i class="fas fa-shopping-cart" style="font-size:3rem; margin-bottom:1rem; color:#ddd;"></i>
                 <h3 style="color: #333;">Your cart is empty</h3>
                 <p style="color: #777;">Looks like you haven't added any items to your cart yet.</p>
-                <a href="../Categories/Best-selling/index.php"
+                <a href="../Categories/best-selling/index.php"
                     style="color:#2A3B7E; text-decoration:none; font-weight:600; margin-top: 10px; display: inline-block;">Start
                     Shopping</a>
             </div>
@@ -365,3 +365,6 @@ if ($result && mysqli_num_rows($result) > 0) {
 </body>
 
 </html>
+
+
+

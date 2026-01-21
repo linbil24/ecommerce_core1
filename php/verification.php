@@ -47,7 +47,7 @@ if (isset($_POST['verify'])) {
     <title>Verify Account - iMarket</title>
     <link rel="icon" type="image/x-icon" href="../image/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../Css/Login-Reg-Forget/login.css">
+    <link rel="stylesheet" href="../css/login-reg-forget/login.css">
     <style>
         .alert {
             padding: 10px;
@@ -129,3 +129,6 @@ if (isset($_POST['verify'])) {
 </body>
 
 </html>
+
+
+

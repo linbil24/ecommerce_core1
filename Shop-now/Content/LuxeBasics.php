@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Luxe Ribbed Bodycon Midi',
             'price' => '₱249',
             'raw_price' => 249.00,
-            'image' => '../image/Shop/Luxe Basics/Luxe Ribbed Bodycon Midi.jpeg',
+            'image' => '../image/shop/Luxe Basics/Luxe Ribbed Bodycon Midi.jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Premium Heavyweight Boxy Tee',
             'price' => '₱225',
             'raw_price' => 225.00,
-            'image' => '../image/Shop/Luxe Basics/Premium Heavyweight Boxy Tee.jpeg',
+            'image' => '../image/shop/Luxe Basics/Premium Heavyweight Boxy Tee.jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Seamless Sculpting Tank Top',
             'price' => '₱145',
             'raw_price' => 145.00,
-            'image' => '../image/Shop/Luxe Basics/Seamless Sculpting Tank Top.jpeg',
+            'image' => '../image/shop/Luxe Basics/Seamless Sculpting Tank Top.jpeg',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Soft-Touch Halter Neck Top',
             'price' => '₱299',
             'raw_price' => 299.00,
-            'image' => '../image/Shop/Luxe Basics/Soft-Touch Halter Neck Top.jpeg',
+            'image' => '../image/shop/Luxe Basics/Soft-Touch Halter Neck Top.jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Tailored Trouser Pants (Cream)',
             'price' => '₱135',
             'raw_price' => 135.00,
-            'image' => '../image/Shop/Luxe Basics/Tailored Trouser Pants (Cream).jpeg',
+            'image' => '../image/shop/Luxe Basics/Tailored Trouser Pants (Cream).jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Classic Button-Down Linen Shirt',
             'price' => '₱115',
             'raw_price' => 115.00,
-            'image' => '../image/Shop/Luxe Basics/Classic Button-Down Linen Shirt.jpeg', // Fallback
+            'image' => '../image/shop/Luxe Basics/Classic Button-Down Linen Shirt.jpeg', // Fallback
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Double-Lined Tube Top',
             'price' => '₱280',
             'raw_price' => 280.00,
-            'image' => '../image/Shop/Luxe Basics/Double-Lined Tube Top.jpeg',
+            'image' => '../image/shop/Luxe Basics/Double-Lined Tube Top.jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Premium Knit Cardigan',
             'price' => '₱320',
             'raw_price' => 320.00,
-            'image' => '../image/Shop/Luxe Basics/Premium Knit Cardigan.jpeg', // Using stylized image
+            'image' => '../image/shop/Luxe Basics/Premium Knit Cardigan.jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'High-Waist Wide Leg Trousers',
             'price' => '₱275',
             'raw_price' => 275.00,
-            'image' => '../image/Shop/Luxe Basics/High-Waist Wide Leg Trousers.jpeg',
+            'image' => '../image/shop/Luxe Basics/High-Waist Wide Leg Trousers.jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Minimalist Mock Neck Top',
             'price' => '₱155',
             'raw_price' => 155.00,
-            'image' => '../image/Shop/Luxe Basics/Minimalist Mock Neck Top.jpeg',
+            'image' => '../image/shop/Luxe Basics/Minimalist Mock Neck Top.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Luxe Cotton Biker Shorts',
             'price' => '₱120',
             'raw_price' => 185.00,
-            'image' => '../image/Shop/Luxe Basics/Luxe Cotton Biker Shorts.jpeg',
+            'image' => '../image/shop/Luxe Basics/Luxe Cotton Biker Shorts.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Ribbed Square Neck Long Sleeve',
             'price' => '₱265',
             'raw_price' => 265.00,
-            'image' => '../image/Shop/Luxe Basics/Ribbed Square Neck Long Sleeve.jpeg',
+            'image' => '../image/shop/Luxe Basics/Ribbed Square Neck Long Sleeve.jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Satin Slip Maxi Skirt',
             'price' => '₱350',
             'raw_price' => 350.00,
-            'image' => '../image/Shop/Luxe Basics/Satin Slip Maxi Skirt.jpeg',
+            'image' => '../image/shop/Luxe Basics/Satin Slip Maxi Skirt.jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Premium Oversized Sweatshirt',
             'price' => '₱165',
             'raw_price' => 165.00,
-            'image' => '../image/Shop/Luxe Basics/Premium Oversized Sweatshirt.jpeg',
+            'image' => '../image/shop/Luxe Basics/Premium Oversized Sweatshirt.jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Old Money Knitted Vest',
             'price' => '₱299.00',
             'raw_price' => 299.00,
-            'image' => '../image/Shop/Luxe Basics/Old Money Knitted Vest.jpeg',
+            'image' => '../image/shop/Luxe Basics/Old Money Knitted Vest.jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
@@ -176,3 +176,5 @@ if (isset($definingProducts) && $definingProducts) {
     return; // Stop processing
 }
 ?>
+
+

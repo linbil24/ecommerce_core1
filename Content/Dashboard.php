@@ -34,24 +34,24 @@ header("X-Content-Type-Options: nosniff");
     <title>DASHBOARD - IMARKET PH</title>
     <link rel="icon" type="image/x-icon" href="../image/Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../Css/Dashboard/Dashboard.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../css/dashboard/dashboard.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../Css/Components/footer.css">
+    <link rel="stylesheet" href="../css/components/footer.css">
 </head>
 
 <body>
     <nav>
-        <?php include '../Components/header.php'; ?>
+        <?php include '../components/header.php'; ?>
     </nav>
 
     <div class="hero-section">
         <div class="hero-slider">
-            <div class="slide active" style="background-image: url('../image/Dashboard/brand new bag.jpeg');"></div>
-            <div class="slide" style="background-image: url('../image/Dashboard/Ipone 17.jpeg');"></div>
-            <div class="slide" style="background-image: url('../image/Dashboard/laptop red dragon.jpeg');"></div>
-            <div class="slide" style="background-image: url('../image/Dashboard/logitech.jpeg');"></div>
-            <div class="slide" style="background-image: url('../image/Dashboard/nike logo basketball.jpeg');"></div>
+            <div class="slide active" style="background-image: url('../image/dashboard/brand new bag.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/dashboard/Ipone 17.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/dashboard/laptop red dragon.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/dashboard/logitech.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/dashboard/nike logo basketball.jpeg');"></div>
         </div>
 
         <div class="hero-content">
@@ -79,7 +79,7 @@ header("X-Content-Type-Options: nosniff");
                 <a href="../Shop-now/index.php" class="btn-shop">
                     <i class="fas fa-shopping-bag"></i> Shop Now
                 </a>
-                <a href="../Categories/Best-selling/index.php" class="btn-best">
+                <a href="../Categories/best-selling/index.php" class="btn-best">
                     <i class="fas fa-fire"></i> Best Sellers
                 </a>
             </div>
@@ -93,9 +93,9 @@ header("X-Content-Type-Options: nosniff");
             <span class="indicator"></span>
         </div>
 
-        <?php include '../Components/floating-buttons.php'; ?>
-        <?php include '../Components/ai_confirmation_modal.php'; ?>
-        <?php include '../Components/product-modal.php'; ?>
+        <?php include '../components/floating-buttons.php'; ?>
+        <?php include '../components/ai_confirmation_modal.php'; ?>
+        <?php include '../components/product-modal.php'; ?>
         <script>
             let currentSlideIndex = 0;
             const slides = document.querySelectorAll('.slide');
@@ -145,3 +145,6 @@ header("X-Content-Type-Options: nosniff");
 </body>
 
 </html>
+
+
+

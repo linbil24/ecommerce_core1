@@ -274,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../Components/header.php';
+        include '../components/header.php';
         ?>
     </nav>
 
@@ -286,9 +286,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <script>
                 setTimeout(function() {
                     // Redirect to the product view page (picture 2)
-                    // Assuming path is relative to Content/Rate.php -> Categories/Best-selling/view-product.php
+                    // Assuming path is relative to Content/Rate.php -> Categories/best-selling/view-product.php
                     // Adjust path if product_id implies a different directory, but user pointed to picture 2 which is Best-selling
-                    window.location.href = "../Categories/Best-selling/view-product.php?id=<?php echo $product_id_post; ?>";
+                    window.location.href = "../Categories/best-selling/view-product.php?id=<?php echo $product_id_post; ?>";
                 }, 2000);
             </script>
         <?php endif; ?>
@@ -412,3 +412,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
+
+
+

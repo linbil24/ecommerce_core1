@@ -104,7 +104,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../image/Logo/logo.png">
-    <link rel="stylesheet" href="../Css/Best-selling/cart.css">
+    <link rel="stylesheet" href="../css/best-selling/cart.css">
     <!-- Using Shop's CSS as base, can override -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -303,14 +303,14 @@ if ($result && mysqli_num_rows($result) > 0) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../Components/header.php';
+        include '../components/header.php';
         ?>
     </nav>
 
     <div class="cart-header-bar">
         <div class="cart-header-content">
             <div class="cart-branding">
-                <a href="../Categories/Best-selling/index.php" class="cart-logo-link">
+                <a href="../Categories/best-selling/index.php" class="cart-logo-link">
                     <img src="../image/Logo/logo.png" alt="Imarket Logo">
                     <span class="cart-logo-text">IMARKET</span>
                 </a>
@@ -375,7 +375,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
                             <!-- Dynamic Shop Header Per Item (Simplified: Display above the item if needed, or inline) -->
                             <!-- User requested: "Pwede pag isahin lang din sila... sa baba yung title" 
-                                 Implies they want the "Shop/Branding" header visible per item block or similar.
+                                 Implies they want the "shop/Branding" header visible per item block or similar.
                                  Let's add a small header row or badge for the item's store context.
                             -->
                             <!-- Shop Header Row REMOVED -->
@@ -394,18 +394,18 @@ if ($result && mysqli_num_rows($result) > 0) {
                                         // Image path resolution logic (check raw path)
                                         if (!file_exists($display_img) && strpos($display_img, 'http') === false) {
                                             $possible_paths = [
-                                                '../image/Shop/' . basename($display_img),
+                                                '../image/shop/' . basename($display_img),
                                                 '../image/Best/' . basename($display_img),
                                                 '../image/' . basename($display_img),
-                                                '../Categories/Best-selling/image/' . basename($display_img)
+                                                '../Categories/best-selling/image/' . basename($display_img)
                                             ];
 
                                             // Add Shop-specific path if shop_name exists
                                             if (!empty($item['shop_name'])) {
-                                                array_unshift($possible_paths, '../image/Shop/' . $item['shop_name'] . '/' . basename($display_img));
+                                                array_unshift($possible_paths, '../image/shop/' . $item['shop_name'] . '/' . basename($display_img));
                                             } else {
                                                 // Fallback for UrbanWear
-                                                $possible_paths[] = '../image/Shop/UrbanWear PH/' . basename($display_img);
+                                                $possible_paths[] = '../image/shop/UrbanWear PH/' . basename($display_img);
                                             }
 
                                             foreach ($possible_paths as $path) {
@@ -423,7 +423,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                             <span
                                                 style="font-weight: 500; font-size: 16px; margin-bottom: 5px; color: #333;"><?php echo htmlspecialchars($item['product_name']); ?></span>
 
-                                            <!-- Shop/Branding Subtitle -->
+                                            <!-- shop/Branding Subtitle -->
                                             <?php if ($is_best_selling_item): ?>
                                                 <span style="font-size: 13px; color: #2A3B7E; font-weight: 600;"><i
                                                         class="fas fa-certificate" style="margin-right:4px;"></i> IMarket Best
@@ -501,7 +501,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     </form>
 
     <footer>
-        <?php include '../Components/footer.php'; ?>
+        <?php include '../components/footer.php'; ?>
     </footer>
 
     <!-- Custom Modal Structure -->
@@ -576,3 +576,6 @@ if ($result && mysqli_num_rows($result) > 0) {
 </body>
 
 </html>
+
+
+

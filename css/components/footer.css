@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+.footer {
+    background-color: #f9f9f9;
+    padding: 60px 0 20px;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    width: 100%;
+    margin-top: auto;
+    position: relative;
+    /* Needed for absolute positioning of buttons */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 30px;
+}
+
+.footer-column h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: #2c4c7c;
+    /* Orange accent color typical for ecommerce, adjust if needed */
+}
+
+/* Icons */
+.payment-icons,
+.delivery-icons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pay-icon,
+.del-icon {
+    width: 40px;
+    height: 25px;
+    object-fit: contain;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #666;
+    /* Base color */
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+}
+
+/* Social Colors On Hover */
+.social-link:hover .fa-facebook {
+    color: #1877f2;
+}
+
+.social-link:hover .fa-instagram {
+    color: #c32aa3;
+}
+
+.social-link:hover .fa-x-twitter {
+    color: #000;
+}
+
+.social-link:hover .fa-youtube {
+    color: #2c4c7c;
+}
+
+/* Copyright */
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eaeaea;
+    color: #999;
+    font-size: 13px;
+}
+
+
+
+
+/* Responsive */
+
+

@@ -1,5 +1,5 @@
 <?php
-// Admin/logout.php
+// admin/logout.php
 
 // Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {
@@ -31,3 +31,5 @@ session_destroy();
 header("Location: login.php?msg=" . urlencode("Successfully logged out."));
 exit();
 ?>
+
+

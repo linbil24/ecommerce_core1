@@ -35,9 +35,9 @@ $result = mysqli_query($conn, $sql);
     <title>Order History</title>
     <link rel="icon" type="image/x-icon" href="../image/Logo/logo.png">
 
-    <!-- Use CSS from Shop/css but corrected path -->
-    <!-- Assuming Content is sibling to Shop, so ../Shop/css/order-history.css -->
-    <link rel="stylesheet" href="../Css/Shop/order-history.css">
+    <!-- Use CSS from shop/css but corrected path -->
+    <!-- Assuming Content is sibling to Shop, so ../Sh../css/order-history.css -->
+    <link rel="stylesheet" href="../css/shop/order-history.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -47,7 +47,7 @@ $result = mysqli_query($conn, $sql);
     <nav>
         <?php
         $path_prefix = '../';
-        include $path_prefix . 'Components/header.php';
+        include $path_prefix . 'components/header.php';
         ?>
     </nav>
 
@@ -72,15 +72,15 @@ $result = mysqli_query($conn, $sql);
 
                         $candidates = [
                             // Correct Paths based on recent fixes
-                            '../image/Shop/' . $basename,
+                            '../image/shop/' . $basename,
                             '../image/Best/' . $basename,
-                            '../image/Shop/UrbanWear PH/' . $basename,
+                            '../image/shop/UrbanWear PH/' . $basename,
 
                             // Legacy/Other Paths
-                            '../Categories/Best-selling/image/' . $basename,
-                            '../Shop/image/' . $basename,
-                            '../Shop/image/' . $basename,
-                            '../Shop/image/UrbanWear PH/' . $basename,
+                            '../Categories/best-selling/image/' . $basename,
+                            '../shop/image/' . $basename,
+                            '../shop/image/' . $basename,
+                            '../shop/image/UrbanWear PH/' . $basename,
                             $img_file,
                             $basename,
                             '../image/' . $basename
@@ -138,7 +138,7 @@ $result = mysqli_query($conn, $sql);
                         }
 
                         // FIX LINK: linking to the known view-product.php
-                        $product_link = "../Categories/Best-selling/view-product.php?id=" . $pid;
+                        $product_link = "../Categories/best-selling/view-product.php?id=" . $pid;
                         ?>
                         <a href="<?php echo $product_link; ?>" style="text-decoration:none; color:inherit; display:block;">
                             <div class="order-top">
@@ -191,12 +191,12 @@ $result = mysqli_query($conn, $sql);
                                     style="display:flex; justify-content:flex-end; gap:10px; margin-top: 15px;">
 
                                     <!-- Tracking Link: Assuming Tracking.php is in Shop or needs checking? -->
-                                    <!-- Shop/Tracking.php existed? Let's assume standard link if available or adjust. -->
-                                    <!-- Shop/Order-history.php linked to "Tracking.php". -->
+                                    <!-- shop/Tracking.php existed? Let's assume standard link if available or adjust. -->
+                                    <!-- shop/Order-history.php linked to "Tracking.php". -->
                                     <!-- If I am in Content/Order-history.php, "Tracking.php" probably doesn't exist unless I move it too. -->
-                                    <!-- I'll use ../Shop/Tracking.php if it exists or just keep Tracking.php if user plans to move it. -->
-                                    <!-- Let's check where Tracking.php is: Most likely inside Shop/ or Categories/Best-selling/ -->
-                                    <!-- I'll use ../Shop/Tracking.php for now as a safe bet if it was in Shop. -->
+                                    <!-- I'll use ../shop/Tracking.php if it exists or just keep Tracking.php if user plans to move it. -->
+                                    <!-- Let's check where Tracking.php is: Most likely inside shop/ or Categories/best-selling/ -->
+                                    <!-- I'll use ../shop/Tracking.php for now as a safe bet if it was in Shop. -->
                                     <!-- Tracking Link -->
                                     <a href="Tracking.php?order_id=<?php echo $order['id']; ?>" class="btn-track"><i
                                             class="fas fa-shipping-fast"></i> Track
@@ -226,7 +226,7 @@ $result = mysqli_query($conn, $sql);
                 <i class="fas fa-box-open" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
                 <h2>No orders yet</h2>
                 <p>Looks like you haven't placed any orders yet.</p>
-                <a href="../Categories/Best-selling/selling.php"
+                <a href="../Categories/best-selling/selling.php"
                     style="display:inline-block; margin-top:1rem; color:white; background-color:#2A3B7E; font-weight:600; padding: 10px 20px; border-radius: 4px; text-decoration: none;">Start
                     Shopping</a>
             </div>
@@ -394,9 +394,12 @@ $result = mysqli_query($conn, $sql);
     </script>
 
     <footer>
-        <?php include $path_prefix . 'Components/footer.php'; ?>
+        <?php include $path_prefix . 'components/footer.php'; ?>
     </footer>
 
 </body>
 
 </html>
+
+
+

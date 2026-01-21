@@ -24,7 +24,7 @@ $page_title = isset($name) ? $name : "Product Details";
     <nav>
         <?php
         $path_prefix = '../../';
-        include '../../Components/header.php';
+        include '../../components/header.php';
         ?>
     </nav>
 
@@ -55,9 +55,11 @@ $page_title = isset($name) ? $name : "Product Details";
     <footer>
         <?php
         $path_prefix = '../../';
-        include '../../Components/footer.php';
+        include '../../components/footer.php';
         ?>
     </footer>
 </body>
 
 </html>
+
+

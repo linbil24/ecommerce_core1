@@ -36,3 +36,5 @@ $sql_create_tickets = "CREATE TABLE IF NOT EXISTS `support_tickets` (
 
 $conn->query($sql_create_tickets);
 ?>
+
+
