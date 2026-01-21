@@ -86,7 +86,7 @@ if (mysqli_num_rows($check_table) > 0) {
             <div class="cta-section">
                 <h3>Ready to start shopping?</h3>
                 <p>Explore thousands of products at the best prices.</p>
-                <a href="../Content/Dashboard.php" class="btn-shop">Start Shopping Now <i
+                <a href="../Content/dashboard.php" class="btn-shop">Start Shopping Now <i
                         class="fas fa-arrow-right"></i></a>
             </div>
 

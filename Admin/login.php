@@ -19,7 +19,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // 3. CHECK IF ALREADY LOGGED IN
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: Dashboard.php'); // Route through index to Dashboard
+    header('Location: dashboard.php'); // Route through index to Dashboard
     exit();
 }
 
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Check success based on string return (as per original logic)
         if (stripos($verification_result, 'successful') !== false || stripos($verification_result, 'welcome') !== false) {
-            header("Location: Dashboard.php?msg=" . urlencode($verification_result));
+            header("Location: dashboard.php?msg=" . urlencode($verification_result));
         } else {
             header("Location: login.php?msg=" . urlencode($verification_result));
         }

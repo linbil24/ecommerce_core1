@@ -60,7 +60,7 @@ if (isset($_POST['resend'])) {
             } catch (Exception $e) {
                 $_SESSION['resend_msg'] = "<div class='alert-error'>Mailer Error: {$mail->ErrorInfo}</div>";
             }
-            header("Location: verfication.php");
+            header("Location: verification.php");
             exit();
         }
     }
@@ -77,7 +77,7 @@ if (isset($_POST['login'])) {
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
 
-        // Use password_verify since we hashed it in Register.php
+        // Use password_verify since we hashed it in register.php
         if (password_verify($password, $row['password'])) {
 
             $verification_code = $row['verification_code'];
@@ -124,7 +124,7 @@ if (isset($_POST['login'])) {
 
             // Redirect to verification page
             $_SESSION['email_to_verify'] = $email;
-            header("Location: verfication.php");
+            header("Location: verification.php");
             exit();
 
         } else {

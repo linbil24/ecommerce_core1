@@ -182,7 +182,7 @@
         const price = productMap[productId].price;
 
         // Use the captured image flag
-        window.location.href = `../Content/Dashboard.php?ai_action=open_modal&product=${productId}&price=${encodeURIComponent(price)}&use_captured=true`;
+        window.location.href = `../Content/dashboard.php?ai_action=open_modal&product=${productId}&price=${encodeURIComponent(price)}&use_captured=true`;
     }
 
     // Check if we need to open this modal based on URL (Triggered from Scan)

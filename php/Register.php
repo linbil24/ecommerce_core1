@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
                     // Redirect to verification page
                     session_start();
                     $_SESSION['email_to_verify'] = $email;
-                    header("Location: verfication.php");
+                    header("Location: verification.php");
                     exit();
 
                 } catch (Exception $e) {

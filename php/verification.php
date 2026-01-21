@@ -30,7 +30,7 @@ if (isset($_POST['verify'])) {
         // Clear temp session
         unset($_SESSION['email_to_verify']);
 
-        header("Location: ../Content/Dashboard.php");
+        header("Location: ../Content/dashboard.php");
         exit();
     } else {
         $msg = "<div class='alert alert-danger'>Invalid verification code.</div>";

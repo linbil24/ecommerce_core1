@@ -19,7 +19,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // 3. CHECK IF ALREADY LOGGED IN
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: Dashboard.php'); // Route through index to Dashboard
+    header('Location: dashboard.php'); // Route through index to Dashboard
     exit();
 }
 
