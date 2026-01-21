@@ -32,14 +32,13 @@ if (isset($_POST['submit'])) {
             if (mysqli_query($conn, $sql)) {
                 $mail = new PHPMailer(true);
                 try {
-                    $mail->SMTPDebug = 2;
                     $mail->isSMTP();
                     $mail->Host = gethostbyname('smtp.gmail.com');
                     $mail->SMTPAuth = true;
                     $mail->Username = 'linbilcelestre31@gmail.com';
                     $mail->Password = 'ptkm lwud sfgh twdh';
-                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                    $mail->Port = 465;
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $mail->Port = 587;
                     $mail->Timeout = 20;
 
                     // Fix for XAMPP SSL issues
