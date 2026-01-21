@@ -417,9 +417,9 @@ if ($is_logged_in) {
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="icon" type="image/png" href="../image/logo.png">
 
 <head>
+    <link rel="icon" type="image/png" href="../image/logo.png?v=3.5">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php

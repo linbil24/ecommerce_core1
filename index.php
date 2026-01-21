@@ -1,5 +1,5 @@
 <?php
-// iMarket Loading Page v2.3 (Zero-JS Version)
+// iMarket Loading Page v3.5 (Cache-Bypass Version)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +8,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
+    <!-- Automatic redirect to login page -->
     <meta http-equiv="refresh" content="2;url=php/login.php">
-    <link rel="icon" type="image/png" href="image/logo.png">
+    <!-- Icon with versioning to bust cache -->
+    <link rel="icon" type="image/png" href="image/logo.png?v=3.5">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -95,7 +97,8 @@
 
 <body>
     <div class="loader-container">
-        <img src="image/logo.png" alt="iMarket Logo" class="logo-img">
+        <!-- Logo with versioning and absolute fallback -->
+        <img src="image/logo.png?v=3.5" alt="iMarket Logo" class="logo-img" onerror="this.src='/image/logo.png';">
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
             <p class="tagline">Your Market, Your Choice</p>
