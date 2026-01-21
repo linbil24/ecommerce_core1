@@ -124,7 +124,7 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - iMarket</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="../Image/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
 
     <link rel="stylesheet" href="../Css/Login-Reg-Forget/login.css">
     <style>
@@ -150,7 +150,7 @@ if (isset($_POST['login'])) {
             <!-- Left Side: Branding -->
             <div class="brand-section">
                 <div class="brand-content">
-                    <img src="../Image/logo.png" alt="iMarket Logo" class="brand-logo">
+                    <img src="../image/logo.png" alt="iMarket Logo" class="brand-logo">
                     <h1>iMarket</h1>
                     <p>Your Market, Your Choice</p>
                 </div>

@@ -35,10 +35,10 @@ if (!isset($path_prefix)) {
         <div class="footer-column">
             <h4>Payment Methods</h4>
             <div class="payment-icons">
-                <img src="<?php echo $path_prefix; ?>Image/Banks/visa.png" alt="Visa" class="pay-icon">
-                <img src="<?php echo $path_prefix; ?>Image/Banks/Master-card.png" alt="Mastercard" class="pay-icon">
-                <img src="<?php echo $path_prefix; ?>Image/Banks/gcash.jpeg" alt="GCash" class="pay-icon">
-                <img src="<?php echo $path_prefix; ?>Image/Banks/maya.png" alt="Maya" class="pay-icon">
+                <img src="<?php echo $path_prefix; ?>image/Banks/visa.png" alt="Visa" class="pay-icon">
+                <img src="<?php echo $path_prefix; ?>image/Banks/Master-card.png" alt="Mastercard" class="pay-icon">
+                <img src="<?php echo $path_prefix; ?>image/Banks/gcash.jpeg" alt="GCash" class="pay-icon">
+                <img src="<?php echo $path_prefix; ?>image/Banks/maya.png" alt="Maya" class="pay-icon">
             </div>
         </div>
 
@@ -46,10 +46,10 @@ if (!isset($path_prefix)) {
         <div class="footer-column">
             <h4>Delivery Services</h4>
             <div class="delivery-icons">
-                <img src="<?php echo $path_prefix; ?>Image/Delivery/jnt.png" alt="J&T" class="del-icon">
-                <img src="<?php echo $path_prefix; ?>Image/Delivery/ninjavan.png" alt="NinjaVan" class="del-icon">
-                <img src="<?php echo $path_prefix; ?>Image/Delivery/lbc.png" alt="LBC" class="del-icon">
-                <img src="<?php echo $path_prefix; ?>Image/Delivery/flash.jpeg" alt="Flash" class="del-icon">
+                <img src="<?php echo $path_prefix; ?>image/Delivery/jnt.png" alt="J&T" class="del-icon">
+                <img src="<?php echo $path_prefix; ?>image/Delivery/ninjavan.png" alt="NinjaVan" class="del-icon">
+                <img src="<?php echo $path_prefix; ?>image/Delivery/lbc.png" alt="LBC" class="del-icon">
+                <img src="<?php echo $path_prefix; ?>image/Delivery/flash.jpeg" alt="Flash" class="del-icon">
             </div>
         </div>
 

@@ -32,7 +32,7 @@ header("X-Content-Type-Options: nosniff");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DASHBOARD - IMARKET PH</title>
-    <link rel="icon" type="image/x-icon" href="../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../Css/Dashboard/Dashboard.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
@@ -47,11 +47,11 @@ header("X-Content-Type-Options: nosniff");
 
     <div class="hero-section">
         <div class="hero-slider">
-            <div class="slide active" style="background-image: url('../Image/Dashboard/brand new bag.jpeg');"></div>
-            <div class="slide" style="background-image: url('../Image/Dashboard/Ipone 17.jpeg');"></div>
-            <div class="slide" style="background-image: url('../Image/Dashboard/laptop red dragon.jpeg');"></div>
-            <div class="slide" style="background-image: url('../Image/Dashboard/logitech.jpeg');"></div>
-            <div class="slide" style="background-image: url('../Image/Dashboard/nike logo basketball.jpeg');"></div>
+            <div class="slide active" style="background-image: url('../image/Dashboard/brand new bag.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/Dashboard/Ipone 17.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/Dashboard/laptop red dragon.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/Dashboard/logitech.jpeg');"></div>
+            <div class="slide" style="background-image: url('../image/Dashboard/nike logo basketball.jpeg');"></div>
         </div>
 
         <div class="hero-content">

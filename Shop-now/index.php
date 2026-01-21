@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../Image/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
     <title>
         <?php echo isset($_GET['store']) ? htmlspecialchars(urldecode($_GET['store'])) . ' - IMARKET PH' : 'SHOP NOW - IMARKET PH'; ?>
     </title>
@@ -162,7 +162,7 @@
                     $name = $adjectives[array_rand($adjectives)] . ' ' . $productNames[array_rand($productNames)];
                     $image = 'https://via.placeholder.com/300x400/f5f5f5/999999?text=' . urlencode($name);
 
-                    // Image/Override selection logic
+                    // image/Override selection logic
                     include $fileToLoad;
 
                     $products[] = [
@@ -363,7 +363,7 @@
                         <!-- Item 1 -->
                         <div class="featured-card">
                             <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../Image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" alt="H&M Hoodie"
+                                <img src="../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" alt="H&M Hoodie"
                                     style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 0; margin-bottom: 0;">
                             </a>
                         </div>
@@ -371,7 +371,7 @@
                         <!-- Item 2 -->
                         <div class="featured-card">
                             <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../Image/Shop/UrbanWear PH/Pilipinas Hoodie.avif" alt="Pilipinas Hoodie"
+                                <img src="../image/Shop/UrbanWear PH/Pilipinas Hoodie.avif" alt="Pilipinas Hoodie"
                                     style="width: 100%; height: 350px; object-fit: cover; object-position: center; border-radius: 0; margin-bottom: 0;">
                             </a>
                         </div>
@@ -379,7 +379,7 @@
                         <!-- Item 3 -->
                         <div class="featured-card">
                             <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../Image/Shop/UrbanWear PH/Team SKOOP Denim Jacket.jpeg" alt="Team SKOOP"
+                                <img src="../image/Shop/UrbanWear PH/Team SKOOP Denim Jacket.jpeg" alt="Team SKOOP"
                                     style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 0; margin-bottom: 0;">
                             </a>
                         </div>
@@ -409,7 +409,7 @@
 
                 <div class="title">
                     <h1 id="modalHeaderTitle">
-                        <img src="../Image/logo.png" alt="IMarket" style="height: 50px; border:1px solid #000"> |
+                        <img src="../image/logo.png" alt="IMarket" style="height: 50px; border:1px solid #000"> |
                         <span id="modalStoreSpan"><?php echo htmlspecialchars($selectedStore); ?></span>
                     </h1>
                 </div>

@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
                     $mail->addAddress($email, $fullname);
 
                     // Attach Logo
-                    $mail->addEmbeddedImage('../Image/logo.png', 'logo_img');
+                    $mail->addEmbeddedImage('../image/logo.png', 'logo_img');
 
                     $mail->isHTML(true);
                     $mail->Subject = 'Verify Your Account - iMarket';
@@ -96,7 +96,7 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - iMarket</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="../Image/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
     <link rel="stylesheet" href="../css/Login-Reg-Forget/Register.css">
     <style>
         .alert-error {
@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
             <!-- Left Side: Branding -->
             <div class="brand-section">
                 <div class="brand-content">
-                    <img src="../Image/logo.png" alt="iMarket Logo" class="brand-logo">
+                    <img src="../image/logo.png" alt="iMarket Logo" class="brand-logo">
                     <h1>iMarket</h1>
                     <p>Create your account</p>
                 </div>

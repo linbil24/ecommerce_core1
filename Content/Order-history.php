@@ -33,7 +33,7 @@ $result = mysqli_query($conn, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History</title>
-    <link rel="icon" type="image/x-icon" href="../Image/Logo/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/Logo/logo.png">
 
     <!-- Use CSS from Shop/css but corrected path -->
     <!-- Assuming Content is sibling to Shop, so ../Shop/css/order-history.css -->
@@ -72,13 +72,13 @@ $result = mysqli_query($conn, $sql);
 
                         $candidates = [
                             // Correct Paths based on recent fixes
-                            '../Image/Shop/' . $basename,
-                            '../Image/Best/' . $basename,
-                            '../Image/Shop/UrbanWear PH/' . $basename,
+                            '../image/Shop/' . $basename,
+                            '../image/Best/' . $basename,
+                            '../image/Shop/UrbanWear PH/' . $basename,
 
                             // Legacy/Other Paths
-                            '../Categories/Best-selling/Image/' . $basename,
-                            '../Shop/Image/' . $basename,
+                            '../Categories/Best-selling/image/' . $basename,
+                            '../Shop/image/' . $basename,
                             '../Shop/image/' . $basename,
                             '../Shop/image/UrbanWear PH/' . $basename,
                             $img_file,
@@ -114,7 +114,7 @@ $result = mysqli_query($conn, $sql);
                         <!-- Dynamic Header -->
                         <div
                             style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; margin-bottom: 10px;">
-                            <img src="../Image/Logo/logo.png" alt="Shop Logo"
+                            <img src="../image/Logo/logo.png" alt="Shop Logo"
                                 style="width: 40px; height: 40px; object-fit: contain; margin-right: 10px;">
                             <div>
                                 <?php if ($is_best_selling): ?>

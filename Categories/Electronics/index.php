@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELECTRONICS | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Electronics/Wireless Bluetooth Earbuds.jpeg');">
+                        style="background-image: url('../../image/Electronics/Wireless Bluetooth Earbuds.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Electronics/Smart Watch (Fitness Tracker).jpeg');">
+                        style="background-image: url('../../image/Electronics/Smart Watch (Fitness Tracker).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Electronics/Portable Power Bank 20,000mAh.jpeg');">
+                        style="background-image: url('../../image/Electronics/Portable Power Bank 20,000mAh.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Electronics/Bluetooth Speaker (Waterproof).jpeg');">
+                        style="background-image: url('../../image/Electronics/Bluetooth Speaker (Waterproof).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Electronics/USB-C Fast Charging Cable.jpeg');"></div>
+                        style="background-image: url('../../image/Electronics/USB-C Fast Charging Cable.jpeg');"></div>
 
                     <!-- Indicators (White Lines) -->
                     <div class="slider-indicators">

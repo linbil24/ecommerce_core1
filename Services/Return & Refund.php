@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_return'])) {
         // Handle File Upload
         $image_proof = NULL;
         if (isset($_FILES['image_proof']) && $_FILES['image_proof']['error'] == 0) {
-            $target_dir = "../Image/Returns/";
+            $target_dir = "../image/Returns/";
             // Create dir if not exists
             if (!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_return'])) {
             $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
             if (in_array($file_extension, $allowed_types)) {
                 if (move_uploaded_file($_FILES["image_proof"]["tmp_name"], $target_file)) {
-                    $image_proof = 'Image/Returns/' . $new_filename; // Store relative path for DB
+                    $image_proof = 'image/Returns/' . $new_filename; // Store relative path for DB
                 } else {
                     $msg = "<div class='alert alert-error'>Failed to upload image.</div>";
                 }
@@ -81,7 +81,7 @@ if ($user_id) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return & Refund | IMARKET PH</title>
-    <link rel="icon" type="image/x-icon" href="../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="../Css/Services/return_refund.css?v=<?php echo time(); ?>">

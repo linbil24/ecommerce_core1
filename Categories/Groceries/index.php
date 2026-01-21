@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GROCERIES | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Groceries/Organic Rolled Oats (1kg).jpeg');">
+                        style="background-image: url('../../image/Groceries/Organic Rolled Oats (1kg).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Groceries/Creamy Peanut Butter (No Added Sugar).jpeg');">
+                        style="background-image: url('../../image/Groceries/Creamy Peanut Butter (No Added Sugar).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Groceries/Japanese Green Tea Bags (50pcs).jpeg');">
+                        style="background-image: url('../../image/Groceries/Japanese Green Tea Bags (50pcs).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Groceries/Pure Raw Honey (500g).jpeg');">
+                        style="background-image: url('../../image/Groceries/Pure Raw Honey (500g).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Groceries/White Quinoa (500g).jpeg');">
+                        style="background-image: url('../../image/Groceries/White Quinoa (500g).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->

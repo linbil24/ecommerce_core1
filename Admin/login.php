@@ -109,7 +109,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $is_otp_page ? 'OTP Verification | IMARKETPH' : 'ADMIN LOGIN | IMARKETPH'; ?></title>
-    <link rel="icon" type="image/png" href="../Image/logo.png">
+    <link rel="icon" type="image/png" href="../image/logo.png">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>

@@ -39,7 +39,7 @@ if (isset($_POST['reset'])) {
                 $mail->addAddress($email);
 
                 // Attach Logo
-                $mail->addEmbeddedImage('../Image/logo.png', 'logo_img');
+                $mail->addEmbeddedImage('../image/logo.png', 'logo_img');
 
                 //Content
                 // Use a dynamic way to get the base URL if possible or hardcode based on environment
@@ -161,7 +161,7 @@ if (isset($_POST['change_password'])) {
             <!-- Left Side: Branding -->
             <div class="brand-section">
                 <div class="brand-content">
-                    <img src="../Image/logo.png" alt="iMarket Logo" class="brand-logo">
+                    <img src="../image/logo.png" alt="iMarket Logo" class="brand-logo">
                     <h1>iMarket</h1>
                     <p>Account Recovery</p>
                 </div>

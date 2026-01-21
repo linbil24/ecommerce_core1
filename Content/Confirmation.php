@@ -27,7 +27,7 @@ if (!$order) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation</title>
-    <link rel="icon" type="image/x-icon" href="../Image/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
@@ -209,7 +209,7 @@ if (!$order) {
                 <!-- Shop Header -->
                 <div
                     style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0; margin-bottom: 15px;">
-                    <img src="../Image/logo.png" alt="Shop Logo"
+                    <img src="../image/logo.png" alt="Shop Logo"
                         style="width: 30px; height: 30px; object-fit: contain; margin-right: 10px;">
                     <div>
                         <?php

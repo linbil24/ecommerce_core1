@@ -1,4 +1,4 @@
-﻿// --- UTILITY FUNCTIONS ---
+// --- UTILITY FUNCTIONS ---
 function setPageTitle(title) {
     // Update the large title in the content area
     const contentHeader = document.querySelector('#content-container .page-header');
@@ -1970,3 +1970,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ensure icons are rendered for the sidebar/static content
     lucide.createIcons();
 });
+

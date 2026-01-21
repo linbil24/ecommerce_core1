@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME & LIVING | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,18 +30,18 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Home & living/LED Table Lamp (Touch Control).jpeg');">
+                        style="background-image: url('../../image/Home & living/LED Table Lamp (Touch Control).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Home & living/Storage Basket Organizer.jpeg');"></div>
+                        style="background-image: url('../../image/Home & living/Storage Basket Organizer.jpeg');"></div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Home & living/Ceramic Vase (Modern Design).jpeg');">
+                        style="background-image: url('../../image/Home & living/Ceramic Vase (Modern Design).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Home & living/Kitchen Spice Rack Organizer.jpeg');">
+                        style="background-image: url('../../image/Home & living/Kitchen Spice Rack Organizer.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Home & living/Foldable Laundry Basket.jpeg');"></div>
+                        style="background-image: url('../../image/Home & living/Foldable Laundry Basket.jpeg');"></div>
 
                     <!-- Indicators (White Lines) -->
                     <div class="slider-indicators">

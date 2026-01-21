@@ -103,7 +103,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../Image/Logo/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/Logo/logo.png">
     <link rel="stylesheet" href="../Css/Best-selling/cart.css">
     <!-- Using Shop's CSS as base, can override -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -311,7 +311,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         <div class="cart-header-content">
             <div class="cart-branding">
                 <a href="../Categories/Best-selling/index.php" class="cart-logo-link">
-                    <img src="../Image/Logo/logo.png" alt="Imarket Logo">
+                    <img src="../image/Logo/logo.png" alt="Imarket Logo">
                     <span class="cart-logo-text">IMARKET</span>
                 </a>
                 <div class="cart-divider"></div>
@@ -394,18 +394,18 @@ if ($result && mysqli_num_rows($result) > 0) {
                                         // Image path resolution logic (check raw path)
                                         if (!file_exists($display_img) && strpos($display_img, 'http') === false) {
                                             $possible_paths = [
-                                                '../Image/Shop/' . basename($display_img),
-                                                '../Image/Best/' . basename($display_img),
-                                                '../Image/' . basename($display_img),
-                                                '../Categories/Best-selling/Image/' . basename($display_img)
+                                                '../image/Shop/' . basename($display_img),
+                                                '../image/Best/' . basename($display_img),
+                                                '../image/' . basename($display_img),
+                                                '../Categories/Best-selling/image/' . basename($display_img)
                                             ];
 
                                             // Add Shop-specific path if shop_name exists
                                             if (!empty($item['shop_name'])) {
-                                                array_unshift($possible_paths, '../Image/Shop/' . $item['shop_name'] . '/' . basename($display_img));
+                                                array_unshift($possible_paths, '../image/Shop/' . $item['shop_name'] . '/' . basename($display_img));
                                             } else {
                                                 // Fallback for UrbanWear
-                                                $possible_paths[] = '../Image/Shop/UrbanWear PH/' . basename($display_img);
+                                                $possible_paths[] = '../image/Shop/UrbanWear PH/' . basename($display_img);
                                             }
 
                                             foreach ($possible_paths as $path) {

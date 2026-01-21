@@ -47,7 +47,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="icon" type="image/x-icon" href="../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- External CSS - We should unify this, but for now using the request's style source -->
     <link rel="stylesheet" href="../Css/Best-selling/checkout_cart.css">
@@ -149,34 +149,34 @@ if ($result && mysqli_num_rows($result) > 0) {
 
                         // Define potential directories relative to Content/Check-out.php
                         $possible_paths = [
-                            '../Image/Best-seller/' . $clean_img_name, // Corrected Best-seller path
-                            '../Image/New-arrivals/' . $clean_img_name, // New Arrivals
-                            '../Image/Electronics/' . $clean_img_name,
-                            '../Image/Fashion & Apparel/' . $clean_img_name,
-                            '../Image/Beauty & Health/' . $clean_img_name,
-                            '../Image/Home & Living/' . $clean_img_name,
-                            '../Image/Sports & Outdoor/' . $clean_img_name,
-                            '../Image/Toys & Games/' . $clean_img_name,
-                            '../Image/Groceries/' . $clean_img_name,
-                            // Specific Shop Directories in Image/Shop
-                            '../Image/Shop/CozyLiving Store/' . $clean_img_name,
-                            '../Image/Shop/DailyFits Co/' . $clean_img_name,
-                            '../Image/Shop/FreshLook PH/' . $clean_img_name,
-                            '../Image/Shop/GadgetLab PH/' . $clean_img_name,
-                            '../Image/Shop/GlowUp Beauty/' . $clean_img_name,
-                            '../Image/Shop/HomeEssentials PH/' . $clean_img_name,
-                            '../Image/Shop/Luxe Basics/' . $clean_img_name,
-                            '../Image/Shop/SmartGear Store/' . $clean_img_name,
-                            '../Image/Shop/StyleHub Manila/' . $clean_img_name,
-                            '../Image/Shop/TechZone PH/' . $clean_img_name,
-                            '../Image/Shop/TrendyBags PH/' . $clean_img_name,
-                            '../Image/Shop/UrbanWear PH/' . $clean_img_name,
+                            '../image/Best-seller/' . $clean_img_name, // Corrected Best-seller path
+                            '../image/New-arrivals/' . $clean_img_name, // New Arrivals
+                            '../image/Electronics/' . $clean_img_name,
+                            '../image/Fashion & Apparel/' . $clean_img_name,
+                            '../image/Beauty & Health/' . $clean_img_name,
+                            '../image/Home & Living/' . $clean_img_name,
+                            '../image/Sports & Outdoor/' . $clean_img_name,
+                            '../image/Toys & Games/' . $clean_img_name,
+                            '../image/Groceries/' . $clean_img_name,
+                            // Specific Shop Directories in image/Shop
+                            '../image/Shop/CozyLiving Store/' . $clean_img_name,
+                            '../image/Shop/DailyFits Co/' . $clean_img_name,
+                            '../image/Shop/FreshLook PH/' . $clean_img_name,
+                            '../image/Shop/GadgetLab PH/' . $clean_img_name,
+                            '../image/Shop/GlowUp Beauty/' . $clean_img_name,
+                            '../image/Shop/HomeEssentials PH/' . $clean_img_name,
+                            '../image/Shop/Luxe Basics/' . $clean_img_name,
+                            '../image/Shop/SmartGear Store/' . $clean_img_name,
+                            '../image/Shop/StyleHub Manila/' . $clean_img_name,
+                            '../image/Shop/TechZone PH/' . $clean_img_name,
+                            '../image/Shop/TrendyBags PH/' . $clean_img_name,
+                            '../image/Shop/UrbanWear PH/' . $clean_img_name,
                             // Legacy/Generic
-                            '../Image/Best/' . $clean_img_name,
-                            '../Image/Shop/' . $clean_img_name,
-                            '../Image/' . $clean_img_name,
-                            '../Categories/Best-selling/Image/' . $clean_img_name,
-                            '../Shop/Image/' . $clean_img_name,
+                            '../image/Best/' . $clean_img_name,
+                            '../image/Shop/' . $clean_img_name,
+                            '../image/' . $clean_img_name,
+                            '../Categories/Best-selling/image/' . $clean_img_name,
+                            '../Shop/image/' . $clean_img_name,
                             '../Shop/image/UrbanWear PH/' . $clean_img_name, // Legacy specific
                             '../Shop/image/' . $clean_img_name,
                             $display_img

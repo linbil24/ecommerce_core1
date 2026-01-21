@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FASHION & APPAREL | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Fashion & Apparel/Men’s Plain T-Shirt (Cotton).jpeg');">
+                        style="background-image: url('../../image/Fashion & Apparel/Men’s Plain T-Shirt (Cotton).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Fashion & Apparel/Women’s Oversized Blouse.jpeg');">
+                        style="background-image: url('../../image/Fashion & Apparel/Women’s Oversized Blouse.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
+                        style="background-image: url('../../image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
+                        style="background-image: url('../../image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
+                        style="background-image: url('../../image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->

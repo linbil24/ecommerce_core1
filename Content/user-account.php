@@ -61,7 +61,7 @@ $uzip = $u['zip'] ?? '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MY ACCOUNT | IMARKET PH</title>
-    <link rel="icon" type="image/x-icon" href="../Image/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 

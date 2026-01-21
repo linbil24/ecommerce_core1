@@ -151,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
-    <link rel="icon" type="image/x-icon" href="../Image/logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
     <!-- Use Shop CSS -->
     <link rel="stylesheet" href="../Css/Shop/payment.css?v=<?php echo time(); ?>">
 
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
 
                         <div class="shop-header-container"
                             style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
-                            <img src="../Image/Logo.png" alt="Shop Logo" class="shop-logo"
+                            <img src="../image/Logo.png" alt="Shop Logo" class="shop-logo"
                                 style="width: 50px; height: 50px; object-fit: contain;">
                             <div>
                                 <?php
@@ -291,28 +291,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                                     // Robust Image Path Correction
                                     $raw_img = $item['image'];
 
-                                    // 1. Strip all leading relative components to get the clean path from root (e.g., Image/Category/file.jpg)
-                                    // This handles inputs like "../../Image/...", "../Image/...", or "Image/..."
+                                    // 1. Strip all leading relative components to get the clean path from root (e.g., image/Category/file.jpg)
+                                    // This handles inputs like "../../image/...", "../image/...", or "image/..."
                                     $clean_path = preg_replace('/^(\.\.\/)+/', '', $raw_img);
 
-                                    // 2. Construct path relative to THIS file (Content/Payment.php needs ../Image/...)
+                                    // 2. Construct path relative to THIS file (Content/Payment.php needs ../image/...)
                                     $display_img = '../' . $clean_path;
 
                                     // 3. Fallback: If strict path doesn't exist, try searching in common Image directories by filename
                                     if (!file_exists($display_img)) {
                                         $filename = basename($clean_path);
                                         $candidates = [
-                                            '../Image/' . $filename,
-                                            '../Image/Best/' . $filename,
-                                            '../Image/Electronics/' . $filename,
-                                            '../Image/Fashion & Apparel/' . $filename,
-                                            '../Image/Home & living/' . $filename,
-                                            '../Image/Beauty & Health/' . $filename,
-                                            '../Image/Sports & outdoor/' . $filename,
-                                            '../Image/Groceries/' . $filename,
-                                            '../Image/Toys & Games/' . $filename,
-                                            '../Image/New-arrivals/' . $filename,
-                                            '../Image/Shop/' . $filename,
+                                            '../image/' . $filename,
+                                            '../image/Best/' . $filename,
+                                            '../image/Electronics/' . $filename,
+                                            '../image/Fashion & Apparel/' . $filename,
+                                            '../image/Home & living/' . $filename,
+                                            '../image/Beauty & Health/' . $filename,
+                                            '../image/Sports & outdoor/' . $filename,
+                                            '../image/Groceries/' . $filename,
+                                            '../image/Toys & Games/' . $filename,
+                                            '../image/New-arrivals/' . $filename,
+                                            '../image/Shop/' . $filename,
                                         ];
                                         foreach ($candidates as $cand) {
                                             if (file_exists($cand)) {
@@ -388,11 +388,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                             <!-- Helper to display payment option -->
                             <?php
                             $methods = [
-                                ['val' => 'GCash', 'img' => '../Image/Banks/Gcash.jpeg', 'label' => 'GCash', 'sub' => 'E-wallet'],
-                                ['val' => 'PayMaya', 'img' => '../Image/Banks/Paymaya.jpeg', 'label' => 'PayMaya', 'sub' => 'E-wallet'],
-                                ['val' => 'Credit Card', 'img' => '../Image/Banks/Master-card.png', 'label' => 'Credit/Debit Card', 'sub' => 'Visa, Mastercard'],
-                                ['val' => 'Maya', 'img' => '../Image/Banks/Maya.png', 'label' => 'Maya', 'sub' => 'E-wallet'],
-                                ['val' => 'BDO', 'img' => '../Image/Banks/BDO.png', 'label' => 'BDO', 'sub' => 'Bank Transfer'],
+                                ['val' => 'GCash', 'img' => '../image/Banks/Gcash.jpeg', 'label' => 'GCash', 'sub' => 'E-wallet'],
+                                ['val' => 'PayMaya', 'img' => '../image/Banks/Paymaya.jpeg', 'label' => 'PayMaya', 'sub' => 'E-wallet'],
+                                ['val' => 'Credit Card', 'img' => '../image/Banks/Master-card.png', 'label' => 'Credit/Debit Card', 'sub' => 'Visa, Mastercard'],
+                                ['val' => 'Maya', 'img' => '../image/Banks/Maya.png', 'label' => 'Maya', 'sub' => 'E-wallet'],
+                                ['val' => 'BDO', 'img' => '../image/Banks/BDO.png', 'label' => 'BDO', 'sub' => 'Bank Transfer'],
                                 ['val' => 'Cash On Delivery', 'img' => '', 'icon' => 'fas fa-money-bill-wave', 'label' => 'Cash on Delivery', 'sub' => 'Pay when delivered', 'checked' => true]
                             ];
 

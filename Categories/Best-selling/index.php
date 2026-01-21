@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEST SELLING | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,15 +30,15 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Best-seller/bag-men.jpeg');">
+                        style="background-image: url('../../image/Best-seller/bag-men.jpeg');">
                     </div>
-                    <div class="fade-slide" style="background-image: url('../../Image/Best-seller/bag-women.jpeg');">
+                    <div class="fade-slide" style="background-image: url('../../image/Best-seller/bag-women.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Best-seller/Earphone-bluetooth.jpeg');">
+                        style="background-image: url('../../image/Best-seller/Earphone-bluetooth.jpeg');">
                     </div>
-                    <div class="fade-slide" style="background-image: url('../../Image/Best-seller/Relo.jpeg');"></div>
-                    <div class="fade-slide" style="background-image: url('../../Image/Best-seller/School-bag.jpg');">
+                    <div class="fade-slide" style="background-image: url('../../image/Best-seller/Relo.jpeg');"></div>
+                    <div class="fade-slide" style="background-image: url('../../image/Best-seller/School-bag.jpg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->

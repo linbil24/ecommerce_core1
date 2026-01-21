@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOYS & GAMES | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Toys & Games/Action Figure (Superhero).jpeg');">
+                        style="background-image: url('../../image/Toys & Games/Action Figure (Superhero).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Toys & Games/Board Game (Strategy).jpeg');">
+                        style="background-image: url('../../image/Toys & Games/Board Game (Strategy).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Toys & Games/Building Blocks Set.jpeg');">
+                        style="background-image: url('../../image/Toys & Games/Building Blocks Set.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Toys & Games/Card Game (Family Fun).jpeg');">
+                        style="background-image: url('../../image/Toys & Games/Card Game (Family Fun).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Toys & Games/Doll House (Wooden).jpeg');">
+                        style="background-image: url('../../image/Toys & Games/Doll House (Wooden).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->

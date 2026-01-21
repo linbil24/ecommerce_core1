@@ -4,7 +4,7 @@ $products = [
     [
         'name' => 'Facial Cleanser (Gentle Formula)',
         'price' => '₱100.00',
-        'image' => '../../Image/Beauty & Health/Facial Cleanser (Gentle Formula).jpeg',
+        'image' => '../../image/Beauty & Health/Facial Cleanser (Gentle Formula).jpeg',
         'link' => 'view-product.php?id=601',
         'discount' => '-20%'
     ],
@@ -13,7 +13,7 @@ $products = [
     [
         'name' => 'Vitamin C Serum',
         'price' => '₱340.00',
-        'image' => '../../Image/Beauty & Health/Vitamin C Serum.jpeg',
+        'image' => '../../image/Beauty & Health/Vitamin C Serum.jpeg',
         'link' => 'view-product.php?id=602',
         'discount' => '-20%'
     ],
@@ -22,7 +22,7 @@ $products = [
     [
         'name' => 'Aloe Vera Soothing Gel',
         'price' => '₱50.00',
-        'image' => '../../Image/Beauty & Health/Aloe Vera Soothing Gel.jpeg',
+        'image' => '../../image/Beauty & Health/Aloe Vera Soothing Gel.jpeg',
         'link' => 'view-product.php?id=603',
         'discount' => '-20%'
     ],
@@ -31,7 +31,7 @@ $products = [
     [
         'name' => 'Sunscreen SPF 50+',
         'price' => '₱1,500.00',
-        'image' => '../../Image/Beauty & Health/Sunscreen SPF 50+.jpeg',
+        'image' => '../../image/Beauty & Health/Sunscreen SPF 50+.jpeg',
         'link' => 'view-product.php?id=604',
         'discount' => '-20%'
     ],
@@ -40,7 +40,7 @@ $products = [
     [
         'name' => 'Moisturizing Face Cream',
         'price' => '₱2,500.00',
-        'image' => '../../Image/Beauty & Health/Moisturizing Face Cream.jpeg',
+        'image' => '../../image/Beauty & Health/Moisturizing Face Cream.jpeg',
         'link' => 'view-product.php?id=605',
         'discount' => '-20%'
     ],
@@ -49,7 +49,7 @@ $products = [
     [
         'name' => 'Charcoal Face Mask',
         'price' => '₱10,200.00',
-        'image' => '../../Image/Beauty & Health/Charcoal Face Mask.jpeg',
+        'image' => '../../image/Beauty & Health/Charcoal Face Mask.jpeg',
         'link' => 'view-product.php?id=606',
         'discount' => '-20%'
     ],
@@ -59,7 +59,7 @@ $products = [
     [
         'name' => 'Hair Growth Shampoo',
         'price' => '₱15,000.00',
-        'image' => '../../Image/Beauty & Health/Hair Growth Shampoo.jpeg',
+        'image' => '../../image/Beauty & Health/Hair Growth Shampoo.jpeg',
         'link' => 'view-product.php?id=607',
         'discount' => '-20%'
     ],
@@ -68,7 +68,7 @@ $products = [
     [
         'name' => 'Hair Conditioner (Repair Care)',
         'price' => '₱15,000.00',
-        'image' => '../../Image/Beauty & Health/Hair Conditioner (Repair Care).jpeg',
+        'image' => '../../image/Beauty & Health/Hair Conditioner (Repair Care).jpeg',
         'link' => 'view-product.php?id=608',
         'discount' => '-20%'
     ],
@@ -77,7 +77,7 @@ $products = [
     [
         'name' => 'Makeup Brush Set (10pcs)',
         'price' => '₱20,000.00',
-        'image' => '../../Image/Beauty & Health/Makeup Brush Set (10pcs).jpeg',
+        'image' => '../../image/Beauty & Health/Makeup Brush Set (10pcs).jpeg',
         'link' => 'view-product.php?id=609',
         'discount' => '-20%'
     ],
@@ -86,7 +86,7 @@ $products = [
     [
         'name' => 'Lip Tint - Lip Gloss Set',
         'price' => '₱59,000.00',
-        'image' => '../../Image/Beauty & Health/Lip Tint - Lip Gloss Set.jpeg',
+        'image' => '../../image/Beauty & Health/Lip Tint - Lip Gloss Set.jpeg',
         'link' => 'view-product.php?id=610',
         'discount' => '-20%'
     ],
@@ -95,7 +95,7 @@ $products = [
     [
         'name' => 'Body Scrub (Whitening & Exfoliating)',
         'price' => '₱100.00',
-        'image' => '../../Image/Beauty & Health/Body Scrub (Whitening & Exfoliating).jpeg',
+        'image' => '../../image/Beauty & Health/Body Scrub (Whitening & Exfoliating).jpeg',
         'link' => 'view-product.php?id=611',
         'discount' => '-20%'
     ],
@@ -104,7 +104,7 @@ $products = [
     [
         'name' => 'Electric Facial Cleanser Brush',
         'price' => '₱1,000.00',
-        'image' => '../../Image/Beauty & Health/Electric Facial Cleanser Brush.jpeg',
+        'image' => '../../image/Beauty & Health/Electric Facial Cleanser Brush.jpeg',
         'link' => 'view-product.php?id=612',
         'discount' => '-20%'
     ],
@@ -113,7 +113,7 @@ $products = [
     [
         'name' => 'Nail Care Kit (Manicure Set)',
         'price' => '₱100.00',
-        'image' => '../../Image/Beauty & Health/Nail Care Kit (Manicure Set).jpeg',
+        'image' => '../../image/Beauty & Health/Nail Care Kit (Manicure Set).jpeg',
         'link' => 'view-product.php?id=613',
         'discount' => '-20%'
     ],
@@ -122,7 +122,7 @@ $products = [
     [
         'name' => 'Essential Oil Set (Relaxing Blend)',
         'price' => '₱299.00',
-        'image' => '../../Image/Beauty & Health/Essential Oil Set (Relaxing Blend).jpeg',
+        'image' => '../../image/Beauty & Health/Essential Oil Set (Relaxing Blend).jpeg',
         'link' => 'view-product.php?id=614',
         'discount' => '-20%'
     ],
@@ -131,7 +131,7 @@ $products = [
     [
         'name' => 'Foot Spa Massager Roller',
         'price' => '₱299',
-        'image' => '../../Image/Beauty & Health/Foot Spa Massager Roller.jpeg',
+        'image' => '../../image/Beauty & Health/Foot Spa Massager Roller.jpeg',
         'link' => 'view-product.php?id=615',
         'discount' => '-20%'
     ],

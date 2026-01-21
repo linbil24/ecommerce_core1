@@ -29,7 +29,7 @@ if (mysqli_num_rows($check_table) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shipping & Delivery | IMARKET PH</title>
-    <link rel="icon" type="image/x-icon" href="../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="../Css/Services/shipping_delivery.css?v=<?php echo time(); ?>">

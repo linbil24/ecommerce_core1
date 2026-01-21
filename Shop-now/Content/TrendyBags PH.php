@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Olive Utility Messenger',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../Image/Shop/TrendyBags PH/Olive Utility Messenger.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Olive Utility Messenger.jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Suede Shoulder Bag (Dark Moss)',
             'price' => '₱899.00',
             'raw_price' => 899.00,
-            'image' => '../Image/Shop/TrendyBags PH/Suede Shoulder Bag (Dark Moss).jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Suede Shoulder Bag (Dark Moss).jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Half Moon Leather Purse',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../Image/Shop/TrendyBags PH/Half Moon Leather Purse.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Half Moon Leather Purse.jpeg',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Canvas Tote with Scarf',
             'price' => '₱2,800.00',
             'raw_price' => 2800.00,
-            'image' => '../Image/Shop/TrendyBags PH/Canvas Tote with Scarf.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Canvas Tote with Scarf.jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Mother of Pearl Clutch',
             'price' => '₱750.00',
             'raw_price' => 750.00,
-            'image' => '../Image/Shop/TrendyBags PH/Mother of Pearl Clutch.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Mother of Pearl Clutch.jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Nylon Dumpling Bag',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../Image/Shop/TrendyBags PH/Nylon Dumpling Bag.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Nylon Dumpling Bag.jpeg',
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Anderson Top Handle Bag',
             'price' => '₱1,500.00',
             'raw_price' => 1500.00,
-            'image' => '../Image/Shop/TrendyBags PH/Anderson Top Handle Bag.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Anderson Top Handle Bag.jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Crocodile Vanity Bag',
             'price' => '₱350.00',
             'raw_price' => 350.00,
-            'image' => '../Image/Shop/TrendyBags PH/Crocodile Vanity Bag.jpeg', // Using stylized image
+            'image' => '../image/Shop/TrendyBags PH/Crocodile Vanity Bag.jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Pop Toft Tote Bag',
             'price' => '₱1,100.00',
             'raw_price' => 1100.00,
-            'image' => '../Image/Shop/TrendyBags PH/Pop Toft Tote Bag.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Pop Toft Tote Bag.jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Woven Suede Crossbody',
             'price' => '₱850.00',
             'raw_price' => 850.00,
-            'image' => '../Image/Shop/TrendyBags PH/Woven Suede Crossbody.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Woven Suede Crossbody.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Buntal Shoulder Bag',
             'price' => '₱1,800.00',
             'raw_price' => 1800.00,
-            'image' => '../Image/Shop/TrendyBags PH/Buntal Shoulder Bag.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Buntal Shoulder Bag.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Metallic Ruched Hobo Bag',
             'price' => '₱1,350.00',
             'raw_price' => 1350.00,
-            'image' => '../Image/Shop/TrendyBags PH/Metallic Ruched Hobo Bag.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Metallic Ruched Hobo Bag.jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Snoopy Peanuts Shopper',
             'price' => '₱450.00',
             'raw_price' => 450.00,
-            'image' => '../Image/Shop/TrendyBags PH/Snoopy Peanuts Shopper.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Snoopy Peanuts Shopper.jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Landscape Satchel',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../Image/Shop/TrendyBags PH/Landscape Satchel.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Landscape Satchel.jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Faux Shearling Shoulder Bag',
             'price' => '₱299.00',
             'raw_price' => 299.00,
-            'image' => '../Image/Shop/TrendyBags PH/Faux Shearling Shoulder Bag.jpeg',
+            'image' => '../image/Shop/TrendyBags PH/Faux Shearling Shoulder Bag.jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]

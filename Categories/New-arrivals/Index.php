@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEW ARRIVALS | IMARKET</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,18 +30,18 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/New-arrivals/Aesthetic Desk Organizer Set.jpeg');">
+                        style="background-image: url('../../image/New-arrivals/Aesthetic Desk Organizer Set.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/New-arrivals/Classic Leather Wallet (Men).jpeg');">
+                        style="background-image: url('../../image/New-arrivals/Classic Leather Wallet (Men).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/New-arrivals/Canvas Tote Bag.jpeg');">
+                        style="background-image: url('../../image/New-arrivals/Canvas Tote Bag.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/New-arrivals/Trendy Crossbody Bag (Women).');"></div>
+                        style="background-image: url('../../image/New-arrivals/Trendy Crossbody Bag (Women).');"></div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Best/Wireless Bluetooth Earbuds.jpeg');"></div>
+                        style="background-image: url('../../image/Best/Wireless Bluetooth Earbuds.jpeg');"></div>
 
                     <!-- Indicators (White Lines) -->
                     <div class="slider-indicators">

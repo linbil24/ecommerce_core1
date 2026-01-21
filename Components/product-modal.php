@@ -182,7 +182,7 @@
 
         <div class="pm-details-section">
             <div class="pm-store-header">
-                <img src="../Image/Logo.png" class="pm-store-logo"> <!-- Placeholder Logo -->
+                <img src="../image/Logo.png" class="pm-store-logo"> <!-- Placeholder Logo -->
                 <span class="pm-store-name" id="pm-store">TechZone PH</span>
             </div>
 

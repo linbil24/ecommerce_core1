@@ -4,7 +4,7 @@ $products = [
     [
         'name' => 'Organic Rolled Oats (1kg)',
         'price' => '₱250.00',
-        'image' => '../../Image/Groceries/Organic Rolled Oats (1kg).jpeg',
+        'image' => '../../image/Groceries/Organic Rolled Oats (1kg).jpeg',
         'link' => 'view-product.php?id=901',
         'discount' => '-17%'
     ],
@@ -13,7 +13,7 @@ $products = [
     [
         'name' => 'Unsweetened Almond Milk (1L)',
         'price' => '₱180.00',
-        'image' => '../../Image/Groceries/Unsweetened Almond Milk (1L).jpeg',
+        'image' => '../../image/Groceries/Unsweetened Almond Milk (1L).jpeg',
         'link' => 'view-product.php?id=902',
         'discount' => '-18%',
     ],
@@ -22,7 +22,7 @@ $products = [
     [
         'name' => 'Extra Virgin Olive Oil (500ml)',
         'price' => '₱450.00',
-        'image' => '../../Image/Groceries/Extra Virgin Olive Oil (500ml).jpeg',
+        'image' => '../../image/Groceries/Extra Virgin Olive Oil (500ml).jpeg',
         'link' => 'view-product.php?id=903',
         'discount' => '-18%',
     ],
@@ -31,7 +31,7 @@ $products = [
     [
         'name' => 'Premium Brown Rice (2kg)',
         'price' => '₱320.00',
-        'image' => '../../Image/Groceries/Premium Brown Rice (2kg).jpeg',
+        'image' => '../../image/Groceries/Premium Brown Rice (2kg).jpeg',
         'link' => 'view-product.php?id=904',
         'discount' => '-20%',
     ],
@@ -40,7 +40,7 @@ $products = [
     [
         'name' => 'Japanese Green Tea Bags (50pcs)',
         'price' => '₱280.00',
-        'image' => '../../Image/Groceries/Japanese Green Tea Bags (50pcs).jpeg',
+        'image' => '../../image/Groceries/Japanese Green Tea Bags (50pcs).jpeg',
         'link' => 'view-product.php?id=905',
         'discount' => '-20%',
     ],
@@ -49,7 +49,7 @@ $products = [
     [
         'name' => 'Jasmine Rice',
         'price' => '₱150.00',
-        'image' => '../../Image/Groceries/Jasmine Rice.jpeg',
+        'image' => '../../image/Groceries/Jasmine Rice.jpeg',
         'link' => 'view-product.php?id=906',
         'discount' => '-16%',
     ],
@@ -58,7 +58,7 @@ $products = [
     [
         'name' => 'Pure Raw Honey (500g)',
         'price' => '₱380.00',
-        'image' => '../../Image/Groceries/Pure Raw Honey (500g).jpeg',
+        'image' => '../../image/Groceries/Pure Raw Honey (500g).jpeg',
         'link' => 'view-product.php?id=907',
         'discount' => '-15%',
     ],
@@ -67,7 +67,7 @@ $products = [
     [
         'name' => 'Creamy Peanut Butter (No Added Sugar)',
         'price' => '₱220.00',
-        'image' => '../../Image/Groceries/Creamy Peanut Butter (No Added Sugar).jpeg',
+        'image' => '../../image/Groceries/Creamy Peanut Butter (No Added Sugar).jpeg',
         'link' => 'view-product.php?id=908',
         'discount' => '-21%',
     ],
@@ -76,7 +76,7 @@ $products = [
     [
         'name' => 'Organic Chia Seeds (250g)',
         'price' => '₱180.00',
-        'image' => '../../Image/Groceries/Organic Chia Seeds (250g).jpeg',
+        'image' => '../../image/Groceries/Organic Chia Seeds (250g).jpeg',
         'link' => 'view-product.php?id=909',
         'discount' => '-28%',
     ],
@@ -85,7 +85,7 @@ $products = [
     [
         'name' => 'White Quinoa (500g)',
         'price' => '₱350.00',
-        'image' => '../../Image/Groceries/White Quinoa (500g).jpeg',
+        'image' => '../../image/Groceries/White Quinoa (500g).jpeg',
         'link' => 'view-product.php?id=910',
         'discount' => '-22%',
     ],
@@ -94,7 +94,7 @@ $products = [
     [
         'name' => 'Pure Coconut Water (1L)',
         'price' => '₱120.00',
-        'image' => '../../Image/Groceries/Pure Coconut Water (1L).jpeg',
+        'image' => '../../image/Groceries/Pure Coconut Water (1L).jpeg',
         'link' => 'view-product.php?id=911',
         'discount' => '-20%',
     ],
@@ -103,7 +103,7 @@ $products = [
     [
         'name' => 'Crunchy Granola (Honey Almond)',
         'price' => '₱280.00',
-        'image' => '../../Image/Groceries/Crunchy Granola (Honey Almond).jpeg',
+        'image' => '../../image/Groceries/Crunchy Granola (Honey Almond).jpeg',
         'link' => 'view-product.php?id=912',
         'discount' => '-20%',
     ],
@@ -112,7 +112,7 @@ $products = [
     [
         'name' => 'High Protein Energy Bar (Box of 12)',
         'price' => '₱600.00',
-        'image' => '../../Image/Groceries/High Protein Energy Bar (Box of 12).jpeg',
+        'image' => '../../image/Groceries/High Protein Energy Bar (Box of 12).jpeg',
         'link' => 'view-product.php?id=913',
         'discount' => '-25%',
     ],
@@ -121,7 +121,7 @@ $products = [
     [
         'name' => 'Apple Cider Vinegar with Mother',
         'price' => '₱250.00',
-        'image' => '../../Image/Groceries/Apple Cider Vinegar with Mother.jpeg',
+        'image' => '../../image/Groceries/Apple Cider Vinegar with Mother.jpeg',
         'link' => 'view-product.php?id=914',
         'discount' => '-17%',
     ],
@@ -130,7 +130,7 @@ $products = [
     [
         'name' => 'Mixed Nuts (Roasted & Salted)',
         'price' => '₱320.00',
-        'image' => '../../Image/Groceries/Mixed Nuts (Roasted & Salted).jpeg',
+        'image' => '../../image/Groceries/Mixed Nuts (Roasted & Salted).jpeg',
         'link' => 'view-product.php?id=915',
         'discount' => '-20%',
     ]

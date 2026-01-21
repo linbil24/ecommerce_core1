@@ -12,7 +12,7 @@ if (!isset($path_prefix)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="<?php echo $path_prefix; ?>Image/logo.png">
+    <link rel="icon" href="<?php echo $path_prefix; ?>image/logo.png">
     <title>ABOUT US | IMARKETPH</title>
 
     <!-- Fonts -->
@@ -47,7 +47,7 @@ if (!isset($path_prefix)) {
                      Or I can use a generic shop image from the project if one exists. 
                      For now, I'll style this heavily with CSS. -->
                 <div class="hero-shape"></div>
-                <img src="<?php echo $path_prefix; ?>Image/logo.png" alt="ImarketPH Logo" class="hero-img-floating">
+                <img src="<?php echo $path_prefix; ?>image/logo.png" alt="ImarketPH Logo" class="hero-img-floating">
             </div>
         </section>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../../Image/logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css">
     <?php
     $page_title = isset($_GET['name']) ? $_GET['name'] : 'Product Details';
@@ -23,7 +23,7 @@
 
 
     <div style="text-align: center; margin: 30px 0 10px;">
-        <img src="../../Image/Logo.png" alt="iMarket Logo"
+        <img src="../../image/Logo.png" alt="iMarket Logo"
             style="height: 40px; vertical-align: middle; margin-right: 10px;">
         <span
             style="font-size: 24px; font-weight: bold; color: #2A3B7E; vertical-align: middle; font-family: sans-serif;">New

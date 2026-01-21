@@ -2,7 +2,7 @@
 <aside id="sidebar" class="sidebar">
     <div class="logo-container">
         <div class="logo-flex">
-            <img src="../Image/logo.png" alt="Logo" class="logo-img"
+            <img src="../image/logo.png" alt="Logo" class="logo-img"
                 style="height: 2.5rem; width: auto; margin-right: 0.5rem;">
             <span class="logo-text">IMARKETPH | ADMIN </span>
         </div>

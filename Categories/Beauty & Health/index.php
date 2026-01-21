@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEAUTY & HEALTH | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Beauty & Health/Aloe Vera Soothing Gel.jpeg');">
+                        style="background-image: url('../../image/Beauty & Health/Aloe Vera Soothing Gel.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Beauty & Health/Charcoal Face Mask.jpeg');">
+                        style="background-image: url('../../image/Beauty & Health/Charcoal Face Mask.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Beauty & Health/Essential Oil Set (Relaxing Blend).jpeg');">
+                        style="background-image: url('../../image/Beauty & Health/Essential Oil Set (Relaxing Blend).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Beauty & Health/Hair Growth Shampoo.jpeg');">
+                        style="background-image: url('../../image/Beauty & Health/Hair Growth Shampoo.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Beauty & Health/Foot Spa Massager Roller.jpeg');">
+                        style="background-image: url('../../image/Beauty & Health/Foot Spa Massager Roller.jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->

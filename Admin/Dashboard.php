@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // =========================================================================
 // iMARKET ADMIN PORTAL - Main Application File
 //
@@ -47,7 +47,7 @@ try {
 <body>
     <div class=\"error-card\">
         <h1>Database Connection Required</h1>
-        <p>We couldnâ€™t reach the database server, so the admin portal is temporarily unavailable. Please review the configuration below and try again.</p>
+        <p>We couldn’t reach the database server, so the admin portal is temporarily unavailable. Please review the configuration below and try again.</p>
         <ul>";
     foreach ($supportTips as $tip) {
         echo '<li>' . htmlspecialchars($tip, ENT_QUOTES, 'UTF-8') . '</li>';
@@ -417,7 +417,7 @@ if ($is_logged_in) {
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="icon" type="image/png" href="../Image/logo.png">
+<link rel="icon" type="image/png" href="../image/logo.png">
 
 <head>
     <meta charset="UTF-8">

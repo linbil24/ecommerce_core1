@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CONTACT US | IMARKET PH</title>
-    <link rel="icon" type="image/x-icon" href="../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="../Css/Services/contact.css?v=<?php echo time(); ?>">

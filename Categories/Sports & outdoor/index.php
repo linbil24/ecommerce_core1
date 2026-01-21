@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTS & OUTDOOR | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../Image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
     <link rel="stylesheet" href="../../Css/Best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../Image/Sports & outdoor/Yoga Mat (Non-Slip).jpeg');">
+                        style="background-image: url('../../image/Sports & outdoor/Yoga Mat (Non-Slip).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Sports & outdoor/Dumbbell Set (Adjustable).jpeg');">
+                        style="background-image: url('../../image/Sports & outdoor/Dumbbell Set (Adjustable).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Sports & outdoor/Resistance Bands Set.jpeg');">
+                        style="background-image: url('../../image/Sports & outdoor/Resistance Bands Set.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Sports & outdoor/Jump Rope (Speed Type).jpeg');">
+                        style="background-image: url('../../image/Sports & outdoor/Jump Rope (Speed Type).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../Image/Sports & outdoor/Sports Water Bottle (1L).jpeg');">
+                        style="background-image: url('../../image/Sports & outdoor/Sports Water Bottle (1L).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->

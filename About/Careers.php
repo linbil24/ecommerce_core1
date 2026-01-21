@@ -12,7 +12,7 @@ if (!isset($path_prefix)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="<?php echo $path_prefix; ?>Image/logo.png">
+    <link rel="icon" href="<?php echo $path_prefix; ?>image/logo.png">
     <title>CAREERS | IMARKETPH</title>
 
     <!-- Fonts -->

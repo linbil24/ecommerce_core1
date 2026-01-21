@@ -460,7 +460,7 @@ body {
     position: relative;
     height: 60vh;
     min-height: 400px;
-    background: url('../../Image/logo.png') no-repeat center center/contain, var(--gradient-hero);
+    background: url('../../image/logo.png') no-repeat center center/contain, var(--gradient-hero);
     /* Using logo as placeholder if no actual office image */
     background-blend-mode: overlay;
     display: flex;

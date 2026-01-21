@@ -4,7 +4,7 @@ $products = [
     [
         'name' => 'bag Sholder Men',
         'price' => '₱100.00',
-        'image' => '../../Image/Best-seller/bag-men.jpeg',
+        'image' => '../../image/Best-seller/bag-men.jpeg',
         'link' => 'view-product.php?id=101',
         'discount' => '-20%'
     ],
@@ -13,7 +13,7 @@ $products = [
     [
         'name' => 'bag women',
         'price' => '₱340.00',
-        'image' => '../../Image/Best-seller/bag-women.jpeg',
+        'image' => '../../image/Best-seller/bag-women.jpeg',
         'link' => 'view-product.php?id=102',
         'discount' => '-20%',
     ],
@@ -22,7 +22,7 @@ $products = [
     [
         'name' => 'Notebook',
         'price' => '₱50.00',
-        'image' => '../../Image/Best-seller/Notebooks.jpeg',
+        'image' => '../../image/Best-seller/Notebooks.jpeg',
         'link' => 'view-product.php?id=103',
         'discount' => '-20%',
     ],
@@ -31,7 +31,7 @@ $products = [
     [
         'name' => 'Earphone Bluetooth',
         'price' => '₱1,500.00',
-        'image' => '../../Image/Best-seller/Earphone-bluetooth.jpeg',
+        'image' => '../../image/Best-seller/Earphone-bluetooth.jpeg',
         'link' => 'view-product.php?id=104',
         'discount' => '-20%',
     ],
@@ -40,7 +40,7 @@ $products = [
     [
         'name' => 'Snikers Shoes',
         'price' => '₱2,500.00',
-        'image' => '../../Image/Best-seller/snikers shoes.avif',
+        'image' => '../../image/Best-seller/snikers shoes.avif',
         'link' => 'view-product.php?id=105',
         'discount' => '-20%',
     ],
@@ -49,7 +49,7 @@ $products = [
     [
         'name' => 'swatch watch',
         'price' => '₱10,200.00',
-        'image' => '../../Image/Best-seller/Snart watch.jpeg',
+        'image' => '../../image/Best-seller/Snart watch.jpeg',
         'link' => 'view-product.php?id=106',
         'discount' => '-20%',
     ],
@@ -58,7 +58,7 @@ $products = [
     [
         'name' => 'Brand New SEALED HP Laptop i3',
         'price' => '₱15,000.00',
-        'image' => '../../Image/Best-seller/laptop.jpeg',
+        'image' => '../../image/Best-seller/laptop.jpeg',
         'link' => 'view-product.php?id=107',
         'discount' => '-20%',
     ],
@@ -67,7 +67,7 @@ $products = [
     [
         'name' => 'Desktop Computers & 2-in-1 PCs | Dell Philippines',
         'price' => '₱20,000.00',
-        'image' => '../../Image/Best-seller/pc computer.avif',
+        'image' => '../../image/Best-seller/pc computer.avif',
         'link' => 'view-product.php?id=108',
         'discount' => '-20%',
     ],
@@ -76,7 +76,7 @@ $products = [
     [
         'name' => 'vivo pro max',
         'price' => '₱59,000.00',
-        'image' => '../../Image/Best-seller/vivo pro max.jpeg',
+        'image' => '../../image/Best-seller/vivo pro max.jpeg',
         'link' => 'view-product.php?id=109',
         'discount' => '-20%',
     ],
@@ -85,7 +85,7 @@ $products = [
     [
         'name' => 'iphone 15 pro max na may kagat',
         'price' => '₱100.00',
-        'image' => '../../Image/Best-seller/iphone.jpeg',
+        'image' => '../../image/Best-seller/iphone.jpeg',
         'link' => 'view-product.php?id=110',
         'discount' => '-20%',
     ],
@@ -94,7 +94,7 @@ $products = [
     [
         'name' => 'Keyboard mechanical',
         'price' => '₱1,000.00',
-        'image' => '../../Image/Best-seller/Keyboard-maagas.jpeg',
+        'image' => '../../image/Best-seller/Keyboard-maagas.jpeg',
         'link' => 'view-product.php?id=111',
         'discount' => '-20%',
     ],
@@ -103,7 +103,7 @@ $products = [
     [
         'name' => 'Ben10 brief',
         'price' => '₱100.00',
-        'image' => '../../Image/Best-seller/brief.jpg',
+        'image' => '../../image/Best-seller/brief.jpg',
         'link' => 'view-product.php?id=112',
         'discount' => '-20%',
     ],
@@ -112,7 +112,7 @@ $products = [
     [
         'name' => 'USB C Fast Charging Cable (2-Pack)',
         'price' => '₱299.00',
-        'image' => '../../Image/Best-seller/USB C Fast Charging Cable (2-Pack).jpeg',
+        'image' => '../../image/Best-seller/USB C Fast Charging Cable (2-Pack).jpeg',
         'link' => 'view-product.php?id=113',
         'discount' => '-20%',
     ],
@@ -121,7 +121,7 @@ $products = [
     [
         'name' => 'Mini Bluetooth Speaker',
         'price' => '₱299',
-        'image' => '../../Image/Best-seller/Mini Bluetooth Speaker.jpeg',
+        'image' => '../../image/Best-seller/Mini Bluetooth Speaker.jpeg',
         'link' => 'view-product.php?id=114',
         'discount' => '-20%',
     ],
@@ -130,7 +130,7 @@ $products = [
     [
         'name' => 'Phone Ring Holder',
         'price' => '₱299',
-        'image' => '../../Image/Best-seller/Phone Ring Holder.jpeg',
+        'image' => '../../image/Best-seller/Phone Ring Holder.jpeg',
         'link' => 'view-product.php?id=115',
         'discount' => '-20%',
     ]

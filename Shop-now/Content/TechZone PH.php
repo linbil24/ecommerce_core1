@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'AMD Ryzen 7 7800X3D',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../Image/Shop/TechZone PH/AMD Ryzen 7 7800X3D.jpeg',
+            'image' => '../image/Shop/TechZone PH/AMD Ryzen 7 7800X3D.jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Gigabyte GS27QCA 27 Curved Monitor',
             'price' => '₱899.00',
             'raw_price' => 899.00,
-            'image' => '../Image/Shop/TechZone PH/Gigabyte GS27QCA 27 Curved Monitor.webp',
+            'image' => '../image/Shop/TechZone PH/Gigabyte GS27QCA 27 Curved Monitor.webp',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'MSI B550M PRO-VDH WiFi Motherboard',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../Image/Shop/TechZone PH/MSI B550M PRO-VDH WiFi Motherboard.webp',
+            'image' => '../image/Shop/TechZone PH/MSI B550M PRO-VDH WiFi Motherboard.webp',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Redmi Turbo 4 Pro (Snapdragon 8s Gen 4)',
             'price' => '₱2,800.00',
             'raw_price' => 2800.00,
-            'image' => '../Image/Shop/TechZone PH/Redmi Turbo 4 Pro (Snapdragon 8s Gen 4).jpeg',
+            'image' => '../image/Shop/TechZone PH/Redmi Turbo 4 Pro (Snapdragon 8s Gen 4).jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Sony PlayStation 5 Slim (1TB)',
             'price' => '₱750.00',
             'raw_price' => 750.00,
-            'image' => '../Image/Shop/TechZone PH/Sony PlayStation 5 Slim (1TB).webp',
+            'image' => '../image/Shop/TechZone PH/Sony PlayStation 5 Slim (1TB).webp',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Samsung Galaxy S25 Ultra (512GB)',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../Image/Shop/TechZone PH/Samsung Galaxy S25 Ultra (512GB).jpeg', // Fallback
+            'image' => '../image/Shop/TechZone PH/Samsung Galaxy S25 Ultra (512GB).jpeg', // Fallback
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Edifier Hi-Res Bookshelf Speakers',
             'price' => '₱1,500.00',
             'raw_price' => 1500.00,
-            'image' => '../Image/Shop/TechZone PH/Edifier Hi-Res Bookshelf Speakers.jpeg',
+            'image' => '../image/Shop/TechZone PH/Edifier Hi-Res Bookshelf Speakers.jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Logitech M350S Pebble Mouse 2',
             'price' => '₱350.00',
             'raw_price' => 350.00,
-            'image' => '../Image/Shop/TechZone PH/Logitech M350S Pebble Mouse 2.jpeg', // Using stylized image
+            'image' => '../image/Shop/TechZone PH/Logitech M350S Pebble Mouse 2.jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Tecno CAMON 40 Pro 5G',
             'price' => '₱1,100.00',
             'raw_price' => 1100.00,
-            'image' => '../Image/Shop/TechZone PH/Tecno CAMON 40 Pro 5G.jpeg',
+            'image' => '../image/Shop/TechZone PH/Tecno CAMON 40 Pro 5G.jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Lexar THOR 8GB DDR4 3200MHz RAM',
             'price' => '₱850.00',
             'raw_price' => 850.00,
-            'image' => '../Image/Shop/TechZone PH/Lexar THOR 8GB DDR4 3200MHz RAM.jpeg',
+            'image' => '../image/Shop/TechZone PH/Lexar THOR 8GB DDR4 3200MHz RAM.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Xbox Wireless Controller (Carbon Black)',
             'price' => '₱1,800.00',
             'raw_price' => 1800.00,
-            'image' => '../Image/Shop/TechZone PH/Xbox Wireless Controller (Carbon Black).jpeg',
+            'image' => '../image/Shop/TechZone PH/Xbox Wireless Controller (Carbon Black).jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Lexar THOR 8GB DDR4 3200MHz RAM',
             'price' => '₱1,350.00',
             'raw_price' => 1350.00,
-            'image' => '../Image/Shop/TechZone PH/Lexar THOR 8GB DDR4 3200MHz RAM.jpeg',
+            'image' => '../image/Shop/TechZone PH/Lexar THOR 8GB DDR4 3200MHz RAM.jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Tecno CAMON 40 Pro 5G',
             'price' => '₱450.00',
             'raw_price' => 450.00,
-            'image' => '../Image/Shop/TechZone PH/Tecno CAMON 40 Pro 5G.jpeg',
+            'image' => '../image/Shop/TechZone PH/Tecno CAMON 40 Pro 5G.jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => '1stPlayer Go2 Mesh Gaming Case',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../Image/Shop/TechZone PH/1stPlayer Go2 Mesh Gaming Case.jpeg',
+            'image' => '../image/Shop/TechZone PH/1stPlayer Go2 Mesh Gaming Case.jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'KZ EDC In-Ear Monitors (IEMs)',
             'price' => '₱299.00',
             'raw_price' => 299.00,
-            'image' => '../Image/Shop/TechZone PH/KZ EDC In-Ear Monitors (IEMs).jpeg',
+            'image' => '../image/Shop/TechZone PH/KZ EDC In-Ear Monitors (IEMs).jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
