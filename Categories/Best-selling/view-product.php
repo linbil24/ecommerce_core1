@@ -59,4 +59,4 @@ $page_title = isset($name) ? $name : "Product Details";
     </footer>
 </body>
 
-</html>
+</html>B
