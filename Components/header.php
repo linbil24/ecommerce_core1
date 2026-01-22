@@ -38,8 +38,8 @@ if (!isset($path_prefix)) {
     $path_prefix = '../';
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0../css/all.min.css">
-<link rel="stylesheet" href="<?php echo $path_prefix; ?>css/Components/header.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/header.css">
 
 <header class="header">
     <div class="header-container">
@@ -60,15 +60,15 @@ if (!isset($path_prefix)) {
                     <a href="#" class="dropdown-toggle"><i class="fas fa-list"></i> Categories <i
                             class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Best-selling/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/Best%20selling/index.php"><i
                                     class="fas fa-fire"></i> Best Selling</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/New-arrivals/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/New%20arrivals/index.php"><i
                                     class="fas fa-star"></i> New Arrivals</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/Electronics/index.php"><i
                                     class="fas fa-desktop"></i> Electronics</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/Fashion%20%26%20Apparel/index.php"><i
                                     class="fas fa-tshirt"></i> Fashion & Apparel</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Home-living/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/Home%20living/index.php"><i
                                     class="fas fa-home"></i>
                                 Home & Living</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/Beauty%20%26%20Health/index.php"><i

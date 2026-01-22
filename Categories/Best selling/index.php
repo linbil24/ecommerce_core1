@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEW ARRIVALS | IMARKET</title>
+    <title>BEST SELLING | IMARKETPH</title>
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
-    <link rel="stylesheet" href="../../css/best-selling/Best.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../../css/best-selling/best.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -20,29 +20,25 @@
             <!-- Text Section (Left) -->
             <div class="text-section">
                 <h2>ImarketPH</h2>
-                <p>New Arrivals</p>
+                <p>BEST SELLING PRODUCTS</p>
 
-                <a class="btn-shop" href="../../Shop-now/index.php">Shop now</a>
+                <a class="btn-shop" href="#product-grid">Shop now</a>
             </div>
 
-            <!-- Slider Section (Right)-->
+            <!-- Slider Section (Right) -->
             <div class="slider-section">
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/New-arrivals/Aesthetic%20Desk%20Organizer%20Set.jpeg');">
+                        style="background-image: url('../../image/Best-seller/bag-men.jpeg');">
+                    </div>
+                    <div class="fade-slide" style="background-image: url('../../image/Best-seller/bag-women.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/New-arrivals/Classic%20Leather%20Wallet%20(Men).jpeg');">
+                        style="background-image: url('../../image/Best-seller/Earphone-bluetooth.jpeg');">
                     </div>
-                    <div class="fade-slide"
-                        style="background-image: url('../../image/New-arrivals/Canvas%20Tote%20Bag.jpeg');">
-                    </div>
-                    <div class="fade-slide"
-                        style="background-image: url('../../image/New-arrivals/Trendy%20Crossbody%20Bag%20(Women).jpeg');">
-                    </div>
-                    <div class="fade-slide"
-                        style="background-image: url('../../image/New-arrivals/Wireless%20Bluetooth%20Earbuds.jpeg');">
+                    <div class="fade-slide" style="background-image: url('../../image/Best-seller/Relo.jpeg');"></div>
+                    <div class="fade-slide" style="background-image: url('../../image/Best-seller/School-bag.jpg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->
@@ -60,8 +56,8 @@
 
     <div class="content-card">
         <div class="section-header">
-            <h2>New Arrivals</h2>
-            <p>Check out our New Arrivals!</p>
+            <h2>Discover Quality Products</h2>
+            <p>Check out our best sellers!</p>
         </div>
         <?php include 'card.php'; ?>
     </div>
