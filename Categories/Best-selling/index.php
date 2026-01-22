@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEST SELLING | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
-    <link rel="stylesheet" href="../../css/best-selling/best.css?v=<?php echo time(); ?>">
+    <link rel="icon" type="image/x-icon" href="../../image/logo.png">
+    <link rel="stylesheet" href="../../css/best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../components/header.php'; ?>
+        include '../../Components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -22,7 +22,7 @@
                 <h2>ImarketPH</h2>
                 <p>BEST SELLING PRODUCTS</p>
 
-                <a class="btn-shop" href="../../Shop-now/index.php">Shop now</a>
+                <a class="btn-shop" href="#product-grid">Shop now</a>
             </div>
 
             <!-- Slider Section (Right) -->
@@ -102,10 +102,8 @@
     </script>
 
     <footer>
-        <?php include '../../components/footer.php'; ?>
+        <?php include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
-
-

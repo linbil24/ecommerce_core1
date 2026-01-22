@@ -137,7 +137,7 @@ $products = [
 ];
 ?>
 
-<div class="product-grid">
+<div class="product-grid" id="product-grid">
     <?php foreach ($products as $product): ?>
         <div class="product-card" onclick="window.location.href='<?php echo $product['link']; ?>'">
             <div class="image-wrapper">
@@ -159,5 +159,3 @@ $products = [
         </div>
     <?php endforeach; ?>
 </div>
-
-
