@@ -190,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../components/header.php';
+        include '../Components/header.php';
         ?>
     </nav>
 
@@ -452,7 +452,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     </div>
 
     <footer>
-        <?php include '../components/footer.php'; ?>
+        <?php include '../Components/footer.php'; ?>
     </footer>
 
     <script>
@@ -466,6 +466,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
 </body>
 
 </html>
-
-
-

@@ -303,7 +303,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../components/header.php';
+        include '../Components/header.php';
         ?>
     </nav>
 
@@ -501,7 +501,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     </form>
 
     <footer>
-        <?php include '../components/footer.php'; ?>
+        <?php include '../Components/footer.php'; ?>
     </footer>
 
     <!-- Custom Modal Structure -->
@@ -576,6 +576,3 @@ if ($result && mysqli_num_rows($result) > 0) {
 </body>
 
 </html>
-
-
-

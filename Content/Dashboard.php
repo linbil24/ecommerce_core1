@@ -42,7 +42,7 @@ header("X-Content-Type-Options: nosniff");
 
 <body>
     <nav>
-        <?php include '../components/header.php'; ?>
+        <?php include '../Components/header.php'; ?>
     </nav>
 
     <div class="hero-section">
@@ -93,9 +93,9 @@ header("X-Content-Type-Options: nosniff");
             <span class="indicator"></span>
         </div>
 
-        <?php include '../components/floating-buttons.php'; ?>
-        <?php include '../components/ai_confirmation_modal.php'; ?>
-        <?php include '../components/product-modal.php'; ?>
+        <?php include '../Components/floating-buttons.php'; ?>
+        <?php include '../Components/ai_confirmation_modal.php'; ?>
+        <?php include '../Components/product-modal.php'; ?>
         <script>
             let currentSlideIndex = 0;
             const slides = document.querySelectorAll('.slide');
@@ -145,6 +145,3 @@ header("X-Content-Type-Options: nosniff");
 </body>
 
 </html>
-
-
-

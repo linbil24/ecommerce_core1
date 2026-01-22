@@ -274,7 +274,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../components/header.php';
+        include '../Components/header.php';
         ?>
     </nav>
 
@@ -284,7 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <i class="fas fa-check-circle"></i> Review submitted successfully! Redirecting...
             </div>
             <script>
-                setTimeout(function() {
+                setTimeout(function () {
                     // Redirect to the product view page (picture 2)
                     // Assuming path is relative to Content/Rate.php -> Categories/best-selling/view-product.php
                     // Adjust path if product_id implies a different directory, but user pointed to picture 2 which is Best-selling
@@ -412,6 +412,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
-
-
-

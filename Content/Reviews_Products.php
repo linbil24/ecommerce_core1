@@ -151,7 +151,7 @@ $result = mysqli_query($conn, $sql);
     <nav>
         <?php
         $path_prefix = '../';
-        include '../components/header.php';
+        include '../Components/header.php';
         ?>
     </nav>
 
@@ -212,6 +212,3 @@ $result = mysqli_query($conn, $sql);
 </body>
 
 </html>
-
-
-

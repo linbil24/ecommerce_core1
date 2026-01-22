@@ -96,7 +96,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../components/header.php';
+        include '../Components/header.php';
         ?>
     </nav>
 
@@ -365,6 +365,3 @@ if ($result && mysqli_num_rows($result) > 0) {
 </body>
 
 </html>
-
-
-
