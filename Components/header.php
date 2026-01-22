@@ -60,7 +60,7 @@ if (!isset($path_prefix)) {
                     <a href="#" class="dropdown-toggle"><i class="fas fa-list"></i> Categories <i
                             class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo $path_prefix; ?>Categories/best-selling/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/Best-selling/index.php"><i
                                     class="fas fa-fire"></i> Best Selling</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/New-arrivals/index.php"><i
                                     class="fas fa-star"></i> New Arrivals</a></li>
