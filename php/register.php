@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
             $verification_code = rand(100000, 999999);
 
             // Assuming 'verification_code' column exists
-            $sql = "INSERT INTO users (fullname, email, password, verification_code) VALUES ('$fullname', '$email', '$hashed_password', '$verification_code')";
+            $sql = "INSERT INTO users (fullname, email, password, verification_code, name) VALUES ('$fullname', '$email', '$hashed_password', '$verification_code', '$fullname')";
 
             if (mysqli_query($conn, $sql)) {
                 $mail = new PHPMailer(true);
