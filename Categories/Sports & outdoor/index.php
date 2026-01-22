@@ -12,7 +12,7 @@
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../components/header.php'; ?>
+        include '../../Components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/Sports & outdoor/Yoga Mat (Non-Slip).jpeg');">
+                        style="background-image: url('../../image/Sports%20%26%20outdoor/Yoga%20Mat%20(Non-Slip).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Sports & outdoor/Dumbbell Set (Adjustable).jpeg');">
+                        style="background-image: url('../../image/Sports%20%26%20outdoor/Dumbbell%20Set%20(Adjustable).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Sports & outdoor/Resistance Bands Set.jpeg');">
+                        style="background-image: url('../../image/Sports%20%26%20outdoor/Resistance%20Bands%20Set.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Sports & outdoor/Jump Rope (Speed Type).jpeg');">
+                        style="background-image: url('../../image/Sports%20%26%20outdoor/Jump%20Rope%20(Speed%20Type).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Sports & outdoor/Sports Water Bottle (1L).jpeg');">
+                        style="background-image: url('../../image/Sports%20%26%20outdoor/Sports%20Water%20Bottle%20(1L).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->
@@ -106,10 +106,8 @@
     </script>
 
     <footer>
-        <?php include '../../components/footer.php'; ?>
+        <?php include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
-
-

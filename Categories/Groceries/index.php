@@ -12,7 +12,7 @@
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../components/header.php'; ?>
+        include '../../Components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/Groceries/Organic Rolled Oats (1kg).jpeg');">
+                        style="background-image: url('../../image/Groceries/Organic%20Rolled%20Oats%20(1kg).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Groceries/Creamy Peanut Butter (No Added Sugar).jpeg');">
+                        style="background-image: url('../../image/Groceries/Creamy%20Peanut%20Butter%20(No%20Added%20Sugar).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Groceries/Japanese Green Tea Bags (50pcs).jpeg');">
+                        style="background-image: url('../../image/Groceries/Japanese%20Green%20Tea%20Bags%20(50pcs).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Groceries/Pure Raw Honey (500g).jpeg');">
+                        style="background-image: url('../../image/Groceries/Pure%20Raw%20Honey%20(500g).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Groceries/White Quinoa (500g).jpeg');">
+                        style="background-image: url('../../image/Groceries/White%20Quinoa%20(500g).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->
@@ -106,10 +106,8 @@
     </script>
 
     <footer>
-        <?php include '../../components/footer.php'; ?>
+        <?php include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
-
-

@@ -66,16 +66,16 @@ if (!isset($path_prefix)) {
                                     class="fas fa-star"></i> New Arrivals</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/Electronics/index.php"><i
                                     class="fas fa-desktop"></i> Electronics</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Fashion & Apparel/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/Fashion%20%26%20Apparel/index.php"><i
                                     class="fas fa-tshirt"></i> Fashion & Apparel</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/Home-living/index.php"><i
                                     class="fas fa-home"></i>
                                 Home & Living</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Beauty & Health/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/Beauty%20%26%20Health/index.php"><i
                                     class="fas fa-heart"></i> Beauty & Health</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Sports & outdoor/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/Sports%20%26%20outdoor/index.php"><i
                                     class="fas fa-football-ball"></i> Sports & Outdoor</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Toys & Games/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/Toys%20%26%20Games/index.php"><i
                                     class="fas fa-gamepad"></i> Toys & Games</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/Groceries/index.php"><i
                                     class="fas fa-shopping-basket"></i> Groceries</a></li>

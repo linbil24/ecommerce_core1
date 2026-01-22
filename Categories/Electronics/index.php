@@ -12,7 +12,7 @@
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../components/header.php'; ?>
+        include '../../Components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -30,19 +30,20 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/Electronics/Wireless Bluetooth Earbuds.jpeg');">
+                        style="background-image: url('../../image/Electronics/Wireless%20Bluetooth%20Earbuds.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/Smart Watch (Fitness Tracker).jpeg');">
+                        style="background-image: url('../../image/Electronics/Smart%20Watch%20(Fitness%20Tracker).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/Portable Power Bank 20,000mAh.jpeg');">
+                        style="background-image: url('../../image/Electronics/Portable%20Power%20Bank%2020%2C000mAh.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/Bluetooth Speaker (Waterproof).jpeg');">
+                        style="background-image: url('../../image/Electronics/Bluetooth%20Speaker%20(Waterproof).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/USB-C Fast Charging Cable.jpeg');"></div>
+                        style="background-image: url('../../image/Electronics/USB-C%20Fast%20Charging%20Cable.jpeg');">
+                    </div>
 
                     <!-- Indicators (White Lines) -->
                     <div class="slider-indicators">
@@ -105,10 +106,8 @@
     </script>
 
     <footer>
-        <?php include '../../components/footer.php'; ?>
+        <?php include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
-
-

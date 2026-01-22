@@ -12,7 +12,7 @@
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../components/header.php'; ?>
+        include '../../Components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -30,18 +30,20 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/Home & living/LED Table Lamp (Touch Control).jpeg');">
+                        style="background-image: url('../../image/Home%20%26%20Living/LED%20Table%20Lamp%20(Touch%20Control).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Home & living/Storage Basket Organizer.jpeg');"></div>
-                    <div class="fade-slide"
-                        style="background-image: url('../../image/Home & living/Ceramic Vase (Modern Design).jpeg');">
+                        style="background-image: url('../../image/Home%20%26%20Living/Storage%20Basket%20Organizer.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Home & living/Kitchen Spice Rack Organizer.jpeg');">
+                        style="background-image: url('../../image/Home%20%26%20Living/Ceramic%20Vase%20(Modern%20Design).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Home & living/Foldable Laundry Basket.jpeg');"></div>
+                        style="background-image: url('../../image/Home%20%26%20Living/Kitchen%20Spice%20Rack%20Organizer.jpeg');">
+                    </div>
+                    <div class="fade-slide"
+                        style="background-image: url('../../image/Home%20%26%20Living/Foldable%20Laundry%20Basket.jpeg');">
+                    </div>
 
                     <!-- Indicators (White Lines) -->
                     <div class="slider-indicators">
@@ -104,10 +106,8 @@
     </script>
 
     <footer>
-        <?php include '../../components/footer.php'; ?>
+        <?php include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
-
-

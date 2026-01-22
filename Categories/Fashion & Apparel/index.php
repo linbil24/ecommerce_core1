@@ -12,7 +12,7 @@
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../components/header.php'; ?>
+        include '../../Components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/Fashion & Apparel/Men’s Plain T-Shirt (Cotton).jpeg');">
+                        style="background-image: url('../../image/Fashion%20%26%20Apparel/Men’s%20Plain%20T-Shirt%20(Cotton).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Fashion & Apparel/Women’s Oversized Blouse.jpeg');">
+                        style="background-image: url('../../image/Fashion%20%26%20Apparel/Women’s%20Oversized%20Blouse.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
+                        style="background-image: url('../../image/Fashion%20%26%20Apparel/Slim%20Fit%20Denim%20Jeans%20(Men).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
+                        style="background-image: url('../../image/Fashion%20%26%20Apparel/Slim%20Fit%20Denim%20Jeans%20(Men).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Fashion & Apparel/Slim Fit Denim Jeans (Men).jpeg');">
+                        style="background-image: url('../../image/Fashion%20%26%20Apparel/Slim%20Fit%20Denim%20Jeans%20(Men).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->
@@ -106,10 +106,8 @@
     </script>
 
     <footer>
-        <?php include '../../components/footer.php'; ?>
+        <?php include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
-
-

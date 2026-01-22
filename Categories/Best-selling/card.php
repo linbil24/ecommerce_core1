@@ -40,7 +40,7 @@ $products = [
     [
         'name' => 'Snikers Shoes',
         'price' => '₱2,500.00',
-        'image' => '../../image/Best-seller/snikers shoes.avif',
+        'image' => '../../image/Best-seller/snikers%20shoes.avif',
         'link' => 'view-product.php?id=105',
         'discount' => '-20%',
     ],
@@ -49,7 +49,7 @@ $products = [
     [
         'name' => 'swatch watch',
         'price' => '₱10,200.00',
-        'image' => '../../image/Best-seller/Snart watch.jpeg',
+        'image' => '../../image/Best-seller/Snart%20watch.jpeg',
         'link' => 'view-product.php?id=106',
         'discount' => '-20%',
     ],
@@ -67,7 +67,7 @@ $products = [
     [
         'name' => 'Desktop Computers & 2-in-1 PCs | Dell Philippines',
         'price' => '₱20,000.00',
-        'image' => '../../image/Best-seller/pc computer.avif',
+        'image' => '../../image/Best-seller/pc%20computer.avif',
         'link' => 'view-product.php?id=108',
         'discount' => '-20%',
     ],
@@ -76,7 +76,7 @@ $products = [
     [
         'name' => 'vivo pro max',
         'price' => '₱59,000.00',
-        'image' => '../../image/Best-seller/vivo pro max.jpeg',
+        'image' => '../../image/Best-seller/vivo%20pro%20max.jpeg',
         'link' => 'view-product.php?id=109',
         'discount' => '-20%',
     ],
@@ -112,7 +112,7 @@ $products = [
     [
         'name' => 'USB C Fast Charging Cable (2-Pack)',
         'price' => '₱299.00',
-        'image' => '../../image/Best-seller/USB C Fast Charging Cable (2-Pack).jpeg',
+        'image' => '../../image/Best-seller/USB%20C%20Fast%20Charging%20Cable%20(2-Pack).jpeg',
         'link' => 'view-product.php?id=113',
         'discount' => '-20%',
     ],
@@ -121,7 +121,7 @@ $products = [
     [
         'name' => 'Mini Bluetooth Speaker',
         'price' => '₱299',
-        'image' => '../../image/Best-seller/Mini Bluetooth Speaker.jpeg',
+        'image' => '../../image/Best-seller/Mini%20Bluetooth%20Speaker.jpeg',
         'link' => 'view-product.php?id=114',
         'discount' => '-20%',
     ],
@@ -130,7 +130,7 @@ $products = [
     [
         'name' => 'Phone Ring Holder',
         'price' => '₱299',
-        'image' => '../../image/Best-seller/Phone Ring Holder.jpeg',
+        'image' => '../../image/Best-seller/Phone%20Ring%20Holder.jpeg',
         'link' => 'view-product.php?id=115',
         'discount' => '-20%',
     ]

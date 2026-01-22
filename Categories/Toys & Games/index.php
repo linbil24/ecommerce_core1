@@ -12,7 +12,7 @@
 <body>
     <nav>
         <?php $path_prefix = '../../';
-        include '../../components/header.php'; ?>
+        include '../../Components/header.php'; ?>
     </nav>
 
     <div class="content">
@@ -30,19 +30,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/Toys & Games/Action Figure (Superhero).jpeg');">
+                        style="background-image: url('../../image/Toys%20%26%20Games/Action%20Figure%20(Superhero).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Toys & Games/Board Game (Strategy).jpeg');">
+                        style="background-image: url('../../image/Toys%20%26%20Games/Board%20Game%20(Strategy).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Toys & Games/Building Blocks Set.jpeg');">
+                        style="background-image: url('../../image/Toys%20%26%20Games/Building%20Blocks%20Set.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Toys & Games/Card Game (Family Fun).jpeg');">
+                        style="background-image: url('../../image/Toys%20%26%20Games/Card%20Game%20(Family%20Fun).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Toys & Games/Doll House (Wooden).jpeg');">
+                        style="background-image: url('../../image/Toys%20%26%20Games/Doll%20House%20(Wooden).jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->
@@ -106,10 +106,8 @@
     </script>
 
     <footer>
-        <?php include '../../components/footer.php'; ?>
+        <?php include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
-
-

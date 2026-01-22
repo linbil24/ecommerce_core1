@@ -51,7 +51,7 @@ $products_data = [
         'price_range' => '₱2,500',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Best-seller/snikers shoes.avif',
+        'image' => '../../image/Best-seller/snikers%20shoes.avif',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -62,7 +62,7 @@ $products_data = [
         'price_range' => '₱10,200',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Best-seller/Snart watch.jpeg',
+        'image' => '../../image/Best-seller/Snart%20watch.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -84,7 +84,7 @@ $products_data = [
         'price_range' => '₱10,200',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Best-seller/pc computer.avif',
+        'image' => '../../image/Best-seller/pc%20computer.avif',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -95,7 +95,7 @@ $products_data = [
         'price_range' => '₱10,200',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Best-seller/vivo pro max.jpeg',
+        'image' => '../../image/Best-seller/vivo%20pro%20max.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -139,7 +139,7 @@ $products_data = [
         'price_range' => '₱10,200',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Best-seller/USB C Fast Charging Cable (2-Pack).jpeg',
+        'image' => '../../image/Best-seller/USB%20C%20Fast%20Charging%20Cable%20(2-Pack).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -150,7 +150,7 @@ $products_data = [
         'price_range' => '₱10,200',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Best-seller/Mini Bluetooth Speaker.jpeg',
+        'image' => '../../image/Best-seller/Mini%20Bluetooth%20Speaker.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -161,17 +161,11 @@ $products_data = [
         'price_range' => '₱10,200',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Best-seller/Phone Ring Holder.jpeg',
+        'image' => '../../image/Best-seller/Phone%20Ring%20Holder.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
     ],
-
-
-
-
-
-
 ];
 
 // Get ID or default
@@ -295,5 +289,3 @@ $img = $product['image'];
         });
     </script>
 </div>
-
-
