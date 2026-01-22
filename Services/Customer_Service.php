@@ -54,7 +54,7 @@ if ($user_id) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CUSTOMER SERVICE | IMARKET PH</title>
-    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="../css/services/customer_service.css?v=<?php echo time(); ?>">
@@ -65,7 +65,7 @@ if ($user_id) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../components/header.php';
+        include '../Components/header.php';
         ?>
     </nav>
 
@@ -248,7 +248,7 @@ if ($user_id) {
     </div>
 
     <footer>
-        <?php include '../components/footer.php'; ?>
+        <?php include '../Components/footer.php'; ?>
     </footer>
 </body>
 

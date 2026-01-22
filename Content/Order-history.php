@@ -47,7 +47,7 @@ $result = mysqli_query($conn, $sql);
     <nav>
         <?php
         $path_prefix = '../';
-        include $path_prefix . 'components/header.php';
+        include $path_prefix . 'Components/header.php';
         ?>
     </nav>
 
@@ -394,7 +394,7 @@ $result = mysqli_query($conn, $sql);
     </script>
 
     <footer>
-        <?php include $path_prefix . 'components/footer.php'; ?>
+        <?php include $path_prefix . 'Components/footer.php'; ?>
     </footer>
 
 </body>

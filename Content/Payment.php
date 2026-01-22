@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
 
                         <div class="shop-header-container"
                             style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
-                            <img src="../image/Logo.png" alt="Shop Logo" class="shop-logo"
+                            <img src="../image/logo.png" alt="Shop Logo" class="shop-logo"
                                 style="width: 50px; height: 50px; object-fit: contain;">
                             <div>
                                 <?php

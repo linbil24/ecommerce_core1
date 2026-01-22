@@ -16,14 +16,14 @@
     <nav>
         <?php
         $path_prefix = '../../';
-        include '../../components/header.php';
+        include '../../Components/header.php';
         ?>
     </nav>
 
 
 
     <div style="text-align: center; margin: 30px 0 10px;">
-        <img src="../../image/Logo.png" alt="iMarket Logo"
+        <img src="../../image/logo.png" alt="iMarket Logo"
             style="height: 40px; vertical-align: middle; margin-right: 10px;">
         <span
             style="font-size: 24px; font-weight: bold; color: #2A3B7E; vertical-align: middle; font-family: sans-serif;">New
@@ -54,11 +54,9 @@
     <footer>
         <?php
         $path_prefix = '../../';
-        include '../../components/footer.php';
+        include '../../Components/footer.php';
         ?>
     </footer>
 </body>
 
 </html>
-
-

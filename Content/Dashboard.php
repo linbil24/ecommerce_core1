@@ -37,7 +37,7 @@ header("X-Content-Type-Options: nosniff");
     <link rel="stylesheet" href="../css/dashboard/Dashboard.css?v=<?php echo time(); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../css/components/footer.css">
+    <link rel="stylesheet" href="../css/Components/footer.css">
 </head>
 
 <body>

@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="../css/components/floating-buttons.css">
-<link rel="stylesheet" href="../css/components/ai-features.css">
+<link rel="stylesheet" href="../css/Components/floating-buttons.css">
+<link rel="stylesheet" href="../css/Components/ai-features.css">
 
 <!-- Background Modal Overlay -->
 <div id="ai-modal-overlay" class="ai-modal-overlay">

@@ -13,7 +13,7 @@
 <body>
     <nav>
         <?php $path_prefix = '../';
-        include '../components/header.php'; ?>
+        include '../Components/header.php'; ?>
     </nav>
 
     <!-- Link Shop CSS after header to ensure it takes precedence or cascades correctly -->
@@ -395,7 +395,7 @@
         </div>
     </div>
     <footer>
-        <?php include '../components/footer.php'; ?>
+        <?php include '../Components/footer.php'; ?>
     </footer>
 
     <!-- Product Detail Modal -->

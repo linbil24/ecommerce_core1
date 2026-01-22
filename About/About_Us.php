@@ -28,7 +28,7 @@ if (!isset($path_prefix)) {
 
 <body>
 
-    <?php include '../components/header.php'; ?>
+    <?php include '../Components/header.php'; ?>
 
     <main class="about-us-wrapper">
 
@@ -148,7 +148,7 @@ if (!isset($path_prefix)) {
 
     </main>
 
-    <?php include '../components/footer.php'; ?>
+    <?php include '../Components/footer.php'; ?>
 
 </body>
 

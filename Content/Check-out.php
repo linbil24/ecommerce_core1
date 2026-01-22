@@ -47,7 +47,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
 
     <!-- External CSS - We should unify this, but for now using the request's style source -->
     <link rel="stylesheet" href="../css/best-selling/checkout_cart.css">

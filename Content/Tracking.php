@@ -284,7 +284,7 @@ if (!isset($timeline_events)) {
     <nav>
         <?php
         $path_prefix = '../';
-        include $path_prefix . 'components/header.php';
+        include $path_prefix . 'Components/header.php';
         ?>
     </nav>
 
@@ -401,7 +401,7 @@ if (!isset($timeline_events)) {
     </div>
 
     <footer>
-        <?php include $path_prefix . 'components/footer.php'; ?>
+        <?php include $path_prefix . 'Components/footer.php'; ?>
     </footer>
 </body>
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPORTS & OUTDOOR | IMARKETPH</title>
-    <link rel="icon" type="image/x-icon" href="../../image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../../image/logo.png">
     <link rel="stylesheet" href="../../css/best-selling/Best.css?v=<?php echo time(); ?>">
 </head>
 

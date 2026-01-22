@@ -28,7 +28,7 @@ if (!isset($path_prefix)) {
 
 <body>
 
-    <?php include '../components/header.php'; ?>
+    <?php include '../Components/header.php'; ?>
 
     <main class="legal-wrapper">
         <div class="legal-header">
@@ -94,7 +94,7 @@ if (!isset($path_prefix)) {
         </div>
     </main>
 
-    <?php include '../components/footer.php'; ?>
+    <?php include '../Components/footer.php'; ?>
 
 </body>
 

@@ -28,7 +28,7 @@ if (mysqli_num_rows($check_table) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Buy | IMARKET PH</title>
-    <link rel="icon" type="image/x-icon" href="../image/Logo.png">
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="../css/services/how_to_buy.css?v=<?php echo time(); ?>">
@@ -39,7 +39,7 @@ if (mysqli_num_rows($check_table) > 0) {
     <nav>
         <?php
         $path_prefix = '../';
-        include '../components/header.php';
+        include '../Components/header.php';
         ?>
     </nav>
 
@@ -94,7 +94,7 @@ if (mysqli_num_rows($check_table) > 0) {
     </div>
 
     <footer>
-        <?php include '../components/footer.php'; ?>
+        <?php include '../Components/footer.php'; ?>
     </footer>
 </body>
 
