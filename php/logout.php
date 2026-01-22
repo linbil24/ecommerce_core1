@@ -9,7 +9,7 @@ if (isset($_POST['logout_confirm'])) {
 }
 
 if (isset($_POST['cancel'])) {
-    header("Location: ../Content/dashboard.php"); // Redirect back to dashboard if cancelled
+    header("Location: ../Content/Dashboard.php"); // Redirect back to dashboard if cancelled
     exit();
 }
 ?>
@@ -100,6 +100,3 @@ if (isset($_POST['cancel'])) {
 </body>
 
 </html>
-
-
-

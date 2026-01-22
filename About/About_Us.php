@@ -142,7 +142,7 @@ if (!isset($path_prefix)) {
             <div class="cta-content">
                 <h2>Ready to Start Shopping?</h2>
                 <p>Explore our wide range of collections today.</p>
-                <a href="<?php echo $path_prefix; ?>Content/dashboard.php" class="btn-shop-now">Shop Now</a>
+                <a href="<?php echo $path_prefix; ?>Content/Dashboard.php" class="btn-shop-now">Shop Now</a>
             </div>
         </section>
 
@@ -153,6 +153,3 @@ if (!isset($path_prefix)) {
 </body>
 
 </html>
-
-
-

@@ -45,13 +45,13 @@ if (!isset($path_prefix)) {
     <div class="header-container">
         <!-- Left Section: Logo & Nav -->
         <div class="header-left">
-            <a href="<?php echo $path_prefix; ?>Content/dashboard.php" class="logo-link">
+            <a href="<?php echo $path_prefix; ?>Content/Dashboard.php" class="logo-link">
                 <img src="<?php echo $path_prefix; ?>image/logo.png?v=3.5" alt="Imarket Logo" class="logo-img">
                 <span class="logo-text">IMARKET</span>
             </a>
 
             <nav class="header-nav">
-                <a href="<?php echo $path_prefix; ?>Content/dashboard.php" class="nav-item active"><i
+                <a href="<?php echo $path_prefix; ?>Content/Dashboard.php" class="nav-item active"><i
                         class="fas fa-home"></i>
                     Home</a>
                 <a href="#" class="nav-item"><i class="fas fa-store"></i> Mall</a>
@@ -182,5 +182,3 @@ if (!isset($path_prefix)) {
         });
     });
 </script>
-
-

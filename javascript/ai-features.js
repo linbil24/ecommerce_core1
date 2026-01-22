@@ -238,7 +238,7 @@ async function captureAndSearch() {
                         }
 
                         // Redirect to CONFIRMATION MODAL first
-                        window.location.href = `../Content/dashboard.php?ai_action=confirm_scan&detected=${encodeURIComponent(product.name)}&category=${encodeURIComponent(category)}`;
+                        window.location.href = `../Content/Dashboard.php?ai_action=confirm_scan&detected=${encodeURIComponent(product.name)}&category=${encodeURIComponent(category)}`;
                     }
 
                 }, 1500);

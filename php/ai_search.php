@@ -58,7 +58,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
                 'store' => $selected_product['store'],
                 'category' => $selected_product['category'],
                 'image' => $selected_product['image'],
-                'redirect_url' => "../Content/dashboard.php?ai_action=open_modal&product=" . $selected_product['id'] . "&price=" . urlencode($selected_product['price']) . "&image=" . urlencode($selected_product['image'])
+                'redirect_url' => "../Content/Dashboard.php?ai_action=open_modal&product=" . $selected_product['id'] . "&price=" . urlencode($selected_product['price']) . "&image=" . urlencode($selected_product['image'])
             ]
         ];
 
@@ -81,5 +81,3 @@ function callOpenAIVision($imagePath, $apiKey)
     return [];
 }
 ?>
-
-
