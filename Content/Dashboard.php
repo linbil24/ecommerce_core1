@@ -76,7 +76,7 @@ header("X-Content-Type-Options: nosniff");
             </div>
 
             <div class="hero-buttons">
-                <a href="../Categories/best-selling/index.php" class="btn-shop">
+                <a href="../Shop-now/index.php" class="btn-shop">
                     <i class="fas fa-shopping-bag"></i> Shop Now
                 </a>
                 <a href="../Categories/best-selling/index.php" class="btn-best">
