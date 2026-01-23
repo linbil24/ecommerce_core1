@@ -79,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         id INT AUTO_INCREMENT PRIMARY KEY,
         user_id INT NOT NULL,
         tracking_number VARCHAR(50),
+        product_id INT DEFAULT 0,
         product_name VARCHAR(255) NOT NULL,
         quantity INT NOT NULL,
         price DECIMAL(10,2) NOT NULL,
@@ -94,12 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
     mysqli_query($conn, $create_table);
-
-    // Ensure tracking_number column exists (for existing tables)
-    $check_col = mysqli_query($conn, "SHOW COLUMNS FROM orders LIKE 'tracking_number'");
-    if (mysqli_num_rows($check_col) == 0) {
-        mysqli_query($conn, "ALTER TABLE orders ADD COLUMN tracking_number VARCHAR(50) AFTER id");
-    }
 
     // Generate Tracking Number (OTP for Shipment Tracking)
     $tracking_number = "TRK-" . date("Ymd") . "-" . str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);

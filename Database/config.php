@@ -56,10 +56,52 @@ if ($check_orders->num_rows > 0) {
     $conn->query("ALTER TABLE orders ADD COLUMN product_id INT DEFAULT 0 AFTER tracking_number");
   }
 
+  // Check and add product_name
+  $check_pname = $conn->query("SHOW COLUMNS FROM orders LIKE 'product_name'");
+  if ($check_pname->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN product_name VARCHAR(255) NOT NULL AFTER product_id");
+  }
+
+  // Check and add quantity
+  $check_qty = $conn->query("SHOW COLUMNS FROM orders LIKE 'quantity'");
+  if ($check_qty->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN quantity INT NOT NULL AFTER product_name");
+  }
+
+  // Check and add price
+  $check_price = $conn->query("SHOW COLUMNS FROM orders LIKE 'price'");
+  if ($check_price->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN price DECIMAL(10,2) NOT NULL AFTER quantity");
+  }
+
+  // Check and add total_amount
+  $check_total = $conn->query("SHOW COLUMNS FROM orders LIKE 'total_amount'");
+  if ($check_total->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN total_amount DECIMAL(10,2) NOT NULL AFTER price");
+  }
+
   // Check and add image_url (some versions might have used image_url instead of image)
   $check_image = $conn->query("SHOW COLUMNS FROM orders LIKE 'image_url'");
   if ($check_image->num_rows == 0) {
     $conn->query("ALTER TABLE orders ADD COLUMN image_url VARCHAR(255) AFTER status");
+  }
+
+  // Check and add full_name, phone_number, address, city, postal_code, payment_method, status
+  $cols_to_check = [
+    'full_name' => "VARCHAR(255) NOT NULL",
+    'phone_number' => "VARCHAR(50) NOT NULL",
+    'address' => "TEXT NOT NULL",
+    'city' => "VARCHAR(100) NOT NULL",
+    'postal_code' => "VARCHAR(20) NOT NULL",
+    'payment_method' => "VARCHAR(50) NOT NULL",
+    'status' => "VARCHAR(50) DEFAULT 'Pending'"
+  ];
+
+  foreach ($cols_to_check as $col => $def) {
+    $c_check = $conn->query("SHOW COLUMNS FROM orders LIKE '$col'");
+    if ($c_check->num_rows == 0) {
+      $conn->query("ALTER TABLE orders ADD COLUMN $col $def");
+    }
   }
 }
 
