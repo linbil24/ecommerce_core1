@@ -103,6 +103,12 @@ if ($check_orders->num_rows > 0) {
       $conn->query("ALTER TABLE orders ADD COLUMN $col $def");
     }
   }
+
+  // Final fix for 'order_number' error: make it nullable if it exists
+  $check_order_num = $conn->query("SHOW COLUMNS FROM orders LIKE 'order_number'");
+  if ($check_order_num->num_rows > 0) {
+    $conn->query("ALTER TABLE orders MODIFY COLUMN order_number VARCHAR(50) NULL");
+  }
 }
 
 // Auto-update cart table structure
