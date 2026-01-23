@@ -29,11 +29,11 @@ $page_title = isset($name) ? $name : "Product Details";
         ?>
     </nav>
 
-    <div style="text-align: center; margin: 30px 0 10px;">
+    <div style="text-align: center; margin: 20px 0 10px;">
         <img src="../../image/logo.png" alt="iMarket Logo"
-            style="height: 40px; vertical-align: middle; margin-right: 10px;">
+            style="height: 32px; vertical-align: middle; margin-right: 10px;">
         <span
-            style="font-size: 24px; font-weight: bold; color: #2A3B7E; vertical-align: middle; font-family: sans-serif;">Fashion
+            style="font-size: 20px; font-weight: bold; color: #2A3B7E; vertical-align: middle; font-family: sans-serif;">Fashion
             & Apparel
             | IMarket</span>
     </div>
@@ -62,6 +62,8 @@ $page_title = isset($name) ? $name : "Product Details";
 </body>
 
 </html>
+
+
 
 
 

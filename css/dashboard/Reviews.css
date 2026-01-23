@@ -1,232 +1,246 @@
+/* Reviews & Rating Premium Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 .reviews-container {
     background-color: #fff;
-    padding: 25px;
+    padding: 30px;
     margin-top: 20px;
-    border-radius: 4px;
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .05);
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .reviews-header {
-    font-size: 1.125rem;
-    color: #2a3b7e;
-    /* Using the theme color */
-    text-transform: capitalize;
-    margin-bottom: 1.25rem;
-    font-weight: 500;
+    font-size: 1.25rem;
+    color: #1a1a1a;
+    margin-bottom: 25px;
+    font-weight: 700;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    border-bottom: 2px solid #f8fafc;
+    padding-bottom: 15px;
 }
 
 .rating-overview {
-    background-color: #fffbf8;
-    border: 1px solid #f9ede5;
-    padding: 1.875rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid #e2e8f0;
+    padding: 30px;
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    border-radius: 2px;
-    color: #2a3b7e;
+    margin-bottom: 30px;
+    border-radius: 16px;
 }
 
 .rating-score {
-    color: #2a3b7e;
-    font-size: 1.875rem;
-    margin-right: 1.5rem;
+    color: #2c4c7c;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-right: 25px;
 }
 
 .rating-score span {
-    font-size: 1.125rem;
-    color: #2a3b7e;
-}
-
-.stars-large {
-    color: #ee4d2d;
-    /* Shopee star color or theme color? Let's stick to orange/red for stars */
     font-size: 1.25rem;
+    opacity: 0.7;
 }
 
 .review-item {
-    border-bottom: 1px solid rgba(0, 0, 0, .09);
-    padding: 1rem 0 1rem 3.75rem;
-    /* avatar indentation */
+    border-bottom: 1px solid #f1f5f9;
+    padding: 24px 0 24px 60px;
     position: relative;
-    min-height: 40px;
-    display: flex;
-    flex-direction: column;
+    transition: background 0.2s ease;
 }
 
 .review-avatar {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     position: absolute;
-    top: 1rem;
+    top: 24px;
     left: 0;
-    border-radius: 50%;
-    background-color: #e0e0e0;
-    color: #555;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2c4c7c 0%, #1a3b6e 100%);
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 1.2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 10px rgba(44, 76, 124, 0.2);
 }
 
 .review-author {
-    font-size: 0.75rem;
-    color: #2a3b7e;
-    text-decoration: none;
-    margin-bottom: 5px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
 }
 
 .review-meta {
-    font-size: 0.75rem;
-    color: rgba(0, 0, 0, .54);
-    margin-bottom: 0.9375rem;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-bottom: 12px;
 }
 
 .review-content {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    color: rgba(0, 0, 0, .87);
-    margin-bottom: 0.9375rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #334155;
+    margin-bottom: 15px;
     white-space: pre-wrap;
 }
 
-.review-images {
+.review-stars {
+    color: #fbbf24;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 2px;
 }
 
 .review-img {
-    width: 72px;
-    height: 72px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
+    border-radius: 8px;
     cursor: pointer;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    transition: opacity 0.2s;
+    border: 2px solid #f1f5f9;
+    transition: all 0.3s ease;
 }
 
 .review-img:hover {
-    opacity: 0.8;
+    transform: scale(1.05);
+    border-color: #2c4c7c;
 }
 
-.review-stars {
-    color: #ee4d2d;
-    font-size: 0.7rem;
-    margin-bottom: 5px;
+/* Rate Button */
+.rate-btn-container {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #f8fafc;
 }
 
-.seller-response {
-    background-color: #f5f5f5;
-    padding: 0.875rem;
-    margin-top: 0.75rem;
-    font-size: 0.875rem;
-    color: rgba(0, 0, 0, .87);
-    position: relative;
+.btn-view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    background: #2c4c7c;
+    color: #fff !important;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(44, 76, 124, 0.15);
 }
 
-/* Modal Styles */
+.btn-view-all:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(44, 76, 124, 0.25);
+    background: #1e3a63;
+}
+
+/* Premium Modal Sizing & Layout */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    /* Centering */
+    justify-content: center;
+    /* Centering */
+}
+
+.modal.show {
+    display: flex;
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 8px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 380px;
     text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-@keyframes fadeIn {
+@keyframes modalPop {
     from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: scale(0.85);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
     }
 }
 
 .close-modal {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #94a3b8;
+    font-size: 24px;
     cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
 }
 
-.close-modal:hover,
-.close-modal:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.close-modal:hover {
+    color: #1e293b;
 }
 
 .modal-icon {
-    font-size: 50px;
-    color: #f0ad4e;
-    margin-bottom: 20px;
+    width: 70px;
+    height: 70px;
+    background: #fef2f2;
+    color: #ef4444;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 0 auto 20px;
+}
+
+.modal-content h3 {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.modal-content p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
 }
 
 .modal-btn {
-    background-color: #2a3b7e;
-    color: white;
-    padding: 10px 20px;
+    background: #0f172a;
+    color: #fff;
+    padding: 12px 30px;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
-    margin-top: 15px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.2s;
 }
 
 .modal-btn:hover {
-    background-color: #1e2b5e;
+    background: #1e293b;
+    transform: translateY(-1px);
 }
-
-.btn-view-all {
-    display: inline-block;
-    min-width: 200px;
-    text-align: center;
-    padding: 12px 24px;
-    background-color: #2a3b7e;
-    color: white;
-    border-radius: 4px;
-    margin-top: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.2s;
-}
-
-.btn-view-all:hover {
-    background-color: #1e2b5e;
-}
-
-.rate-btn-container {
-    text-align: center;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-}
-
-

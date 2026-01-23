@@ -290,3 +290,4 @@ $img = $product['image'];
     </script>
 </div>
 
+

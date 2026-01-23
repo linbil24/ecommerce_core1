@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../css/dashboard/reviews.css">
+<link rel="stylesheet" href="../../css/dashboard/reviews.css?v=20260123082808">
 <div class="reviews-container">
     <div class="reviews-header">
         Product Ratings
@@ -96,7 +96,7 @@
         } else {
             ?>
             <div class="review-item" style="justify-content: center; color: #888;">
-                No attributes yet. Be the first to rate!
+                No ratings yet. Be the first to rate!
             </div>
             <?php
         }
@@ -140,21 +140,26 @@
     }
 
     function showModal() {
-        document.getElementById('buyFirstModal').style.display = "block";
+        document.getElementById("buyFirstModal").classList.add("show");
     }
 
     function closeModal() {
-        document.getElementById('buyFirstModal').style.display = "none";
+        document.getElementById("buyFirstModal").classList.remove("show");
     }
 
     // Close modal if clicked outside
     window.onclick = function (event) {
         const modal = document.getElementById('buyFirstModal');
-        if (event.target == modal) {
-            modal.style.display = "none";
+        if (event.target == modal) { modal.classList.remove("show"); }
+            ;
         }
     }
 </script>
+
+
+
+
+
 
 
 
