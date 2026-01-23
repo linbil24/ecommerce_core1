@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../../css/dashboard/reviews.css?v=20260123082808">
+
 <div class="reviews-container">
     <div class="reviews-header">
         Product Ratings
@@ -204,12 +204,14 @@
 
     // Close modal if clicked outside
     window.onclick = function (event) {
-        const modal = document.getElementById('buyFirstModal');
-        if (event.target == modal) { modal.classList.remove("show"); }
-            ;
+        const modal = document.getElementById("buyFirstModal");
+        if (event.target == modal) {
+            modal.classList.remove("show");
         }
     }
 </script>
+
+
 
 
 

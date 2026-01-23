@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
-    <link rel="stylesheet" href="../../css/components/product-view.css?v=20260123082900">
-    <?php
-    $page_title = isset($_GET['name']) ? $_GET['name'] : 'Product Details';
-    ?>
     <title><?php echo htmlspecialchars($page_title); ?> - IMarket</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/product-view.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="<?php echo $path_prefix; ?>css/dashboard/reviews.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <nav>
         <?php
-        $path_prefix = '../../';
+
+        $path_prefix
         include '../../Components/header.php';
         ?>
     </nav>
@@ -31,9 +32,10 @@
     </div>
 
     <div class="content">
-        <div style="width: 100%; max-width: 1500%; display: flex; flex-direction: column; gap: 40px;">
+        <div style="width: 100%; max-width: 1200px; display: flex; flex-direction: column; gap: 40px;">
             <div class="product">
                 <?php
+
                 // Get product ID from URL, default to 201
                 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 201;
 
@@ -43,6 +45,7 @@
             </div>
 
             <?php
+
             // Set product_id for reviews (default to 0 or map based on name if needed)
             $product_id = isset($p_id) ? $p_id : 0;
             include 'reviews_section.php';
@@ -53,13 +56,20 @@
 
     <footer>
         <?php
-        $path_prefix = '../../';
+
+        $path_prefix
         include '../../Components/footer.php';
         ?>
     </footer>
 </body>
 
 </html>
+
+
+
+
+
+
 
 
 

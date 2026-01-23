@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEAUTY & HEALTH | IMARKETPH - IMarket</title>
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
-    <link rel="stylesheet" href="../../css/components/category-base.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../../css/components/category-base.css?v=<?php
+$path_prefix = '../../';
+ echo time(); ?>">
 </head>
 
 <body>
     <nav>
-        <?php $path_prefix = '../../';
+        <?php
+ $path_prefix
         include '../../Components/header.php'; ?>
     </nav>
 
@@ -63,7 +66,8 @@
             <h2>Beauty & Health</h2>
             <p>Check out our Beauty & Health!</p>
         </div>
-        <?php include 'card.php'; ?>
+        <?php
+ include 'card.php'; ?>
     </div>
 
 
@@ -106,11 +110,16 @@
     </script>
 
     <footer>
-        <?php include '../../Components/footer.php'; ?>
+        <?php
+ include '../../Components/footer.php'; ?>
     </footer>
 </body>
 
 </html>
+
+
+
+
 
 
 
