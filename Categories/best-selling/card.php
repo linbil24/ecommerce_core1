@@ -148,7 +148,7 @@ $products = [
             </div>
             <div class="product-details">
                 <h3 class="product-title"
-                    style="text-align: center; white-space: normal; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-width: 100%; height: 40px; line-height: 20px;">
+                    >
                     <?php echo htmlspecialchars($product['name']); ?>
                 </h3>
             </div>
@@ -159,3 +159,4 @@ $products = [
         </div>
     <?php endforeach; ?>
 </div>
+

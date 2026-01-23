@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
-    <link rel="stylesheet" href="../../css/best-selling/best.css">
+    <link rel="stylesheet" href="../../css/components/product-view.css">
     <?php
     $page_title = isset($_GET['name']) ? $_GET['name'] : 'Product Details';
     ?>
@@ -60,3 +60,5 @@
 </body>
 
 </html>
+
+

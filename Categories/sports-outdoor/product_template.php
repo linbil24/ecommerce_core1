@@ -198,7 +198,7 @@ $price = $product['price_range'];
 $img = $product['image'];
 ?>
 
-<link rel="stylesheet" href="../../css/dashboard/best.css?v=<?php echo time(); ?>">
+<link rel="stylesheet" href="../../css/components/product-view.css?v=<?php echo time(); ?>">
 
 <div class="product-image">
     <img class="img1" src="<?php echo $img; ?>" alt="Product">
@@ -309,5 +309,6 @@ $img = $product['image'];
         });
     </script>
 </div>
+
 
 

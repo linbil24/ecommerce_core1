@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GROCERIES | IMARKETPH</title>
+    <title>GROCERIES | IMARKETPH - IMarket</title>
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
-    <link rel="stylesheet" href="../../css/best-selling/best.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../../css/components/category-base.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -111,3 +111,5 @@
 </body>
 
 </html>
+
+
