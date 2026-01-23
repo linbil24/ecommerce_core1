@@ -195,6 +195,28 @@ $img = $product['image'];
     <p class="box-check">Choice</p>
     <h2><?php echo htmlspecialchars($name); ?></h2>
 
+    <!-- Rating/Sold Summary -->
+    <div class="rating-summary-row">
+        <div class="rating-summary-item">
+            <span class="rating-count" style="color: #ee4d2d; border-bottom: 1px solid #ee4d2d;">4.9</span>
+            <div class="stars-orange">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+        </div>
+        <div class="rating-summary-item">
+            <span class="rating-count">1.5k</span>
+            <span style="color: #757575; font-size: 14px; margin-left: 5px;">Ratings</span>
+        </div>
+        <div class="rating-summary-item">
+            <span style="color: #222; font-weight: 500;">4.2k</span>
+            <span style="color: #757575; font-size: 14px; margin-left: 5px;">Sold</span>
+        </div>
+    </div>
+
     <!-- Price Section -->
     <div class="price-section">
         <span class="original-price"><?php echo $product['original_price']; ?></span>
@@ -297,7 +319,3 @@ $img = $product['image'];
         });
     </script>
 </div>
-
-
-
-
