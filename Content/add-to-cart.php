@@ -15,6 +15,7 @@ $msg = "";
 // 1.5 Handle Add to Cart (from Product Page)
 // Supports legacy GET or POST
 if (isset($_GET['add_to_cart']) || isset($_POST['add_to_cart'])) {
+    $p_id = intval(isset($_GET['product_id']) ? $_GET['product_id'] : (isset($_POST['product_id']) ? $_POST['product_id'] : 0));
     $p_name = mysqli_real_escape_string($conn, isset($_GET['product_name']) ? $_GET['product_name'] : $_POST['product_name']);
     $p_price = floatval(isset($_GET['price']) ? $_GET['price'] : $_POST['price']);
     $p_qty = intval(isset($_GET['quantity']) ? $_GET['quantity'] : $_POST['quantity']);
@@ -42,7 +43,7 @@ if (isset($_GET['add_to_cart']) || isset($_POST['add_to_cart'])) {
         }
     } else {
         // Insert new
-        $insert_sql = "INSERT INTO cart (user_id, product_name, price, quantity, image, shop_name) VALUES ('$user_id', '$p_name', '$p_price', '$p_qty', '$p_image', '$shop_name')";
+        $insert_sql = "INSERT INTO cart (user_id, product_id, product_name, price, quantity, image, shop_name) VALUES ('$user_id', '$p_id', '$p_name', '$p_price', '$p_qty', '$p_image', '$shop_name')";
         if (mysqli_query($conn, $insert_sql)) {
             header("Location: add-to-cart.php");
             exit();

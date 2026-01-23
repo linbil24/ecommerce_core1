@@ -35,6 +35,40 @@ $sql_create_tickets = "CREATE TABLE IF NOT EXISTS `support_tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
 $conn->query($sql_create_tickets);
+// Auto-update orders table structure
+$check_orders = $conn->query("SHOW TABLES LIKE 'orders'");
+if ($check_orders->num_rows > 0) {
+  // Check and add user_id
+  $check_user_id = $conn->query("SHOW COLUMNS FROM orders LIKE 'user_id'");
+  if ($check_user_id->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN user_id INT NOT NULL AFTER id");
+  }
+
+  // Check and add tracking_number
+  $check_tracking = $conn->query("SHOW COLUMNS FROM orders LIKE 'tracking_number'");
+  if ($check_tracking->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN tracking_number VARCHAR(50) AFTER user_id");
+  }
+
+  // Check and add product_id
+  $check_product_id = $conn->query("SHOW COLUMNS FROM orders LIKE 'product_id'");
+  if ($check_product_id->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN product_id INT DEFAULT 0 AFTER tracking_number");
+  }
+
+  // Check and add image_url (some versions might have used image_url instead of image)
+  $check_image = $conn->query("SHOW COLUMNS FROM orders LIKE 'image_url'");
+  if ($check_image->num_rows == 0) {
+    $conn->query("ALTER TABLE orders ADD COLUMN image_url VARCHAR(255) AFTER status");
+  }
+}
+
+// Auto-update cart table structure
+$check_cart = $conn->query("SHOW TABLES LIKE 'cart'");
+if ($check_cart->num_rows > 0) {
+  $check_cart_pid = $conn->query("SHOW COLUMNS FROM cart LIKE 'product_id'");
+  if ($check_cart_pid->num_rows == 0) {
+    $conn->query("ALTER TABLE cart ADD COLUMN product_id INT DEFAULT 0 AFTER user_id");
+  }
+}
 ?>
-
-

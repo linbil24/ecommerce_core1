@@ -26,6 +26,7 @@ if ($from_cart && !empty($selected_ids_str)) {
         $result = mysqli_query($conn, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
             $order_items[] = [
+                'product_id' => intval($row['product_id']),
                 'product_name' => $row['product_name'],
                 'price' => floatval($row['price']),
                 'quantity' => intval($row['quantity']),
@@ -35,12 +36,14 @@ if ($from_cart && !empty($selected_ids_str)) {
     }
 } else {
     // Single Item parameters from URL (Fallback)
+    $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : 0;
     $product_name = isset($_GET['product_name']) ? $_GET['product_name'] : 'Product';
     $price = isset($_GET['price']) ? floatval($_GET['price']) : 0;
     $quantity = isset($_GET['quantity']) ? intval($_GET['quantity']) : 1;
     $image_file = isset($_GET['image']) ? $_GET['image'] : '';
 
     $order_items[] = [
+        'product_id' => $product_id,
         'product_name' => $product_name,
         'price' => $price,
         'quantity' => $quantity,
@@ -114,9 +117,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         $total_qty += $itm['quantity'];
 
     $first_image = isset($order_items[0]['image']) ? mysqli_real_escape_string($conn, $order_items[0]['image']) : '';
+    $first_product_id = isset($order_items[0]['product_id']) ? intval($order_items[0]['product_id']) : 0;
 
-    $sql = "INSERT INTO orders (user_id, tracking_number, product_name, quantity, price, total_amount, full_name, phone_number, address, city, postal_code, payment_method, status, image_url)
-            VALUES ('$user_id', '$tracking_number', '$product_name_str', '$total_qty', '$subtotal', '$total', '$full_name', '$phone_number', '$address', '$city', '$postal_code', '$payment_method', '$status', '$first_image')";
+    $sql = "INSERT INTO orders (user_id, tracking_number, product_id, product_name, quantity, price, total_amount, full_name, phone_number, address, city, postal_code, payment_method, status, image_url)
+            VALUES ('$user_id', '$tracking_number', '$first_product_id', '$product_name_str', '$total_qty', '$subtotal', '$total', '$full_name', '$phone_number', '$address', '$city', '$postal_code', '$payment_method', '$status', '$first_image')";
 
     if (mysqli_query($conn, $sql)) {
         $last_order_id = mysqli_insert_id($conn);
