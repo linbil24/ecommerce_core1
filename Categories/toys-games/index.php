@@ -6,15 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOYS & GAMES | IMARKETPH - IMarket</title>
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
-    <link rel="stylesheet" href="../../css/components/category-base.css?v=<?php
-$path_prefix = '../../';
- echo time(); ?>">
+    <link rel="stylesheet" href="../../css/components/category-base.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
     <nav>
         <?php
- $path_prefix
+ $path_prefix = '../../';
         include '../../Components/header.php'; ?>
     </nav>
 

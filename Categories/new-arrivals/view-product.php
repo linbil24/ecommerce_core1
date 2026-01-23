@@ -16,7 +16,7 @@
     <nav>
         <?php
 
-        $path_prefix
+        $path_prefix = '../../';
         include '../../Components/header.php';
         ?>
     </nav>
@@ -57,7 +57,7 @@
     <footer>
         <?php
 
-        $path_prefix
+        $path_prefix = '../../';
         include '../../Components/footer.php';
         ?>
     </footer>
