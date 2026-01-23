@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'FreshLook Colorblends (Monthly)',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/shop/FreshLook PH/FreshLook Colorblends (Monthly).jpeg',
+            'image' => '../image/Shop/FreshLook PH/FreshLook Colorblends (Monthly).jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'FreshLook One-Day Color (10 Lenses)',
             'price' => '₱899.00',
             'raw_price' => 899.00,
-            'image' => '../image/shop/FreshLook PH/FreshLook One-Day Color (10 Lenses).jpeg',
+            'image' => '../image/Shop/FreshLook PH/FreshLook One-Day Color (10 Lenses).jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'SevenGlow Brightening Soap',
             'price' => '₱1,250.00',
             'raw_price' => 1250.00,
-            'image' => '../image/shop/GlowUp Beauty/SevenGlow Brightening Soap.jpeg',
+            'image' => '../image/Shop/GlowUp Beauty/SevenGlow Brightening Soap.jpeg',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'FreshLook Illuminate (Starburst)',
             'price' => '₱2,800.00',
             'raw_price' => 2800.00,
-            'image' => '../image/shop/FreshLook PH/FreshLook Illuminate (Starburst).jpeg',
+            'image' => '../image/Shop/FreshLook PH/FreshLook Illuminate (Starburst).jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Fresh Tomato Glass Skin Gel',
             'price' => '₱750.00',
             'raw_price' => 750.00,
-            'image' => '../image/shop/FreshLook PH/Fresh Tomato Glass Skin Gel.jpeg',
+            'image' => '../image/Shop/FreshLook PH/Fresh Tomato Glass Skin Gel.jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Opti-Free PureMoist (300ml)',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/shop/FreshLook PH/Opti-Free PureMoist (300ml).jpeg',
+            'image' => '../image/Shop/FreshLook PH/Opti-Free PureMoist (300ml).jpeg',
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Fresh Skinlab Milk White Lotion',
             'price' => '₱1,500.00',
             'raw_price' => 1500.00,
-            'image' => '../image/shop/FreshLook PH/Fresh Skinlab Milk White Lotion.jpeg',
+            'image' => '../image/Shop/FreshLook PH/Fresh Skinlab Milk White Lotion.jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'FreshLook CC Lens (Jewel Collection)',
             'price' => '₱350.00',
             'raw_price' => 350.00,
-            'image' => '../image/shop/FreshLook PH/FreshLook CC Lens (Jewel Collection).jpeg', // Using stylized image
+            'image' => '../image/Shop/FreshLook PH/FreshLook CC Lens (Jewel Collection).jpeg', // Using stylized image
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Fresh Tomato Glass Skin Vitamin C',
             'price' => '₱1,100.00',
             'raw_price' => 1100.00,
-            'image' => '../image/shop/FreshLook PH/Fresh Tomato Glass Skin Vitamin C.jpeg',
+            'image' => '../image/Shop/FreshLook PH/Fresh Tomato Glass Skin Vitamin C.jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Systane Ultra Lubricant Eye Drops',
             'price' => '₱850.00',
             'raw_price' => 850.00,
-            'image' => '../image/shop/FreshLook PH/Systane Ultra Lubricant Eye Drops.jpeg',
+            'image' => '../image/Shop/FreshLook PH/Systane Ultra Lubricant Eye Drops.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Fresh Jeju Aloe Ice Facial Mist',
             'price' => '₱1,800.00',
             'raw_price' => 1800.00,
-            'image' => '../image/shop/FreshLook PH/Fresh Jeju Aloe Ice Facial Mist.jpeg',
+            'image' => '../image/Shop/FreshLook PH/Fresh Jeju Aloe Ice Facial Mist.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'FreshLook Colorblends (Graded)',
             'price' => '₱1,350.00',
             'raw_price' => 1350.00,
-            'image' => '../image/shop/FreshLook PH/FreshLook Colorblends (Graded).jpeg',
+            'image' => '../image/Shop/FreshLook PH/FreshLook Colorblends (Graded).jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Fresh Skinlab 98% Tomato Toner',
             'price' => '₱450.00',
             'raw_price' => 450.00,
-            'image' => '../image/shop/FreshLook PH/Fresh Skinlab 98 Percent Tomato Toner.jpeg',
+            'image' => '../image/Shop/FreshLook PH/Fresh Skinlab 98 Percent Tomato Toner.jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Opti-Free Replenish Kit (Travel Size)',
             'price' => '₱1,200.00',
             'raw_price' => 1200.00,
-            'image' => '../image/shop/FreshLook PH/Opti-Free Replenish Kit (Travel Size).jpeg',
+            'image' => '../image/Shop/FreshLook PH/Opti-Free Replenish Kit (Travel Size).jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Fresh Jeju Aloe Ice Sun Protection',
             'price' => '₱299.00',
             'raw_price' => 299.00,
-            'image' => '../image/shop/FreshLook PH/Fresh Jeju Aloe Ice Sun Protection.jpeg',
+            'image' => '../image/Shop/FreshLook PH/Fresh Jeju Aloe Ice Sun Protection.jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
@@ -176,5 +176,3 @@ if (isset($definingProducts) && $definingProducts) {
     return; // Stop processing
 }
 ?>
-
-

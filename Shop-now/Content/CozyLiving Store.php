@@ -42,7 +42,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'HAY Flowerpot and Saucer',
             'price' => '₱290.00',
             'raw_price' => 1200.00,
-            'image' => '../image/shop/CozyLiving Store/HAY Flowerpot and Saucer.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/HAY Flowerpot and Saucer.jpeg',
             'rating' => 4.8,
             'sold' => 1020
         ],
@@ -51,7 +51,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'George Glass Vase Clear Shape 3',
             'price' => '₱1,195',
             'raw_price' => 1099.00,
-            'image' => '../image/shop/CozyLiving Store/George Glass Vase Clear Shape 3.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/George Glass Vase Clear Shape 3.jpeg',
             'rating' => 4.5,
             'sold' => 3400
         ],
@@ -60,7 +60,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Village Thrive Imperfect Rattan Eye Decor',
             'price' => '₱990.00',
             'raw_price' => 2299.00,
-            'image' => '../image/shop/CozyLiving Store/Village Thrive Imperfect Rattan Eye Decor.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Village Thrive Imperfect Rattan Eye Decor.jpeg',
             'rating' => 4.7,
             'sold' => 850
         ],
@@ -69,7 +69,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'WAN JAI Rattan Wall Hanging Decor',
             'price' => '₱229.00',
             'raw_price' => 95.00,
-            'image' => '../image/shop/CozyLiving Store/WAN JAI Rattan Wall Hanging Decor.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/WAN JAI Rattan Wall Hanging Decor.jpeg',
             'rating' => 4.9,
             'sold' => 540
         ],
@@ -78,7 +78,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Wood Chain',
             'price' => '₱199.00',
             'raw_price' => 95.00,
-            'image' => '../image/shop/CozyLiving Store/Wood Chain.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Wood Chain.jpeg',
             'rating' => 4.3,
             'sold' => 2100
         ],
@@ -87,7 +87,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Disco Mushroom',
             'price' => '₱450',
             'raw_price' => 2295.00,
-            'image' => '../image/shop/CozyLiving Store/Disco Mushroom.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Disco Mushroom.jpeg',
             'rating' => 4.6,
             'sold' => 3000
         ],
@@ -96,7 +96,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Ceramic Candle Set ',
             'price' => '₱249',
             'raw_price' => 1500.00,
-            'image' => '../image/shop/CozyLiving Store/Ceramic Candle Set.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Ceramic Candle Set.jpeg',
             'rating' => 4.8,
             'sold' => 1500
         ],
@@ -105,7 +105,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Decorative Wall Art Frame',
             'price' => '₱1,250',
             'raw_price' => 350.00,
-            'image' => '../image/shop/CozyLiving Store/Decorative Wall Art Frame.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Decorative Wall Art Frame.jpeg',
             'rating' => 4.2,
             'sold' => 1100
         ],
@@ -114,7 +114,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Throw Pillow Set (2 pcs)',
             'price' => '₱349',
             'raw_price' => 1100.00,
-            'image' => '../image/shop/CozyLiving Store/Throw Pillow Set (2 pcs).jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Throw Pillow Set (2 pcs).jpeg',
             'rating' => 4.5,
             'sold' => 980
         ],
@@ -123,7 +123,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'LED Marquee Sign',
             'price' => '₱580',
             'raw_price' => 850.00,
-            'image' => '../image/shop/CozyLiving Store/LED Marquee Sign.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/LED Marquee Sign.jpeg',
             'rating' => 4.4,
             'sold' => 1300
         ],
@@ -132,7 +132,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Woven Storage Basket',
             'price' => '₱180',
             'raw_price' => 1800.00,
-            'image' => '../image/shop/CozyLiving Store/Woven Storage Basket.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Woven Storage Basket.jpeg',
             'rating' => 4.7,
             'sold' => 670
         ],
@@ -141,7 +141,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Faux Green Potted Plant',
             'price' => '₱1,495',
             'raw_price' => 1350.00,
-            'image' => '../image/shop/CozyLiving Store/Faux Green Potted Plant.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Faux Green Potted Plant.jpeg',
             'rating' => 4.3,
             'sold' => 2500
         ],
@@ -150,7 +150,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Macramé Wall Hanging',
             'price' => '₱219',
             'raw_price' => 450.00,
-            'image' => '../image/shop/CozyLiving Store/Macramé Wall Hanging.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Macramé Wall Hanging.jpeg',
             'rating' => 4.1,
             'sold' => 4200
         ],
@@ -159,7 +159,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Wooden Serving Tray',
             'price' => '₱149',
             'raw_price' => 1200.00,
-            'image' => '../image/shop/CozyLiving Store/Wooden Serving Tray.jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Wooden Serving Tray.jpeg',
             'rating' => 4.9,
             'sold' => 3100
         ],
@@ -168,7 +168,7 @@ if (isset($definingProducts) && $definingProducts) {
             'name' => 'Framed Mirror Accent (Medium)',
             'price' => '₱299',
             'raw_price' => 299.00,
-            'image' => '../image/shop/CozyLiving Store/Framed Mirror Accent (Medium).jpeg',
+            'image' => '../image/Shop/CozyLiving Store/Framed Mirror Accent (Medium).jpeg',
             'rating' => 4.0,
             'sold' => 1800
         ]
@@ -176,5 +176,3 @@ if (isset($definingProducts) && $definingProducts) {
     return; // Stop processing
 }
 ?>
-
-

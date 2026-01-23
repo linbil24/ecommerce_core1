@@ -171,15 +171,15 @@ async function captureAndSearch() {
                 if (detectedName.includes('telephone') || detectedName.includes('phone')) {
                     product = { id: "iphone15", name: "iPhone 15 Pro Max", price: "₱84,990.00", store: "TechZone PH", image: "../image/Electronics/Portable Power Bank 20,000mAh.jpeg" };
                 } else if (detectedName.includes('shoe') || detectedName.includes('sneaker') || detectedName.includes('sandal')) {
-                    product = { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: "../image/shop/UrbanWear PH/Casual Sneakers.jpeg" };
+                    product = { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/Casual Sneakers.jpeg" };
                 } else if (detectedName.includes('shirt') || detectedName.includes('jersey') || detectedName.includes('clothing')) {
-                    product = { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: "../image/shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" };
+                    product = { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" };
                 } else {
                     // RANDOM FALLBACK 
                     const randomProducts = [
                         { id: "iphone15", name: "iPhone 15 Pro Max", price: "₱84,990.00", store: "TechZone PH", image: "../image/Electronics/Portable Power Bank 20,000mAh.jpeg" },
-                        { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: "../image/shop/UrbanWear PH/Casual Sneakers.jpeg" },
-                        { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: "../image/shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" },
+                        { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/Casual Sneakers.jpeg" },
+                        { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" },
                         { id: "webcam_1080p", name: "1080p HD Web Camera", price: "₱10,200.00", store: "TechZone PH", image: "../image/Electronics/1080p HD Web Camera.jpeg" }
                     ];
                     product = randomProducts[Math.floor(Math.random() * randomProducts.length)];

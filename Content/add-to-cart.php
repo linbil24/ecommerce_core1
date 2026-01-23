@@ -395,7 +395,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                         // Image path resolution logic (check raw path)
                                         if (!file_exists($display_img) && strpos($display_img, 'http') === false) {
                                             $possible_paths = [
-                                                '../image/shop/' . basename($display_img),
+                                                '../image/Shop/' . basename($display_img),
                                                 '../image/Best/' . basename($display_img),
                                                 '../image/' . basename($display_img),
                                                 '../Categories/best-selling/image/' . basename($display_img)
@@ -403,10 +403,10 @@ if ($result && mysqli_num_rows($result) > 0) {
 
                                             // Add Shop-specific path if shop_name exists
                                             if (!empty($item['shop_name'])) {
-                                                array_unshift($possible_paths, '../image/shop/' . $item['shop_name'] . '/' . basename($display_img));
+                                                array_unshift($possible_paths, '../image/Shop/' . $item['shop_name'] . '/' . basename($display_img));
                                             } else {
                                                 // Fallback for UrbanWear
-                                                $possible_paths[] = '../image/shop/UrbanWear PH/' . basename($display_img);
+                                                $possible_paths[] = '../image/Shop/UrbanWear PH/' . basename($display_img);
                                             }
 
                                             foreach ($possible_paths as $path) {

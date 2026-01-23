@@ -79,8 +79,8 @@ $result = mysqli_query($conn, $sql);
                             '../image/Best-seller/' . $basename_dashed,
                             '../image/Best-selling/' . $basename,
                             '../image/' . $basename,
-                            '../image/shop/' . $basename,
-                            '../image/shop/UrbanWear PH/' . $basename,
+                            '../image/Shop/' . $basename,
+                            '../image/Shop/UrbanWear PH/' . $basename,
                             $img_file,
                             $basename
                         ];

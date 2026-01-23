@@ -311,7 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                                             '../image/Groceries/' . $filename,
                                             '../image/Toys & Games/' . $filename,
                                             '../image/New-arrivals/' . $filename,
-                                            '../image/shop/' . $filename,
+                                            '../image/Shop/' . $filename,
                                         ];
                                         foreach ($candidates as $cand) {
                                             if (file_exists($cand)) {
