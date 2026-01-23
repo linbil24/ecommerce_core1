@@ -109,6 +109,17 @@ if ($check_orders->num_rows > 0) {
   if ($check_order_num->num_rows > 0) {
     $conn->query("ALTER TABLE orders MODIFY COLUMN order_number VARCHAR(50) NULL");
   }
+
+  // Handle 'customer_id' and 'address_id' errors for existing shopify-style tables
+  $check_cust_id = $conn->query("SHOW COLUMNS FROM orders LIKE 'customer_id'");
+  if ($check_cust_id->num_rows > 0) {
+    $conn->query("ALTER TABLE orders MODIFY COLUMN customer_id INT NULL");
+  }
+
+  $check_addr_id = $conn->query("SHOW COLUMNS FROM orders LIKE 'address_id'");
+  if ($check_addr_id->num_rows > 0) {
+    $conn->query("ALTER TABLE orders MODIFY COLUMN address_id INT NULL");
+  }
 }
 
 // Auto-update cart table structure
