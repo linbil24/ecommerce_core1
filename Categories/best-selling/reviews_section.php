@@ -1,3 +1,10 @@
+<style>
+    .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); align-items: center; justify-content: center; }
+    .modal.show { display: flex; }
+    .modal-content { background: #fff; padding: 40px; border-radius: 20px; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    .modal-icon { font-size: 50px; color: #ef4444; margin-bottom: 20px; }
+    .modal-btn { background: #0f172a; color: #fff; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px; }
+</style>
 
 <div class="reviews-container">
     <div class="reviews-header">
@@ -96,7 +103,7 @@
         } else {
             ?>
             <div class="review-item" style="justify-content: center; color: #888;">
-                No ratings yet. Be the first to rate!
+                <div style="text-align:center; padding: 20px 0; color: #94a3b8;"><i class="fas fa-star" style="display:block; font-size: 30px; margin-bottom: 10px; opacity: 0.3;"></i>No ratings yet. Be the first to rate!</div>
             </div>
             <?php
         }
@@ -107,7 +114,7 @@
 
     <!-- Rate Button -->
     <div class="rate-btn-container">
-        <a href="#" class="btn-view-all" onclick="handleRateClick(event)">Rate Product <i
+        <a href="#" class="btn-rate-now" onclick="handleRateClick(event)">Rate Product <i
                 class="fas fa-chevron-right"></i></a>
     </div>
 </div>
@@ -155,6 +162,7 @@
         }
     }
 </script>
+
 
 
 
