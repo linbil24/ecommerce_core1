@@ -208,9 +208,9 @@ if (!$order) {
             <div class="order-details-box">
                 <!-- Shop Header -->
                 <div
-                    style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0; margin-bottom: 15px;">
+                    style="display: flex; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #e0e0e0; margin-bottom: 25px; gap: 15px;">
                     <img src="../image/logo.png" alt="Shop Logo"
-                        style="width: 30px; height: 30px; object-fit: contain; margin-right: 10px;">
+                        style="width: 45px; height: 45px; object-fit: contain;">
                     <div>
                         <?php
                         // Determine header based on order's product (image or ID)
@@ -218,20 +218,12 @@ if (!$order) {
 
                         // Check 1: Product ID (if stored in DB accurately)
                         $pid = isset($order['product_id']) ? intval($order['product_id']) : 0;
-                        if ($pid >= 1 && $pid <= 6) {
+                        if ($pid >= 101 && $pid <= 112) {
                             $is_best_selling_confirm = true;
                         } else {
                             // Check 2: Image URL Keywords
                             $img_check = isset($order['image_url']) ? strtolower($order['image_url']) : '';
-                            $best_selling_keywords = [
-                                'bag-women',
-                                'bag-men',
-                                'notebooks',
-                                'earphone',
-                                'shoes',
-                                'watch',
-                                'best-selling'
-                            ];
+                            $best_selling_keywords = ['best-seller', 'best-selling', 'bag-', 'notebook', 'shoes', 'earphone', 'speaker'];
                             foreach ($best_selling_keywords as $kw) {
                                 if (strpos($img_check, $kw) !== false) {
                                     $is_best_selling_confirm = true;
@@ -309,6 +301,3 @@ if (!$order) {
 </body>
 
 </html>
-
-
-

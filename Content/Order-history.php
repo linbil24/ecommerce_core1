@@ -68,45 +68,36 @@ $result = mysqli_query($conn, $sql);
                     $is_best_selling = false;
 
                     if (!empty($img_file)) {
-                        $basename = basename($img_file);
+                        // 1. Clean up paths and generate variants
+                        $clean_path = str_replace('../../', '../', $img_file);
+                        $basename = basename($clean_path);
+                        $basename_dashed = str_replace(' ', '-', $basename);
 
                         $candidates = [
-                            // Correct Paths based on recent fixes
+                            $clean_path,
+                            '../image/Best-seller/' . $basename,
+                            '../image/Best-seller/' . $basename_dashed,
+                            '../image/Best-selling/' . $basename,
+                            '../image/' . $basename,
                             '../image/shop/' . $basename,
-                            '../image/Best/' . $basename,
                             '../image/shop/UrbanWear PH/' . $basename,
-
-                            // Legacy/Other Paths
-                            '../Categories/best-selling/image/' . $basename,
-                            '../shop/image/' . $basename,
-                            '../shop/image/' . $basename,
-                            '../shop/image/UrbanWear PH/' . $basename,
                             $img_file,
-                            $basename,
-                            '../image/' . $basename
+                            $basename
                         ];
 
                         foreach ($candidates as $candidate) {
-                            if (file_exists($candidate) && !is_dir($candidate)) {
+                            if (!empty($candidate) && file_exists($candidate) && !is_dir($candidate)) {
                                 $final_img_src = $candidate;
-                                // Check if it came from Best Selling folder
-                                if (strpos($candidate, 'Best-selling') !== false) {
+                                if (strpos(strtolower($candidate), 'best-seller') !== false || strpos(strtolower($candidate), 'best-selling') !== false) {
                                     $is_best_selling = true;
                                 }
                                 break;
                             }
                         }
 
-                        // Fallback check on string if image not found on disk but path looks like Best Selling
-                        if (empty($final_img_src) || !$is_best_selling) {
+                        if (empty($final_img_src)) {
                             $check_str = strtolower($img_file);
-                            $keywords = ['bag-women', 'bag-men', 'notebooks', 'earphone', 'shoes', 'watch', 'best'];
-                            foreach ($keywords as $kw) {
-                                if (strpos($check_str, $kw) !== false) {
-                                    $is_best_selling = true;
-                                    break;
-                                }
-                            }
+                            $is_best_selling = (strpos($check_str, 'best') !== false);
                         }
                     }
                     ?>
@@ -114,16 +105,16 @@ $result = mysqli_query($conn, $sql);
                         <!-- Dynamic Header -->
                         <div
                             style="display: flex; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #f0f0f0; margin-bottom: 10px;">
-                            <img src="../image/Logo/logo.png" alt="Shop Logo"
+                            <img src="../image/logo.png" alt="Shop Logo"
                                 style="width: 40px; height: 40px; object-fit: contain; margin-right: 10px;">
                             <div>
                                 <?php if ($is_best_selling): ?>
-                                    <h4 style="margin: 0; font-size: 16px; color: #2A3B7E; font-weight: bold;">
-                                        | iMarket Best Selling</h4>
-                                    <span style="font-size: 11px; color: #555; display: block;">Top Rated Products</span>
+                                    <h4 style="margin: 0; font-size: 15px; color: #222; font-weight: 500;">
+                                        iMarket Best Selling</h4>
+                                    <span style="font-size: 12px; color: #757575; display: block;">Top Rated Products</span>
                                 <?php else: ?>
-                                    <h4 style="margin: 0; font-size: 16px; color: #2A3B7E; font-weight: bold;">| UrbanWear PH</h4>
-                                    <span style="font-size: 11px; color: #555;">Streetwear & Casual Outfits</span>
+                                    <h4 style="margin: 0; font-size: 15px; color: #222; font-weight: 500;">UrbanWear PH</h4>
+                                    <span style="font-size: 12px; color: #757575;">Streetwear & Casual Outfits</span>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -140,17 +131,15 @@ $result = mysqli_query($conn, $sql);
                         // FIX LINK: linking to the known view-product.php
                         $product_link = "../Categories/best-selling/view-product.php?id=" . $pid;
                         ?>
-                        <a href="<?php echo $product_link; ?>" style="text-decoration:none; color:inherit; display:block;">
-                            <div class="order-top">
-                                <div class="order-id">Order #<?php echo str_pad($order['id'], 6, '0', STR_PAD_LEFT); ?></div>
-                                <div class="order-status"><?php echo htmlspecialchars($order['status']); ?></div>
-                            </div>
-                        </a>
+                        <div class="order-top">
+                            <div class="order-id">Order #<?php echo str_pad($order['id'], 6, '0', STR_PAD_LEFT); ?></div>
+                            <div class="order-status"><?php echo htmlspecialchars($order['status']); ?></div>
+                        </div>
 
                         <div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 15px;">
                             <!-- Order Image -->
                             <a href="<?php echo $product_link; ?>" class="order-image"
-                                style="width: 100px; height: 100px; flex-shrink: 0; background-color: #f9f9f9; border: 1px solid #eee; border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+                                style="width: 80px; height: 80px; flex-shrink: 0; background-color: #f9f9f9; border: 1px solid #eee; border-radius: 2px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-decoration: none;">
                                 <?php
                                 if (!empty($final_img_src)) {
                                     echo '<img src="' . htmlspecialchars($final_img_src) . '" alt="Product" style="width: 100%; height: 100%; object-fit: contain;">';
@@ -158,7 +147,7 @@ $result = mysqli_query($conn, $sql);
                                     echo '<img src="' . htmlspecialchars($img_file) . '" alt="Product" style="width: 100%; height: 100%; object-fit: contain;">';
                                 } else {
                                     // Fallback icon
-                                    echo '<i class="fas fa-box" style="font-size: 2rem; color: #ddd;"></i>';
+                                    echo '<i class="fas fa-box" style="font-size: 1.5rem; color: #ddd;"></i>';
                                 }
                                 ?>
                             </a>
@@ -172,8 +161,8 @@ $result = mysqli_query($conn, $sql);
                                     </div>
                                     <div class="detail-item">
                                         <span class="detail-label">Total Amount</span>
-                                        <span
-                                            class="detail-value">₱<?php echo number_format($order['total_amount'], 2); ?></span>
+                                        <span class="detail-value"
+                                            style="color: #ee4d2d; font-weight: 500;">₱<?php echo number_format($order['total_amount'], 2); ?></span>
                                     </div>
                                     <div class="detail-item">
                                         <span class="detail-label">Payment Method</span>
@@ -183,35 +172,20 @@ $result = mysqli_query($conn, $sql);
                                     <div class="detail-item">
                                         <span class="detail-label">Payment Status</span>
                                         <span class="detail-value"
-                                            style="text-transform:lowercase;"><?php echo strtolower($order['status']); ?></span>
+                                            style="text-transform:uppercase; font-weight: 500; color: #28a745;"><?php echo htmlspecialchars($order['status'] == 'Shipped' || $order['status'] == 'Delivered' ? 'PAID' : 'PENDING'); ?></span>
                                     </div>
                                 </div>
 
-                                <div class="track-btn-container"
-                                    style="display:flex; justify-content:flex-end; gap:10px; margin-top: 15px;">
+                                <div class="track-btn-container">
+                                    <a href="Tracking.php?order_id=<?php echo $order['id']; ?>" class="btn-track primary"><i
+                                            class="fas fa-shipping-fast"></i> Track Order</a>
 
-                                    <!-- Tracking Link: Assuming Tracking.php is in Shop or needs checking? -->
-                                    <!-- shop/Tracking.php existed? Let's assume standard link if available or adjust. -->
-                                    <!-- shop/Order-history.php linked to "Tracking.php". -->
-                                    <!-- If I am in Content/Order-history.php, "Tracking.php" probably doesn't exist unless I move it too. -->
-                                    <!-- I'll use ../shop/Tracking.php if it exists or just keep Tracking.php if user plans to move it. -->
-                                    <!-- Let's check where Tracking.php is: Most likely inside shop/ or Categories/best-selling/ -->
-                                    <!-- I'll use ../shop/Tracking.php for now as a safe bet if it was in Shop. -->
-                                    <!-- Tracking Link -->
-                                    <a href="Tracking.php?order_id=<?php echo $order['id']; ?>" class="btn-track"><i
-                                            class="fas fa-shipping-fast"></i> Track
-                                        Order</a>
-
-                                    <!-- Rate Button Added (Visible for testing/all statuses) -->
                                     <a href="Rate.php?order_id=<?php echo $order['id']; ?>&product_id=<?php echo $pid; ?>"
-                                        class="btn-track"
-                                        style="background:#ffc107; color:#333; border:none; font-weight:600;"><i
+                                        class="btn-track" style="background:#fff; color:#ee4d2d; border:1px solid #ee4d2d;"><i
                                             class="fas fa-star"></i> Rate</a>
 
-                                    <!-- Delete Button (Triggers Modal) -->
                                     <button type="button" class="btn-track"
-                                        onclick="openDeleteModal(<?php echo $order['id']; ?>)"
-                                        style="background: #dc3545; color: white; border: none; cursor: pointer;">
+                                        onclick="openDeleteModal(<?php echo $order['id']; ?>)">
                                         <i class="fas fa-trash"></i> Delete
                                     </button>
                                 </div>
@@ -400,6 +374,3 @@ $result = mysqli_query($conn, $sql);
 </body>
 
 </html>
-
-
-
