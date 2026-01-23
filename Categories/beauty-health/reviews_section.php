@@ -4,6 +4,20 @@
     .modal-content { background: #fff; padding: 40px; border-radius: 20px; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
     .modal-icon { font-size: 50px; color: #ef4444; margin-bottom: 20px; }
     .modal-btn { background: #0f172a; color: #fff; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 10px; }
+
+    .btn-rate-now { 
+        display: inline-block; 
+        background: #2c4c7c; 
+        color: #fff !important; 
+        padding: 10px 20px; 
+        border-radius: 8px; 
+        text-decoration: none !important; 
+        font-weight: 600; 
+        font-size: 14px; 
+        transition: 0.3s; 
+        margin-top: 15px;
+    }
+    .btn-rate-now:hover { background: #1a355e; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 </style>
 
 <div class="reviews-container">
@@ -217,6 +231,7 @@
         }
     }
 </script>
+
 
 
 

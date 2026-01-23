@@ -12,11 +12,11 @@ if (!isset($path_prefix)) {
         <div class="footer-column">
             <h4>Customer Care</h4>
             <ul>
-                <li><a href="<?php echo $path_prefix; ?>services/Customer_Service.php">Customer Service</a></li>
-                <li><a href="<?php echo $path_prefix; ?>services/How_to_buy.php">How to Buy</a></li>
-                <li><a href="<?php echo $path_prefix; ?>services/Shipping & Delivery.php">Shipping & Delivery</a></li>
-                <li><a href="<?php echo $path_prefix; ?>services/Return & Refund.php">Return & Refund</a></li>
-                <li><a href="<?php echo $path_prefix; ?>services/Contact Us.php">Contact Us</a></li>
+                <li><a href="<?php echo $path_prefix; ?>Services/Customer_Service.php">Customer Service</a></li>
+                <li><a href="<?php echo $path_prefix; ?>Services/How_to_buy.php">How to Buy</a></li>
+                <li><a href="<?php echo $path_prefix; ?>Services/Shipping%20%26%20Delivery.php">Shipping & Delivery</a></li>
+                <li><a href="<?php echo $path_prefix; ?>Services/Return%20%26%20Refund.php">Return & Refund</a></li>
+                <li><a href="<?php echo $path_prefix; ?>Services/Contact%20Us.php">Contact Us</a></li>
             </ul>
         </div>
 
@@ -24,10 +24,10 @@ if (!isset($path_prefix)) {
         <div class="footer-column">
             <h4>About ImarketPH</h4>
             <ul>
-                <li><a href="<?php echo $path_prefix; ?>about/about_us.php">About Us</a></li>
+                <li><a href="<?php echo $path_prefix; ?>about/About_Us.php">About Us</a></li>
                 <li><a href="<?php echo $path_prefix; ?>about/Careers.php">Careers</a></li>
-                <li><a href="<?php echo $path_prefix; ?>about/Terms & Conditions.php">Terms & Conditions</a></li>
-                <li><a href="<?php echo $path_prefix; ?>about/Privacy Policy.php">Privacy Policy</a></li>
+                <li><a href="<?php echo $path_prefix; ?>about/Terms%20%26%20Conditions.php">Terms & Conditions</a></li>
+                <li><a href="<?php echo $path_prefix; ?>about/Privacy%20Policy.php">Privacy Policy</a></li>
             </ul>
         </div>
 
@@ -37,8 +37,8 @@ if (!isset($path_prefix)) {
             <div class="payment-icons">
                 <img src="<?php echo $path_prefix; ?>image/Banks/visa.png" alt="Visa" class="pay-icon">
                 <img src="<?php echo $path_prefix; ?>image/Banks/Master-card.png" alt="Mastercard" class="pay-icon">
-                <img src="<?php echo $path_prefix; ?>image/Banks/gcash.jpeg" alt="GCash" class="pay-icon">
-                <img src="<?php echo $path_prefix; ?>image/Banks/maya.png" alt="Maya" class="pay-icon">
+                <img src="<?php echo $path_prefix; ?>image/Banks/Gcash.jpeg" alt="GCash" class="pay-icon">
+                <img src="<?php echo $path_prefix; ?>image/Banks/Maya.png" alt="Maya" class="pay-icon">
             </div>
         </div>
 
