@@ -1,6 +1,6 @@
 <?php
-// Get product ID from URL, default to 301 if missing or invalid
-$product_id = isset($_GET['id']) ? intval($_GET['id']) : 301;
+// Get product ID from URL, default to 901 if missing or invalid
+$product_id = isset($_GET['id']) ? intval($_GET['id']) : 901;
 
 // Capture product output to get access to variables like $name
 ob_start();
@@ -18,6 +18,7 @@ $page_title = isset($name) ? $name : "Product Details";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../../image/logo.png">
     <title><?php echo htmlspecialchars($page_title); ?> - IMarket</title>
+    <link rel="stylesheet" href="../../css/best-selling/best.css?v=<?php echo time(); ?>">
 </head>
 
 <body>
@@ -32,8 +33,8 @@ $page_title = isset($name) ? $name : "Product Details";
         <img src="../../image/logo.png" alt="iMarket Logo"
             style="height: 40px; vertical-align: middle; margin-right: 10px;">
         <span
-            style="font-size: 24px; font-weight: bold; color: #2A3B7E; vertical-align: middle; font-family: sans-serif;">Electronics
-            | IMarket</span>
+            style="font-size: 24px; font-weight: bold; color: #2A3B7E; vertical-align: middle; font-family: sans-serif;">
+            Groceries | IMarket</span>
     </div>
 
     <div class="content">
@@ -60,5 +61,6 @@ $page_title = isset($name) ? $name : "Product Details";
 </body>
 
 </html>
+
 
 

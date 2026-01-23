@@ -3,7 +3,7 @@ if (!isset($path_prefix)) {
     $path_prefix = '../';
 }
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0../css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/footer.css">
 
 <footer class="footer">
@@ -73,5 +73,3 @@ if (!isset($path_prefix)) {
         <p>&copy; 2025 All Rights Reserved by ImarketPH</p>
     </div>
 </footer>
-
-

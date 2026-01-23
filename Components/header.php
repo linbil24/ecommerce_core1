@@ -38,7 +38,9 @@ if (!isset($path_prefix)) {
     $path_prefix = '../';
 }
 ?>
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<!-- Core Component Styles -->
 <link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/header.css">
 
 <header class="header">
@@ -60,24 +62,23 @@ if (!isset($path_prefix)) {
                     <a href="#" class="dropdown-toggle"><i class="fas fa-list"></i> Categories <i
                             class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Best%20selling/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/best-selling/index.php"><i
                                     class="fas fa-fire"></i> Best Selling</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/New%20arrivals/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/new-arrivals/index.php"><i
                                     class="fas fa-star"></i> New Arrivals</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Electronics/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/electronics/index.php"><i
                                     class="fas fa-desktop"></i> Electronics</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Fashion%20%26%20Apparel/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/fashion-apparel/index.php"><i
                                     class="fas fa-tshirt"></i> Fashion & Apparel</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Home%20living/index.php"><i
-                                    class="fas fa-home"></i>
-                                Home & Living</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Beauty%20%26%20Health/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/home-living/index.php"><i
+                                    class="fas fa-home"></i> Home & Living</a></li>
+                        <li><a href="<?php echo $path_prefix; ?>Categories/beauty-health/index.php"><i
                                     class="fas fa-heart"></i> Beauty & Health</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Sports%20%26%20outdoor/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/sports-outdoor/index.php"><i
                                     class="fas fa-football-ball"></i> Sports & Outdoor</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Toys%20%26%20Games/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/toys-games/index.php"><i
                                     class="fas fa-gamepad"></i> Toys & Games</a></li>
-                        <li><a href="<?php echo $path_prefix; ?>Categories/Groceries/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/groceries/index.php"><i
                                     class="fas fa-shopping-basket"></i> Groceries</a></li>
                     </ul>
                 </div>
@@ -110,7 +111,7 @@ if (!isset($path_prefix)) {
                     </span>
                     <div class="user-dropdown-toggle">
                         <i class="fas fa-chevron-down"></i>
-                        <ul class="user-dropdown-menu"> <!-- Moved inside toggle for hover/click or adjacent -->
+                        <ul class="user-dropdown-menu">
                             <li><a href="<?php echo $path_prefix; ?>Content/user-account.php"><i class="fas fa-user"></i>
                                     My Profile</a></li>
                             <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
@@ -147,33 +148,24 @@ if (!isset($path_prefix)) {
         const userMenu = document.querySelector('.user-dropdown-menu');
 
         if (userToggle && userMenu) {
-            // Toggle only when clicking the arrow/container directly, NOT children inside the menu
             userToggle.addEventListener('click', function (e) {
-                // If the click is inside the menu (e.g. a link), let it function normally and don't toggle
                 if (userMenu.contains(e.target)) {
                     return;
                 }
-
                 e.preventDefault();
                 e.stopPropagation();
                 userMenu.classList.toggle('show');
-                // Close other dropdown if open
                 if (dropdownMenu && dropdownMenu.classList.contains('show')) dropdownMenu.classList.remove('show');
             });
         }
 
         // Close dropdowns when clicking outside
         document.addEventListener('click', function (e) {
-            // Check for Categories Dropdown
             if (dropdownToggle && dropdownMenu) {
                 if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
                     dropdownMenu.classList.remove('show');
                 }
             }
-
-            // Check for User Dropdown
-            // Note: Since userMenu is strictly INSIDE userToggle in HTML, userToggle.contains includes userMenu.
-            // But we need to close if clicking OUTSIDE the toggle entirely.
             if (userToggle && userMenu) {
                 if (!userToggle.contains(e.target)) {
                     userMenu.classList.remove('show');
