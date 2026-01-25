@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Custom Auth CSS -->
-    <link rel="stylesheet" href="../css/Admin/auth.css">
+    <link rel="stylesheet" href="../css/admin/auth.css">
 </head>
 
 <body>

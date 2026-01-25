@@ -436,7 +436,7 @@ if ($is_logged_in) {
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/Admin/dashboard.css">
+    <link rel="stylesheet" href="../css/admin/dashboard.css">
     <style>
 
     </style>
@@ -524,7 +524,7 @@ if ($is_logged_in) {
             currentAdminId: <?php echo $_SESSION['admin_id'] ?? 0; ?>
         };
     </script>
-    <script src="../javascript/Admin/Dashboard.js"></script>
+    <script src="../javascript/admin/Dashboard.js"></script>
 </body>
 
 </html>
