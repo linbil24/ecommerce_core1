@@ -368,6 +368,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                                 <?php echo htmlspecialchars($d_address); ?><br>
                                 <?php echo htmlspecialchars($d_city); ?>, <?php echo htmlspecialchars($d_zip); ?>
                             </div>
+
+                            <!-- Tracking / Location Map Preview -->
+                            <div
+                                style="margin-top: 15px; border-radius: 4px; overflow: hidden; border: 1px solid #eee;">
+                                <iframe width="100%" height="200" frameborder="0" scrolling="no" marginheight="0"
+                                    marginwidth="0"
+                                    src="https://maps.google.com/maps?q=<?php echo urlencode($d_address . ' ' . $d_city); ?>&t=&z=13&ie=UTF8&iwloc=&output=embed">
+                                </iframe>
+                            </div>
+
                             <!-- Link to User Account setting. Where is it? Categories/best-selling/user-account.php seems to be the one. -->
                             <a href="../Categories/best-selling/user-account.php?return_url=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
                                 class="address-change-link">Change</a>

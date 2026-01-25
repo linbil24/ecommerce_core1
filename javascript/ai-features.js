@@ -175,42 +175,64 @@ async function captureAndSearch() {
                 } else if (detectedName.includes('shirt') || detectedName.includes('jersey') || detectedName.includes('clothing')) {
                     product = { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" };
                 } else {
-                    // RANDOM FALLBACK 
-                    const randomProducts = [
-                        { id: "iphone15", name: "iPhone 15 Pro Max", price: "₱84,990.00", store: "TechZone PH", image: "../image/Electronics/Portable Power Bank 20,000mAh.jpeg" },
-                        { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/Casual Sneakers.jpeg" },
-                        { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" },
-                        { id: "webcam_1080p", name: "1080p HD Web Camera", price: "₱10,200.00", store: "TechZone PH", image: "../image/Electronics/1080p HD Web Camera.jpeg" }
-                    ];
-                    product = randomProducts[Math.floor(Math.random() * randomProducts.length)];
+                    // NO MATCH IN SYSTEM
+                    product = null;
                 }
 
                 scanner.style.display = 'none';
 
                 // Show Result Card
-                // IMPORTANT: showing capturedImageUrl as the thumbnail
-                const resultCard = `
-                    <div style="
-                        position: absolute; bottom: 10px; left: 10px; right: 10px; 
-                        background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
-                        padding: 15px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-                        display: flex; align-items: center; gap: 15px; text-align: left; 
-                        animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                        border: 1px solid rgba(0,0,0,0.05); z-index: 10;
-                    ">
-                        <div style="width: 60px; height: 60px; border-radius: 10px; overflow: hidden; flex-shrink: 0; border: 1px solid #eee;">
-                            <img src="${capturedImageUrl}" style="width: 100%; height: 100%; object-fit: cover;">
+                let resultCard = '';
+
+                if (product) {
+                    // PRODUCT FOUND IN SYSTEM
+                    resultCard = `
+                        <div style="
+                            position: absolute; bottom: 10px; left: 10px; right: 10px; 
+                            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+                            padding: 15px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+                            display: flex; align-items: center; gap: 15px; text-align: left; 
+                            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                            border: 3px solid #0f8392; z-index: 10;
+                        ">
+                            <div style="width: 60px; height: 60px; border-radius: 10px; overflow: hidden; flex-shrink: 0; border: 1px solid #eee;">
+                                <img src="${capturedImageUrl}" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.7rem; color: #0f8392; text-transform: uppercase; font-weight: 700;">Included in System</div>
+                                <div style="font-weight: 700; font-size: 0.95rem; color: #333;">${product.name}</div>
+                                <div style="color: #e74c3c; font-weight: 800; font-size: 1rem;">${product.price}</div>
+                            </div>
+                            <div style="background: #0f8392; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
                         </div>
-                        <div style="flex: 1;">
-                            <div style="font-size: 0.7rem; color: #888; text-transform: uppercase;">Confidence: ${Math.round(topResult.probability * 100)}%</div>
-                            <div style="font-weight: 700; font-size: 0.95rem; color: #333;">${product.name}</div>
-                            <div style="color: #e74c3c; font-weight: 800; font-size: 1rem;">${product.price}</div>
+                    `;
+                } else {
+                    // PRODUCT NOT FOUND / OUT OF ORDER
+                    resultCard = `
+                        <div style="
+                            position: absolute; bottom: 10px; left: 10px; right: 10px; 
+                            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+                            padding: 15px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+                            display: flex; align-items: center; gap: 15px; text-align: left; 
+                            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                            border: 3px solid #e74c3c; z-index: 10;
+                        ">
+                            <div style="width: 60px; height: 60px; border-radius: 10px; overflow: hidden; flex-shrink: 0; border: 1px solid #eee; opacity: 0.7;">
+                                <img src="${capturedImageUrl}" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%);">
+                            </div>
+                            <div style="flex: 1;">
+                                <div style="font-size: 0.7rem; color: #e74c3c; text-transform: uppercase; font-weight: 700;">Detection: ${detectedName}</div>
+                                <div style="font-weight: 700; font-size: 0.95rem; color: #333;">THIS PRODUCT IS OUT OF ORDER</div>
+                                <div style="color: #777; font-size: 0.8rem;">Item not available in current inventory.</div>
+                            </div>
+                            <div style="background: #e74c3c; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+                                <i class="fas fa-times"></i>
+                            </div>
                         </div>
-                        <div style="background: #0f8392; color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center;">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                    </div>
-                `;
+                    `;
+                }
 
                 cameraView.insertAdjacentHTML('beforeend', resultCard);
                 status.innerText = "";
@@ -229,16 +251,24 @@ async function captureAndSearch() {
                         const base64data = reader.result;
                         sessionStorage.setItem('ai_captured_image', base64data);
 
-                        // DETERMINE CATEGORY based on Product Name/ID
-                        let category = "General";
-                        if (product.store === "TechZone PH" || product.name.includes("Phone") || product.name.includes("Camera")) {
-                            category = "Electronics";
-                        } else if (product.store === "UrbanWear PH" || product.name.includes("Hoodie") || product.name.includes("Sneakers")) {
-                            category = "Fashion";
-                        }
+                        // Redirect to CONFIRMATION MODAL only if product found
+                        if (product) {
+                            // DETERMINE CATEGORY based on Product Name/ID
+                            let category = "General";
+                            if (product.store === "TechZone PH" || product.name.includes("Phone") || product.name.includes("Camera")) {
+                                category = "Electronics";
+                            } else if (product.store === "UrbanWear PH" || product.name.includes("Hoodie") || product.name.includes("Sneakers")) {
+                                category = "Fashion";
+                            }
 
-                        // Redirect to CONFIRMATION MODAL first
-                        window.location.href = `../Content/Dashboard.php?ai_action=confirm_scan&detected=${encodeURIComponent(product.name)}&category=${encodeURIComponent(category)}`;
+                            window.location.href = `../Content/Dashboard.php?ai_action=confirm_scan&detected=${encodeURIComponent(product.name)}&category=${encodeURIComponent(category)}`;
+                        } else {
+                            // If not found, stay on modal so they see "Out of Order" message, then maybe close after delay
+                            setTimeout(() => {
+                                // Optional: Reset UI or close
+                                // closeAiModal();
+                            }, 2000);
+                        }
                     }
 
                 }, 1500);
@@ -317,7 +347,18 @@ function openVoiceCommand() {
             }, 1500);
         }
         else {
-            speakResponse("Sorry, I didn't catch that command.");
+            speakResponse("Searching for " + transcript);
+            statusText.innerText = "Searching for " + transcript + "...";
+
+            setTimeout(() => {
+                closeAiModal();
+                // Determine path prefix based on current location (simple check)
+                let prefix = '../';
+                if (window.location.pathname.includes('/Shop-now/')) prefix = '';
+
+                // Redirect to Shop Search
+                window.location.href = prefix + '../Shop-now/index.php?search_query=' + encodeURIComponent(transcript);
+            }, 1500);
         }
     };
 

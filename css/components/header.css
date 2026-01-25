@@ -92,6 +92,22 @@
     height: 44px;
 }
 
+.ai-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 0 10px;
+    font-size: 18px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.ai-btn:hover {
+    color: #2c4c7c;
+}
+
 .search-input {
     flex: 1;
     border: none;
@@ -354,5 +370,3 @@
     width: 20px;
     text-align: center;
 }
-
-

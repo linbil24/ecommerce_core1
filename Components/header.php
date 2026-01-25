@@ -89,6 +89,15 @@ if (!isset($path_prefix)) {
         <div class="header-center">
             <div class="search-container">
                 <input type="text" placeholder="Search for products, brands and more..." class="search-input">
+
+                <!-- AI Features (Camera & Voice) -->
+                <button class="ai-btn" onclick="openCameraSearch()" title="Image Search">
+                    <i class="fas fa-camera"></i>
+                </button>
+                <button class="ai-btn" onclick="openVoiceCommand()" title="Voice Search">
+                    <i class="fas fa-microphone"></i>
+                </button>
+
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
@@ -128,6 +137,15 @@ if (!isset($path_prefix)) {
 
 </header>
 
+<!-- AI Features Logic & Modal (Moved from Floating Buttons) -->
+<link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/ai-features.css">
+<div id="ai-modal-overlay" class="ai-modal-overlay">
+    <div id="ai-modal-content-inject" class="ai-modal-content"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+<script src="<?php echo $path_prefix; ?>javascript/ai-features.js"></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Categories Dropdown
@@ -145,7 +163,7 @@ if (!isset($path_prefix)) {
 
         // User Profile Dropdown
         const userToggle = document.querySelector('.user-dropdown-toggle');
-        const userMenu = document.querySelector('.user-dropdown-menu');
+        const userMenu = document.querySelector('.user-dropdown-menu'); // Note: 'userMenu' was not defined in previous scope properly if not grabbed
 
         if (userToggle && userMenu) {
             userToggle.addEventListener('click', function (e) {
