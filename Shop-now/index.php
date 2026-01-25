@@ -215,102 +215,61 @@
                 <link rel="stylesheet" href="../css/components/category-base.css?v=<?php echo time(); ?>">
                 <style>
                     /* Specific Overrides for Shop View */
-                    .best-selling-container {
-                        margin-top: 20px;
-                        margin-bottom: 40px;
+                    .best-selling-container { margin-top: 20px; margin-bottom: 40px; padding: 0 !important; background: transparent; overflow: hidden; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+                    .shop-seller-profile { color: #fff !important; }
+                    .shop-seller-profile h2 { color: #fff !important; font-size: 2.5em; text-transform: uppercase; font-weight: 800; line-height: 1.1; margin-top: 5px; }
+                    .shop-seller-profile p { color: rgba(255,255,255,0.8) !important; margin-bottom: 0; }
+                    .shop-seller-stats { display: flex; gap: 25px; margin: 25px 0; font-size: 1em; color: #fff; }
+                    .stat-item { display: flex; flex-direction: column; align-items: flex-start; }
+                    .stat-val { font-weight: bold; font-size: 1.25em; }
+                    .stat-label { font-size: 0.85em; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px; }
+                    .seller-actions { display: flex; gap: 12px; margin-top: 25px; }
+                    .btn-seller-action { 
+                        padding: 10px 22px; border-radius: 8px; text-decoration: none; 
+                        font-size: 0.9em; border: 1px solid rgba(255,255,255,0.3); color: white; transition: all 0.2s; display: flex; align-items: center; gap: 8px; font-weight: 500;
                     }
-
-                    .shop-seller-profile {
-                        color: #fff;
-                    }
-
-                    .shop-seller-stats {
-                        display: flex;
-                        gap: 15px;
-                        margin: 15px 0;
-                        font-size: 0.9em;
-                    }
-
-                    .stat-item {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                    }
-
-                    .stat-val {
-                        font-weight: bold;
-                        font-size: 1.1em;
-                    }
-
-                    .stat-label {
-                        font-size: 0.8em;
-                        opacity: 0.8;
-                    }
-
-                    .seller-actions {
-                        display: flex;
-                        gap: 10px;
-                        margin-top: 20px;
-                    }
-
-                    .btn-seller-action {
-                        padding: 8px 15px;
-                        border-radius: 4px;
-                        text-decoration: none;
-                        font-size: 0.9em;
-                        border: 1px solid rgba(255, 255, 255, 0.3);
-                        color: white;
-                        transition: all 0.2s;
-                    }
-
-                    .btn-seller-action:hover {
-                        background: rgba(255, 255, 255, 0.1);
-                        border-color: white;
-                    }
-
-                    .btn-seller-primary {
-                        background: white;
-                        color: #333;
-                        border: none;
-                        font-weight: 600;
-                    }
-
-                    .btn-seller-primary:hover {
-                        background: #f0f0f0;
-                        color: #333;
-                    }
+                    .btn-seller-action:hover { background: rgba(255,255,255,0.15); border-color: white; }
+                    .btn-seller-primary { background: white; color: #111 !important; border: none; font-weight: 700; }
+                    .btn-seller-primary:hover { background: #f8f9fa; color: #000 !important; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+                    
+                    /* Sort Controls Override */
+                    .sort-controls { display: flex; gap: 15px; align-items: center; background: #fff; padding: 6px 12px; border-radius: 8px; border: 1px solid #e2e8f0; }
+                    .sort-btn { padding: 6px 14px; font-size: 0.9em; color: #64748b; text-decoration: none; border-radius: 6px; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
+                    .sort-btn:hover { color: #2c4c7c; background: #f1f5f9; }
+                    .sort-btn.active { background: #2c4c7c; color: white; box-shadow: 0 4px 6px -1px rgba(44, 76, 124, 0.2); }
+                    .sort-label { color: #64748b; font-size: 0.85em; font-weight: 700; text-transform: uppercase; margin-right: 5px; letter-spacing: 0.5px; }
                 </style>
 
                 <!-- NEW LAYOUT: Hero Split (Seller Profile + Banner) -->
-                <div class="best-selling-container"
-                    style="background: linear-gradient(135deg, #<?php echo $currentShop['bg']; ?> 0%, #1a1a1a 100%);">
+                <div class="best-selling-container" style="background: linear-gradient(135deg, #111 0%, #<?php echo $currentShop['bg']; ?> 100%); display: flex; height: 380px; position: relative;">
                     <!-- Left: Seller Account/Profile -->
-                    <div class="text-section" style="flex: 1; padding: 40px;">
+                    <div class="text-section" style="flex: 1.1; padding: 50px; display: flex; flex-direction: column; justify-content: center; z-index: 2;">
                         <div class="shop-seller-profile">
-                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
-                                <img src="https://ui-avatars.com/api/?name=<?php echo $currentShop['initials']; ?>&background=fff&color=<?php echo $currentShop['bg']; ?>&size=64"
-                                    alt="Logo"
-                                    style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2);">
-                                <div>
-                                    <div
-                                        style="font-size: 0.8em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px;">
-                                        Official Store</div>
-                                    <h2 style="margin: 0; font-size: 2em;"><?php echo htmlspecialchars($selectedStore); ?>
-                                    </h2>
+                            <div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 15px;">
+                                <img src="https://ui-avatars.com/api/?name=<?php echo $currentShop['initials']; ?>&background=fff&color=<?php echo $currentShop['bg']; ?>&size=128" 
+                                     alt="Logo" style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.15); box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+                                <div style="padding-top: 5px;">
+                                    <div style="font-size: 0.75em; opacity: 0.8; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: #eee; margin-bottom: 5px;">Official Store</div>
+                                    <h2><?php echo htmlspecialchars($selectedStore); ?></h2>
                                 </div>
                             </div>
-
-                            <p style="opacity: 0.9; margin-bottom: 5px;">
-                                <?php echo htmlspecialchars($currentShop['category']); ?></p>
-
+                            
+                            <p style="font-size: 1.1em; max-width: 90%; margin-bottom: 25px; opacity: 0.9; font-weight: 300;"><?php echo htmlspecialchars($currentShop['category']); ?></p>
+                            
                             <div class="shop-seller-stats">
                                 <div class="stat-item">
                                     <span class="stat-val"><?php echo $currentShop['rating']; ?>/5.0</span>
-                                    <span class="stat-label">Rating</span>
+                                    <span class="stat-label">Avg. Rating</span>
+                                </div>
+                                <div class="stat-item">
+                                    <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.2);"></div>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-val"><?php echo $currentShop['sold']; ?></span>
                                     <span class="stat-label">Products Sold</span>
+                                </div>
+                                <div class="stat-item">
+                                    <div style="width: 1px; height: 40px; background: rgba(255,255,255,0.2);"></div>
                                 </div>
                                 <div class="stat-item">
                                     <span class="stat-val">100%</span>
@@ -319,22 +278,33 @@
                             </div>
 
                             <div class="seller-actions">
-                                <a href="#" class="btn-seller-action btn-seller-primary"><i class="fas fa-plus"></i>
-                                    Follow</a>
+                                <a href="#" class="btn-seller-action btn-seller-primary"><i class="fas fa-plus"></i> Follow</a>
                                 <a href="#" class="btn-seller-action"><i class="fas fa-comment-dots"></i> Chat</a>
-                                <a href="../Content/user-account.php?view=profile" class="btn-seller-action"><i
-                                        class="fas fa-info-circle"></i> Seller Info</a>
+                                <a href="../Content/user-account.php?view=profile" class="btn-seller-action"><i class="fas fa-info-circle"></i> Info</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Right: Banner/Slider -->
-                    <div class="slider-section" style="flex: 1.5;">
-                        <div class="fade-slider">
-                            <div class="fade-slide active"
-                                style="background-image: url('https://via.placeholder.com/800x400/<?php echo $currentShop['bg']; ?>/ffffff?text=<?php echo urlencode($selectedStore . ' Collection'); ?>'); background-size: cover; background-position: center;">
+                    <div class="slider-section" style="flex: 0.9; border: none; box-shadow: none; border-radius: 0; position: relative; overflow: hidden; background: #fff; margin: 0; max-width: none; height: 100%;">
+                       <!-- Geometric / Color Pattern Gradient instead of missing image -->
+                       <div style="width: 100%; height: 100%; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 60%), linear-gradient(45deg, #<?php echo $currentShop['bg']; ?> 0%, #<?php echo dechex(max(0, hexdec($currentShop['bg']) - 202020)); ?> 100%); position: relative;">
+                            
+                            <!-- Large Initials BG -->
+                            <div style="position: absolute; bottom: -40px; right: -20px; color: rgba(255,255,255,0.1); font-size: 18em; font-weight: 900; line-height: 1; user-select: none;">
+                                <?php echo htmlspecialchars($currentShop['initials']); ?>
                             </div>
-                        </div>
+
+                            <!-- Decorative overlay -->
+                            <div style="position: absolute; inset: 0; background: url('https://www.transparenttextures.com/patterns/cubes.png'); opacity: 0.1;"></div>
+
+                            <div style="position: absolute; top: 40px; right: 50px; text-align: right; color: white;">
+                                <div style="font-size: 3em; font-weight: 800; text-transform: uppercase; line-height: 1; margin-bottom: 5px;">New</div>
+                                <div style="font-size: 3em; font-weight: 300; text-transform: uppercase; line-height: 0.9;">Arrivals</div>
+                                <div style="font-size: 1em; opacity: 0.8; margin-top: 10px; letter-spacing: 2px;">COLLECTION 2024</div>
+                                <div style="margin-top: 20px; display: inline-block; padding: 10px 20px; border: 2px solid white; font-weight: 600; text-transform: uppercase; font-size: 0.9em;">Explore Now</div>
+                            </div>
+                       </div>
                     </div>
                 </div>
 
