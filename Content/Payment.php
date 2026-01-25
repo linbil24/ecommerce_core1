@@ -350,16 +350,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                         <div class="section-title"><i class="fas fa-map-marker-alt"
                                 style="margin-right: 10px;"></i>Shipping Address</div>
                         <?php
-                        // Fetch user details
-                        $u_sql = "SELECT * FROM users WHERE id = '$user_id'";
-                        $u_res = mysqli_query($conn, $u_sql);
-                        $user_data = mysqli_fetch_assoc($u_res);
+                        // 1. Fetch from 'user_addresses' table (Default first)
+                        $addr_sql = "SELECT * FROM user_addresses WHERE user_id = '$user_id' AND is_default = 1 LIMIT 1";
+                        $addr_res = mysqli_query($conn, $addr_sql);
 
-                        $d_name = isset($user_data['fullname']) ? $user_data['fullname'] : (isset($user_data['username']) ? $user_data['username'] : 'My Name');
-                        $d_phone = isset($user_data['phone']) ? $user_data['phone'] : '09123456789';
-                        $d_address = isset($user_data['address']) ? $user_data['address'] : 'No default address set.';
-                        $d_city = isset($user_data['city']) ? $user_data['city'] : 'Metro Manila';
-                        $d_zip = isset($user_data['zip']) ? $user_data['zip'] : '1000';
+                        if ($addr_res && mysqli_num_rows($addr_res) > 0) {
+                            $addr_data = mysqli_fetch_assoc($addr_res);
+                            $d_name = $addr_data['fullname'];
+                            $d_phone = $addr_data['phone'];
+                            $d_address = $addr_data['address'];
+                            $d_city = $addr_data['city'];
+                            $d_zip = $addr_data['zip'];
+                        } else {
+                            // 2. Fallback to basic 'users' profile if no specific addresses saved
+                            $u_sql = "SELECT * FROM users WHERE id = '$user_id'";
+                            $u_res = mysqli_query($conn, $u_sql);
+                            $user_data = mysqli_fetch_assoc($u_res);
+
+                            $d_name = isset($user_data['fullname']) ? $user_data['fullname'] : (isset($user_data['username']) ? $user_data['username'] : 'My Name');
+                            $d_phone = isset($user_data['phone']) ? $user_data['phone'] : '09123456789';
+                            $d_address = isset($user_data['address']) ? $user_data['address'] : 'No default address set.';
+                            $d_city = isset($user_data['city']) ? $user_data['city'] : 'Metro Manila';
+                            $d_zip = isset($user_data['zip']) ? $user_data['zip'] : '1000';
+                        }
                         ?>
 
                         <div class="address-card">
