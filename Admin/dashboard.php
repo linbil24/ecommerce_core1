@@ -457,6 +457,50 @@ if ($is_logged_in) {
             </div>
 
             <div class="header-right">
+                <!-- Notification Bell -->
+                <div class="notification-bell-container" style="position: relative; margin-right: 1.5rem;">
+                    <div class="notification-bell" onclick="toggleNotificationPanel()"
+                        style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; position: relative;"
+                        onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                        <i data-lucide="bell" style="width: 1.25rem; height: 1.25rem; color: #64748b;"></i>
+                        <span id="notificationBellBadge" class="notification-bell-badge"
+                            style="display: none; position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></span>
+                    </div>
+
+                    <!-- Notification Dropdown Panel -->
+                    <div id="notificationPanel" class="notification-panel"
+                        style="display: none; position: absolute; top: calc(100% + 12px); right: 0; width: 380px; max-height: 500px; background: white; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); border: 1px solid #e2e8f0; z-index: 1000; overflow: hidden;">
+                        <div
+                            style="padding: 16px 20px; border-bottom: 2px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);">
+                            <h3 style="margin: 0; font-size: 16px; font-weight: 700; color: #1e293b;">Notifications</h3>
+                            <button onclick="markAllAsRead()"
+                                style="background: none; border: none; color: #3b82f6; font-size: 13px; font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 4px; transition: background 0.2s;"
+                                onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='none'">
+                                Mark all as read
+                            </button>
+                        </div>
+
+                        <div id="notificationList" style="max-height: 400px; overflow-y: auto;">
+                            <!-- Notifications will be loaded here -->
+                            <div style="padding: 40px 20px; text-align: center; color: #94a3b8;">
+                                <i data-lucide="inbox"
+                                    style="width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.5;"></i>
+                                <p style="margin: 0; font-size: 14px;">No new notifications</p>
+                            </div>
+                        </div>
+
+                        <div
+                            style="padding: 12px 20px; border-top: 1px solid #f1f5f9; text-align: center; background: #fafbfc;">
+                            <a href="#"
+                                onclick="showModule('alerts', this); toggleNotificationPanel(); event.preventDefault();"
+                                style="color: #3b82f6; font-size: 13px; font-weight: 600; text-decoration: none; transition: color 0.2s;"
+                                onmouseover="this.style.color='#2563eb'" onmouseout="this.style.color='#3b82f6'">
+                                View All Notifications
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="profile-menu-container" tabindex="0">
                     <div class="profile-avatar"
                         style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.2s; border: 2px solid rgba(255, 255, 255, 0.2);">
@@ -556,6 +600,126 @@ if ($is_logged_in) {
         // Update notifications on page load and every 10 seconds
         updateChatNotifications();
         setInterval(updateChatNotifications, 10000);
+
+        // Notification Panel Functions
+        function toggleNotificationPanel() {
+            const panel = document.getElementById('notificationPanel');
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+                loadNotifications();
+                lucide.createIcons(); // Refresh icons
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+
+        async function loadNotifications() {
+            try {
+                const response = await fetch('get_notifications.php');
+                const data = await response.json();
+
+                const notificationList = document.getElementById('notificationList');
+                const bellBadge = document.getElementById('notificationBellBadge');
+
+                if (data.success && data.notifications.length > 0) {
+                    notificationList.innerHTML = '';
+                    let unreadCount = 0;
+
+                    data.notifications.forEach(notif => {
+                        if (!notif.is_read) unreadCount++;
+
+                        const notifDiv = document.createElement('div');
+                        notifDiv.style.cssText = `
+                            padding: 14px 20px;
+                            border-bottom: 1px solid #f1f5f9;
+                            cursor: pointer;
+                            transition: background 0.2s;
+                            ${!notif.is_read ? 'background: #eff6ff;' : 'background: white;'}
+                        `;
+                        notifDiv.onmouseover = function () { this.style.background = '#f8fafc'; };
+                        notifDiv.onmouseout = function () { this.style.background = notif.is_read ? 'white' : '#eff6ff'; };
+
+                        const iconColor = notif.type === 'chat' ? '#3b82f6' : notif.type === 'order' ? '#8b5cf6' : '#f59e0b';
+                        const iconName = notif.type === 'chat' ? 'message-circle' : notif.type === 'order' ? 'shopping-cart' : 'alert-circle';
+
+                        notifDiv.innerHTML = `
+                            <div style="display: flex; gap: 12px; align-items: start;">
+                                <div style="width: 40px; height: 40px; border-radius: 50%; background: ${iconColor}15; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                    <i data-lucide="${iconName}" style="width: 20px; height: 20px; color: ${iconColor};"></i>
+                                </div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <div style="font-size: 14px; font-weight: ${!notif.is_read ? '600' : '500'}; color: #1e293b; margin-bottom: 4px; line-height: 1.4;">
+                                        ${notif.title}
+                                    </div>
+                                    <div style="font-size: 13px; color: #64748b; line-height: 1.4; margin-bottom: 6px;">
+                                        ${notif.message}
+                                    </div>
+                                    <div style="font-size: 12px; color: #94a3b8;">
+                                        ${notif.time_ago}
+                                    </div>
+                                </div>
+                                ${!notif.is_read ? '<div style="width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div>' : ''}
+                            </div>
+                        `;
+
+                        notifDiv.onclick = function () {
+                            if (notif.type === 'chat') {
+                                showSubModule('support', 'chat');
+                                toggleNotificationPanel();
+                            }
+                        };
+
+                        notificationList.appendChild(notifDiv);
+                    });
+
+                    lucide.createIcons();
+
+                    if (unreadCount > 0) {
+                        bellBadge.textContent = unreadCount;
+                        bellBadge.style.display = 'inline-block';
+                    } else {
+                        bellBadge.style.display = 'none';
+                    }
+                } else {
+                    notificationList.innerHTML = `
+                        <div style="padding: 40px 20px; text-align: center; color: #94a3b8;">
+                            <i data-lucide="inbox" style="width: 48px; height: 48px; margin-bottom: 12px; opacity: 0.5;"></i>
+                            <p style="margin: 0; font-size: 14px;">No new notifications</p>
+                        </div>
+                    `;
+                    lucide.createIcons();
+                    bellBadge.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error loading notifications:', error);
+            }
+        }
+
+        async function markAllAsRead() {
+            try {
+                const response = await fetch('mark_notifications_read.php', { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    loadNotifications();
+                }
+            } catch (error) {
+                console.error('Error marking notifications as read:', error);
+            }
+        }
+
+        // Close notification panel when clicking outside
+        document.addEventListener('click', function (event) {
+            const panel = document.getElementById('notificationPanel');
+            const bellContainer = document.querySelector('.notification-bell-container');
+
+            if (panel && bellContainer && !bellContainer.contains(event.target)) {
+                panel.style.display = 'none';
+            }
+        });
+
+        // Load notifications on page load
+        loadNotifications();
+        setInterval(loadNotifications, 30000); // Refresh every 30 seconds
     </script>
     <script src="../javascript/admin/Dashboard.js"></script>
 </body>
