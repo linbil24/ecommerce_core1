@@ -66,17 +66,29 @@
     </div>
 
     <script>
+        // Clean redirect function with proper syntax
         function startRedirect() {
             setTimeout(function() {
+                // Using quotes around the URL string
                 window.location.replace("/ecommerce_core1/php/login.php");
-            }, 2000);
+            }, 2000); // 2 second delay
         }
 
+        // Start the redirect when page is fully loaded
         if (document.readyState === "complete") {
             startRedirect();
         } else {
             window.addEventListener("load", startRedirect);
         }
+
+        // Alternative: You can also use this simpler approach
+        /*
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.location.href = "/ecommerce_core1/php/login.php";
+            }, 2000);
+        });
+        */
     </script>
 </body>
 </html>
