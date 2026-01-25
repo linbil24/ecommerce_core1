@@ -1,218 +1,52 @@
-﻿<!DOCTYPE html>
+﻿<!-- Simple version without external image -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
-    <!-- Fixed: Corrected image URL path (lowercase 'image' instead of 'Image') -->
-    <link rel="icon" type="image/png" href="https://core1.imarketph.com/image/logo.png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: "Poppins", sans-serif;
             background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             color: white;
+            font-family: Arial, sans-serif;
         }
-
-        .loader-container {
+        .container {
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
         }
-
-        .logo-img {
-            width: 120px;
-            height: auto;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite ease-in-out;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-        }
-
-        /* Fallback styling if image fails to load */
-        .logo-fallback {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        .brand-name {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .tagline {
-            font-size: 1.1rem;
-            font-weight: 300;
-            opacity: 0.8;
-            margin-bottom: 50px;
-            letter-spacing: 0.5px;
-        }
-
+        h1 { font-size: 3rem; margin-bottom: 10px; }
+        p { margin-bottom: 30px; }
         .spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top: 3px solid #fff;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top: 3px solid white;
             border-radius: 50%;
+            margin: 0 auto;
             animation: spin 1s linear infinite;
         }
-
-        .loading-text {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            animation: fadeInOut 2s infinite;
-        }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-            }
-            50% {
-                transform: scale(1.05);
-                filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
-            }
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        .fade-in {
-            animation: fadeIn 1.2s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hidden {
-            display: none;
-        }
     </style>
 </head>
 <body>
-    <div class="loader-container fade-in">
-        <!-- Added error handling for image -->
-        <img 
-            src="https://core1.imarketph.com/image/logo.png" 
-            alt="iMarket Logo" 
-            class="logo-img"
-            onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden');"
-        >
-        
-        <!-- Fallback logo in case image fails to load -->
-        <div id="logo-fallback" class="logo-fallback hidden">
-            IM
-        </div>
-        
-        <div class="text-content">
-            <h1 class="brand-name">iMarket</h1>
-            <p class="tagline">Your Market, Your Choice</p>
-        </div>
-
+    <div class="container">
+        <h1>iMarket</h1>
+        <p>Your Market, Your Choice</p>
         <div class="spinner"></div>
-        <p class="loading-text">Loading your experience...</p>
+        <p style="margin-top: 20px;">Redirecting to login...</p>
     </div>
-
-    <noscript>
-        <meta http-equiv="refresh" content="3;url=../php/login.php">
-    </noscript>
-
     <script>
-        // Clean JavaScript without potential regex errors
-        (function() {
-            'use strict';
-            
-            var redirected = false;
-            
-            function doRedirect() {
-                if (redirected) return;
-                redirected = true;
-                
-                // Clean redirect without query parameters that might cause issues
-                try {
-                    window.location.href = "../php/login.php";
-                } catch (error) {
-                    console.error('Redirect error:', error);
-                    // Fallback method
-                    window.location = "../php/login.php";
-                }
-            }
-            
-            function init() {
-                // Use a single, clean timeout
-                setTimeout(doRedirect, 2500);
-            }
-            
-            // Safe DOM ready check
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', init);
-            } else {
-                init();
-            }
-            
-            // Prevent any external scripts from causing issues
-            window.addEventListener('error', function(e) {
-                // Suppress error logging for invalid regex from external scripts
-                if (e.message.includes('regular expression')) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
-            
-        })();
-        
-        // Optional: Test the image URL
-        (function() {
-            var testImg = new Image();
-            testImg.onload = function() {
-                console.log('Logo image loaded successfully');
-            };
-            testImg.onerror = function() {
-                console.warn('Logo image failed to load, using fallback');
-            };
-            testImg.src = 'https://core1.imarketph.com/image/logo.png';
-        })();
+        setTimeout(function() {
+            window.location.href = "../php/login.php";
+        }, 2000);
     </script>
 </body>
 </html>
