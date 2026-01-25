@@ -59,6 +59,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
+// Handle Password Change
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] == 'change_password') {
+    $current_pass = $_POST['current_password'];
+    $new_pass = $_POST['new_password'];
+    $confirm_pass = $_POST['confirm_password'];
+
+    // Verify current password
+    $verify_sql = "SELECT password FROM users WHERE id='$user_id'";
+    $verify_res = mysqli_query($conn, $verify_sql);
+    $user_data = mysqli_fetch_assoc($verify_res);
+
+    if (password_verify($current_pass, $user_data['password'])) {
+        if ($new_pass === $confirm_pass) {
+            $hashed_password = password_hash($new_pass, PASSWORD_DEFAULT);
+            $update_pass_sql = "UPDATE users SET password='$hashed_password' WHERE id='$user_id'";
+            if (mysqli_query($conn, $update_pass_sql)) {
+                $msg = "<div class='alert-success'>Password updated successfully!</div>";
+            } else {
+                $msg = "<div class='alert-error'>Error updating password.</div>";
+            }
+        } else {
+            $msg = "<div class='alert-error'>New passwords do not match.</div>";
+        }
+    } else {
+        $msg = "<div class='alert-error'>Incorrect current password.</div>";
+    }
+}
+
 // ---------------------------------------------------------
 // FETCH USER DATA
 // ---------------------------------------------------------
@@ -156,9 +184,12 @@ if ($view == 'orders' || $view == 'tracking') {
                     <ul class="sidebar-submenu">
                         <li><a href="?view=profile"
                                 class="<?php echo $view == 'profile' ? 'active' : ''; ?>">Profile</a></li>
-                        <li><a href="#">Banks & Cards</a></li>
-                        <li><a href="#">Addresses</a></li>
-                        <li><a href="#">Change Password</a></li>
+                        <li><a href="?view=banks" class="<?php echo $view == 'banks' ? 'active' : ''; ?>">Banks &
+                                Cards</a></li>
+                        <li><a href="?view=address"
+                                class="<?php echo $view == 'address' ? 'active' : ''; ?>">Addresses</a></li>
+                        <li><a href="?view=password" class="<?php echo $view == 'password' ? 'active' : ''; ?>">Change
+                                Password</a></li>
                     </ul>
                 </li>
                 <li class="sidebar-menu-item">
@@ -484,10 +515,87 @@ if ($view == 'orders' || $view == 'tracking') {
 
                     </div>
 
-                    <?php
+                <?php
                 } // End if/else for curr_order
             endif;
             ?>
+
+            <!-- VIEW: BANKS & CARDS -->
+                <?php if ($view == 'banks'): ?>
+                    <div class="content-header">
+                        <div class="content-title">Credit / Debit Cards</div>
+                        <div class="content-subtitle">Manage your payment methods</div>
+                    </div>
+                
+                    <div class="empty-state">
+                        <i class="fas fa-credit-card" style="font-size: 40px; margin-bottom: 20px; color: #ccc;"></i>
+                        <p>You have not added any cards yet.</p>
+                        <button class="btn-primary" style="margin-top: 10px;">+ Add New Card</button>
+                    </div>
+
+                <!-- VIEW: ADDRESSES -->
+            <?php elseif ($view == 'address'): ?>
+                    <div class="content-header">
+                        <div class="content-title">My Addresses</div>
+                        <div class="content-subtitle">Manage your shipping addresses</div>
+                    </div>
+
+                    <div class="address-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 4px; position: relative;">
+                        <span style="position: absolute; right: 20px; top: 20px;">
+                            <a href="#" style="color: #0f8392; margin-right: 10px; font-size: 14px;">Edit</a>
+                            <a href="#" style="color: #d9534f; font-size: 14px;">Delete</a>
+                        </span>
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 10px;"><?php echo htmlspecialchars($user['fullname'] ?? $user['username']); ?> <span style="font-weight: normal; color: #777;">| <?php echo htmlspecialchars($user['phone'] ?? ''); ?></span></div>
+                        <div style="color: #555; font-size: 14px; line-height: 1.5;">
+                            <?php echo htmlspecialchars($user['address'] ?? ''); ?><br>
+                            <?php echo htmlspecialchars($user['city'] ?? ''); ?>, <?php echo htmlspecialchars($user['zip'] ?? ''); ?>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <span style="border: 1px solid #0f8392; color: #0f8392; font-size: 11px; padding: 2px 6px; border-radius: 2px;">Default</span>
+                        </div>
+                    </div>
+                
+                    <button class="btn-primary" style="margin-top: 20px;">+ Add New Address</button>
+
+                <!-- VIEW: CHANGE PASSWORD -->
+            <?php elseif ($view == 'password'): ?>
+                    <div class="content-header">
+                        <div class="content-title">Change Password</div>
+                        <div class="content-subtitle">For your account's security, do not share your password with anyone.</div>
+                    </div>
+                
+                    <?php echo $msg; ?>
+
+                    <form action="" method="POST" style="max-width: 500px;">
+                        <input type="hidden" name="action" value="change_password">
+                    
+                        <div class="profile-input-group">
+                            <div class="profile-input-label" style="width: 180px;">Current Password</div>
+                            <div class="profile-input-field">
+                                <input type="password" name="current_password" required>
+                            </div>
+                        </div>
+
+                        <div class="profile-input-group">
+                            <div class="profile-input-label" style="width: 180px;">New Password</div>
+                            <div class="profile-input-field">
+                                <input type="password" name="new_password" required>
+                            </div>
+                        </div>
+
+                        <div class="profile-input-group">
+                            <div class="profile-input-label" style="width: 180px;">Confirm Password</div>
+                            <div class="profile-input-field">
+                                <input type="password" name="confirm_password" required>
+                            </div>
+                        </div>
+
+                        <div class="save-btn-container" style="margin-left: 210px;">
+                            <button type="submit" class="btn-primary">Confirm</button>
+                        </div>
+                    </form>
+
+            <?php endif; ?>
 
         </main>
     </div>
