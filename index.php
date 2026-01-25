@@ -13,7 +13,7 @@ header("Expires: 0"); // Proxies.
     <title>iMarket - Loading...</title>
     <!-- Use root-relative paths for maximum reliability -->
     <meta http-equiv="refresh" content="2;url=php/login.php">
-    <link rel="icon" type="image/png" href="logo.png?v=3.6">
+    <link rel="icon" type="image/png" href="logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -100,7 +100,7 @@ header("Expires: 0"); // Proxies.
 <body>
     <div class="loader-container">
         <!-- Using the root logo.png we just created -->
-        <img src="logo.png?v=3.6" alt="iMarket Logo" class="logo-img">
+        <img src="logo.png" alt="iMarket Logo" class="logo-img">
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
             <p class="tagline">Your Market, Your Choice</p>
@@ -110,5 +110,3 @@ header("Expires: 0"); // Proxies.
 </body>
 
 </html>
-
-
