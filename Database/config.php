@@ -36,10 +36,19 @@ $sql_create_tickets = "CREATE TABLE IF NOT EXISTS `support_tickets` (
 
 $conn->query($sql_create_tickets);
 
-// Check and add is_read for support_tickets
-$check_is_read = $conn->query("SHOW COLUMNS FROM support_tickets LIKE 'is_read'");
-if ($check_is_read->num_rows == 0) {
-  $conn->query("ALTER TABLE support_tickets ADD COLUMN is_read TINYINT(1) DEFAULT 0 AFTER admin_reply");
+// Ensure support_tickets has all necessary columns
+$ticket_cols = [
+  'ticket_number' => "VARCHAR(50) DEFAULT NULL AFTER id",
+  'category' => "VARCHAR(100) DEFAULT NULL AFTER customer_id",
+  'admin_reply' => "TEXT DEFAULT NULL AFTER assigned_to",
+  'is_read' => "TINYINT(1) DEFAULT 0 AFTER admin_reply"
+];
+
+foreach ($ticket_cols as $col => $def) {
+  $check = $conn->query("SHOW COLUMNS FROM support_tickets LIKE '$col'");
+  if ($check->num_rows == 0) {
+    $conn->query("ALTER TABLE support_tickets ADD COLUMN $col $def");
+  }
 }
 // Auto-update orders table structure
 $check_orders = $conn->query("SHOW TABLES LIKE 'orders'");

@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         image_url VARCHAR(255),
         cash_tendered DECIMAL(10,2) DEFAULT 0,
         change_amount DECIMAL(10,2) DEFAULT 0,
+        payment_reference VARCHAR(100) DEFAULT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )";
     mysqli_query($conn, $create_table);
@@ -103,6 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     if (mysqli_num_rows($check_cash) == 0) {
         mysqli_query($conn, "ALTER TABLE orders ADD COLUMN cash_tendered DECIMAL(10,2) DEFAULT 0 AFTER image_url");
         mysqli_query($conn, "ALTER TABLE orders ADD COLUMN change_amount DECIMAL(10,2) DEFAULT 0 AFTER cash_tendered");
+    }
+    $check_ref = mysqli_query($conn, "SHOW COLUMNS FROM orders LIKE 'payment_reference'");
+    if (mysqli_num_rows($check_ref) == 0) {
+        mysqli_query($conn, "ALTER TABLE orders ADD COLUMN payment_reference VARCHAR(100) DEFAULT NULL AFTER change_amount");
     }
 
     // Generate Tracking Number (OTP for Shipment Tracking)
@@ -124,9 +129,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
 
     $cash_tendered = isset($_POST['cash_tendered']) ? floatval($_POST['cash_tendered']) : 0;
     $change_amount = isset($_POST['change_amount']) ? floatval(str_replace(',', '', $_POST['change_amount'])) : 0;
+    $payment_reference = isset($_POST['payment_reference']) ? mysqli_real_escape_string($conn, $_POST['payment_reference']) : '';
 
-    $sql = "INSERT INTO orders (user_id, tracking_number, product_id, product_name, quantity, price, total_amount, full_name, phone_number, address, city, postal_code, payment_method, status, image_url, cash_tendered, change_amount)
-            VALUES ('$user_id', '$tracking_number', '$first_product_id', '$product_name_str', '$total_qty', '$subtotal', '$total', '$full_name', '$phone_number', '$address', '$city', '$postal_code', '$payment_method', '$status', '$first_image', '$cash_tendered', '$change_amount')";
+    $sql = "INSERT INTO orders (user_id, tracking_number, product_id, product_name, quantity, price, total_amount, full_name, phone_number, address, city, postal_code, payment_method, status, image_url, cash_tendered, change_amount, payment_reference)
+            VALUES ('$user_id', '$tracking_number', '$first_product_id', '$product_name_str', '$total_qty', '$subtotal', '$total', '$full_name', '$phone_number', '$address', '$city', '$postal_code', '$payment_method', '$status', '$first_image', '$cash_tendered', '$change_amount', '$payment_reference')";
 
     if (mysqli_query($conn, $sql)) {
         $last_order_id = mysqli_insert_id($conn);
@@ -453,117 +459,141 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                         </div>
 
                         <!-- Cash Change Calculation Section (Hidden by default, shown for COD) -->
-                        <div id="cash-calculation-section"
-                            style="display: block; margin-top: 20px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #e9ecef;">
-                            <div style="font-weight: 600; margin-bottom: 10px; color: #333;">Cash Payment Details</div>
-                            <div style="display: flex; gap: 15px; align-items: center;">
-                                <div style="flex: 1;">
-                                    <label style="font-size: 0.9em; color: #555;">Cash Tendered (₱)</label>
-                                    <input type="number" id="cash_tendered" name="cash_tendered" class="form-control"
-                                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
-                                        placeholder="0.00" oninput="calculateChange()">
-                                </div>
-                                <div style="flex: 1;">
-                                    <label style="font-size: 0.9em; color: #555;">Change (₱)</label>
-                                    <input type="text" id="change_amount" name="change_amount" class="form-control"
-                                        style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: #e9ecef; font-weight: bold; color: #2A3B7E;"
-                                        readonly value="0.00">
-                                </div>
+                        <div id="payment-warning"
+                            style="color: #dc3545; font-size: 0.85em; margin-top: 5px; display: none;">Insufficient
+                            cash amount.</div>
+                    </div>
+
+                    <!-- GCash Process Section -->
+                    <div id="gcash-process-section"
+                        style="display: none; margin-top: 20px; background: #e3f2fd; padding: 15px; border-radius: 8px; border: 1px solid #bbdefb;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+                            <img src="../image/Banks/Gcash.jpeg" style="width: 50px; border-radius: 5px;" alt="GCash">
+                            <div>
+                                <div style="font-weight: 700; color: #1976d2;">GCash Transfer</div>
+                                <div style="font-size: 0.85em; color: #555;">Please send your payment to the number
+                                    below.</div>
                             </div>
-                            <div id="payment-warning"
-                                style="color: #dc3545; font-size: 0.85em; margin-top: 5px; display: none;">Insufficient
-                                cash amount.</div>
                         </div>
 
-                    </div>
-                </div>
+                        <div
+                            style="background: #fff; padding: 15px; border-radius: 6px; text-align: center; margin-bottom: 15px; border: 1px dashed #1976d2;">
+                            <div style="font-size: 0.8em; color: #777; text-transform: uppercase; letter-spacing: 1px;">
+                                GCash Account</div>
+                            <div style="font-size: 20px; font-weight: 800; color: #1976d2; margin: 5px 0;">0912 345 6789
+                            </div>
+                            <div style="font-size: 0.9em; font-weight: 600;">IMARKET PH</div>
+                        </div>
 
-                <!-- Right Side (Summary) -->
-                <div class="summary-card">
-                    <h3>Order Summary</h3>
-                    <div class="summary-row">
-                        <span>Subtotal</span>
-                        <span>₱<?php echo number_format($subtotal, 2); ?></span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Shipping Fee</span>
-                        <span>₱<?php echo number_format($shipping, 2); ?></span>
-                    </div>
-                    <div class="summary-row">
-                        <span>VAT (12%)</span>
-                        <span>₱<?php echo number_format($tax, 2); ?></span>
-                    </div>
-                    <div class="summary-row total">
-                        <span>Total Payment</span>
-                        <span id="total_display_amount"
-                            data-amount="<?php echo $total; ?>">₱<?php echo number_format($total, 2); ?></span>
+                        <div class="form-group">
+                            <label
+                                style="font-weight: 600; font-size: 0.9em; display: block; margin-bottom: 8px;">Reference
+                                Number / Ticket (13 Digits)</label>
+                            <input type="text" name="payment_reference" id="payment_reference" class="form-control"
+                                style="width: 100%; border: 1px solid #1976d2; padding: 10px; border-radius: 4px;"
+                                placeholder="Enter GCash Reference Number" maxlength="13">
+                        </div>
+                        <p style="font-size: 0.75em; color: #666; margin-top: 8px;">
+                            <i class="fas fa-info-circle"></i> Once payment is sent, please input the 13-digit reference
+                            number from your receipt.
+                        </p>
                     </div>
 
-                    <button type="submit" name="place_order" id="btn-place-order" class="btn-place-order">Place Order
-                        Now</button>
-                    <p style="margin-top:1rem; font-size:0.8rem; color:#777; text-align:center;">
-                        By placing an order, you agree to our Terms of Service.
-                    </p>
                 </div>
             </div>
-        </form>
 
-        <script>
-            function selectPayment(element) {
-                document.querySelectorAll('.payment-card-label').forEach(el => el.classList.remove('selected'));
-                element.classList.add('selected');
-                const radio = element.querySelector('input[type="radio"]');
-                if (radio) {
-                    radio.checked = true;
-                    toggleCashSection(radio.value);
-                }
+            <!-- Right Side (Summary) -->
+            <div class="summary-card">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>₱<?php echo number_format($subtotal, 2); ?></span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping Fee</span>
+                    <span>₱<?php echo number_format($shipping, 2); ?></span>
+                </div>
+                <div class="summary-row">
+                    <span>VAT (12%)</span>
+                    <span>₱<?php echo number_format($tax, 2); ?></span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total Payment</span>
+                    <span id="total_display_amount"
+                        data-amount="<?php echo $total; ?>">₱<?php echo number_format($total, 2); ?></span>
+                </div>
+
+                <button type="submit" name="place_order" id="btn-place-order" class="btn-place-order">Place Order
+                    Now</button>
+                <p style="margin-top:1rem; font-size:0.8rem; color:#777; text-align:center;">
+                    By placing an order, you agree to our Terms of Service.
+                </p>
+            </div>
+    </div>
+    </form>
+
+    <script>
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-card-label').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            const radio = element.querySelector('input[type="radio"]');
+            if (radio) {
+                radio.checked = true;
+                toggleCashSection(radio.value);
             }
+        }
 
-            function toggleCashSection(method) {
-                const cashSection = document.getElementById('cash-calculation-section');
-                if (method === 'Cash On Delivery') {
-                    cashSection.style.display = 'block';
-                } else {
-                    cashSection.style.display = 'none';
-                }
+        function toggleCashSection(method) {
+            const cashSection = document.getElementById('cash-calculation-section');
+            const gcashSection = document.getElementById('gcash-process-section');
+
+            // Hide all first
+            cashSection.style.display = 'none';
+            gcashSection.style.display = 'none';
+
+            if (method === 'Cash On Delivery') {
+                cashSection.style.display = 'block';
+            } else if (method === 'GCash') {
+                gcashSection.style.display = 'block';
             }
+        }
 
-            function calculateChange() {
-                const total = parseFloat(document.getElementById('total_display_amount').getAttribute('data-amount'));
-                const cashInput = document.getElementById('cash_tendered');
-                const changeInput = document.getElementById('change_amount');
-                const warning = document.getElementById('payment-warning');
-                const placeOrderBtn = document.getElementById('btn-place-order');
+        function calculateChange() {
+            const total = parseFloat(document.getElementById('total_display_amount').getAttribute('data-amount'));
+            const cashInput = document.getElementById('cash_tendered');
+            const changeInput = document.getElementById('change_amount');
+            const warning = document.getElementById('payment-warning');
+            const placeOrderBtn = document.getElementById('btn-place-order');
 
-                const cash = parseFloat(cashInput.value);
+            const cash = parseFloat(cashInput.value);
 
-                if (isNaN(cash) || cash < total) {
-                    changeInput.value = "0.00";
-                    if (cashInput.value.length > 0) {
-                        warning.style.display = 'block';
-                        // placeOrderBtn.disabled = true; // Optional: disable button
-                        // placeOrderBtn.style.opacity = '0.5';
-                    }
-                } else {
-                    const change = cash - total;
-                    changeInput.value = change.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    warning.style.display = 'none';
-                    // placeOrderBtn.disabled = false;
-                    // placeOrderBtn.style.opacity = '1';
+            if (isNaN(cash) || cash < total) {
+                changeInput.value = "0.00";
+                if (cashInput.value.length > 0) {
+                    warning.style.display = 'block';
+                    // placeOrderBtn.disabled = true; // Optional: disable button
+                    // placeOrderBtn.style.opacity = '0.5';
                 }
+            } else {
+                const change = cash - total;
+                changeInput.value = change.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                warning.style.display = 'none';
+                // placeOrderBtn.disabled = false;
+                // placeOrderBtn.style.opacity = '1';
             }
+        }
 
-            // Initialize state on page load
-            document.addEventListener('DOMContentLoaded', function () {
-                const selected = document.querySelector('input[name="payment_method"]:checked');
-                if (selected) {
-                    toggleCashSection(selected.value);
-                } else {
-                    // Default logic (COD is usually checked by default in PHP loop above? Yes)
-                    toggleCashSection('Cash On Delivery');
-                }
-            });
-        </script>
+        // Initialize state on page load
+        document.addEventListener('DOMContentLoaded', function () {
+            const selected = document.querySelector('input[name="payment_method"]:checked');
+            if (selected) {
+                toggleCashSection(selected.value);
+            } else {
+                // Default logic (COD is usually checked by default in PHP loop above? Yes)
+                toggleCashSection('Cash On Delivery');
+            }
+        });
+    </script>
 </body>
 
 </html>
