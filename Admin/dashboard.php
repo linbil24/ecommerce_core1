@@ -523,6 +523,39 @@ if ($is_logged_in) {
             role: "<?php echo $admin_role; ?>",
             currentAdminId: <?php echo $_SESSION['admin_id'] ?? 0; ?>
         };
+
+        // Update chat notification badges
+        async function updateChatNotifications() {
+            try {
+                const response = await fetch('get_unread_chat_count.php');
+                const data = await response.json();
+
+                if (data.success && data.unread_count > 0) {
+                    const mainBadge = document.getElementById('chatNotificationBadge');
+                    const subBadge = document.getElementById('chatSubNotificationBadge');
+
+                    if (mainBadge) {
+                        mainBadge.textContent = data.unread_count;
+                        mainBadge.style.display = 'inline-block';
+                    }
+                    if (subBadge) {
+                        subBadge.textContent = data.unread_count;
+                        subBadge.style.display = 'inline-block';
+                    }
+                } else {
+                    const mainBadge = document.getElementById('chatNotificationBadge');
+                    const subBadge = document.getElementById('chatSubNotificationBadge');
+                    if (mainBadge) mainBadge.style.display = 'none';
+                    if (subBadge) subBadge.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error fetching chat notifications:', error);
+            }
+        }
+
+        // Update notifications on page load and every 10 seconds
+        updateChatNotifications();
+        setInterval(updateChatNotifications, 10000);
     </script>
     <script src="../javascript/admin/Dashboard.js"></script>
 </body>
