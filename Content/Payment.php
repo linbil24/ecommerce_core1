@@ -98,6 +98,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     )";
     mysqli_query($conn, $create_table);
 
+    // Self-healing: Ensure columns exist if table already existed
+    $check_cash = mysqli_query($conn, "SHOW COLUMNS FROM orders LIKE 'cash_tendered'");
+    if (mysqli_num_rows($check_cash) == 0) {
+        mysqli_query($conn, "ALTER TABLE orders ADD COLUMN cash_tendered DECIMAL(10,2) DEFAULT 0 AFTER image_url");
+        mysqli_query($conn, "ALTER TABLE orders ADD COLUMN change_amount DECIMAL(10,2) DEFAULT 0 AFTER cash_tendered");
+    }
+
     // Generate Tracking Number (OTP for Shipment Tracking)
     $tracking_number = "TRK-" . date("Ymd") . "-" . str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);
     // Prepare data for Order
