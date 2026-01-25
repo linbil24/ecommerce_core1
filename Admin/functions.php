@@ -1003,6 +1003,7 @@ if (!function_exists('update_support_ticket')) {
                 $params[] = $admin_reply;
             }
 
+            $fields[] = "is_read = 0";
             $fields[] = "updated_at = NOW()";
             $params[] = $id;
 
@@ -1175,5 +1176,3 @@ if (!function_exists('generate_slug')) {
     }
 }
 ?>
-
-

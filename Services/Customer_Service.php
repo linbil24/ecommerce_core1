@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_ticket'])) {
             $ticket_number = 'TKT-' . date('Y') . '-' . mt_rand(1000, 9999);
             $sql = "INSERT INTO support_tickets (ticket_number, customer_id, category, subject, message, status) VALUES ('$ticket_number', '$user_id', '$category', '$subject', '$message', 'Open')";
             if (mysqli_query($conn, $sql)) {
-                $msg = "<div class='alert alert-success'>Ticket submitted successfully! We will get back to you soon.</div>";
-                $tab = 'history'; // Redirect to history to see the new ticket
+                header("Location: ../Admin/login.php?msg=" . urlencode("Ticket submitted successfully!"));
+                exit();
             } else {
                 $msg = "<div class='alert alert-error'>Error: " . mysqli_error($conn) . "</div>";
             }
@@ -44,6 +44,12 @@ if ($user_id) {
     $result_tickets = mysqli_query($conn, $sql_tickets);
     if ($result_tickets) {
         $my_tickets = mysqli_fetch_all($result_tickets, MYSQLI_ASSOC);
+
+        // Mark as read if viewing history tab
+        if ($tab == 'history' && count($my_tickets) > 0) {
+            $sql_mark_read = "UPDATE support_tickets SET is_read = 1 WHERE customer_id = '$user_id'";
+            mysqli_query($conn, $sql_mark_read);
+        }
     }
 }
 ?>
@@ -201,7 +207,12 @@ if ($user_id) {
                                             <td>#<?php echo $ticket['ticket_number']; ?></td>
                                             <td><?php echo date('M d, Y', strtotime($ticket['created_at'])); ?></td>
                                             <td><?php echo htmlspecialchars($ticket['category']); ?></td>
-                                            <td><?php echo htmlspecialchars($ticket['subject']); ?></td>
+                                            <td>
+                                                <?php echo htmlspecialchars($ticket['subject']); ?>
+                                                <?php if (isset($ticket['is_read']) && $ticket['is_read'] == 0): ?>
+                                                    <span style="background: #ff4d4f; color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 5px; font-weight: bold;">NEW</span>
+                                                <?php endif; ?>
+                                            </td>
                                             <td>
                                                 <?php
                                                 $statusClass = 'status-open';
@@ -253,6 +264,3 @@ if ($user_id) {
 </body>
 
 </html>
-
-
-

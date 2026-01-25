@@ -14,7 +14,8 @@ if (!isset($path_prefix)) {
             <ul>
                 <li><a href="<?php echo $path_prefix; ?>Services/Customer_Service.php">Customer Service</a></li>
                 <li><a href="<?php echo $path_prefix; ?>Services/How_to_buy.php">How to Buy</a></li>
-                <li><a href="<?php echo $path_prefix; ?>Services/Shipping%20%26%20Delivery.php">Shipping & Delivery</a></li>
+                <li><a href="<?php echo $path_prefix; ?>Services/Shipping%20%26%20Delivery.php">Shipping & Delivery</a>
+                </li>
                 <li><a href="<?php echo $path_prefix; ?>Services/Return%20%26%20Refund.php">Return & Refund</a></li>
                 <li><a href="<?php echo $path_prefix; ?>Services/Contact%20Us.php">Contact Us</a></li>
             </ul>
@@ -24,10 +25,10 @@ if (!isset($path_prefix)) {
         <div class="footer-column">
             <h4>About ImarketPH</h4>
             <ul>
-                <li><a href="<?php echo $path_prefix; ?>about/About_Us.php">About Us</a></li>
-                <li><a href="<?php echo $path_prefix; ?>about/Careers.php">Careers</a></li>
-                <li><a href="<?php echo $path_prefix; ?>about/Terms%20%26%20Conditions.php">Terms & Conditions</a></li>
-                <li><a href="<?php echo $path_prefix; ?>about/Privacy%20Policy.php">Privacy Policy</a></li>
+                <li><a href="<?php echo $path_prefix; ?>About/About_Us.php">About Us</a></li>
+                <li><a href="<?php echo $path_prefix; ?>About/Careers.php">Careers</a></li>
+                <li><a href="<?php echo $path_prefix; ?>About/Terms%20%26%20Conditions.php">Terms & Conditions</a></li>
+                <li><a href="<?php echo $path_prefix; ?>About/Privacy%20Policy.php">Privacy Policy</a></li>
             </ul>
         </div>
 

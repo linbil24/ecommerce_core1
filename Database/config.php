@@ -35,6 +35,12 @@ $sql_create_tickets = "CREATE TABLE IF NOT EXISTS `support_tickets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
 $conn->query($sql_create_tickets);
+
+// Check and add is_read for support_tickets
+$check_is_read = $conn->query("SHOW COLUMNS FROM support_tickets LIKE 'is_read'");
+if ($check_is_read->num_rows == 0) {
+  $conn->query("ALTER TABLE support_tickets ADD COLUMN is_read TINYINT(1) DEFAULT 0 AFTER admin_reply");
+}
 // Auto-update orders table structure
 $check_orders = $conn->query("SHOW TABLES LIKE 'orders'");
 if ($check_orders->num_rows > 0) {

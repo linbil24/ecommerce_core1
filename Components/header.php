@@ -37,6 +37,25 @@ if (isset($_SESSION['user_id'])) {
 if (!isset($path_prefix)) {
     $path_prefix = '../';
 }
+
+// Fetch notification count for unread support tickets
+$unread_tickets_count = 0;
+if (isset($_SESSION['user_id'])) {
+    // We need a database connection. If $conn isn't set, try to include config.php
+    if (!isset($conn)) {
+        include_once $path_prefix . 'Database/config.php';
+    }
+
+    if (isset($conn)) {
+        $u_id = $_SESSION['user_id'];
+        $n_sql = "SELECT COUNT(*) as unread FROM support_tickets WHERE customer_id = '$u_id' AND is_read = 0";
+        $n_result = mysqli_query($conn, $n_sql);
+        if ($n_result) {
+            $n_row = mysqli_fetch_assoc($n_result);
+            $unread_tickets_count = $n_row['unread'];
+        }
+    }
+}
 ?>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -111,6 +130,9 @@ if (!isset($path_prefix)) {
                 <div class="user-profile-container">
                     <div class="user-avatar-circle">
                         <i class="far fa-user"></i>
+                        <?php if ($unread_tickets_count > 0): ?>
+                            <span class="notification-badge"><?php echo $unread_tickets_count; ?></span>
+                        <?php endif; ?>
                     </div>
                     <span class="user-display-name">
                         <?php
@@ -123,6 +145,11 @@ if (!isset($path_prefix)) {
                         <ul class="user-dropdown-menu">
                             <li><a href="<?php echo $path_prefix; ?>Content/user-account.php"><i class="fas fa-user"></i>
                                     My Profile</a></li>
+                            <li><a href="<?php echo $path_prefix; ?>Services/Customer_Service.php?tab=history"><i
+                                        class="fas fa-ticket-alt"></i>
+                                    Support Tickets <?php if ($unread_tickets_count > 0): ?><span
+                                            class="badge-mini"><?php echo $unread_tickets_count; ?></span><?php endif; ?></a>
+                            </li>
                             <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
                             <li><a href="<?php echo $path_prefix; ?>php/logout.php"><i class="fas fa-sign-out-alt"></i>
                                     Logout</a></li>
