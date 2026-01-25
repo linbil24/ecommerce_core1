@@ -76,10 +76,19 @@
             </div>
         </div>
 
-        <a href="#" class="nav-item" onclick="showModule('support', this)">
-            <i data-lucide="message-square" class="w-5 h-5 mr-3"></i>
-            Customer Support Center
-        </a>
+        <div class="group">
+            <a href="#" class="nav-item"
+                onclick="toggleSubMenu(this, 'support-submenu'); showSubModule('support', 'tickets');">
+                <i data-lucide="message-square" class="w-5 h-5 mr-3"></i>
+                Customer Support Center
+                <i data-lucide="chevron-right"
+                    class="w-4 h-4 ml-auto transition-transform duration-200 chevron-icon"></i>
+            </a>
+            <div id="support-submenu" class="submenu hidden">
+                <a href="#" onclick="showSubModule('support', 'tickets'); event.preventDefault();">Support Tickets</a>
+                <a href="#" onclick="showSubModule('support', 'chat'); event.preventDefault();">Store Chat Messages</a>
+            </div>
+        </div>
 
         <a href="#" class="nav-item" onclick="showModule('alerts', this)">
             <i data-lucide="alert-triangle" class="w-5 h-5 mr-3"></i>
@@ -96,5 +105,3 @@
         <p>iMARKET Admin Portal v1.0</p>
     </div>
 </aside>
-
-
