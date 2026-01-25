@@ -41,7 +41,7 @@ if (!isset($path_prefix)) {
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <!-- Core Component Styles -->
-<link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/header.css">
+<link rel="stylesheet" href="<?php echo $path_prefix; ?>css/components/header.css?v=<?php echo time(); ?>">
 
 <header class="header">
     <div class="header-container">
