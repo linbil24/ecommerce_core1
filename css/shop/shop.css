@@ -494,320 +494,102 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    background-color: #B0E0E6;
-    /* Explicit blue */
+    background-color: #f0f8ff;
+    /* AliceBlue - softer, cleaner blue "hindi masakit sa mata" */
+    color: #333;
 }
 
 .modal-title {
     font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 10px;
+    font-weight: 700;
+    margin-bottom: 5px;
     line-height: 1.3;
-    color: #000;
+    color: #1a3b6e;
+    /* Dark Blue for title */
 }
 
-.title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
+/* ... (keeping existing intermediate styles) ... */
 
-.modal-price {
-    font-size: 32px;
-    color: #000;
-    /* Gold/Yellow for price */
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.modal-meta {
-    display: flex;
-    gap: 15px;
-    font-size: 14px;
-    margin-bottom: 25px;
-    color: #bbb;
-    align-items: center;
-}
-
-.modal-rating i {
-    color: #2A3B7E;
-    margin-right: 2px;
-}
-
-#modalSold {
-    color: #2A3B7E;
-}
-
-.modal-options {
-    margin-bottom: 25px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 20px;
-}
-
-.option-group {
-    margin-bottom: 20px;
-}
-
-.option-label {
-    font-size: 14px;
-    color: #000;
-    margin-bottom: 10px;
-    display: block;
-    font-weight: 700;
-}
-
-.option-btn {
-    background: #2A3B7E;
-    color: #fff;
-    padding: 8px 16px;
-    cursor: pointer;
-    margin-right: 10px;
-    border-radius: 2px;
-    font-size: 13px;
-    transition: all 0.2s;
-}
-
-.option-btn:hover {
-    border-color: #fff;
-
-}
-
-.option-btn.selected {
-    border-color: #2A3B7E;
-    color: #2A3B7E;
-    background: #fff;
-
-}
-
-.quantity-control {
-    display: flex;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    width: fit-content;
-    margin-bottom: 30px;
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.qty-btn {
-    background: #2A3B7E;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.2s;
-}
-
-.qty-btn:hover {
-    background: rgba(0, 0, 0, 0.4);
-}
-
-.qty-input {
-    width: 60px;
-    text-align: center;
-    background: transparent;
-    border: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    height: 38px;
-    font-size: 16px;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: auto;
-}
-
-.btn-add-cart,
-.btn-buy-now {
-    flex: 1;
-    padding: 15px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s;
-}
-
-.btn-add-cart {
-    background: #2A3B7E;
-    color: #fff;
-
-}
-
-.btn-add-cart:hover {
-    /* border: 1px solid #000; */
-    color: #2A3B7E;
-    background: #fff;
-}
-
-.btn-buy-now {
-    background: #2A3B7E;
-    color: #fff;
-    border: none;
-}
-
-.btn-buy-now:hover {
-    /* border: 1px solid #000; */
-    color: #2A3B7E;
-    background: #fff;
-}
-
-
-#modalHeaderTitle {
-    color: #000;
-    margin-bottom: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    /* font-family: 'Montserrat', sans-serif; */
-}
-
-/* Responsive Modal */
-@media (max-width: 900px) {
-    .modal-content {
-        flex-direction: column;
-        overflow-y: auto;
-    }
-
-    .modal-left,
-    .modal-right {
-        width: 100%;
-    }
-
-    .modal-left {
-        height: 250px;
-    }
-
-    .modal-product-img {
-        max-height: 220px;
-    }
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-    .product-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-@media (max-width: 900px) {
-    .product-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
-
-    .store-layout {
-        flex-direction: column;
-    }
-
-    .shop-sidebar {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-
-    .sidebar-list {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-}
-
-@media (max-width: 600px) {
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Reviews Section */
 .modal-reviews {
-    margin-top: 30px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    padding-top: 20px;
+    margin-top: 25px;
+    background: #fff;
+    /* White background for reviews to pop against the blue modal */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 .modal-reviews h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     margin-bottom: 15px;
-    color: #000;
+    color: #2A3B7E;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
 }
 
 .reviews-list {
-    max-height: 200px;
-    /* Scrollable height */
+    max-height: 250px;
     overflow-y: auto;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
+    padding-right: 5px;
+    /* Space for scrollbar */
 }
 
 .review-item {
     margin-bottom: 15px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #f5f5f5;
     padding-bottom: 15px;
 }
 
 .review-item:last-child {
     border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .review-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 5px;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
-.reviewer-name {
-    font-weight: 600;
-    font-size: 13px;
-    color: #333;
+.user-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #2A3B7E;
 }
 
 .review-date {
     font-size: 11px;
-    color: #777;
-}
-
-.review-rating {
-    margin-bottom: 8px;
+    color: #999;
 }
 
 .review-rating i {
-    color: #ffb800;
-    /* Gold stars */
-    font-size: 10px;
-    margin-right: 1px;
+    color: #ffc107;
+    font-size: 11px;
+    margin-right: 2px;
 }
 
 .review-text {
     font-size: 13px;
     color: #555;
-    line-height: 1.4;
+    line-height: 1.5;
     margin: 0;
 }
 
 .rate-product-link {
     display: block;
     text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
     color: #2A3B7E;
-    font-weight: 600;
     text-decoration: none;
-    font-size: 14px;
-    padding: 10px 0;
-    border-top: 1px solid #eaeaea;
+    font-weight: 600;
 }
 
 .rate-product-link:hover {
     text-decoration: underline;
 }
-
-

@@ -190,7 +190,7 @@ $img = $product['image'];
     <!-- Rating/Sold Summary -->
     <div class="rating-summary-row">
         <div class="rating-summary-item">
-            <span class="rating-count" style="color: #ee4d2d; border-bottom: 1px solid #ee4d2d;">4.9</span>
+            <span class="rating-count">4.9</span>
             <div class="stars-orange">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
