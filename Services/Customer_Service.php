@@ -23,6 +23,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_ticket'])) {
         $message = clean_input($_POST['message']);
 
         if (!empty($category) && !empty($subject) && !empty($message)) {
+            // Just-In-Time Repair: Ensure all necessary columns exist
+            $required_cols = [
+                'ticket_number' => "VARCHAR(50) DEFAULT NULL AFTER id",
+                'category' => "VARCHAR(100) DEFAULT NULL AFTER customer_id",
+                'is_read' => "TINYINT(1) DEFAULT 0"
+            ];
+            foreach ($required_cols as $col => $def) {
+                $check_col = mysqli_query($conn, "SHOW COLUMNS FROM support_tickets LIKE '$col'");
+                if (mysqli_num_rows($check_col) == 0) {
+                    mysqli_query($conn, "ALTER TABLE support_tickets ADD COLUMN $col $def");
+                }
+            }
+            // Ensure unique index on ticket_number
+            $check_idx = mysqli_query($conn, "SHOW INDEX FROM support_tickets WHERE Key_name = 'ticket_number'");
+            if (mysqli_num_rows($check_idx) == 0) {
+                mysqli_query($conn, "ALTER TABLE support_tickets ADD UNIQUE (ticket_number)");
+            }
+
             $ticket_number = 'TKT-' . date('Y') . '-' . mt_rand(1000, 9999);
             $sql = "INSERT INTO support_tickets (ticket_number, customer_id, category, subject, message, status) VALUES ('$ticket_number', '$user_id', '$category', '$subject', '$message', 'Open')";
             if (mysqli_query($conn, $sql)) {
@@ -210,7 +228,8 @@ if ($user_id) {
                                             <td>
                                                 <?php echo htmlspecialchars($ticket['subject']); ?>
                                                 <?php if (isset($ticket['is_read']) && $ticket['is_read'] == 0): ?>
-                                                    <span style="background: #ff4d4f; color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 5px; font-weight: bold;">NEW</span>
+                                                    <span
+                                                        style="background: #ff4d4f; color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 5px; font-weight: bold;">NEW</span>
                                                 <?php endif; ?>
                                             </td>
                                             <td>

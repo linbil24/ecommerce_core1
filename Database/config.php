@@ -38,19 +38,33 @@ $conn->query($sql_create_tickets);
 
 // Ensure support_tickets has all necessary columns
 $ticket_cols = [
-  'ticket_number' => "VARCHAR(50) DEFAULT NULL AFTER id",
-  'category' => "VARCHAR(100) DEFAULT NULL AFTER customer_id",
-  'admin_reply' => "TEXT DEFAULT NULL AFTER assigned_to",
-  'is_read' => "TINYINT(1) DEFAULT 0 AFTER admin_reply"
+  'ticket_number' => "VARCHAR(50) DEFAULT NULL",
+  'customer_id' => "INT(11) DEFAULT NULL",
+  'category' => "VARCHAR(100) DEFAULT NULL",
+  'subject' => "VARCHAR(200) NOT NULL",
+  'message' => "TEXT NOT NULL",
+  'status' => "ENUM('Open','In Progress','Resolved','Closed') DEFAULT 'Open'",
+  'priority' => "ENUM('Low','Medium','High','Urgent') DEFAULT 'Medium'",
+  'assigned_to' => "INT(11) DEFAULT NULL",
+  'admin_reply' => "TEXT DEFAULT NULL",
+  'is_read' => "TINYINT(1) DEFAULT 0"
 ];
 
 foreach ($ticket_cols as $col => $def) {
-  // Use a more aggressive check: try to select the column. If it fails, it's definitely missing.
-  $test = $conn->query("SELECT $col FROM support_tickets LIMIT 1");
-  if (!$test) {
-    if (!$conn->query("ALTER TABLE support_tickets ADD COLUMN $col $def")) {
-      error_log("Failed to add column $col: " . $conn->error);
-    }
+  $res = $conn->query("SHOW COLUMNS FROM support_tickets LIKE '$col'");
+  if ($res && $res->num_rows == 0) {
+    // Column missing, add it
+    $conn->query("ALTER TABLE support_tickets ADD COLUMN $col $def");
+  }
+}
+
+// Ensure unique index on ticket_number exists
+$res = $conn->query("SHOW INDEX FROM support_tickets WHERE Key_name = 'ticket_number'");
+if ($res && $res->num_rows == 0) {
+  // Check if column exists first (it should now)
+  $col_check = $conn->query("SHOW COLUMNS FROM support_tickets LIKE 'ticket_number'");
+  if ($col_check && $col_check->num_rows > 0) {
+    $conn->query("ALTER TABLE support_tickets ADD UNIQUE (ticket_number)");
   }
 }
 // Auto-update orders table structure
