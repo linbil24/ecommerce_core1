@@ -1,61 +1,92 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>iMarket</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMarket - Loading...</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: white;
+        }
+        
+        .loader-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 900;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite ease-in-out;
+        }
+        
+        .brand-name { font-size: 42px; font-weight: 800; margin-top: 10px; }
+        .tagline { font-size: 16px; opacity: 0.8; }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
 
-  <!-- ✅ Prevent favicon error -->
-  <link rel="icon" href="data:,">
-
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(180deg, #4f6f8f, #2c4b6b);
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
-
-    img {
-      width: 120px;
-      margin-bottom: 10px;
-    }
-
-    .loader {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(255,255,255,.3);
-      border-top: 4px solid #fff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-top: 20px;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-  </style>
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
 </head>
 <body>
 
-  <!-- ✅ FIXED IMAGE PATH -->
-  <img src="/image/logo.png" alt="iMarket Logo">
+    <div class="loader-container">
+        <div class="logo">IM</div>
+        <div class="text-content">
+            <h1 class="brand-name">iMarket</h1>
+            <p class="tagline">Your Market, Your Choice</p>
+        </div>
+        <div class="spinner"></div>
+        <p style="font-size: 14px; opacity: 0.6;">Loading dashboard...</p>
+    </div>
 
-  <h1>iMarket</h1>
-  <p>Your Market, Your Choice</p>
+    <script>
+        // Simple, clean redirect logic
+        (function() {
+            const destination = '../php/login.php';
+            
+            function doRedirect() {
+                window.location.replace(destination);
+            }
 
-  <div class="loader"></div>
+            // Redirect after 2 seconds
+            setTimeout(doRedirect, 2000);
 
-  <!-- ✅ FIXED REDIRECT -->
-  <script>
-    setTimeout(() => {
-      window.location.href = "/ecommerce_core1/php/login.php";
-    }, 2500);
-  </script>
-
+            // Backup: redirect if user interacts
+            document.addEventListener('click', doRedirect);
+        })();
+    </script>
 </body>
 </html>
