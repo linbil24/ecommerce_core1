@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
-    
-    <link rel="icon" href="data:,">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -66,28 +64,42 @@
     </div>
 
     <script>
+        'use strict';
+        
         // Redirect logic with proper path and fallback
         function redirectUser() {
-            // Check if user is already logged in by looking for session indicator
-            const isLoggedIn = document.cookie.includes('user_id') || document.cookie.includes('PHPSESSID');
-            
-            const targetUrl = isLoggedIn ? "Content/Dashboard.php" : "php/login.php";
-            
             try {
+                // Check if user is already logged in by looking for session indicator
+                var cookies = document.cookie;
+                var isLoggedIn = (cookies.indexOf('user_id') !== -1) || (cookies.indexOf('PHPSESSID') !== -1);
+                
+                var targetUrl = isLoggedIn ? "Content/Dashboard.php" : "php/login.php";
+                
+                // Use replace to prevent back button
                 window.location.replace(targetUrl);
-            } catch (e) {
-                // Fallback if replace fails
-                window.location.href = targetUrl;
+            } catch (err) {
+                // Fallback: use href if replace fails
+                var fallbackUrl = "php/login.php";
+                window.location.href = fallbackUrl;
             }
         }
         
         // Redirect after page load
-        window.addEventListener('load', function() {
+        if (document.readyState === 'loading') {
+            window.addEventListener('load', function() {
+                setTimeout(redirectUser, 2000);
+            });
+        } else {
+            // Page already loaded
             setTimeout(redirectUser, 2000);
-        });
+        }
         
-        // Fallback: redirect if page doesn't load properly
-        setTimeout(redirectUser, 5000);
+        // Safety fallback: redirect if page doesn't load properly after 5 seconds
+        setTimeout(function() {
+            if (window.location.pathname.includes('index.html')) {
+                redirectUser();
+            }
+        }, 5000);
     </script>
 </body>
 </html>
