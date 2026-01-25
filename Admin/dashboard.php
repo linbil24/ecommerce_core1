@@ -445,7 +445,7 @@ if ($is_logged_in) {
 <body>
 
     <!-- Sidebar / Navigation -->
-    <?php include '../Components/admin/sidebar.php'; ?>
+    <?php include '../Components/Admin/sidebar.php'; ?>
 
     <!-- Main Content Area -->
     <main class="main-content">
