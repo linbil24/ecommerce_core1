@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_ticket'])) {
             $ticket_number = 'TKT-' . date('Y') . '-' . mt_rand(1000, 9999);
             $sql = "INSERT INTO support_tickets (ticket_number, customer_id, category, subject, message, status) VALUES ('$ticket_number', '$user_id', '$category', '$subject', '$message', 'Open')";
             if (mysqli_query($conn, $sql)) {
-                header("Location: ../Admin/login.php?msg=" . urlencode("Ticket submitted successfully!"));
+                header("Location: ../Admin/dashboard.php?msg=" . urlencode("Ticket submitted successfully!"));
                 exit();
             } else {
                 $msg = "<div class='alert alert-error'>Error: " . mysqli_error($conn) . "</div>";

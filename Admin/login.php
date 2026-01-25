@@ -19,8 +19,35 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // 3. CHECK IF ALREADY LOGGED IN
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: dashboard.php'); // Route through index to Dashboard
+    header('Location: dashboard.php');
     exit();
+}
+
+// 3.1 AUTO-LOGIN FROM MAIN SITE (Session Sharing)
+if (isset($_SESSION['user_id']) && !isset($_SESSION['admin_logged_in'])) {
+    $u_id = $_SESSION['user_id'];
+    // Fetch details from 'users' table to promote to Admin session (Seller mode)
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->execute([$u_id]);
+    $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user_data) {
+        $_SESSION['admin_logged_in'] = true;
+        $_SESSION['admin_id'] = $user_data['id'];
+        $_SESSION['admin_username'] = $user_data['fullname'];
+        $_SESSION['admin_role'] = 'Seller'; // Promotion to Seller/Admin role
+
+        // Optional: Re-fetch if they exist in admin_users for specific roles
+        $check_admin = $pdo->prepare("SELECT role FROM admin_users WHERE email = ?");
+        $check_admin->execute([$user_data['email']]);
+        $role_data = $check_admin->fetch(PDO::FETCH_ASSOC);
+        if ($role_data) {
+            $_SESSION['admin_role'] = $role_data['role'];
+        }
+
+        header('Location: dashboard.php');
+        exit();
+    }
 }
 
 $message = $_GET['msg'] ?? '';
@@ -216,5 +243,3 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
 </body>
 
 </html>
-
-
