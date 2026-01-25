@@ -142,7 +142,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Custom Auth CSS -->
-    <link rel="stylesheet" href="../css/admin/auth.css">
+    <link rel="stylesheet" href="../css/Admin/auth.css">
 </head>
 
 <body>
