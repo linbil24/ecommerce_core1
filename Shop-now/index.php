@@ -211,135 +211,194 @@
                 // ---------------------
                 ?>
 
-                <div class="store-layout">
-                    <!-- Sidebar -->
-                    <div class="shop-sidebar">
-                        <div class="sidebar-title">Store</div>
-                        <ul class="sidebar-list">
-                            <?php foreach ($shops as $shop):
-                                $isActive = ($shop['name'] === $selectedStore) ? 'active' : '';
-                                ?>
-                                <li class="sidebar-item">
-                                    <a href="?store=<?php echo urlencode($shop['name']); ?>"
-                                        class="sidebar-link <?php echo $isActive; ?>">
-                                        <span class="sidebar-checkbox"><i class="fas fa-check"></i></span>
-                                        <?php echo $shop['name']; ?>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </div>
+                <!-- Mimic Category UI: Link CSS -->
+                <link rel="stylesheet" href="../css/components/category-base.css?v=<?php echo time(); ?>">
+                <style>
+                    /* Specific Overrides for Shop View */
+                    .best-selling-container {
+                        margin-top: 20px;
+                        margin-bottom: 40px;
+                    }
 
-                    <!-- Main Content (Products) -->
-                    <div class="store-main">
-                        <!-- Store Header Panel -->
-                        <!-- Store Header Panel -->
-                        <?php
-                        // Construct filename for header inclusion
-                        // We use $selectedStore here because we are in the main scope
-                        // Strip trailing dot to avoid double dots
-                        $safeSelectedStore = rtrim($selectedStore, '.');
-                        $exactFile = 'Content/' . $safeSelectedStore . '.php';
-                        $dashedFile = 'Content/' . str_replace(' ', '-', $safeSelectedStore) . '.php';
+                    .shop-seller-profile {
+                        color: #fff;
+                    }
 
-                        $targetFile = null;
-                        if (file_exists($exactFile) && filesize($exactFile) > 0) {
-                            $targetFile = $exactFile;
-                        } elseif (file_exists($dashedFile) && filesize($dashedFile) > 0) {
-                            $targetFile = $dashedFile;
-                        }
+                    .shop-seller-stats {
+                        display: flex;
+                        gap: 15px;
+                        margin: 15px 0;
+                        font-size: 0.9em;
+                    }
 
-                        if ($targetFile) {
-                            // Flag to tell the included file to render header HTML
-                            $rendering_header = true;
-                            include $targetFile;
-                            $rendering_header = false;
-                        } else {
-                            // Fallback if file doesn't exist or doesn't support header rendering
-                            ?>
-                            <div class="store-header-panel">
-                                <div class="store-info">
-                                    <img src="https://ui-avatars.com/api/?name=<?php echo $currentShop['initials']; ?>&background=<?php echo $currentShop['bg']; ?>&color=fff&size=64"
-                                        alt="Logo" class="store-logo-small">
-                                    <div class="store-details">
-                                        <h1><?php echo htmlspecialchars($selectedStore); ?></h1>
-                                        <p><?php echo htmlspecialchars($currentShop['category']); ?></p>
-                                    </div>
-                                </div>
-                                <!-- Sort Controls -->
-                                <div class="sort-controls">
-                                    <span class="sort-label">Sort By</span>
-                                    <a href="?store=<?php echo urlencode($selectedStore); ?>&sort=best"
-                                        class="sort-btn <?php echo (!isset($_GET['sort']) || $_GET['sort'] == 'best') ? 'active' : ''; ?>">Best
-                                        Match</a>
-                                    <a href="?store=<?php echo urlencode($selectedStore); ?>&sort=latest"
-                                        class="sort-btn <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'latest') ? 'active' : ''; ?>">Latest</a>
-                                    <a href="?store=<?php echo urlencode($selectedStore); ?>&sort=sales"
-                                        class="sort-btn <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'sales') ? 'active' : ''; ?>">Top
-                                        Sales</a>
-                                    <a href="?store=<?php echo urlencode($selectedStore); ?>&sort=<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc') ? 'price_desc' : 'price_asc'; ?>"
-                                        class="sort-btn <?php echo (isset($_GET['sort']) && strpos($_GET['sort'], 'price') !== false) ? 'active' : ''; ?>">
-                                        Price <i
-                                            class="fas fa-chevron-<?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price_asc') ? 'up' : 'down'; ?>"></i>
-                                    </a>
+                    .stat-item {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+
+                    .stat-val {
+                        font-weight: bold;
+                        font-size: 1.1em;
+                    }
+
+                    .stat-label {
+                        font-size: 0.8em;
+                        opacity: 0.8;
+                    }
+
+                    .seller-actions {
+                        display: flex;
+                        gap: 10px;
+                        margin-top: 20px;
+                    }
+
+                    .btn-seller-action {
+                        padding: 8px 15px;
+                        border-radius: 4px;
+                        text-decoration: none;
+                        font-size: 0.9em;
+                        border: 1px solid rgba(255, 255, 255, 0.3);
+                        color: white;
+                        transition: all 0.2s;
+                    }
+
+                    .btn-seller-action:hover {
+                        background: rgba(255, 255, 255, 0.1);
+                        border-color: white;
+                    }
+
+                    .btn-seller-primary {
+                        background: white;
+                        color: #333;
+                        border: none;
+                        font-weight: 600;
+                    }
+
+                    .btn-seller-primary:hover {
+                        background: #f0f0f0;
+                        color: #333;
+                    }
+                </style>
+
+                <!-- NEW LAYOUT: Hero Split (Seller Profile + Banner) -->
+                <div class="best-selling-container"
+                    style="background: linear-gradient(135deg, #<?php echo $currentShop['bg']; ?> 0%, #1a1a1a 100%);">
+                    <!-- Left: Seller Account/Profile -->
+                    <div class="text-section" style="flex: 1; padding: 40px;">
+                        <div class="shop-seller-profile">
+                            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+                                <img src="https://ui-avatars.com/api/?name=<?php echo $currentShop['initials']; ?>&background=fff&color=<?php echo $currentShop['bg']; ?>&size=64"
+                                    alt="Logo"
+                                    style="width: 64px; height: 64px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2);">
+                                <div>
+                                    <div
+                                        style="font-size: 0.8em; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px;">
+                                        Official Store</div>
+                                    <h2 style="margin: 0; font-size: 2em;"><?php echo htmlspecialchars($selectedStore); ?>
+                                    </h2>
                                 </div>
                             </div>
-                            <?php
-                        }
-                        ?>
 
-                        <!-- Product Grid -->
-                        <div class="product-grid">
-                            <?php
-                            foreach ($products as $index => $product):
-                                // Use data from array
-                                $rating = $product['rating'];
-                                $soldVal = $product['sold'];
-                                // Format sold count e.g. 1.2k
-                                if ($soldVal > 1000) {
-                                    $soldDisp = number_format($soldVal / 1000, 1) . 'k';
-                                } else {
-                                    $soldDisp = $soldVal;
-                                }
+                            <p style="opacity: 0.9; margin-bottom: 5px;">
+                                <?php echo htmlspecialchars($currentShop['category']); ?></p>
 
-                                // Prepare URL for Add/Check out
-                                $addToCartUrl = "add-cart.php?add_to_cart=1&product_name=" . urlencode($product['name']) .
-                                    "&price=" . $product['raw_price'] .
-                                    "&quantity=1" .
-                                    "&store=" . urlencode($selectedStore) .
-                                    "&image=" . urlencode($product['image']);
-                                ?>
-                                <div class="product-card" data-name="<?php echo htmlspecialchars($product['name']); ?>"
-                                    data-price="<?php echo $product['price']; ?>"
-                                    data-raw-price="<?php echo $product['raw_price']; ?>"
-                                    data-image="<?php echo $product['image']; ?>"
-                                    data-rating="<?php echo $product['rating']; ?>" data-sold="<?php echo $soldDisp; ?>"
-                                    data-store="<?php echo htmlspecialchars($selectedStore); ?>"
-                                    onclick="openProductModal(this)">
-
-                                    <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>"
-                                        class="product-img">
-                                    <h3 class="product-title"><?php echo htmlspecialchars($product['name']); ?></h3>
-                                    <div class="product-price"><?php echo $product['price']; ?></div>
-                                    <div class="product-meta-row">
-                                        <div class="product-rating">
-                                            <?php
-                                            // Render stars
-                                            for ($i = 0; $i < 5; $i++) {
-                                                if ($i < floor($rating))
-                                                    echo '<i class="fas fa-star"></i>';
-                                                else
-                                                    echo '<i class="far fa-star"></i>';
-                                            }
-                                            ?>
-                                        </div>
-                                        <span class="product-sold"><?php echo $soldDisp; ?> Sold</span>
-                                    </div>
-                                    <!-- Changed button to just be visual or helper, clicking card opens modal anyway -->
-                                    <button class="add-to-cart-btn">View Details</button>
+                            <div class="shop-seller-stats">
+                                <div class="stat-item">
+                                    <span class="stat-val"><?php echo $currentShop['rating']; ?>/5.0</span>
+                                    <span class="stat-label">Rating</span>
                                 </div>
-                            <?php endforeach; ?>
+                                <div class="stat-item">
+                                    <span class="stat-val"><?php echo $currentShop['sold']; ?></span>
+                                    <span class="stat-label">Products Sold</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-val">100%</span>
+                                    <span class="stat-label">Chat Response</span>
+                                </div>
+                            </div>
+
+                            <div class="seller-actions">
+                                <a href="#" class="btn-seller-action btn-seller-primary"><i class="fas fa-plus"></i>
+                                    Follow</a>
+                                <a href="#" class="btn-seller-action"><i class="fas fa-comment-dots"></i> Chat</a>
+                                <a href="../Content/user-account.php?view=profile" class="btn-seller-action"><i
+                                        class="fas fa-info-circle"></i> Seller Info</a>
+                            </div>
                         </div>
+                    </div>
+
+                    <!-- Right: Banner/Slider -->
+                    <div class="slider-section" style="flex: 1.5;">
+                        <div class="fade-slider">
+                            <div class="fade-slide active"
+                                style="background-image: url('https://via.placeholder.com/800x400/<?php echo $currentShop['bg']; ?>/ffffff?text=<?php echo urlencode($selectedStore . ' Collection'); ?>'); background-size: cover; background-position: center;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="section-header"
+                        style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+                        <div>
+                            <h2>Store Products</h2>
+                            <p>Browse our latest collection</p>
+                        </div>
+
+                        <!-- Sort Controls -->
+                        <div class="sort-controls">
+                            <span class="sort-label">Sort By:</span>
+                            <a href="?store=<?php echo urlencode($selectedStore); ?>&sort=best"
+                                class="sort-btn <?php echo (!isset($_GET['sort']) || $_GET['sort'] == 'best') ? 'active' : ''; ?>">Best
+                                Match</a>
+                            <a href="?store=<?php echo urlencode($selectedStore); ?>&sort=latest"
+                                class="sort-btn <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'latest') ? 'active' : ''; ?>">Latest</a>
+                            <a href="?store=<?php echo urlencode($selectedStore); ?>&sort=sales"
+                                class="sort-btn <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'sales') ? 'active' : ''; ?>">Top
+                                Sales</a>
+                        </div>
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div class="product-grid">
+                        <?php
+                        foreach ($products as $index => $product):
+                            $rating = $product['rating'];
+                            $soldVal = $product['sold'];
+                            if ($soldVal > 1000) {
+                                $soldDisp = number_format($soldVal / 1000, 1) . 'k';
+                            } else {
+                                $soldDisp = $soldVal;
+                            }
+                            ?>
+                            <div class="product-card" data-name="<?php echo htmlspecialchars($product['name']); ?>"
+                                data-price="<?php echo $product['price']; ?>"
+                                data-raw-price="<?php echo $product['raw_price']; ?>"
+                                data-image="<?php echo $product['image']; ?>" data-rating="<?php echo $product['rating']; ?>"
+                                data-sold="<?php echo $soldDisp; ?>"
+                                data-store="<?php echo htmlspecialchars($selectedStore); ?>" onclick="openProductModal(this)">
+
+                                <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>"
+                                    class="product-img">
+                                <h3 class="product-title"><?php echo htmlspecialchars($product['name']); ?></h3>
+                                <div class="product-price"><?php echo $product['price']; ?></div>
+                                <div class="product-meta-row">
+                                    <div class="product-rating">
+                                        <?php
+                                        for ($i = 0; $i < 5; $i++) {
+                                            if ($i < floor($rating))
+                                                echo '<i class="fas fa-star"></i>';
+                                            else
+                                                echo '<i class="far fa-star"></i>';
+                                        }
+                                        ?>
+                                    </div>
+                                    <span class="product-sold"><?php echo $soldDisp; ?> Sold</span>
+                                </div>
+                                <button class="add-to-cart-btn">View Details</button>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 
