@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     mysqli_query($conn, $create_table);
 
     // Generate Tracking Number (OTP for Shipment Tracking)
-    $tracking_number = "TRK-" . date("Ymd") . "-" . str_pad(mt_rand(1, 9999), 4, '0', STR_PAD_LEFT);
+
 
     // Prepare data for Order
     $all_product_names = [];
@@ -428,6 +428,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                             <?php } ?>
                         </div>
 
+                        <!-- Cash Change Calculation Section (Hidden by default, shown for COD) -->
+                        <div id="cash-calculation-section" style="display: block; margin-top: 20px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #e9ecef;">
+                            <div style="font-weight: 600; margin-bottom: 10px; color: #333;">Cash Payment Details</div>
+                            <div style="display: flex; gap: 15px; align-items: center;">
+                                <div style="flex: 1;">
+                                    <label style="font-size: 0.9em; color: #555;">Cash Tendered (₱)</label>
+                                    <input type="number" id="cash_tendered" name="cash_tendered" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" placeholder="0.00" oninput="calculateChange()">
+                                </div>
+                                <div style="flex: 1;">
+                                    <label style="font-size: 0.9em; color: #555;">Change (₱)</label>
+                                    <input type="text" id="change_amount" name="change_amount" class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; background: #e9ecef; font-weight: bold; color: #2A3B7E;" readonly value="0.00">
+                                </div>
+                            </div>
+                            <div id="payment-warning" style="color: #dc3545; font-size: 0.85em; margin-top: 5px; display: none;">Insufficient cash amount.</div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -448,29 +464,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                     </div>
                     <div class="summary-row total">
                         <span>Total Payment</span>
-                        <span>₱<?php echo number_format($total, 2); ?></span>
+                        <span id="total_display_amount" data-amount="<?php echo $total; ?>">₱<?php echo number_format($total, 2); ?></span>
                     </div>
 
-                    <button type="submit" name="place_order" class="btn-place-order">Place Order Now</button>
+                    <button type="submit" name="place_order" id="btn-place-order" class="btn-place-order">Place Order Now</button>
                     <p style="margin-top:1rem; font-size:0.8rem; color:#777; text-align:center;">
                         By placing an order, you agree to our Terms of Service.
                     </p>
                 </div>
             </div>
         </form>
-    </div>
-
-    <footer>
-        <?php include '../Components/footer.php'; ?>
-    </footer>
 
     <script>
         function selectPayment(element) {
             document.querySelectorAll('.payment-card-label').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             const radio = element.querySelector('input[type="radio"]');
-            if (radio) radio.checked = true;
+            if (radio) {
+                radio.checked = true;
+                toggleCashSection(radio.value);
+            }
         }
+
+        function toggleCashSection(method) {
+            const cashSection = document.getElementById('cash-calculation-section');
+            if (method === 'Cash On Delivery') {
+                cashSection.style.display = 'block';
+            } else {
+                cashSection.style.display = 'none';
+            }
+        }
+
+        function calculateChange() {
+            const total = parseFloat(document.getElementById('total_display_amount').getAttribute('data-amount'));
+            const cashInput = document.getElementById('cash_tendered');
+            const changeInput = document.getElementById('change_amount');
+            const warning = document.getElementById('payment-warning');
+            const placeOrderBtn = document.getElementById('btn-place-order');
+            
+            const cash = parseFloat(cashInput.value);
+
+            if (isNaN(cash) || cash < total) {
+                changeInput.value = "0.00";
+                if(cashInput.value.length > 0) {
+                     warning.style.display = 'block';
+                     // placeOrderBtn.disabled = true; // Optional: disable button
+                     // placeOrderBtn.style.opacity = '0.5';
+                }
+            } else {
+                const change = cash - total;
+                changeInput.value = change.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                warning.style.display = 'none';
+                // placeOrderBtn.disabled = false;
+                // placeOrderBtn.style.opacity = '1';
+            }
+        }
+
+        // Initialize state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const selected = document.querySelector('input[name="payment_method"]:checked');
+            if(selected) {
+               toggleCashSection(selected.value);
+            } else {
+               // Default logic (COD is usually checked by default in PHP loop above? Yes)
+               toggleCashSection('Cash On Delivery'); 
+            }
+        });
     </script>
 </body>
 
