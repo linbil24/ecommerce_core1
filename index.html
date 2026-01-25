@@ -1,6 +1,5 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,13 +66,16 @@
             animation: spin 1s linear infinite;
         }
 
+        .loading-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: fadeInOut 2s infinite;
+        }
+
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes pulse {
@@ -85,6 +87,11 @@
                 transform: scale(1.05);
                 filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
             }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
         }
 
         .fade-in {
@@ -103,15 +110,17 @@
         }
     </style>
 </head>
-
 <body>
     <div class="loader-container fade-in">
         <img src="https://core1.imarketph.com/image/logo.png" alt="iMarket Logo" class="logo-img">
+        
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
             <p class="tagline">Your Market, Your Choice</p>
         </div>
+
         <div class="spinner"></div>
+        <p class="loading-text">Loading your experience...</p>
     </div>
 
     <noscript>
@@ -133,5 +142,4 @@
         })();
     </script>
 </body>
-
 </html>
