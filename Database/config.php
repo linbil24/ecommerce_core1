@@ -45,9 +45,12 @@ $ticket_cols = [
 ];
 
 foreach ($ticket_cols as $col => $def) {
-  $check = $conn->query("SHOW COLUMNS FROM support_tickets LIKE '$col'");
-  if ($check->num_rows == 0) {
-    $conn->query("ALTER TABLE support_tickets ADD COLUMN $col $def");
+  // Use a more aggressive check: try to select the column. If it fails, it's definitely missing.
+  $test = $conn->query("SELECT $col FROM support_tickets LIMIT 1");
+  if (!$test) {
+    if (!$conn->query("ALTER TABLE support_tickets ADD COLUMN $col $def")) {
+      error_log("Failed to add column $col: " . $conn->error);
+    }
   }
 }
 // Auto-update orders table structure
