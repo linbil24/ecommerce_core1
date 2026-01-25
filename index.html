@@ -8,95 +8,56 @@
     <link rel="icon" href="data:,">
 
     <style>
-        /* RESET & BASE STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: sans-serif;
             background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             color: white;
+            overflow: hidden;
         }
-        
-        .loader-container {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-            animation: fadeIn 0.8s ease-out;
-        }
-        
-        /* LOGO - CSS-BASED (Hindi na kailangan ng logo.png para iwas error) */
-        .logo-box {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            display: flex;
+        .container { text-align: center; }
+        .logo-placeholder {
+            width: 100px; height: 100px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 42px;
-            font-weight: 900;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s infinite ease-in-out;
+            font-size: 40px; font-weight: bold;
+            margin-bottom: 20px;
         }
-        
-        .brand-name { font-size: 48px; font-weight: 800; margin-bottom: 5px; }
-        .tagline { font-size: 18px; opacity: 0.85; margin-bottom: 40px; }
-        
+        .brand { font-size: 48px; margin-bottom: 10px; }
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.15);
-            border-top: 4px solid #ffffff;
+            width: 50px; height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top-color: white;
             border-radius: 50%;
-            animation: spin 1.2s linear infinite;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="loader-container">
-        <div class="logo-box">IM</div>
-        
-        <div class="text-content">
-            <h1 class="brand-name">iMarket</h1>
-            <p class="tagline">Your Market, Your Choice</p>
-        </div>
-        
+    <div class="container">
+        <div class="logo-placeholder">IM</div>
+        <h1 class="brand">iMarket</h1>
+        <p>Your Market, Your Choice</p>
         <div class="spinner"></div>
-        <p style="opacity: 0.8;">Preparing your dashboard...</p>
+        <p id="status">Redirecting to login...</p>
     </div>
 
     <script>
-        // SIMPLE REDIRECT - Inalis ang mga kumplikadong flags na nag-eerror
-        (function() {
-            // Siguraduhin na tama ang path ng login.php mo
-            const target = '../php/login.php';
-
-            function startRedirect() {
-                setTimeout(function() {
-                    window.location.href = target;
-                }, 2500); // 2.5 seconds na loading
-            }
-
-            // Kapag tapos na mag-load ang page, simulan ang redirect
-            if (document.readyState === 'complete') {
-                startRedirect();
-            } else {
-                window.addEventListener('load', startRedirect);
-            }
-        })();
+        // Pinaka-simpleng redirect. Walang flags, walang regex.
+        // Siguraduhin na ang path na ito ay tama.
+        setTimeout(function() {
+            window.location.href = "../php/login.php";
+        }, 2000);
     </script>
-
 </body>
 </html>
