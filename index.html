@@ -8,7 +8,7 @@
     <link rel="icon" href="data:,">
 
     <style>
-        /* RESET */
+        /* RESET & BASE STYLES */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
@@ -31,8 +31,8 @@
             animation: fadeIn 0.8s ease-out;
         }
         
-        /* LOGO - CSS-BASED (Hindi kailangan ng logo.png) */
-        .logo {
+        /* LOGO - CSS-BASED (Hindi na kailangan ng logo.png para iwas error) */
+        .logo-box {
             width: 120px;
             height: 120px;
             background: rgba(255, 255, 255, 0.15);
@@ -66,27 +66,36 @@
 <body>
 
     <div class="loader-container">
-        <div class="logo">IM</div>
+        <div class="logo-box">IM</div>
+        
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
             <p class="tagline">Your Market, Your Choice</p>
         </div>
+        
         <div class="spinner"></div>
-        <p style="opacity: 0.7;">Loading dashboard...</p>
+        <p style="opacity: 0.8;">Preparing your dashboard...</p>
     </div>
 
     <script>
-        // Simple at direktang redirect pagkatapos ng 2 segundo
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                window.location.href = '../php/login.php';
-            }, 2000);
-        });
+        // SIMPLE REDIRECT - Inalis ang mga kumplikadong flags na nag-eerror
+        (function() {
+            // Siguraduhin na tama ang path ng login.php mo
+            const target = '../php/login.php';
 
-        // Backup: Redirect kung may pinindot ang user
-        document.addEventListener('click', function() {
-            window.location.href = '../php/login.php';
-        });
+            function startRedirect() {
+                setTimeout(function() {
+                    window.location.href = target;
+                }, 2500); // 2.5 seconds na loading
+            }
+
+            // Kapag tapos na mag-load ang page, simulan ang redirect
+            if (document.readyState === 'complete') {
+                startRedirect();
+            } else {
+                window.addEventListener('load', startRedirect);
+            }
+        })();
     </script>
 
 </body>
