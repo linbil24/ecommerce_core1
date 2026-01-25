@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_ticket'])) {
             // Just-In-Time Repair: Ensure all necessary columns exist
             $required_cols = [
                 'ticket_number' => "VARCHAR(50) DEFAULT NULL AFTER id",
+                'customer_id' => "INT(11) DEFAULT NULL AFTER ticket_number",
                 'category' => "VARCHAR(100) DEFAULT NULL AFTER customer_id",
                 'is_read' => "TINYINT(1) DEFAULT 0"
             ];
@@ -35,6 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_ticket'])) {
                     mysqli_query($conn, "ALTER TABLE support_tickets ADD COLUMN $col $def");
                 }
             }
+
+            // Fix for 'user_id' doesn't have default value
+            $check_u = mysqli_query($conn, "SHOW COLUMNS FROM support_tickets LIKE 'user_id'");
+            if (mysqli_num_rows($check_u) > 0) {
+                mysqli_query($conn, "ALTER TABLE support_tickets MODIFY COLUMN user_id INT(11) DEFAULT NULL");
+            }
+
             // Ensure unique index on ticket_number
             $check_idx = mysqli_query($conn, "SHOW INDEX FROM support_tickets WHERE Key_name = 'ticket_number'");
             if (mysqli_num_rows($check_idx) == 0) {

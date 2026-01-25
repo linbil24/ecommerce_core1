@@ -58,6 +58,12 @@ foreach ($ticket_cols as $col => $def) {
   }
 }
 
+// Special fix for 'user_id' if it exists and is causing 'no default value' error
+$check_uid = $conn->query("SHOW COLUMNS FROM support_tickets LIKE 'user_id'");
+if ($check_uid && $check_uid->num_rows > 0) {
+  $conn->query("ALTER TABLE support_tickets MODIFY COLUMN user_id INT(11) DEFAULT NULL");
+}
+
 // Ensure unique index on ticket_number exists
 $res = $conn->query("SHOW INDEX FROM support_tickets WHERE Key_name = 'ticket_number'");
 if ($res && $res->num_rows == 0) {
