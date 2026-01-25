@@ -1,105 +1,141 @@
-﻿<!DOCTYPE html>
+<?php
+// iMarket Loading Page - Cache-Breaking Version
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+?>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
-
+    <meta http-equiv="refresh" content="3;url=php/login.php">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
             overflow: hidden;
+            color: white;
         }
-        body > div {
+
+        .loader-container {
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: fadeIn 0.5s ease-in;
+            gap: 20px;
         }
+
         .logo-box {
-            width: 100px; height: 100px;
+            width: 100px;
+            height: 100px;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px; font-weight: bold;
+            font-size: 40px;
+            font-weight: bold;
             margin-bottom: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
-        h1 { margin-bottom: 10px; font-weight: 600; }
-        .subtitle { margin-bottom: 30px; }
+
+        .brand-name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 50px;
+        }
+
         .spinner {
-            width: 40px; height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top-color: #fff;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid #fff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 20px 0;
         }
-        #status-text {
-            margin-top: 20px;
-            font-size: 14px;
-            opacity: 0.9;
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div>
+    <div class="loader-container">
         <div class="logo-box">IM</div>
-        <h1 style="font-size: 42px;">iMarket</h1>
-        <p class="subtitle" style="opacity: 0.8;">Your Market, Your Choice</p>
+        <div class="text-content">
+            <h1 class="brand-name">iMarket</h1>
+            <p class="tagline">Your Market, Your Choice</p>
+        </div>
         <div class="spinner"></div>
-        <p id="status-text">Loading...</p>
     </div>
 
     <script>
         'use strict';
         
-        // Redirect logic with proper path and fallback
         function redirectUser() {
             try {
-                // Check if user is already logged in by looking for session indicator
                 var cookies = document.cookie;
                 var isLoggedIn = (cookies.indexOf('user_id') !== -1) || (cookies.indexOf('PHPSESSID') !== -1);
-                
-                var targetUrl = isLoggedIn ? "Content/Dashboard.php" : "php/login.php";
-                
-                // Use replace to prevent back button
+                var targetUrl = isLoggedIn ? "/Content/Dashboard.php" : "/php/login.php";
                 window.location.replace(targetUrl);
             } catch (err) {
-                // Fallback: use href if replace fails
-                var fallbackUrl = "php/login.php";
-                window.location.href = fallbackUrl;
+                window.location.href = "/php/login.php";
             }
         }
         
-        // Redirect after page load
         if (document.readyState === 'loading') {
             window.addEventListener('load', function() {
                 setTimeout(redirectUser, 2000);
             });
         } else {
-            // Page already loaded
             setTimeout(redirectUser, 2000);
         }
         
-        // Safety fallback: redirect if page doesn't load properly after 5 seconds
         setTimeout(function() {
-            if (window.location.pathname.includes('index.html')) {
-                redirectUser();
-            }
+            redirectUser();
         }, 5000);
     </script>
 </body>
+
 </html>
