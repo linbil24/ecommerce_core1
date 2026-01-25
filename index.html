@@ -159,13 +159,13 @@
 
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function () {
-                    setTimeout(doRedirect, 2000);
+                    setTimeout(doRedirect, 1500);
                 });
             } else {
-                setTimeout(doRedirect, 2000);
+                setTimeout(doRedirect, 1500);
             }
 
-            setTimeout(doRedirect, 4000);
+            setTimeout(doRedirect, 3000);
         })();
     </script>
 </body>
