@@ -248,12 +248,14 @@ if ($view == 'orders' || $view == 'tracking') {
                             <div class="profile-input-group">
                                 <div class="profile-input-label">Gender</div>
                                 <div class="profile-input-field"> <!-- Simple Radio or Select -->
+                                    <?php $g = $user['gender'] ?? ''; ?>
                                     <select name="gender">
-                                    <option value="" disabled <?php echo empty($g) ? 'selected' : ''; ?>>Select Gender
-                                    </option>
-                                    <option value="Male" <?php echo ($g == 'Male') ? 'selected' : ''; ?>>Male</option>
-                                    <option value="Female" <?php echo ($g == 'Female') ? 'selected' : ''; ?>>Female</option>
-                                    <option value="Other" <?php echo ($g == 'Other') ? 'selected' : ''; ?>>Other</option>
+                                        <option value="" disabled <?php echo empty($g) ? 'selected' : ''; ?>>Select Gender
+                                        </option>
+                                        <option value="Male" <?php echo ($g == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                        <option value="Female" <?php echo ($g == 'Female') ? 'selected' : ''; ?>>Female
+                                        </option>
+                                        <option value="Other" <?php echo ($g == 'Other') ? 'selected' : ''; ?>>Other</option>
                                     </select>
                                 </div>
                             </div>
