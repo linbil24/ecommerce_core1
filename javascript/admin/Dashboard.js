@@ -1492,11 +1492,11 @@ function renderAlertsModule() {
         alertsList.push({
             type: 'warning',
             icon: 'alert-triangle',
-            title: 'Low Stock Alert',
-            message: `${lowStockProducts.length} product(s) are running low on stock (less than 10 units)`,
+            title: 'Inventory Alert',
+            message: `${lowStockProducts.length} items are running low.`,
             count: lowStockProducts.length,
             color: '#f59e0b',
-            bgColor: 'rgba(245, 158, 11, 0.1)'
+            glowClass: 'badge-glow-warning'
         });
     }
 
@@ -1504,177 +1504,134 @@ function renderAlertsModule() {
         alertsList.push({
             type: 'info',
             icon: 'shopping-cart',
-            title: 'Pending Orders',
-            message: `${pendingOrders.length} order(s) are pending approval`,
+            title: 'Order Queue',
+            message: `${pendingOrders.length} orders need approval.`,
             count: pendingOrders.length,
             color: '#4f46e5',
-            bgColor: 'rgba(79, 70, 229, 0.1)'
+            glowClass: 'badge-glow-indigo'
         });
     }
 
     if (openTickets.length > 0) {
         alertsList.push({
-            type: 'warning',
+            type: 'urgent',
             icon: 'message-square',
-            title: 'Open Support Tickets',
-            message: `${openTickets.length} support ticket(s) require attention`,
+            title: 'Support Tickets',
+            message: `${openTickets.length} active tickets pending.`,
             count: openTickets.length,
             color: '#f97316',
-            bgColor: 'rgba(249, 115, 22, 0.1)'
+            glowClass: 'pulse-badge'
         });
     }
 
     if (pendingTransactions.length > 0) {
         alertsList.push({
-            type: 'info',
+            type: 'finance',
             icon: 'dollar-sign',
             title: 'Pending Payments',
-            message: `${pendingTransactions.length} transaction(s) are pending`,
+            message: `${pendingTransactions.length} payments processing.`,
             count: pendingTransactions.length,
             color: '#06b6d4',
-            bgColor: 'rgba(6, 182, 212, 0.1)'
+            glowClass: 'badge-glow-cyan'
         });
     }
 
-    const alertsHTML = alertsList.map(alert => `
-        <div class="alert-item gradient-border" style="margin-bottom: 1.25rem;">
-            <div class="glass-panel" style="padding: 1.25rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 1.25rem; position: relative; z-index: 1;">
-                <div style="width: 3.5rem; height: 3.5rem; background: ${alert.bgColor}; border-radius: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                    <i data-lucide="${alert.icon}" style="width: 1.75rem; height: 1.75rem; color: ${alert.color};"></i>
-                </div>
-                <div style="flex: 1;">
-                    <h4 style="font-weight: 700; color: #1e293b; margin: 0 0 0.25rem 0; font-size: 1.05rem;">${alert.title}</h4>
-                    <p style="font-size: 0.9rem; color: #64748b; margin: 0; line-height: 1.4;">${alert.message}</p>
-                </div>
-                <div class="pulse-badge ${alert.type === 'warning' ? 'pulse-warning' : 'pulse-badge'}" 
-                     style="background: ${alert.color}; color: white; min-width: 2.25rem; height: 2.25rem; padding: 0 0.75rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; box-shadow: 0 4px 10px ${alert.color}40;">
-                    ${alert.count}
-                </div>
+    const alertsHTML = alertsList.map((alert, idx) => `
+        <div class="alert-item" style="position: relative; padding: 1.25rem 1.5rem; border-bottom: ${idx === alertsList.length - 1 ? 'none' : '1px solid #f1f5f9'}; display: flex; align-items: center; gap: 1.25rem; transition: all 0.2s;">
+            <div class="sidebar-indicator" style="background: ${alert.color};"></div>
+            <div class="stat-icon-wrapper" style="color: ${alert.color};">
+                <i data-lucide="${alert.icon}" style="width: 1.5rem; height: 1.5rem; z-index: 2;"></i>
+            </div>
+            <div style="flex: 1;">
+                <h4 style="font-weight: 700; color: #1e293b; margin: 0; font-size: 0.95rem;">${alert.title}</h4>
+                <p style="font-size: 0.8125rem; color: #64748b; margin: 0;">${alert.message}</p>
+            </div>
+            <div class="${alert.glowClass}" style="min-width: 2rem; height: 2rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 0.75rem;">
+                ${alert.count}
             </div>
         </div>
     `).join('');
 
     content.innerHTML = `
-        <div style="margin-bottom: 2.5rem; animation: fadeIn 0.5s ease-out;">
-            <h2 class="page-header" style="margin-bottom: 0.5rem;">Notification & Alert System</h2>
-            <div style="display: flex; align-items: center; gap: 0.5rem; color: #64748b;">
-                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);"></span>
-                <p style="margin: 0; font-size: 0.95rem;">System status: Operational. Monitoring ${alertsList.length} active notifications.</p>
-            </div>
+        <div style="margin-bottom: 2.5rem; animation: fadeIn 0.4s ease-out;">
+            <h2 class="page-header" style="margin: 0;">System Performance & Alerts</h2>
+            <p style="color: #64748b; font-size: 0.875rem; margin-top: 0.5rem;">Manage real-time system notifications and direct broadcasts.</p>
         </div>
 
-        <div class="module-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem;">
-            <!-- Alerts Column -->
-            <div style="animation: fadeIn 0.6s ease-out;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin: 0; display: flex; align-items: center; gap: 0.75rem;">
-                        <i data-lucide="bell-ring" style="width: 1.25rem; height: 1.25rem; color: #4f46e5;"></i>
-                        Critical Alerts
-                    </h3>
-                    <span style="font-size: 0.8125rem; font-weight: 600; color: #64748b; background: #e2e8f0; padding: 0.25rem 0.75rem; border-radius: 9999px;">
-                        ${alertsList.length} ACTIVE
-                    </span>
+        <div class="module-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; align-items: start;">
+            
+            <div class="premium-card" style="animation: fadeIn 0.6s ease-out; background: #ffffff;">
+                <div class="glass-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="font-size: 1.125rem; font-weight: 800; color: #1e293b; margin: 0;">Active System Alerts</h3>
+                    </div>
+                    <span style="background: rgba(16, 185, 129, 0.1); color: #10b981; padding: 0.25rem 0.625rem; border-radius: 9999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em;">LIVE MONITOR</span>
                 </div>
                 
-                <div style="max-height: 600px; overflow-y: auto; padding-right: 0.5rem;">
+                <div style="padding: 0;">
                     ${alertsList.length > 0 ? alertsHTML : `
-                        <div class="glass-panel" style="padding: 3rem 2rem; border-radius: 1rem; text-align: center;">
-                            <div style="width: 4rem; height: 4rem; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                                <i data-lucide="shield-check" style="width: 2rem; height: 2rem; color: #10b981;"></i>
-                            </div>
-                            <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">All Systems Clear</h4>
-                            <p style="color: #64748b; font-size: 0.9rem;">No urgent matters require your attention at this moment.</p>
+                        <div style="padding: 3rem 2rem; text-align: center;">
+                            <i data-lucide="check-circle" style="width: 3rem; height: 3rem; color: #10b981; margin: 0 auto 1rem;"></i>
+                            <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 0.25rem;">All Systems Operational</h4>
+                            <p style="color: #64748b; font-size: 0.8125rem;">No active alerts detected at this time.</p>
                         </div>
                     `}
                 </div>
             </div>
 
-            <!-- Broadcast Column -->
-            <div style="animation: fadeIn 0.7s ease-out;">
-                <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <i data-lucide="send" style="width: 1.25rem; height: 1.25rem; color: #4f46e5;"></i>
-                    Broadcast Hub
-                </h3>
+            <div class="luxury-compose" style="animation: fadeIn 0.8s ease-out;">
+                <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); padding: 1.5rem 2rem; color: white;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800; margin: 0;">Broadcast Message</h3>
+                    <p style="opacity: 0.8; font-size: 0.8125rem; margin-top: 0.25rem;">Direct reach to your platform users.</p>
+                </div>
                 
-                <div class="broadcast-compose">
-                    <div class="broadcast-header">
-                        <div style="display: flex; gap: 0.75rem;">
-                            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #ff5f56;"></div>
-                            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #ffbd2e;"></div>
-                            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #27c93f;"></div>
-                        </div>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">New Broadcast Message</span>
+                <div style="padding: 1.5rem 2rem 2rem;">
+                    <div style="margin-bottom: 1.25rem;">
+                        <label style="display: block; font-size: 0.7rem; font-weight: 800; color: #94a3b8; margin-bottom: 0.5rem; text-transform: uppercase;">Audience</label>
+                        <select id="broadcast-audience" class="input-modern" style="padding: 0.75rem 1rem;">
+                            <option>All Registered Customers</option>
+                            <option>Active Segment Only</option>
+                        </select>
                     </div>
-                    
-                    <div class="broadcast-body">
-                        <div style="margin-bottom: 1.25rem;">
-                            <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Target Audience</label>
-                            <div style="position: relative;">
-                                <select id="broadcast-audience" class="input-modern" style="appearance: none; padding-right: 2.5rem;">
-                                    <option>Send to All Customers (Global)</option>
-                                    <option>Send to Active Customers Only</option>
-                                    <option>Send to New Registrations (Last 7 Days)</option>
-                                </select>
-                                <i data-lucide="chevron-down" style="position: absolute; right: 1rem; top: 1rem; width: 1.25rem; height: 1.25rem; color: #94a3b8; pointer-events: none;"></i>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Message Content</label>
-                            <textarea id="broadcast-message" class="input-modern" rows="6" placeholder="Type your broadcast message here... Use this to announce promotions, maintenance, or system updates."></textarea>
-                        </div>
-                        
-                        <div style="margin-top: 1rem; display: flex; gap: 1rem; color: #94a3b8; font-size: 0.75rem;">
-                            <span style="display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="mail" style="width: 1rem; height: 1rem;"></i> Email</span>
-                            <span style="display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="smartphone" style="width: 1rem; height: 1rem;"></i> SMS</span>
-                            <span style="display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="bell" style="width: 1rem; height: 1rem;"></i> In-App</span>
-                        </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-size: 0.7rem; font-weight: 800; color: #94a3b8; margin-bottom: 0.5rem; text-transform: uppercase;">Message Content</label>
+                        <textarea id="broadcast-message" class="input-modern" rows="4" placeholder="Enter message for Email/SMS Broadcast..." style="resize: none;"></textarea>
                     </div>
-                    
-                    <div class="broadcast-footer">
-                        <button class="btn-base btn-primary" style="padding: 0.875rem 2rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 0.75rem;"
-                            onclick="showCustomActionModal('Send Broadcast', 'This message will be sent to all selected recipients via Email, SMS, and In-App notification. Continue?', 'Send Now', () => {
-                                showCustomActionModal('Success', 'Broadcast message has been queued for delivery.', 'Great!');
-                                document.getElementById('broadcast-message').value = '';
-                            })">
-                            <i data-lucide="send" style="width: 1.125rem; height: 1.125rem;"></i>
-                            Dispatch Broadcast
-                        </button>
-                    </div>
+
+                    <button class="btn-base btn-primary w-full" style="padding: 0.875rem; border-radius: 0.75rem;"
+                        onclick="showCustomActionModal('Send Broadcast', 'Are you sure you want to send this broadcast message?', 'Send', () => console.log('Sent'))">
+                        <i data-lucide="send" style="width: 1.125rem; height: 1.125rem; margin-right: 0.5rem;"></i>
+                        Send Broadcast
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Recent Logs Section (New) -->
-        <div style="margin-top: 3rem; animation: fadeIn 0.8s ease-out;">
+        <div style="margin-top: 3rem;">
             <h3 style="font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
                 <i data-lucide="history" style="width: 1.125rem; height: 1.125rem; color: #64748b;"></i>
                 Recent System Activity
             </h3>
-            <div class="glass-panel" style="border-radius: 1rem; overflow: hidden;">
+            <div class="glass-panel" style="border-radius: 1rem; overflow: hidden; background: #ffffff;">
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
-                        <tr style="background: rgba(248, 250, 252, 0.5); border-bottom: 1px solid #e2e8f0;">
-                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Event</th>
-                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Status</th>
-                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Time</th>
+                        <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Event</th>
+                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Status</th>
+                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Time</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="border-bottom: 1px solid #f1f5f9;">
-                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Automated Inventory Sync</td>
-                            <td style="padding: 1rem 1.5rem;"><span style="color: #10b981; font-weight: 600; font-size: 0.8125rem;">Success</span></td>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Inventory Auto-Sync</td>
+                            <td style="padding: 1rem 1.5rem;"><span style="color: #10b981; font-weight: 700; font-size: 0.75rem;">SUCCESS</span></td>
                             <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8;">Just now</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f1f5f9;">
-                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Mail Server Gateway Check</td>
-                            <td style="padding: 1rem 1.5rem;"><span style="color: #10b981; font-weight: 600; font-size: 0.8125rem;">Connected</span></td>
-                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8;">15m ago</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Database Optimization Cache</td>
-                            <td style="padding: 1rem 1.5rem;"><span style="color: #4f46e5; font-weight: 600; font-size: 0.8125rem;">Completed</span></td>
-                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8;">1h ago</td>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Gateway Check</td>
+                            <td style="padding: 1rem 1.5rem;"><span style="color: #10b981; font-weight: 700; font-size: 0.75rem;">ONLINE</span></td>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8;">12m ago</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1690,8 +1647,8 @@ function renderSettingsModule() {
     setPageTitle('System Settings & Security');
     const content = document.getElementById('content-container');
     content.innerHTML = `
-                            <h2 class="page-header">System Settings & Security</h2>
-                            <p class="mb-6 text-gray-500">Protect system integrity and ensure compliance.</p>
+        <h2 class="page-header">System Settings & Security</h2>
+        <p class="mb-6 text-gray-500">Protect system integrity and ensure compliance.</p>
 
                             <div class="module-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
                                 <div class="kpi-card p-6 space-y-4">
@@ -1725,20 +1682,16 @@ function renderSettingsModule() {
                                     </div>
                                 </div>
                             </div>
-                            `;
+`;
     lucide.createIcons();
 }
 
-// --- MAIN ROUTER ---
 function showModule(moduleName, element = null) {
-
-    // Close all submenus when switching main modules
     document.querySelectorAll('.submenu').forEach(sub => sub.classList.add('hidden'));
     document.querySelectorAll('.nav-item .chevron-icon').forEach(icon => {
         icon.classList.remove('rotate-90');
     });
 
-    // Set the clicked main module or default module to active
     let navElement = element;
     if (!navElement) {
         navElement = document.querySelector(`.nav-menu a[onclick*="'${moduleName}'"]`);
@@ -1852,85 +1805,85 @@ function showProductForm(productId = null) {
     ).join('');
 
     const formHTML = `
-                            <form id="product-form" method="POST" action="index.php">
-                                <input type="hidden" name="action" value="${isEdit ? 'edit_product' : 'add_product'}">
-                                    <input type="hidden" name="module" value="product">
-                                        <input type="hidden" name="submodule" value="products">
-                                            ${isEdit ? `<input type="hidden" name="id" value="${product.id}">` : ''}
+        <form id="product-form" method="POST" action="index.php">
+        <input type="hidden" name="action" value="${isEdit ? 'edit_product' : 'add_product'}">
+            <input type="hidden" name="module" value="product">
+                <input type="hidden" name="submodule" value="products">
+                    ${isEdit ? `<input type="hidden" name="id" value="${product.id}">` : ''}
 
-                                            <div class="form-group" style="margin-bottom: 1.5rem;">
-                                                <label>Product Name *</label>
-                                                <input type="text" name="name" value="${product ? product.name.replace(/" /g, '&quot;') : ''}" required 
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Product Name *</label>
+                        <input type="text" name="name" value="${product ? product.name.replace(/"/g, '&quot;') : ''}" required 
                                         style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                            </div>
+                    </div>
 
-                                            <div class="form-group" style="margin-bottom: 1.5rem;">
-                                                <label>Description</label>
-                                                <textarea name="description" rows="3"
-                                                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">${product ? (product.description || '').replace(/"/g, '&quot;') : ''}</textarea>
-                                            </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Description</label>
+                        <textarea name="description" rows="3"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">${product ? (product.description || '').replace(/"/g, '&quot;') : ''}</textarea>
+                    </div>
 
-                                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-                                                <div class="form-group">
-                                                    <label>Price *</label>
-                                                    <input type="number" name="price" step="0.01" value="${product ? product.price : ''}" required
-                                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                                </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>Price *</label>
+                            <input type="number" name="price" step="0.01" value="${product ? product.price : ''}" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+                        </div>
 
-                                                <div class="form-group">
-                                                    <label>Stock Quantity *</label>
-                                                    <input type="number" name="stock" value="${product ? product.stock : ''}" required
-                                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                                </div>
-                                            </div>
+                        <div class="form-group">
+                            <label>Stock Quantity *</label>
+                            <input type="number" name="stock" value="${product ? product.stock : ''}" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+                        </div>
+                    </div>
 
-                                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-                                                <div class="form-group">
-                                                    <label>Category *</label>
-                                                    <select name="category_id" required
-                                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                                        <option value="">Select Category</option>
-                                                        ${categoryOptions}
-                                                    </select>
-                                                </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>Category *</label>
+                            <select name="category_id" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+                                <option value="">Select Category</option>
+                                ${categoryOptions}
+                            </select>
+                        </div>
 
-                                                <div class="form-group">
-                                                    <label>Status</label>
-                                                    <select name="status"
-                                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                                        <option value="Active" ${product && product.status === 'Active' ? 'selected' : ''}>Active</option>
-                                                        <option value="Inactive" ${product && product.status === 'Inactive' ? 'selected' : ''}>Inactive</option>
-                                                        <option value="Low Stock" ${product && product.status === 'Low Stock' ? 'selected' : ''}>Low Stock</option>
-                                                        <option value="Critical Stock" ${product && product.status === 'Critical Stock' ? 'selected' : ''}>Critical Stock</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select name="status"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+                                <option value="Active" ${product && product.status === 'Active' ? 'selected' : ''}>Active</option>
+                                <option value="Inactive" ${product && product.status === 'Inactive' ? 'selected' : ''}>Inactive</option>
+                                <option value="Low Stock" ${product && product.status === 'Low Stock' ? 'selected' : ''}>Low Stock</option>
+                                <option value="Critical Stock" ${product && product.status === 'Critical Stock' ? 'selected' : ''}>Critical Stock</option>
+                            </select>
+                        </div>
+                    </div>
 
-                                            <div class="form-group" style="margin-bottom: 1.5rem;">
-                                                <label>Image URL (Optional)</label>
-                                                <input type="url" name="image_url" value="${product ? (product.image_url || '') : ''}"
-                                                    placeholder="https://example.com/image.jpg"
-                                                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                                    <small style="color: #6b7280; font-size: 0.75rem; margin-top: 0.25rem; display: block;">Enter a URL to an image for this product</small>
-                                            </div>
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label>Image URL (Optional)</label>
+                        <input type="url" name="image_url" value="${product ? (product.image_url || '') : ''}"
+                            placeholder="https://example.com/image.jpg"
+                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+                            <small style="color: #6b7280; font-size: 0.75rem; margin-top: 0.25rem; display: block;">Enter a URL to an image for this product</small>
+                    </div>
 
-                                            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                                                <button type="submit" class="btn-base btn-primary" style="flex: 1; padding: 0.75rem; font-weight: 600;">
-                                                    <i data-lucide="${isEdit ? 'save' : 'plus'}" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
-                                                    ${isEdit ? 'Update Product' : 'Add Product'}
-                                                </button>
-                                                <button type="button" class="btn-base btn-secondary" onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" style="flex: 1; padding: 0.75rem;">
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        </form>
-                                        `;
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button type="submit" class="btn-base btn-primary" style="flex: 1; padding: 0.75rem; font-weight: 600;">
+                            <i data-lucide="${isEdit ? 'save' : 'plus'}" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
+                            ${isEdit ? 'Update Product' : 'Add Product'}
+                        </button>
+                        <button type="button" class="btn-base btn-secondary" onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" style="flex: 1; padding: 0.75rem;">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+                `;
 
     const modalContainer = document.getElementById('modal-container');
     modalContainer.innerHTML = `
-                                        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">${isEdit ? 'Edit Product' : 'Add New Product'}</h3>
-                                        <div id="modal-form-content">${formHTML}</div>
-                                        `;
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">${isEdit ? 'Edit Product' : 'Add New Product'}</h3>
+                <div id="modal-form-content">${formHTML}</div>
+                `;
     document.getElementById('custom-modal-backdrop').classList.remove('hidden');
 }
 
@@ -1944,11 +1897,11 @@ function deleteProduct(id, name) {
             form.method = 'POST';
             form.action = 'index.php';
             form.innerHTML = `
-                                    <input type="hidden" name="action" value="delete_product">
-                                    <input type="hidden" name="id" value="${id}">
-                                    <input type="hidden" name="module" value="product">
-                                    <input type="hidden" name="submodule" value="products">
-                                `;
+                <input type="hidden" name="action" value="delete_product">
+                <input type="hidden" name="id" value="${id}">
+                <input type="hidden" name="module" value="product">
+                <input type="hidden" name="submodule" value="products">
+            `;
             document.body.appendChild(form);
             form.submit();
         }
@@ -1966,10 +1919,10 @@ function clearAllProducts() {
             form.method = 'POST';
             form.action = 'index.php';
             form.innerHTML = `
-                                            <input type="hidden" name="action" value="clear_all_products">
-                                                <input type="hidden" name="module" value="product">
-                                                    <input type="hidden" name="submodule" value="products">
-                                                        `;
+                <input type="hidden" name="action" value="clear_all_products">
+                <input type="hidden" name="module" value="product">
+                <input type="hidden" name="submodule" value="products">
+            `;
             document.body.appendChild(form);
             form.submit();
         }
@@ -1982,49 +1935,49 @@ function showCategoryForm(categoryId = null) {
     const isEdit = !!category;
 
     const formHTML = `
-                                                        <form id="category-form" method="POST" action="index.php">
-                                                            <input type="hidden" name="action" value="${isEdit ? 'edit_category' : 'add_category'}">
-                                                                <input type="hidden" name="module" value="product">
-                                                                    <input type="hidden" name="submodule" value="categories">
-                                                                        ${isEdit ? `<input type="hidden" name="id" value="${category.id}">` : ''}
+        <form id="category-form" method="POST" action="index.php">
+            <input type="hidden" name="action" value="${isEdit ? 'edit_category' : 'add_category'}">
+            <input type="hidden" name="module" value="product">
+            <input type="hidden" name="submodule" value="categories">
+            ${isEdit ? `<input type="hidden" name="id" value="${category.id}">` : ''}
 
-                                                                        <div class="form-group" style="margin-bottom: 1.5rem;">
-                                                                            <label>Category Name *</label>
-                                                                            <input type="text" name="name" value="${category ? category.name.replace(/" /g, '&quot;') : ''}" required 
-                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                                                        </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label>Category Name *</label>
+                <input type="text" name="name" value="${category ? category.name.replace(/"/g, '&quot;') : ''}" required 
+                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+            </div>
 
-                                                                        <div class="form-group" style="margin-bottom: 1.5rem;">
-                                                                            <label>Description</label>
-                                                                            <textarea name="description" rows="3"
-                                                                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">${category ? (category.description || '').replace(/"/g, '&quot;') : ''}</textarea>
-                                                                        </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label>Description</label>
+                <textarea name="description" rows="3"
+                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">${category ? (category.description || '').replace(/"/g, '&quot;') : ''}</textarea>
+            </div>
 
-                                                                        <div class="form-group" style="margin-bottom: 1.5rem;">
-                                                                            <label>Status</label>
-                                                                            <select name="status"
-                                                                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                                                                <option value="Active" ${category && category.status === 'Active' ? 'selected' : ''}>Active</option>
-                                                                                <option value="Inactive" ${category && category.status === 'Inactive' ? 'selected' : ''}>Inactive</option>
-                                                                            </select>
-                                                                        </div>
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label>Status</label>
+                <select name="status"
+                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+                    <option value="Active" ${category && category.status === 'Active' ? 'selected' : ''}>Active</option>
+                    <option value="Inactive" ${category && category.status === 'Inactive' ? 'selected' : ''}>Inactive</option>
+                </select>
+            </div>
 
-                                                                        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                                                                            <button type="submit" class="btn-base btn-primary" style="flex: 1;">
-                                                                                ${isEdit ? 'Update Category' : 'Add Category'}
-                                                                            </button>
-                                                                            <button type="button" class="btn-base btn-secondary" onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" style="flex: 1;">
-                                                                                Cancel
-                                                                            </button>
-                                                                        </div>
-                                                                    </form>
-                                                                    `;
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button type="submit" class="btn-base btn-primary" style="flex: 1;">
+                    ${isEdit ? 'Update Category' : 'Add Category'}
+                </button>
+                <button type="button" class="btn-base btn-secondary" onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" style="flex: 1;">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    `;
 
     const modalContainer = document.getElementById('modal-container');
     modalContainer.innerHTML = `
-                                                                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">${isEdit ? 'Edit Category' : 'Add New Category'}</h3>
-                                                                    <div id="modal-form-content">${formHTML}</div>
-                                                                    `;
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">${isEdit ? 'Edit Category' : 'Add New Category'}</h3>
+        <div id="modal-form-content">${formHTML}</div>
+    `;
     document.getElementById('custom-modal-backdrop').classList.remove('hidden');
 }
 
@@ -2038,11 +1991,11 @@ function deleteCategory(id, name) {
             form.method = 'POST';
             form.action = 'index.php';
             form.innerHTML = `
-                                    <input type="hidden" name="action" value="delete_category">
-                                    <input type="hidden" name="id" value="${id}">
-                                    <input type="hidden" name="module" value="product">
-                                    <input type="hidden" name="submodule" value="categories">
-                                `;
+                <input type="hidden" name="action" value="delete_category">
+                <input type="hidden" name="id" value="${id}">
+                <input type="hidden" name="module" value="product">
+                <input type="hidden" name="submodule" value="categories">
+            `;
             document.body.appendChild(form);
             form.submit();
         }
