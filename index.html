@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
     <link rel="icon" type="image/png" href="image/logo.png">
+    <meta http-equiv="refresh" content="3;url=php/login.php">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
@@ -146,27 +147,24 @@
     </noscript>
 
     <script>
-        // Immediate redirect with fallback
         (function () {
             var redirected = false;
+
             function doRedirect() {
                 if (redirected) return;
                 redirected = true;
-                console.log('Redirecting to login page...');
+                console.log('Redirecting to login...');
                 window.location.href = "php/login.php";
             }
 
-            // Try redirect on DOMContentLoaded
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', function () {
                     setTimeout(doRedirect, 2000);
                 });
             } else {
-                // DOM already loaded
                 setTimeout(doRedirect, 2000);
             }
 
-            // Fallback timeout
             setTimeout(doRedirect, 4000);
         })();
     </script>
