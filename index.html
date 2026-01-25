@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
-    
     <link rel="icon" href="data:,">
-
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -17,10 +15,9 @@
             justify-content: center;
             align-items: center;
             color: white;
-            overflow: hidden;
+            text-align: center;
         }
-        .container { text-align: center; }
-        .logo-placeholder {
+        .logo-box {
             width: 100px; height: 100px;
             background: rgba(255,255,255,0.2);
             border-radius: 20px;
@@ -30,11 +27,10 @@
             font-size: 40px; font-weight: bold;
             margin-bottom: 20px;
         }
-        .brand { font-size: 48px; margin-bottom: 10px; }
         .spinner {
-            width: 50px; height: 50px;
-            border: 5px solid rgba(255,255,255,0.3);
-            border-top-color: white;
+            width: 40px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 20px auto;
@@ -43,21 +39,21 @@
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="logo-placeholder">IM</div>
-        <h1 class="brand">iMarket</h1>
+    <div>
+        <div class="logo-box">IM</div>
+        <h1>iMarket</h1>
         <p>Your Market, Your Choice</p>
         <div class="spinner"></div>
-        <p id="status">Redirecting to login...</p>
+        <p>Redirecting...</p>
     </div>
 
     <script>
-        // Pinaka-simpleng redirect. Walang flags, walang regex.
-        // Siguraduhin na ang path na ito ay tama.
-        setTimeout(function() {
-            window.location.href = "../php/login.php";
-        }, 2000);
+        // Pinakasimpleng redirect script. Walang "/" sa dulo para iwas Syntax Error.
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "../php/login.php";
+            }, 2000);
+        };
     </script>
 </body>
 </html>
