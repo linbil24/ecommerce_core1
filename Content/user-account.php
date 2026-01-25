@@ -19,7 +19,7 @@ if (isset($conn)) {
     // Check for 'address' column as a proxy for the update
     $cols_check = mysqli_query($conn, "SHOW COLUMNS FROM users LIKE 'address'");
     if (mysqli_num_rows($cols_check) == 0) {
-        mysqli_query($conn, "ALTER TABLE users ADD COLUMN fullname VARCHAR(255) AFTER username");
+        mysqli_query($conn, "ALTER TABLE users ADD COLUMN fullname VARCHAR(255) AFTER email");
         mysqli_query($conn, "ALTER TABLE users ADD COLUMN phone VARCHAR(50) AFTER fullname");
         mysqli_query($conn, "ALTER TABLE users ADD COLUMN address TEXT AFTER phone");
         mysqli_query($conn, "ALTER TABLE users ADD COLUMN city VARCHAR(100) AFTER address");
@@ -141,7 +141,9 @@ if ($view == 'orders' || $view == 'tracking') {
             <div class="sidebar-profile">
                 <div class="sidebar-avatar"></div>
                 <div>
-                    <div class="sidebar-username"><?php echo htmlspecialchars($user['username']); ?></div>
+                    <div class="sidebar-username">
+                        <?php echo htmlspecialchars(!empty($user['username']) ? $user['username'] : (!empty($user['fullname']) ? $user['fullname'] : $user['email'])); ?>
+                    </div>
                     <a href="?view=profile" class="sidebar-edit-link"><i class="fas fa-pen"></i> Edit Profile</a>
                 </div>
             </div>
@@ -152,7 +154,8 @@ if ($view == 'orders' || $view == 'tracking') {
                         <i class="fas fa-user"></i> My Account
                     </a>
                     <ul class="sidebar-submenu">
-                        <li><a href="?view=profile" class="<?php echo $view == 'profile' ? 'active' : ''; ?>">Profile</a></li>
+                        <li><a href="?view=profile"
+                                class="<?php echo $view == 'profile' ? 'active' : ''; ?>">Profile</a></li>
                         <li><a href="#">Banks & Cards</a></li>
                         <li><a href="#">Addresses</a></li>
                         <li><a href="#">Change Password</a></li>
@@ -198,7 +201,7 @@ if ($view == 'orders' || $view == 'tracking') {
                             <div class="profile-input-group">
                                 <div class="profile-input-label">Username</div>
                                 <div class="profile-input-field" style="padding-top:10px;">
-                                    <?php echo htmlspecialchars($user['username']); ?>
+                                    <?php echo htmlspecialchars(!empty($user['username']) ? $user['username'] : (!empty($user['fullname']) ? $user['fullname'] : $user['email'])); ?>
                                 </div>
                             </div>
 
@@ -384,7 +387,8 @@ if ($view == 'orders' || $view == 'tracking') {
                             style="background:#fffcf5; border:1px solid #ffeedb; padding:15px; margin-bottom:30px; border-radius:4px; display:flex; justify-content:space-between;">
                             <div>
                                 <div style="font-size:16px; color:#2A3B7E; font-weight:500;">Order Status:
-                                    <?php echo htmlspecialchars($st); ?></div>
+                                    <?php echo htmlspecialchars($st); ?>
+                                </div>
                                 <div style="font-size:13px; color:#777; margin-top:5px;">Estimated Delivery: 3-5 days</div>
                             </div>
                         </div>
@@ -404,7 +408,8 @@ if ($view == 'orders' || $view == 'tracking') {
                                 <div class="step-label">Paid</div>
                                 <?php if ($step_idx >= 2): ?>
                                     <div class="track-time">
-                                        <?php echo date('M d H:i', strtotime($curr_order['created_at'] . ' + 1 hour')); ?></div>
+                                        <?php echo date('M d H:i', strtotime($curr_order['created_at'] . ' + 1 hour')); ?>
+                                    </div>
                                 <?php endif; ?>
                             </div>
                             <!-- Step 3 -->
@@ -413,7 +418,8 @@ if ($view == 'orders' || $view == 'tracking') {
                                 <div class="step-label">Shipped Out</div>
                                 <?php if ($step_idx >= 3): ?>
                                     <div class="track-time">
-                                        <?php echo date('M d H:i', strtotime($curr_order['created_at'] . ' + 1 day')); ?></div>
+                                        <?php echo date('M d H:i', strtotime($curr_order['created_at'] . ' + 1 day')); ?>
+                                    </div>
                                 <?php endif; ?>
                             </div>
                             <!-- Step 4 -->
@@ -438,7 +444,8 @@ if ($view == 'orders' || $view == 'tracking') {
                                 </div>
                                 <div style="font-size:14px; color:#333;">Your order is being processed by the seller.</div>
                                 <div style="font-size:12px; color:#999; margin-top:2px;">
-                                    <?php echo date('Y-m-d H:i', strtotime($curr_order['created_at'])); ?></div>
+                                    <?php echo date('Y-m-d H:i', strtotime($curr_order['created_at'])); ?>
+                                </div>
                             </div>
                             <?php if ($step_idx >= 2): ?>
                                 <div
@@ -460,7 +467,8 @@ if ($view == 'orders' || $view == 'tracking') {
                                     style="width:60px; height:60px; border:1px solid #eee;">
                                 <div>
                                     <div style="font-size:14px; font-weight:600;">
-                                        <?php echo htmlspecialchars($curr_order['product_name']); ?></div>
+                                        <?php echo htmlspecialchars($curr_order['product_name']); ?>
+                                    </div>
                                     <div style="font-size:13px; color:#777;">Quantity: x<?php echo $curr_order['quantity']; ?>
                                     </div>
                                     <div style="font-size:14px; color:#2A3B7E;">
@@ -471,7 +479,7 @@ if ($view == 'orders' || $view == 'tracking') {
 
                     </div>
 
-                <?php
+                    <?php
                 } // End if/else for curr_order
             endif;
             ?>
