@@ -372,7 +372,8 @@
 
                             <p
                                 style="font-size: 1.1em; max-width: 90%; margin-bottom: 25px; opacity: 0.9; font-weight: 300;">
-                                <?php echo htmlspecialchars($currentShop['category']); ?></p>
+                                <?php echo htmlspecialchars($currentShop['category']); ?>
+                            </p>
 
                             <div class="shop-seller-stats">
                                 <div class="stat-item">
@@ -762,7 +763,7 @@
 
         async function toggleFollow(event, storeName) {
             event.preventDefault();
-            
+
             const action = isFollowing ? 'unfollow' : 'follow';
             const formData = new FormData();
             formData.append('store_name', storeName);
@@ -774,7 +775,7 @@
                     body: formData
                 });
                 const data = await response.json();
-                
+
                 if (data.success) {
                     isFollowing = !isFollowing;
                     updateFollowButton(isFollowing);
@@ -792,7 +793,7 @@
             const btn = document.getElementById('followBtn');
             const icon = document.getElementById('followIcon');
             const text = document.getElementById('followText');
-            
+
             if (following) {
                 btn.classList.remove('btn-seller-primary');
                 btn.style.background = 'rgba(255,255,255,0.2)';
@@ -823,7 +824,7 @@
             `;
             notification.textContent = message;
             document.body.appendChild(notification);
-            
+
             setTimeout(() => {
                 notification.style.animation = 'slideOut 0.3s ease-out';
                 setTimeout(() => notification.remove(), 300);
@@ -831,13 +832,17 @@
         }
 
         // Chat Modal Functionality
+        let currentStoreName = '';
+
         function openChatModal(event, storeName) {
             event.preventDefault();
+            currentStoreName = storeName;
             document.getElementById('chatStoreName').textContent = storeName;
             document.getElementById('chatModal').style.display = 'flex';
             setTimeout(() => {
                 document.getElementById('chatModal').classList.add('show');
             }, 10);
+            loadChatHistory(storeName);
         }
 
         function closeChatModal() {
@@ -848,60 +853,133 @@
             }, 300);
         }
 
-        function sendMessage() {
+        async function loadChatHistory(storeName) {
+            try {
+                const response = await fetch(`get_chat_messages.php?store_name=${encodeURIComponent(storeName)}`);
+                const data = await response.json();
+
+                if (data.success && data.messages.length > 0) {
+                    const messagesContainer = document.getElementById('chatMessages');
+                    messagesContainer.innerHTML = '';
+
+                    data.messages.forEach(msg => {
+                        const messageDiv = document.createElement('div');
+                        const isCustomer = msg.sender_type === 'customer';
+                        messageDiv.style.cssText = `
+                            background: ${isCustomer ? 'linear-gradient(135deg, #2c4c7c 0%, #1e3a5f 100%)' : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)'}; 
+                            color: ${isCustomer ? 'white' : '#1e293b'}; 
+                            padding: 12px 18px; 
+                            border-radius: 18px; 
+                            margin-bottom: 12px; 
+                            max-width: 70%; 
+                            align-self: ${isCustomer ? 'flex-end' : 'flex-start'}; 
+                            ${isCustomer ? 'margin-left: auto;' : ''}
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                            word-wrap: break-word;
+                        `;
+                        messageDiv.textContent = msg.message;
+                        messagesContainer.appendChild(messageDiv);
+                    });
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                }
+            } catch (error) {
+                console.error('Error loading chat history:', error);
+            }
+        }
+
+        async function sendMessage() {
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
-            
-            if (message) {
-                const messagesContainer = document.getElementById('chatMessages');
-                const messageDiv = document.createElement('div');
-                messageDiv.style.cssText = 'background: #2c4c7c; color: white; padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 70%; align-self: flex-end; margin-left: auto;';
-                messageDiv.textContent = message;
-                messagesContainer.appendChild(messageDiv);
-                input.value = '';
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                
-                // Auto-reply simulation
-                setTimeout(() => {
-                    const replyDiv = document.createElement('div');
-                    replyDiv.style.cssText = 'background: #f1f5f9; color: #333; padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; max-width: 70%;';
-                    replyDiv.textContent = 'Thank you for your message! We will respond shortly.';
-                    messagesContainer.appendChild(replyDiv);
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                }, 1000);
+
+            if (message && currentStoreName) {
+                const formData = new FormData();
+                formData.append('store_name', currentStoreName);
+                formData.append('message', message);
+                formData.append('sender_type', 'customer');
+
+                try {
+                    const response = await fetch('send_chat_message.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const data = await response.json();
+
+                    if (data.success) {
+                        const messagesContainer = document.getElementById('chatMessages');
+                        const messageDiv = document.createElement('div');
+                        messageDiv.style.cssText = 'background: linear-gradient(135deg, #2c4c7c 0%, #1e3a5f 100%); color: white; padding: 12px 18px; border-radius: 18px; margin-bottom: 12px; max-width: 70%; align-self: flex-end; margin-left: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.08);';
+                        messageDiv.textContent = message;
+                        messagesContainer.appendChild(messageDiv);
+                        input.value = '';
+                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    } else {
+                        showNotification(data.message || 'Failed to send message', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error sending message:', error);
+                    showNotification('An error occurred. Please try again.', 'error');
+                }
             }
         }
 
         // Check follow status on page load
         <?php if (isset($selectedStore)): ?>
-        checkFollowStatus('<?php echo htmlspecialchars($selectedStore); ?>');
+            checkFollowStatus('<?php echo htmlspecialchars($selectedStore); ?>');
         <?php endif; ?>
     </script>
 
     <!-- Chat Modal -->
     <div id="chatModal" class="modal-overlay" style="display: none;">
-        <div class="modal-content" style="max-width: 500px; max-height: 600px; display: flex; flex-direction: column;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 2px solid #e2e8f0;">
-                <h3 style="margin: 0; color: #2c4c7c;">
-                    <i class="fas fa-comment-dots"></i> Chat with <span id="chatStoreName"></span>
-                </h3>
-                <span class="modal-close" onclick="closeChatModal()" style="cursor: pointer; font-size: 28px;">&times;</span>
+        <div class="modal-content"
+            style="max-width: 600px; max-height: 700px; display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+            <!-- Header -->
+            <div
+                style="background: linear-gradient(135deg, #2c4c7c 0%, #1e3a5f 100%); color: white; padding: 20px 25px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div
+                        style="width: 50px; height: 50px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold;">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0; font-size: 18px; font-weight: 700;" id="chatStoreName"></h3>
+                        <p style="margin: 0; font-size: 12px; opacity: 0.9;">
+                            <i class="fas fa-circle" style="font-size: 8px; color: #10b981;"></i> Online
+                        </p>
+                    </div>
+                </div>
+                <span class="modal-close" onclick="closeChatModal()"
+                    style="cursor: pointer; font-size: 32px; opacity: 0.8; transition: opacity 0.2s;"
+                    onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">&times;</span>
             </div>
-            
-            <div id="chatMessages" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; background: #f8fafc; margin: 15px -20px;">
-                <div style="background: #f1f5f9; color: #64748b; padding: 10px 15px; border-radius: 15px; max-width: 70%; text-align: center; margin: 0 auto; font-size: 0.9em;">
-                    Start a conversation with the seller
+
+            <!-- Messages Area -->
+            <div id="chatMessages"
+                style="flex: 1; overflow-y: auto; padding: 25px; display: flex; flex-direction: column; gap: 12px; background: linear-gradient(to bottom, #f8fafc 0%, #ffffff 100%);">
+                <div
+                    style="background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%); color: #3730a3; padding: 15px 20px; border-radius: 15px; max-width: 80%; text-align: center; margin: 0 auto; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <i class="fas fa-comments"></i> Start a conversation with the seller
                 </div>
             </div>
-            
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                <input type="text" id="chatInput" placeholder="Type your message..." 
-                    style="flex: 1; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 25px; outline: none; font-size: 14px;"
+
+            <!-- Input Area -->
+            <div
+                style="padding: 20px 25px; background: #ffffff; border-top: 2px solid #e2e8f0; display: flex; gap: 12px; align-items: center;">
+                <button onclick="document.getElementById('chatFileInput').click()"
+                    style="background: #f1f5f9; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #64748b; transition: all 0.2s;"
+                    onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <input type="file" id="chatFileInput" style="display: none;">
+
+                <input type="text" id="chatInput" placeholder="Type your message..."
+                    style="flex: 1; padding: 14px 20px; border: 2px solid #e2e8f0; border-radius: 25px; outline: none; font-size: 15px; transition: border-color 0.2s;"
+                    onfocus="this.style.borderColor='#2c4c7c'" onblur="this.style.borderColor='#e2e8f0'"
                     onkeypress="if(event.key === 'Enter') sendMessage()">
-                <button onclick="sendMessage()" 
-                    style="background: #2c4c7c; color: white; border: none; padding: 12px 25px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.2s;"
-                    onmouseover="this.style.background='#1e3a5f'" 
-                    onmouseout="this.style.background='#2c4c7c'">
+
+                <button onclick="sendMessage()"
+                    style="background: linear-gradient(135deg, #2c4c7c 0%, #1e3a5f 100%); color: white; border: none; padding: 14px 28px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.2s; box-shadow: 0 4px 12px rgba(44,76,124,0.3); display: flex; align-items: center; gap: 8px;"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(44,76,124,0.4)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(44,76,124,0.3)'">
                     <i class="fas fa-paper-plane"></i> Send
                 </button>
             </div>
@@ -910,12 +988,45 @@
 
     <style>
         @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
+
         @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        #chatMessages::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #chatMessages::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        #chatMessages::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
     </style>
     </script>
