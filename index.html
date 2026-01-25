@@ -10,7 +10,7 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, sans-serif;
             background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
             height: 100vh;
             display: flex;
@@ -43,20 +43,19 @@
 <body>
     <div>
         <div class="logo-box">IM</div>
-        <h1>iMarket</h1>
-        <p>Your Market, Your Choice</p>
+        <h1 style="font-size: 42px;">iMarket</h1>
+        <p style="opacity: 0.8;">Your Market, Your Choice</p>
         <div class="spinner"></div>
-        <p>Loading your dashboard...</p>
+        <p>Redirecting to dashboard...</p>
     </div>
 
     <script>
-        // Use window.location.replace to prevent redirect loops
-        // This script has zero complex characters to avoid SyntaxErrors
-        window.onload = function() {
+        // Cleanest possible redirect
+        window.addEventListener('load', function() {
             setTimeout(function() {
                 window.location.replace("../php/login.php");
             }, 2000);
-        };
+        });
     </script>
 </body>
 </html>
