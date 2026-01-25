@@ -1494,7 +1494,9 @@ function renderAlertsModule() {
             icon: 'alert-triangle',
             title: 'Low Stock Alert',
             message: `${lowStockProducts.length} product(s) are running low on stock (less than 10 units)`,
-            count: lowStockProducts.length
+            count: lowStockProducts.length,
+            color: '#f59e0b',
+            bgColor: 'rgba(245, 158, 11, 0.1)'
         });
     }
 
@@ -1504,7 +1506,9 @@ function renderAlertsModule() {
             icon: 'shopping-cart',
             title: 'Pending Orders',
             message: `${pendingOrders.length} order(s) are pending approval`,
-            count: pendingOrders.length
+            count: pendingOrders.length,
+            color: '#4f46e5',
+            bgColor: 'rgba(79, 70, 229, 0.1)'
         });
     }
 
@@ -1514,7 +1518,9 @@ function renderAlertsModule() {
             icon: 'message-square',
             title: 'Open Support Tickets',
             message: `${openTickets.length} support ticket(s) require attention`,
-            count: openTickets.length
+            count: openTickets.length,
+            color: '#f97316',
+            bgColor: 'rgba(249, 115, 22, 0.1)'
         });
     }
 
@@ -1524,52 +1530,160 @@ function renderAlertsModule() {
             icon: 'dollar-sign',
             title: 'Pending Payments',
             message: `${pendingTransactions.length} transaction(s) are pending`,
-            count: pendingTransactions.length
+            count: pendingTransactions.length,
+            color: '#06b6d4',
+            bgColor: 'rgba(6, 182, 212, 0.1)'
         });
     }
 
     const alertsHTML = alertsList.map(alert => `
-                            <div class="p-4 rounded-lg mb-3" style="background-color: ${alert.type === 'warning' ? '#fffbe6' : '#e0e7ff'}; border: 1px solid ${alert.type === 'warning' ? '#f59e0b' : '#4f46e5'};">
-                                <div style="display: flex; align-items: center; gap: 1rem;">
-                                    <div style="padding: 0.5rem; background: ${alert.type === 'warning' ? '#f59e0b' : '#4f46e5'}; border-radius: 0.5rem; color: white;">
-                                        <i data-lucide="${alert.icon}" style="width: 1.5rem; height: 1.5rem;"></i>
-                                    </div>
-                                    <div style="flex: 1;">
-                                        <h4 style="font-weight: 600; color: #1f2937; margin-bottom: 0.25rem;">${alert.title}</h4>
-                                        <p style="font-size: 0.875rem; color: #6b7280; margin: 0;">${alert.message}</p>
-                                    </div>
-                                    <span style="background: ${alert.type === 'warning' ? '#f59e0b' : '#4f46e5'}; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600;">${alert.count}</span>
-                                </div>
-                            </div>
-                            `).join('');
+        <div class="alert-item gradient-border" style="margin-bottom: 1.25rem;">
+            <div class="glass-panel" style="padding: 1.25rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 1.25rem; position: relative; z-index: 1;">
+                <div style="width: 3.5rem; height: 3.5rem; background: ${alert.bgColor}; border-radius: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i data-lucide="${alert.icon}" style="width: 1.75rem; height: 1.75rem; color: ${alert.color};"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="font-weight: 700; color: #1e293b; margin: 0 0 0.25rem 0; font-size: 1.05rem;">${alert.title}</h4>
+                    <p style="font-size: 0.9rem; color: #64748b; margin: 0; line-height: 1.4;">${alert.message}</p>
+                </div>
+                <div class="pulse-badge ${alert.type === 'warning' ? 'pulse-warning' : 'pulse-badge'}" 
+                     style="background: ${alert.color}; color: white; min-width: 2.25rem; height: 2.25rem; padding: 0 0.75rem; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; box-shadow: 0 4px 10px ${alert.color}40;">
+                    ${alert.count}
+                </div>
+            </div>
+        </div>
+    `).join('');
 
     content.innerHTML = `
-                            <h2 class="page-header">Notification & Alert System</h2>
-                            <p class="mb-6 text-gray-500">Manage system alerts and send broadcast messages to customers.</p>
+        <div style="margin-bottom: 2.5rem; animation: fadeIn 0.5s ease-out;">
+            <h2 class="page-header" style="margin-bottom: 0.5rem;">Notification & Alert System</h2>
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: #64748b;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);"></span>
+                <p style="margin: 0; font-size: 0.95rem;">System status: Operational. Monitoring ${alertsList.length} active notifications.</p>
+            </div>
+        </div>
 
-                            <div class="module-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem;">
-                                <div class="kpi-card p-6">
-                                    <h3 class="text-xl font-semibold mb-4">System Alerts (${alertsList.length} Active)</h3>
-                                    ${alertsList.length > 0 ? alertsHTML : '<div class="p-3 text-sm text-center text-gray-500 rounded-lg" style="border: 1px solid #e5e7eb;">No active system alerts. All systems operational.</div>'}
-                                </div>
-
-                                <div class="kpi-card p-6">
-                                    <h3 class="text-xl font-semibold mb-4">Broadcast Message</h3>
-                                    <textarea id="broadcast-message" style="width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; outline: none;" rows="4" placeholder="Enter message for Email/SMS Broadcast..."></textarea>
-                                    <select id="broadcast-audience" style="margin-top: 0.75rem; width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; outline: none;">
-                                        <option>Send to All Customers</option>
-                                        <option>Send to Active Customers Only</option>
-                                    </select>
-                                    <button class="btn-base btn-primary w-full" style="margin-top: 1rem; padding: 0.75rem 1.25rem;"
-                                        onclick="showCustomActionModal('Send Broadcast', 'Are you sure you want to send this broadcast message?', 'Send', () => console.log('Broadcast message sent'))">
-                                        <i data-lucide="send" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
-                                        Send Broadcast
-                                    </button>
-                                </div>
+        <div class="module-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2rem;">
+            <!-- Alerts Column -->
+            <div style="animation: fadeIn 0.6s ease-out;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin: 0; display: flex; align-items: center; gap: 0.75rem;">
+                        <i data-lucide="bell-ring" style="width: 1.25rem; height: 1.25rem; color: #4f46e5;"></i>
+                        Critical Alerts
+                    </h3>
+                    <span style="font-size: 0.8125rem; font-weight: 600; color: #64748b; background: #e2e8f0; padding: 0.25rem 0.75rem; border-radius: 9999px;">
+                        ${alertsList.length} ACTIVE
+                    </span>
+                </div>
+                
+                <div style="max-height: 600px; overflow-y: auto; padding-right: 0.5rem;">
+                    ${alertsList.length > 0 ? alertsHTML : `
+                        <div class="glass-panel" style="padding: 3rem 2rem; border-radius: 1rem; text-align: center;">
+                            <div style="width: 4rem; height: 4rem; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                                <i data-lucide="shield-check" style="width: 2rem; height: 2rem; color: #10b981;"></i>
                             </div>
-                            `;
+                            <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">All Systems Clear</h4>
+                            <p style="color: #64748b; font-size: 0.9rem;">No urgent matters require your attention at this moment.</p>
+                        </div>
+                    `}
+                </div>
+            </div>
+
+            <!-- Broadcast Column -->
+            <div style="animation: fadeIn 0.7s ease-out;">
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <i data-lucide="send" style="width: 1.25rem; height: 1.25rem; color: #4f46e5;"></i>
+                    Broadcast Hub
+                </h3>
+                
+                <div class="broadcast-compose">
+                    <div class="broadcast-header">
+                        <div style="display: flex; gap: 0.75rem;">
+                            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #ff5f56;"></div>
+                            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #ffbd2e;"></div>
+                            <div style="width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #27c93f;"></div>
+                        </div>
+                        <span style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">New Broadcast Message</span>
+                    </div>
+                    
+                    <div class="broadcast-body">
+                        <div style="margin-bottom: 1.25rem;">
+                            <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Target Audience</label>
+                            <div style="position: relative;">
+                                <select id="broadcast-audience" class="input-modern" style="appearance: none; padding-right: 2.5rem;">
+                                    <option>Send to All Customers (Global)</option>
+                                    <option>Send to Active Customers Only</option>
+                                    <option>Send to New Registrations (Last 7 Days)</option>
+                                </select>
+                                <i data-lucide="chevron-down" style="position: absolute; right: 1rem; top: 1rem; width: 1.25rem; height: 1.25rem; color: #94a3b8; pointer-events: none;"></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label style="display: block; font-size: 0.8125rem; font-weight: 700; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Message Content</label>
+                            <textarea id="broadcast-message" class="input-modern" rows="6" placeholder="Type your broadcast message here... Use this to announce promotions, maintenance, or system updates."></textarea>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; display: flex; gap: 1rem; color: #94a3b8; font-size: 0.75rem;">
+                            <span style="display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="mail" style="width: 1rem; height: 1rem;"></i> Email</span>
+                            <span style="display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="smartphone" style="width: 1rem; height: 1rem;"></i> SMS</span>
+                            <span style="display: flex; align-items: center; gap: 0.25rem;"><i data-lucide="bell" style="width: 1rem; height: 1rem;"></i> In-App</span>
+                        </div>
+                    </div>
+                    
+                    <div class="broadcast-footer">
+                        <button class="btn-base btn-primary" style="padding: 0.875rem 2rem; border-radius: 0.75rem; display: flex; align-items: center; gap: 0.75rem;"
+                            onclick="showCustomActionModal('Send Broadcast', 'This message will be sent to all selected recipients via Email, SMS, and In-App notification. Continue?', 'Send Now', () => {
+                                showCustomActionModal('Success', 'Broadcast message has been queued for delivery.', 'Great!');
+                                document.getElementById('broadcast-message').value = '';
+                            })">
+                            <i data-lucide="send" style="width: 1.125rem; height: 1.125rem;"></i>
+                            Dispatch Broadcast
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Logs Section (New) -->
+        <div style="margin-top: 3rem; animation: fadeIn 0.8s ease-out;">
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+                <i data-lucide="history" style="width: 1.125rem; height: 1.125rem; color: #64748b;"></i>
+                Recent System Activity
+            </h3>
+            <div class="glass-panel" style="border-radius: 1rem; overflow: hidden;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: rgba(248, 250, 252, 0.5); border-bottom: 1px solid #e2e8f0;">
+                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Event</th>
+                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Status</th>
+                            <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #f1f5f9;">
+                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Automated Inventory Sync</td>
+                            <td style="padding: 1rem 1.5rem;"><span style="color: #10b981; font-weight: 600; font-size: 0.8125rem;">Success</span></td>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8;">Just now</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #f1f5f9;">
+                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Mail Server Gateway Check</td>
+                            <td style="padding: 1rem 1.5rem;"><span style="color: #10b981; font-weight: 600; font-size: 0.8125rem;">Connected</span></td>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8;">15m ago</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.875rem; color: #1e293b; font-weight: 500;">Database Optimization Cache</td>
+                            <td style="padding: 1rem 1.5rem;"><span style="color: #4f46e5; font-weight: 600; font-size: 0.8125rem;">Completed</span></td>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8;">1h ago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
     lucide.createIcons();
 }
+
 
 // 8. System Settings & Security
 function renderSettingsModule() {
