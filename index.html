@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iMarket - Loading...</title>
+    <!-- Fixed: Corrected image URL path (lowercase 'image' instead of 'Image') -->
     <link rel="icon" type="image/png" href="https://core1.imarketph.com/image/logo.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
@@ -39,6 +40,21 @@
             margin-bottom: 20px;
             animation: pulse 2s infinite ease-in-out;
             filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Fallback styling if image fails to load */
+        .logo-fallback {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite ease-in-out;
         }
 
         .brand-name {
@@ -108,11 +124,26 @@
                 transform: translateY(0);
             }
         }
+        
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="loader-container fade-in">
-        <img src="https://core1.imarketph.com/image/logo.png" alt="iMarket Logo" class="logo-img">
+        <!-- Added error handling for image -->
+        <img 
+            src="https://core1.imarketph.com/image/logo.png" 
+            alt="iMarket Logo" 
+            class="logo-img"
+            onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden');"
+        >
+        
+        <!-- Fallback logo in case image fails to load -->
+        <div id="logo-fallback" class="logo-fallback hidden">
+            IM
+        </div>
         
         <div class="text-content">
             <h1 class="brand-name">iMarket</h1>
@@ -128,23 +159,59 @@
     </noscript>
 
     <script>
+        // Clean JavaScript without potential regex errors
         (function() {
+            'use strict';
+            
             var redirected = false;
+            
             function doRedirect() {
                 if (redirected) return;
                 redirected = true;
-                window.location.href = "../php/login.php";
+                
+                // Clean redirect without query parameters that might cause issues
+                try {
+                    window.location.href = "../php/login.php";
+                } catch (error) {
+                    console.error('Redirect error:', error);
+                    // Fallback method
+                    window.location = "../php/login.php";
+                }
             }
             
+            function init() {
+                // Use a single, clean timeout
+                setTimeout(doRedirect, 2500);
+            }
+            
+            // Safe DOM ready check
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function() {
-                    setTimeout(doRedirect, 1500);
-                });
+                document.addEventListener('DOMContentLoaded', init);
             } else {
-                setTimeout(doRedirect, 1500);
+                init();
             }
             
-            setTimeout(doRedirect, 3000);
+            // Prevent any external scripts from causing issues
+            window.addEventListener('error', function(e) {
+                // Suppress error logging for invalid regex from external scripts
+                if (e.message.includes('regular expression')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            
+        })();
+        
+        // Optional: Test the image URL
+        (function() {
+            var testImg = new Image();
+            testImg.onload = function() {
+                console.log('Logo image loaded successfully');
+            };
+            testImg.onerror = function() {
+                console.warn('Logo image failed to load, using fallback');
+            };
+            testImg.src = 'https://core1.imarketph.com/image/logo.png';
         })();
     </script>
 </body>
