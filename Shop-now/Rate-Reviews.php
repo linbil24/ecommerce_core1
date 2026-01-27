@@ -30,8 +30,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (mysqli_query($conn, $sql)) {
         $success_msg = "Thank you! Your review for <strong>" . htmlspecialchars($product_name) . "</strong> has been submitted.";
 
-        // Optional: We can insert a specific notification record if a notification table existed
-        // But get_notifications.php queries source tables, so we just need this insert.
+        // --- Notification Logic ---
+        // Email Notification to Admin
+        require '../PHPMailer/src/Exception.php';
+        require '../PHPMailer/src/PHPMailer.php';
+        require '../PHPMailer/src/SMTP.php';
+
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'linbilcelestre31@gmail.com';
+            $mail->Password = 'erdrvfcuoeibstxo'; // App Password
+            $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom('no-reply@imarketph.com', 'IMarket PH');
+            $mail->addAddress('linbilcelestre31@gmail.com', 'Admin');
+
+            $mail->isHTML(true);
+            $mail->Subject = 'New Product Review: ' . $product_name;
+            $user_name = $_SESSION['fullname'] ?? 'A customer';
+            $mail->Body = "<h3>New Product Review Received</h3>
+                           <p><b>Product:</b> $product_name</p>
+                           <p><b>Rating:</b> $rating Stars</p>
+                           <p><b>Customer:</b> $user_name</p>
+                           <p><b>Comment:</b></p>
+                           <p>$comment</p>
+                           <hr>
+                           <p><a href='http://localhost/ecommerce%20core1/Admin/dashboard.php'>View in Admin Dashboard</a></p>";
+            $mail->AltBody = "New Product Review Received\nProduct: $product_name\nRating: $rating Stars\nCustomer: $user_name\nComment: $comment";
+
+            $mail->send();
+        } catch (Exception $e) {
+            // Silently fail email but review is already saved
+        }
     } else {
         $error_msg = "Error submitting review: " . mysqli_error($conn);
     }

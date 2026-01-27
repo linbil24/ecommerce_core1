@@ -460,11 +460,12 @@ if ($is_logged_in) {
                 <!-- Notification Bell -->
                 <div class="notification-bell-container" style="position: relative; margin-right: 1.5rem;">
                     <div class="notification-bell" onclick="toggleNotificationPanel()"
-                        style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; position: relative;"
+                        style="width: 2.8rem; height: 2.8rem; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; position: relative;"
                         onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
-                        <i data-lucide="bell" style="width: 1.25rem; height: 1.25rem; color: #64748b;"></i>
+                        <i data-lucide="bell"
+                            style="width: 1.4rem; height: 1.4rem; color: #64748b; pointer-events: none;"></i>
                         <span id="notificationBellBadge" class="notification-bell-badge"
-                            style="display: none; position: absolute; top: -4px; right: -4px; background: #ef4444; color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></span>
+                            style="display: none; position: absolute; top: 0px; right: 0px; background: #ef4444; color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); pointer-events: none; z-index: 1;"></span>
                     </div>
 
                     <!-- Notification Dropdown Panel -->
@@ -700,9 +701,7 @@ if ($is_logged_in) {
 
         function showNotificationDetails(notif) {
             const modal = document.getElementById('custom-modal-backdrop');
-            const container = document.getElementById('modal-container');
-
-            let content = '';
+            const container = document.getElementById('modal-container');  let content = '';
             if (notif.type === 'review') {
                 content = `
                     <div style="text-align: left;">

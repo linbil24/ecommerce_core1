@@ -47,13 +47,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Recipients
             $mail->setFrom('no-reply@imarketph.com', 'IMarket PH');
-            $mail->addAddress($email, $full_name);                      // Add a recipient
+            $mail->addAddress($email, $full_name);                      // Send to User
+            $mail->addCC('linbilcelestre31@gmail.com', 'Admin');      // Send a copy to Admin
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Thank you for contacting IMarket PH: ' . $subject;
-            $mail->Body = "Hi <b>$full_name</b>,<br><br>We received your message regarding: <b>$subject</b>.<br><br>Message:<br>$message<br><br>We will get back to you shortly.<br><br>Best Regards,<br>IMarket PH Team";
-            $mail->AltBody = "Hi $full_name,\n\nWe received your message regarding: $subject.\n\nMessage:\n$message\n\nWe will get back to you shortly.\n\nBest Regards,\nIMarket PH Team";
+            $mail->Subject = 'New Contact Message: ' . $subject;
+            $mail->Body = "<h3>New Contact Message Received</h3>
+                           <p><b>From:</b> $full_name ($email)</p>
+                           <p><b>Subject:</b> $subject</p>
+                           <p><b>Message:</b></p>
+                           <p>$message</p>
+                           <hr>
+                           <p><i>This is an automated notification from iMarket PH.</i></p>";
+            $mail->AltBody = "New Contact Message Received\n\nFrom: $full_name ($email)\nSubject: $subject\nMessage:\n$message";
 
             $mail->send();
             $msg = "<div class='alert alert-success'>Thank you for reaching out! We received your message and sent a confirmation email.</div>";
