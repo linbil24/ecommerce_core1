@@ -1,13 +1,42 @@
 <?php
 session_start();
+include("../Database/config.php");
+
 $product_name = $_GET['product_name'] ?? 'Product';
+// Try to look up product ID by name if possible, or default to 0
+$product_id = 0;
+// If there's a products table, we could look it up:
+// $p_query = mysqli_query($conn, "SELECT id FROM products WHERE name = '$product_name' LIMIT 1");
+// if($p_row = mysqli_fetch_assoc($p_query)) $product_id = $p_row['id'];
+
 $success_msg = '';
+$error_msg = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Simulate saving review
-    $rating = $_POST['rating'] ?? 5;
-    $comment = $_POST['comment'] ?? '';
-    $success_msg = "Thank you! Your review for <strong>" . htmlspecialchars($product_name) . "</strong> has been submitted.";
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect to login or show error
+        header("Location: ../php/login.php");
+        exit();
+    }
+
+    $user_id = $_SESSION['user_id'];
+    $rating = intval($_POST['rating'] ?? 5);
+    $comment = mysqli_real_escape_string($conn, $_POST['comment'] ?? '');
+
+    // Insert into reviews table
+    // Note: order_id is required by schema but we don't have it here. 
+    // We will set order_id = 0 for direct product ratings from shop view.
+    $sql = "INSERT INTO reviews (user_id, product_id, order_id, rating, comment, created_at) 
+            VALUES ('$user_id', '$product_id', 0, '$rating', '$comment', NOW())";
+
+    if (mysqli_query($conn, $sql)) {
+        $success_msg = "Thank you! Your review for <strong>" . htmlspecialchars($product_name) . "</strong> has been submitted.";
+
+        // Optional: We can insert a specific notification record if a notification table existed
+        // But get_notifications.php queries source tables, so we just need this insert.
+    } else {
+        $error_msg = "Error submitting review: " . mysqli_error($conn);
+    }
 }
 ?>
 <!DOCTYPE html>

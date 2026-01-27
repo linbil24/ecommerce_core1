@@ -61,6 +61,30 @@ if ($ticket_result) {
     }
 }
 
+// Get review notifications
+$review_sql = "SELECT r.*, u.fullname as customer_name 
+               FROM reviews r 
+               LEFT JOIN users u ON r.user_id = u.id 
+               ORDER BY r.created_at DESC 
+               LIMIT 5";
+$review_result = mysqli_query($conn, $review_sql);
+
+if ($review_result) {
+    while ($row = mysqli_fetch_assoc($review_result)) {
+        // Assume unread if created within last 24 hours, or just always show as notification
+        $is_new = (strtotime($row['created_at']) > strtotime('-24 hours'));
+
+        $notifications[] = [
+            'id' => 'review_' . $row['id'],
+            'type' => 'review',
+            'title' => 'New Product Review',
+            'message' => ($row['customer_name'] ?? 'Guest') . ' gave ' . $row['rating'] . ' stars: "' . substr($row['comment'], 0, 30) . '..."',
+            'time_ago' => timeAgo($row['created_at']),
+            'is_read' => false // Always treating as unread/new for visibility
+        ];
+    }
+}
+
 // Sort by most recent
 usort($notifications, function ($a, $b) {
     return strcmp($b['time_ago'], $a['time_ago']);
