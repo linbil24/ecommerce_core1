@@ -503,7 +503,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                             <?php } ?>
                         </div>
 
-                        <!-- Cash Change Calculation Section (Hidden by default, shown for COD) -->
+                        <!-- COD Payment Section -->
+                        <div id="cash-calculation-section"
+                            style="display: none; margin-top: 20px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                            <div style="font-weight: 700; color: #2A3B7E; margin-bottom: 12px;"><i
+                                    class="fas fa-money-bill-wave"></i> Cash on Delivery Details</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Cash Tendered (How much will you pay?)</label>
+                                    <input type="number" name="cash_tendered" id="cash_tendered" class="form-control"
+                                        placeholder="0.00" oninput="calculateChange()">
+                                </div>
+                                <div class="form-group">
+                                    <label>Change Amount</label>
+                                    <input type="text" name="change_amount" id="change_amount" class="form-control"
+                                        placeholder="0.00" readonly style="background: #e9ecef;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cash Change Calculation Warning -->
                         <div id="payment-warning"
                             style="color: #dc3545; font-size: 0.85em; margin-top: 5px; display: none;">Insufficient
                             cash amount.</div>
@@ -548,7 +567,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
             </div>
 
             <!-- Right Side (Summary) -->
-            <div class="summary-card">
+            <div class="summary-card" style="position: sticky; top: 100px;">
                 <h3>Order Summary</h3>
                 <div class="summary-row">
                     <span>Subtotal</span>
@@ -568,7 +587,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                         data-amount="<?php echo $total; ?>">₱<?php echo number_format($total, 2); ?></span>
                 </div>
 
-                <button type="submit" name="place_order" id="btn-place-order" class="btn-place-order">Place Order
+                <button type="submit" name="place_order" id="btn-place-order" class="btn-place-order"
+                    onclick="return validatePayment(event)">Place Order
                     Now</button>
                 <p style="margin-top:1rem; font-size:0.8rem; color:#777; text-align:center;">
                     By placing an order, you agree to our Terms of Service.
@@ -578,6 +598,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     </form>
 
     <script>
+        function validatePayment(e) {
+            const method = document.querySelector('input[name="payment_method"]:checked').value;
+
+            if (method === 'GCash') {
+                const ref = document.getElementById('payment_reference').value;
+                if (ref.length !== 13) {
+                    alert("Please enter a valid 13-digit GCash Reference Number.");
+                    return false;
+                }
+            } else if (method === 'Cash On Delivery') {
+                const total = parseFloat(document.getElementById('total_display_amount').getAttribute('data-amount'));
+                const cash = parseFloat(document.getElementById('cash_tendered').value);
+                if (isNaN(cash) || cash < total) {
+                    alert("Please enter a sufficient cash amount for COD.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
         function selectPayment(element) {
             document.querySelectorAll('.payment-card-label').forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
@@ -591,16 +631,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         function toggleCashSection(method) {
             const cashSection = document.getElementById('cash-calculation-section');
             const gcashSection = document.getElementById('gcash-process-section');
+            const placeOrderBtn = document.getElementById('btn-place-order');
 
-            // Hide all first
-            cashSection.style.display = 'none';
-            gcashSection.style.display = 'none';
+            // Hide/Show logic
+            if (cashSection) cashSection.style.display = (method === 'Cash On Delivery') ? 'block' : 'none';
+            if (gcashSection) gcashSection.style.display = (method === 'GCash') ? 'block' : 'none';
 
-            if (method === 'Cash On Delivery') {
-                cashSection.style.display = 'block';
-            } else if (method === 'GCash') {
-                gcashSection.style.display = 'block';
-            }
+            // Reset validations
+            const warning = document.getElementById('payment-warning');
+            if (warning) warning.style.display = 'none';
         }
 
         function calculateChange() {
