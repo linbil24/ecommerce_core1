@@ -458,38 +458,42 @@
 
                             <!-- Right: Banner/Slider -->
                             <div class="slider-section"
-                                style="flex: 0.9; border: none; box-shadow: none; border-radius: 0; position: relative; overflow: hidden; background: #fff; margin: 0; max-width: none; height: 100%;">
-                                <!-- Geometric / Color Pattern Gradient instead of missing image -->
+                                style="flex: 1.2; position: relative; overflow: hidden; background: #f8f8f8; margin: 0; min-height: 100%;">
+
+                                <!-- Dynamic Dark Background with Shop Color Tint -->
                                 <div
-                                    style="width: 100%; height: 100%; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 60%), linear-gradient(45deg, #<?php echo $currentShop['bg']; ?> 0%, #<?php echo dechex(max(0, hexdec($currentShop['bg']) - 202020)); ?> 100%); position: relative;">
+                                    style="position: absolute; inset: 0; background: linear-gradient(to right, #1a1a1a 40%, #<?php echo $currentShop['bg']; ?> 100%); opacity: 0.9;">
+                                </div>
+                                <div style="position: absolute; inset: 0; background: #1a1a1a; opacity: 0.7;"></div>
 
-                                    <!-- Large Initials BG -->
-                                    <div
-                                        style="position: absolute; bottom: -40px; right: -20px; color: rgba(255,255,255,0.1); font-size: 18em; font-weight: 900; line-height: 1; user-select: none;">
-                                        <?php echo htmlspecialchars($currentShop['initials']); ?>
-                                    </div>
+                                <!-- Geometric Pattern Overlay -->
+                                <div
+                                    style="position: absolute; inset: 0; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px; opacity: 0.03;">
+                                </div>
 
-                                    <!-- Decorative overlay -->
-                                    <div
-                                        style="position: absolute; inset: 0; background: url('https://www.transparenttextures.com/patterns/cubes.png'); opacity: 0.1;">
-                                    </div>
+                                <!-- Large Watermark Initials -->
+                                <div
+                                    style="position: absolute; bottom: -50px; right: -20px; font-size: 18em; font-weight: 900; line-height: 1; color: rgba(255,255,255,0.04); user-select: none; font-family: 'Arial', sans-serif;">
+                                    <?php echo htmlspecialchars($currentShop['initials']); ?>
+                                </div>
 
+                                <!-- Text Content -->
+                                <div
+                                    style="position: absolute; top: 50%; right: 60px; transform: translateY(-50%); text-align: right; color: white; z-index: 10;">
+                                    <h3
+                                        style="font-size: 3.5em; font-weight: 800; margin: 0; line-height: 0.9; text-transform: uppercase;">
+                                        NEW</h3>
+                                    <h2
+                                        style="font-size: 3.5em; font-weight: 300; margin: 0; line-height: 0.9; text-transform: uppercase; letter-spacing: 2px;">
+                                        ARRIVALS</h2>
                                     <div
-                                        style="position: absolute; top: 50%; right: 40px; transform: translateY(-50%); text-align: right; color: white; width: 100%; pointer-events: none;">
-                                        <div
-                                            style="font-size: 2.2em; font-weight: 800; text-transform: uppercase; line-height: 1; margin-bottom: 5px; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-                                            New</div>
-                                        <div
-                                            style="font-size: 2.2em; font-weight: 300; text-transform: uppercase; line-height: 0.9; text-shadow: 0 4px 10px rgba(0,0,0,0.3); margin-bottom: 10px;">
-                                            Arrivals</div>
-                                        <div
-                                            style="font-size: 0.9em; opacity: 0.9; letter-spacing: 3px; font-weight: 500; text-shadow: 0 2px 5px rgba(0,0,0,0.3);">
-                                            COLLECTION
-                                            2024</div>
-                                        <div
-                                            style="margin-top: 25px; display: inline-block; padding: 12px 25px; border: 2px solid white; font-weight: 700; text-transform: uppercase; font-size: 0.85em; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); pointer-events: auto;">
-                                            Explore Now</div>
+                                        style="margin-top: 15px; font-size: 0.9em; letter-spacing: 4px; text-transform: uppercase; opacity: 0.8; font-weight: 500;">
+                                        Collection 2024
                                     </div>
+                                    <a href="#"
+                                        style="margin-top: 30px; display: inline-block; padding: 12px 35px; border: 1px solid rgba(255,255,255,0.8); color: white; text-decoration: none; font-size: 0.85em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; background: transparent;">
+                                        Explore Now
+                                    </a>
                                 </div>
                             </div>
                         </div>

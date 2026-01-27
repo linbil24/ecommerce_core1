@@ -727,7 +727,7 @@ if ($is_logged_in) {
                         <p style="color: #64748b; font-size: 14px;"><strong>${notif.message}</strong></p>
                         <p style="color: #94a3b8; font-size: 12px;">Submitted ${notif.time_ago}</p>
                         <div style="margin-top: 20px; text-align: right; display: flex; gap: 10px; justify-content: flex-end;">
-                            <button onclick="showSubModule('support', 'tickets'); closeCustomModal();" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer;">View Tickets</button>
+                            <button onclick="window.location.href='?module=support&submodule=tickets'" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer;">View Tickets</button>
                             <button onclick="closeCustomModal()" style="padding: 8px 16px; background: #e2e8f0; color: #475569; border: none; border-radius: 6px; cursor: pointer;">Close</button>
                         </div>
                     </div>
