@@ -143,9 +143,96 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
 
     <!-- Custom Auth CSS -->
     <link rel="stylesheet" href="../css/admin/auth.css">
+    
+    <style>
+        /* Loading Screen Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #4A6E95 0%, #2B4560 100%);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        .loader-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .loader-logo-box {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .loader-brand-name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .loader-tagline {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 50px;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden-loader {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Loading Screen Overlay -->
+    <div id="loader-overlay">
+        <div class="loader-container">
+            <div class="loader-logo-box">IM</div>
+            <div class="text-content">
+                <h1 class="loader-brand-name">iMarket</h1>
+                <p class="loader-tagline">Your Market, Your Choice</p>
+            </div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
     <div class="login-container">
         <div class="header">
             <a href="login.php"
@@ -242,6 +329,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
     </div>
     <script>
         lucide.createIcons();
+
+        // Loading Screen Logic
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loader = document.getElementById('loader-overlay');
+                if (loader) {
+                    loader.classList.add('hidden-loader');
+                    setTimeout(() => loader.remove(), 500); // Remove from DOM after fade out
+                }
+            }, 1500); // Display time
+        });
     </script>
 </body>
 
