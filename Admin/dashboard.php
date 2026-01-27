@@ -639,8 +639,8 @@ if ($is_logged_in) {
                         notifDiv.onmouseover = function () { this.style.background = '#f8fafc'; };
                         notifDiv.onmouseout = function () { this.style.background = notif.is_read ? 'white' : '#eff6ff'; };
 
-                        const iconColor = notif.type === 'chat' ? '#3b82f6' : notif.type === 'order' ? '#8b5cf6' : '#f59e0b';
-                        const iconName = notif.type === 'chat' ? 'message-circle' : notif.type === 'order' ? 'shopping-cart' : 'alert-circle';
+                        const iconColor = notif.type === 'chat' ? '#3b82f6' : notif.type === 'order' ? '#8b5cf6' : notif.type === 'review' ? '#ffc107' : '#f59e0b';
+                        const iconName = notif.type === 'chat' ? 'message-circle' : notif.type === 'order' ? 'shopping-cart' : notif.type === 'review' ? 'star' : 'alert-circle';
 
                         notifDiv.innerHTML = `
                             <div style="display: flex; gap: 12px; align-items: start;">
