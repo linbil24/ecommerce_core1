@@ -1570,7 +1570,7 @@ function renderAlertsModule() {
                 <div style="animation: fadeIn 0.4s ease-out; margin-bottom: 2rem;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
                         <div>
-                            <h2 class="page-header" style="margin: 0; font-size: 1.85rem; font-weight: 900; color: #1e293b; letter-spacing: -0.02em;">Digital Pulse Monitoring</h2>
+                            <h2 class="page-header" style="margin: 0; font-size: 1.85rem; font-weight: 900; color: #1e293b; letter-spacing: -0.02em;">Notification market</h2>
                             <p style="color: #64748b; font-size: 0.95rem; margin-top: 0.4rem;">Real-time intelligence and system-wide notification stream.</p>
                         </div>
                         <button onclick="renderAlertsModule()" style="background: white; border: 1px solid #e2e8f0; color: #1e293b; padding: 0.6rem 1.25rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; font-weight: 700; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='white'; this.style.transform='translateY(0)'">
@@ -1582,7 +1582,7 @@ function renderAlertsModule() {
                         ${pulseCards}
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 350px; gap: 2rem;">
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
                         <!-- Main Notification Stream -->
                         <div class="glass-panel" style="border-radius: 1.5rem; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; overflow: hidden;">
                             <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; background: #fafbfc;">
@@ -1608,42 +1608,6 @@ function renderAlertsModule() {
                                         ${notificationRows}
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-
-                        <!-- Sidebar Actions / Broadcast -->
-                        <div style="display: flex; flex-direction: column; gap: 2rem;">
-                            <div class="glass-panel" style="padding: 1.75rem; border-radius: 1.5rem; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white;">
-                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
-                                    <i data-lucide="radio" style="width: 20px; height: 20px; color: #3b82f6;"></i>
-                                    <h3 style="font-size: 0.9rem; font-weight: 800; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Omni-Broadcast</h3>
-                                </div>
-                                <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1.5rem; line-height: 1.6;">Send an immediate announcement to all active marketplace users.</p>
-                                
-                                <textarea id="broadcast-message" placeholder="Type your message here..." style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; color: white; font-size: 0.85rem; min-height: 100px; margin-bottom: 1rem; resize: none; outline: none; transition: border 0.2s;" onfocus="this.style.borderColor='#3b82f6'"></textarea>
-                                
-                                <button onclick="sendBroadcast()" style="width: 100%; background: #3b82f6; color: white; border: none; padding: 0.75rem; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" onmouseover="this.style.background='#2563eb'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#3b82f6'; this.style.transform='translateY(0)'">
-                                    <i data-lucide="send" style="width: 14px; height: 14px;"></i>
-                                    Dispatch Broadcast
-                                </button>
-                            </div>
-
-                            <div class="glass-panel" style="padding: 1.5rem; border-radius: 1.5rem; background: white; border: 1px solid #f1f5f9;">
-                                <h3 style="font-size: 0.85rem; font-weight: 800; color: #1e293b; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">System Health</h3>
-                                <div style="display: flex; flex-direction: column; gap: 1rem;">
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="font-size: 0.85rem; color: #64748b;">Database Latency</span>
-                                        <span style="font-size: 0.85rem; font-weight: 700; color: #10b981;">12ms</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="font-size: 0.85rem; color: #64748b;">API Uptime</span>
-                                        <span style="font-size: 0.85rem; font-weight: 700; color: #10b981;">99.9%</span>
-                                    </div>
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="font-size: 0.85rem; color: #64748b;">SSL Certificate</span>
-                                        <span style="font-size: 0.85rem; font-weight: 700; color: #10b981;">Valid</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
