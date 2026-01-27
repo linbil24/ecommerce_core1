@@ -311,12 +311,13 @@
                     /* Sort Controls Override */
                     .sort-controls {
                         display: flex;
-                        gap: 15px;
+                        gap: 10px;
                         align-items: center;
                         background: #fff;
-                        padding: 6px 12px;
-                        border-radius: 8px;
+                        padding: 8px 16px;
+                        border-radius: 50px;
                         border: 1px solid #e2e8f0;
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
                     }
 
                     .sort-btn {
@@ -352,15 +353,17 @@
                 </style>
 
                 <!-- NEW LAYOUT: Sidebar + Main Content -->
-                <div class="store-layout" style="display: flex; gap: 20px; align-items: flex-start; margin-top: 20px;">
+                <div class="store-layout"
+                    style="display: flex; gap: 30px; align-items: flex-start; margin-top: 30px; position: relative;">
 
                     <!-- Sidebar -->
                     <div class="shop-sidebar"
-                        style="width: 250px; flex-shrink: 0; background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #eaeaea;">
+                        style="width: 260px; flex-shrink: 0; background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #f1f5f9; position: sticky; top: 100px; height: fit-content; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                         <h3 class="sidebar-title"
-                            style="margin-top: 0; padding-bottom: 10px; border-bottom: 1px solid #eee; color: #333;">All
-                            Shops</h3>
-                        <ul class="sidebar-list" style="list-style: none; padding: 0; margin: 0;">
+                            style="margin-top: 0; padding-bottom: 15px; border-bottom: 1px solid #eee; color: #1e293b; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;">
+                            All Shops</h3>
+                        <ul class="sidebar-list"
+                            style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
                             <?php foreach ($shops as $shop):
                                 $isActive = ($shop['name'] === $selectedStore);
                                 $shopInitial = $shop['initials'];
@@ -472,30 +475,31 @@
                                     </div>
 
                                     <div
-                                        style="position: absolute; top: 40px; right: 50px; text-align: right; color: white;">
+                                        style="position: absolute; top: 50%; right: 40px; transform: translateY(-50%); text-align: right; color: white; width: 100%; pointer-events: none;">
                                         <div
-                                            style="font-size: 3em; font-weight: 800; text-transform: uppercase; line-height: 1; margin-bottom: 5px;">
+                                            style="font-size: 2.2em; font-weight: 800; text-transform: uppercase; line-height: 1; margin-bottom: 5px; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">
                                             New</div>
                                         <div
-                                            style="font-size: 3em; font-weight: 300; text-transform: uppercase; line-height: 0.9;">
+                                            style="font-size: 2.2em; font-weight: 300; text-transform: uppercase; line-height: 0.9; text-shadow: 0 4px 10px rgba(0,0,0,0.3); margin-bottom: 10px;">
                                             Arrivals</div>
-                                        <div style="font-size: 1em; opacity: 0.8; margin-top: 10px; letter-spacing: 2px;">
+                                        <div
+                                            style="font-size: 0.9em; opacity: 0.9; letter-spacing: 3px; font-weight: 500; text-shadow: 0 2px 5px rgba(0,0,0,0.3);">
                                             COLLECTION
                                             2024</div>
                                         <div
-                                            style="margin-top: 20px; display: inline-block; padding: 10px 20px; border: 2px solid white; font-weight: 600; text-transform: uppercase; font-size: 0.9em;">
+                                            style="margin-top: 25px; display: inline-block; padding: 12px 25px; border: 2px solid white; font-weight: 700; text-transform: uppercase; font-size: 0.85em; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); pointer-events: auto;">
                                             Explore Now</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="content-card">
+                        <div class="content-card" style="margin-top: 40px;">
                             <div class="section-header"
-                                style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+                                style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom: 25px; border-bottom: 1px solid #f1f5f9; padding-bottom: 20px;">
                                 <div>
-                                    <h2>Store Products</h2>
-                                    <p>Browse our latest collection</p>
+                                    <h2 style="font-size: 1.8rem; color: #1e293b; margin-bottom: 5px;">Store Products</h2>
+                                    <p style="color: #64748b; margin: 0;">Browse our latest collection</p>
                                 </div>
 
                                 <!-- Sort Controls -->
@@ -513,7 +517,8 @@
                             </div>
 
                             <!-- Product Grid -->
-                            <div class="product-grid">
+                            <div class="product-grid"
+                                style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
                                 <?php
                                 foreach ($products as $index => $product):
                                     $rating = $product['rating'];
