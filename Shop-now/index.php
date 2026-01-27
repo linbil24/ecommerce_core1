@@ -192,10 +192,10 @@
 
             // CHECK: Is a store selected or searching?
             $searchQuery = $_GET['search'] ?? '';
-            if (isset($_GET['store']) || !empty($searchQuery)) {
-                $selectedStore = $_GET['store'] ?? 'UrbanWear PH';
-                $selectedStore = urldecode($selectedStore);
+            $selectedStore = $_GET['store'] ?? '';
 
+            if (!empty($selectedStore)) {
+                $selectedStore = urldecode($selectedStore);
                 // Find selected shop details
                 $currentShop = null;
                 foreach ($shops as $s) {
@@ -576,6 +576,461 @@
                         </div>
                     </div> <!-- End .store-main -->
                 </div> <!-- End .store-layout -->
+
+                <?php
+            } elseif (!empty($searchQuery)) {
+                // --- SHOPEE STYLE SEARCH RESULTS VIEW ---
+            
+                // 1. Get Related Shops
+                $relatedShops = [];
+                foreach ($shops as $shop) {
+                    if (stripos($shop['name'], $searchQuery) !== false || stripos($shop['category'], $searchQuery) !== false) {
+                        $relatedShops[] = $shop;
+                    }
+                }
+                $relatedShops = array_slice($relatedShops, 0, 3);
+
+                // 2. Get All Products matching Search
+                $allProducts = [];
+                foreach ($shops as $shop) {
+                    $shopProducts = getMockProducts($shop['name'], $searchQuery);
+                    foreach ($shopProducts as $p) {
+                        $p['shop_name'] = $shop['name'];
+                        $p['shop_initials'] = $shop['initials'];
+                        $p['shop_bg'] = $shop['bg'];
+                        $allProducts[] = $p;
+                    }
+                }
+
+                // 3. Sorting
+                $sort = $_GET['sort'] ?? 'best';
+                if ($sort === 'price_asc')
+                    usort($allProducts, fn($a, $b) => $a['raw_price'] <=> $b['raw_price']);
+                elseif ($sort === 'price_desc')
+                    usort($allProducts, fn($a, $b) => $b['raw_price'] <=> $a['raw_price']);
+                elseif ($sort === 'sales')
+                    usort($allProducts, fn($a, $b) => $b['sold'] <=> $a['sold']);
+                elseif ($sort === 'latest')
+                    shuffle($allProducts);
+                ?>
+
+                <style>
+                    .search-results-page {
+                        display: flex;
+                        gap: 25px;
+                        margin-top: 30px;
+                        font-family: 'Helvetica Neue', Helvetica, Arial, 文泉驛正黑, "WenQuanYi Zen Hei", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+                    }
+
+                    .search-sidebar {
+                        width: 200px;
+                        flex-shrink: 0;
+                    }
+
+                    .filter-group {
+                        margin-bottom: 25px;
+                        padding-bottom: 15px;
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                    }
+
+                    .filter-title {
+                        font-size: 14px;
+                        font-weight: 700;
+                        color: #333;
+                        margin-bottom: 12px;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+
+                    .filter-list {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                    }
+
+                    .filter-item {
+                        margin-bottom: 8px;
+                        color: #555;
+                        font-size: 13px;
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        cursor: pointer;
+                    }
+
+                    .filter-item:hover {
+                        color: #2A3B7E;
+                    }
+
+                    .filter-checkbox {
+                        width: 14px;
+                        height: 14px;
+                        border: 1px solid #ccc;
+                        border-radius: 2px;
+                    }
+
+                    .search-main {
+                        flex: 1;
+                        min-width: 0;
+                    }
+
+                    .related-shops-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 15px;
+                    }
+
+                    .related-shops-header h3 {
+                        color: #777;
+                        font-size: 14px;
+                        font-weight: 400;
+                        text-transform: uppercase;
+                    }
+
+                    .more-shops-link {
+                        color: #2A3B7E;
+                        text-decoration: none;
+                        font-size: 14px;
+                        display: flex;
+                        align-items: center;
+                        gap: 5px;
+                    }
+
+                    .related-shop-card {
+                        background: #fff;
+                        border: 1px solid rgba(0, 0, 0, 0.05);
+                        border-radius: 4px;
+                        padding: 20px;
+                        display: flex;
+                        gap: 30px;
+                        margin-bottom: 30px;
+                        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+                    }
+
+                    .shop-info-side {
+                        width: 250px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        border-right: 1px solid #eee;
+                        padding-right: 30px;
+                        text-align: center;
+                    }
+
+                    .shop-logo-large {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        margin-bottom: 12px;
+                        overflow: hidden;
+                        border: 1px solid #eee;
+                    }
+
+                    .shop-name-bold {
+                        font-weight: 700;
+                        font-size: 16px;
+                        color: #333;
+                        margin-bottom: 5px;
+                    }
+
+                    .shop-badge {
+                        background: #ee4d2d;
+                        color: #fff;
+                        font-size: 10px;
+                        padding: 1px 3px;
+                        border-radius: 2px;
+                        text-transform: uppercase;
+                        margin-bottom: 8px;
+                    }
+
+                    .shop-meta-row {
+                        display: flex;
+                        gap: 15px;
+                        font-size: 12px;
+                        color: #777;
+                        margin-bottom: 15px;
+                    }
+
+                    .visit-shop-btn {
+                        padding: 6px 20px;
+                        border: 1px solid #2A3B7E;
+                        color: #2A3B7E;
+                        text-decoration: none;
+                        border-radius: 2px;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
+                    .visit-shop-btn:hover {
+                        background: rgba(42, 59, 126, 0.05);
+                    }
+
+                    .shop-top-products {
+                        flex: 1;
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 15px;
+                    }
+
+                    .mini-product {
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                    }
+
+                    .mini-product:hover {
+                        transform: translateY(-2px);
+                    }
+
+                    .mini-product-img {
+                        width: 100%;
+                        aspect-ratio: 1;
+                        object-fit: cover;
+                        border-radius: 2px;
+                        margin-bottom: 8px;
+                    }
+
+                    .mini-product-price {
+                        color: #2A3B7E;
+                        font-weight: 700;
+                        font-size: 14px;
+                    }
+
+                    .results-summary {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        margin-bottom: 20px;
+                        color: #333;
+                    }
+
+                    .results-grid {
+                        display: grid;
+                        grid-template-columns: repeat(5, 1fr);
+                        gap: 12px;
+                    }
+
+                    .result-card {
+                        background: #fff;
+                        border: 1px solid transparent;
+                        border-radius: 4px;
+                        overflow: hidden;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                    }
+
+                    .result-card:hover {
+                        border-color: #2A3B7E;
+                        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                        transform: translateY(-2px);
+                    }
+
+                    .result-img-wrapper {
+                        width: 100%;
+                        aspect-ratio: 1;
+                        position: relative;
+                    }
+
+                    .result-img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    .result-info {
+                        padding: 10px;
+                    }
+
+                    .result-title {
+                        font-size: 12px;
+                        line-height: 1.4;
+                        height: 2.8em;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        color: #333;
+                        margin-bottom: 8px;
+                    }
+
+                    .result-price-row {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
+                    .result-price {
+                        color: #2A3B7E;
+                        font-weight: 700;
+                        font-size: 16px;
+                    }
+
+                    .result-sold {
+                        font-size: 10px;
+                        color: #999;
+                    }
+                </style>
+
+                <div class="search-results-page">
+                    <!-- Sidebar Filters -->
+                    <div class="search-sidebar">
+                        <div class="filter-group">
+                            <div class="filter-title"><i class="fas fa-filter"></i> SEARCH FILTER</div>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-title">Shipped From</div>
+                            <ul class="filter-list">
+                                <li class="filter-item">
+                                    <div class="filter-checkbox"></div> Domestic
+                                </li>
+                                <li class="filter-item">
+                                    <div class="filter-checkbox"></div> Overseas
+                                </li>
+                                <li class="filter-item">
+                                    <div class="filter-checkbox"></div> Metro Manila
+                                </li>
+                                <li class="filter-item">
+                                    <div class="filter-checkbox"></div> North Luzon
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-title">Shops & Promos</div>
+                            <ul class="filter-list">
+                                <li class="filter-item">
+                                    <div class="filter-checkbox"></div> Official Shop
+                                </li>
+                                <li class="filter-item">
+                                    <div class="filter-checkbox"></div> Shop Vouchers
+                                </li>
+                                <li class="filter-item">
+                                    <div class="filter-checkbox"></div> Cash on Delivery
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="filter-group">
+                            <div class="filter-title">Price Range</div>
+                            <div style="display:flex; gap:5px; align-items:center;">
+                                <input type="text" placeholder="₱ MIN"
+                                    style="width: 50%; padding: 5px; border: 1px solid #ccc; font-size: 12px;">
+                                <span>-</span>
+                                <input type="text" placeholder="₱ MAX"
+                                    style="width: 50%; padding: 5px; border: 1px solid #ccc; font-size: 12px;">
+                            </div>
+                            <button
+                                style="width: 100%; padding: 8px; background: #2A3B7E; color: #fff; border: none; margin-top: 10px; border-radius: 2px; cursor: pointer; font-size: 12px;">APPLY</button>
+                        </div>
+                    </div>
+
+                    <!-- Main Search Content -->
+                    <div class="search-main">
+
+                        <!-- Related Shops Section -->
+                        <?php if (!empty($relatedShops)): ?>
+                            <div class="related-shops-header">
+                                <h3>SHOPS RELATED TO "<?php echo htmlspecialchars($searchQuery); ?>"</h3>
+                                <a href="#" class="more-shops-link">More Shops <i class="fas fa-chevron-right"></i></a>
+                            </div>
+
+                            <?php foreach ($relatedShops as $rShop):
+                                $topProducts = getMockProducts($rShop['name'], '');
+                                $topProducts = array_slice($topProducts, 0, 3);
+                                ?>
+                                <div class="related-shop-card">
+                                    <div class="shop-info-side">
+                                        <div class="shop-logo-large">
+                                            <img src="https://ui-avatars.com/api/?name=<?php echo $rShop['initials']; ?>&background=<?php echo $rShop['bg']; ?>&color=fff&size=128"
+                                                style="width:100%; height:100%;">
+                                        </div>
+                                        <div class="shop-name-bold"><?php echo htmlspecialchars($rShop['name']); ?></div>
+                                        <div class="shop-badge">Mall</div>
+                                        <div class="shop-meta-row">
+                                            <span><i class="fas fa-star" style="color:#ee4d2d"></i> 4.9</span>
+                                            <span>|</span>
+                                            <span>1.2M Followers</span>
+                                        </div>
+                                        <a href="?store=<?php echo urlencode($rShop['name']); ?>" class="visit-shop-btn">Visit
+                                            Shop</a>
+                                    </div>
+                                    <div class="shop-top-products">
+                                        <?php foreach ($topProducts as $tp): ?>
+                                            <div class="mini-product" data-name="<?php echo htmlspecialchars($tp['name']); ?>"
+                                                data-price="<?php echo $tp['price']; ?>"
+                                                data-raw-price="<?php echo $tp['raw_price']; ?>"
+                                                data-image="<?php echo $tp['image']; ?>" data-rating="<?php echo $tp['rating']; ?>"
+                                                data-sold="<?php echo $tp['sold']; ?>"
+                                                data-store="<?php echo htmlspecialchars($rShop['name']); ?>"
+                                                onclick="openProductModal(this)">
+                                                <img src="<?php echo $tp['image']; ?>" class="mini-product-img">
+                                                <div class="mini-product-price"><?php echo $tp['price']; ?></div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <!-- Standard Search Results -->
+                        <div class="results-summary">
+                            <i class="fas fa-lightbulb" style="color: #2A3B7E;"></i>
+                            <span>Search result for '<strong><?php echo htmlspecialchars($searchQuery); ?></strong>'</span>
+
+                            <div
+                                style="margin-left: auto; display: flex; gap: 10px; align-items: center; background: #fafafa; padding: 5px 15px; border-radius: 2px;">
+                                <span style="font-size: 13px; color: #555;">Sort By:</span>
+                                <a href="?search=<?php echo urlencode($searchQuery); ?>&sort=best"
+                                    class="sort-btn-mini <?php echo ($sort == 'best') ? 'active' : ''; ?>"
+                                    style="font-size:12px; text-decoration:none; color:<?php echo ($sort == 'best') ? '#2A3B7E' : '#555'; ?>; font-weight:<?php echo ($sort == 'best') ? '700' : '400'; ?>;">Relavance</a>
+                                <a href="?search=<?php echo urlencode($searchQuery); ?>&sort=latest"
+                                    class="sort-btn-mini <?php echo ($sort == 'latest') ? 'active' : ''; ?>"
+                                    style="font-size:12px; text-decoration:none; color:<?php echo ($sort == 'latest') ? '#2A3B7E' : '#555'; ?>; font-weight:<?php echo ($sort == 'latest') ? '700' : '400'; ?>;">Latest</a>
+                                <a href="?search=<?php echo urlencode($searchQuery); ?>&sort=sales"
+                                    class="sort-btn-mini <?php echo ($sort == 'sales') ? 'active' : ''; ?>"
+                                    style="font-size:12px; text-decoration:none; color:<?php echo ($sort == 'sales') ? '#2A3B7E' : '#555'; ?>; font-weight:<?php echo ($sort == 'sales') ? '700' : '400'; ?>;">Top
+                                    Sales</a>
+                            </div>
+                        </div>
+
+                        <?php if (empty($allProducts)): ?>
+                            <div style="text-align: center; padding: 50px; background: #fff; border-radius: 4px;">
+                                <img src="https://cdni.iconscout.com/illustration/premium/thumb/no-product-found-8290610-6632128.png"
+                                    style="width: 200px; opacity: 0.5;">
+                                <p style="color: #999; margin-top: 20px;">No results found for
+                                    "<?php echo htmlspecialchars($searchQuery); ?>"</p>
+                            </div>
+                        <?php else: ?>
+                            <div class="results-grid">
+                                <?php foreach ($allProducts as $ap):
+                                    $soldDisp = ($ap['sold'] > 1000) ? number_format($ap['sold'] / 1000, 1) . 'k' : $ap['sold'];
+                                    ?>
+                                    <div class="result-card" data-name="<?php echo htmlspecialchars($ap['name']); ?>"
+                                        data-price="<?php echo $ap['price']; ?>" data-raw-price="<?php echo $ap['raw_price']; ?>"
+                                        data-image="<?php echo $ap['image']; ?>" data-rating="<?php echo $ap['rating']; ?>"
+                                        data-sold="<?php echo $soldDisp; ?>"
+                                        data-store="<?php echo htmlspecialchars($ap['shop_name']); ?>"
+                                        onclick="openProductModal(this)">
+                                        <div class="result-img-wrapper">
+                                            <img src="<?php echo $ap['image']; ?>" class="result-img">
+                                        </div>
+                                        <div class="result-info">
+                                            <div class="result-title"><?php echo htmlspecialchars($ap['name']); ?></div>
+                                            <div class="result-price-row">
+                                                <div class="result-price"><?php echo $ap['price']; ?></div>
+                                                <div class="result-sold"><?php echo $soldDisp; ?> sold</div>
+                                            </div>
+                                            <div style="font-size: 10px; color: #999; margin-top: 5px;"><i class="fas fa-store"></i>
+                                                <?php echo htmlspecialchars($ap['shop_name']); ?></div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
 
                 <?php
             } else {
