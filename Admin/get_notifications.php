@@ -41,6 +41,7 @@ if ($chat_result) {
             'title' => 'New Chat Message',
             'message' => ($row['customer_name'] ?? 'Customer') . ' sent a message about ' . $row['store_name'],
             'time_ago' => timeAgo($row['created_at']),
+            'raw_time' => strtotime($row['created_at']),
             'is_read' => false
         ];
     }
@@ -58,6 +59,7 @@ if ($ticket_result) {
             'title' => 'New Support Ticket',
             'message' => 'Ticket #' . $row['ticket_number'] . ': ' . substr($row['subject'], 0, 50),
             'time_ago' => timeAgo($row['created_at']),
+            'raw_time' => strtotime($row['created_at']),
             'is_read' => $row['is_read'] == 1
         ];
     }
@@ -82,14 +84,15 @@ if ($review_result) {
             'title' => 'New Product Review',
             'message' => ($row['customer_name'] ?? 'Guest') . ' gave ' . $row['rating'] . ' stars: "' . substr($row['comment'], 0, 30) . '..."',
             'time_ago' => timeAgo($row['created_at']),
-            'is_read' => false // Always treating as unread/new for visibility
+            'raw_time' => strtotime($row['created_at']),
+            'is_read' => false
         ];
     }
 }
 
-// Sort by most recent
+// Sort by most recent using raw_time
 usort($notifications, function ($a, $b) {
-    return strcmp($b['time_ago'], $a['time_ago']);
+    return $b['raw_time'] - $a['raw_time'];
 });
 
 echo json_encode(['success' => true, 'notifications' => array_slice($notifications, 0, 10)]);

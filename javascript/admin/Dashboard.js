@@ -1500,174 +1500,169 @@ function renderAlertsModule() {
     setPageTitle('Live System Pulse');
     const content = document.getElementById('content-container');
 
-    const lowStockProducts = productsData.filter(p => parseInt(p.stock) < 10 && p.status !== 'Inactive');
-    const pendingOrders = ordersData.filter(o => o.status === 'Pending');
-    const openTickets = supportTicketsData.filter(t => t.status === 'Open' || t.status === 'In Progress');
-    const pendingTransactions = transactionsData.filter(t => t.status === 'Pending');
+    // Fetch notifications to display in the table
+    fetch('get_notifications.php')
+        .then(response => response.json())
+        .then(data => {
+            let notificationRows = '';
+            if (data.success && data.notifications.length > 0) {
+                notificationRows = data.notifications.map(notif => {
+                    const iconColor = notif.type === 'chat' ? '#3b82f6' : notif.type === 'order' ? '#8b5cf6' : notif.type === 'review' ? '#ffc107' : '#f59e0b';
+                    const iconName = notif.type === 'chat' ? 'message-circle' : notif.type === 'order' ? 'shopping-cart' : notif.type === 'review' ? 'star' : 'alert-circle';
 
-    const alertsList = [];
+                    return `
+                        <tr style="border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+                            <td style="padding: 1rem 1.5rem;">
+                                <div style="width: 32px; height: 32px; border-radius: 8px; background: ${iconColor}15; display: flex; align-items: center; justify-content: center;">
+                                    <i data-lucide="${iconName}" style="width: 16px; height: 16px; color: ${iconColor};"></i>
+                                </div>
+                            </td>
+                            <td style="padding: 1rem 1.5rem;">
+                                <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: ${iconColor}; background: ${iconColor}10; padding: 2px 8px; border-radius: 4px;">${notif.type}</span>
+                            </td>
+                            <td style="padding: 1rem 1.5rem;">
+                                <div style="font-size: 0.875rem; font-weight: 600; color: #1e293b; margin-bottom: 2px;">${notif.title}</div>
+                                <div style="font-size: 0.8125rem; color: #64748b; line-height: 1.4;">${notif.message}</div>
+                            </td>
+                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8; white-space: nowrap;">
+                                ${notif.time_ago}
+                            </td>
+                            <td style="padding: 1rem 1.5rem; text-align: right;">
+                                <button onclick='showNotificationDetails(${JSON.stringify(notif).replace(/'/g, "&apos;")})' 
+                                    style="padding: 6px 12px; font-size: 0.75rem; font-weight: 600; color: #3b82f6; background: #eff6ff; border: 1px solid #dbeafe; border-radius: 6px; cursor: pointer; transition: all 0.2s;"
+                                    onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+                                    View Details
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                notificationRows = `<tr><td colspan="5" style="padding: 3rem; text-align: center; color: #94a3b8;">No recent notifications recorded.</td></tr>`;
+            }
 
-    if (lowStockProducts.length > 0) {
-        alertsList.push({
-            type: 'Inventory',
-            icon: 'package',
-            title: 'Critical Inventory',
-            message: `${lowStockProducts.length} items require immediate restocking.`,
-            count: lowStockProducts.length,
-            color: '#f59e0b',
-            accent: 'rgba(245, 158, 11, 0.1)'
-        });
-    }
+            const lowStockProducts = productsData.filter(p => parseInt(p.stock) < 10 && p.status !== 'Inactive');
+            const pendingOrders = ordersData.filter(o => o.status === 'Pending');
+            const openTickets = supportTicketsData.filter(t => t.status === 'Open' || t.status === 'In Progress');
 
-    if (pendingOrders.length > 0) {
-        alertsList.push({
-            type: 'Orders',
-            icon: 'shopping-cart',
-            title: 'Pending Fulfillment',
-            message: `${pendingOrders.length} orders awaiting processing.`,
-            count: pendingOrders.length,
-            color: '#6366f1',
-            accent: 'rgba(99, 102, 241, 0.1)'
-        });
-    }
+            const alertsList = [];
+            if (lowStockProducts.length > 0) alertsList.push({ type: 'Inventory', label: 'Critical Stock', val: lowStockProducts.length, color: '#f59e0b' });
+            if (pendingOrders.length > 0) alertsList.push({ type: 'Orders', label: 'Processing', val: pendingOrders.length, color: '#6366f1' });
+            if (openTickets.length > 0) alertsList.push({ type: 'Support', label: 'Open Tickets', val: openTickets.length, color: '#10b981' });
 
-    if (openTickets.length > 0) {
-        alertsList.push({
-            type: 'Support',
-            icon: 'message-square',
-            title: 'Active Tickets',
-            message: `${openTickets.length} customer inquiries pending response.`,
-            count: openTickets.length,
-            color: '#10b981',
-            accent: 'rgba(16, 185, 129, 0.1)'
-        });
-    }
-
-    if (pendingTransactions.length > 0) {
-        alertsList.push({
-            type: 'Finance',
-            icon: 'credit-card',
-            title: 'Payment Gateway',
-            message: `${pendingTransactions.length} transactions require verification.`,
-            count: pendingTransactions.length,
-            color: '#ec4899',
-            accent: 'rgba(236, 72, 153, 0.1)'
-        });
-    }
-
-    const alertsHTML = alertsList.map((alert) => `
-        <div class="alert-pulse-item" style="display: flex; align-items: center; gap: 1.5rem; padding: 1.25rem; border-radius: 1rem; background: ${alert.accent}; border: 1px solid rgba(255,255,255,0.5); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin-bottom: 1rem;">
-            <div style="width: 3.5rem; height: 3.5rem; border-radius: 0.75rem; background: white; display: flex; align-items: center; justify-content: center; color: ${alert.color}; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                <i data-lucide="${alert.icon}" style="width: 1.75rem; height: 1.75rem;"></i>
-            </div>
-            <div style="flex: 1;">
-                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.25rem;">
-                    <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: ${alert.color}; letter-spacing: 0.05em;">${alert.type}</span>
-                    <span style="width: 4px; height: 4px; border-radius: 50%; background: #cbd5e1;"></span>
-                    <h4 style="font-size: 1rem; font-weight: 700; color: #1e293b; margin: 0;">${alert.title}</h4>
+            const alertsBadges = alertsList.map(a => `
+                <div style="display: flex; align-items: center; gap: 0.5rem; background: ${a.color}15; padding: 4px 12px; border-radius: 20px; border: 1px solid ${a.color}30;">
+                    <span style="font-size: 0.7rem; font-weight: 800; color: ${a.color}; text-transform: uppercase;">${a.type}</span>
+                    <span style="font-size: 0.875rem; font-weight: 700; color: #1e293b;">${a.val}</span>
                 </div>
-                <p style="font-size: 0.875rem; color: #64748b; margin: 0;">${alert.message}</p>
-            </div>
-            <div style="background: ${alert.color}; color: white; padding: 0.5rem 1rem; border-radius: 2rem; font-weight: 800; font-size: 0.875rem; box-shadow: 0 4px 10px ${alert.color}44;">
-                ${alert.count}
-            </div>
-        </div>
-    `).join('');
+            `).join('');
 
-    content.innerHTML = `
-        <div style="margin-bottom: 3rem; animation: fadeIn 0.4s ease-out;">
-            <h2 class="page-header" style="margin: 0;">Pulse Monitoring</h2>
-            <p style="color: #6b7280; font-size: 1rem; margin-top: 0.5rem;">Real-time health check of your digital ecosystem.</p>
-        </div>
-
-        <div class="module-container" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 2.5rem; align-items: start;">
-            
-            <div class="glass-panel" style="padding: 2rem; border-radius: 1.5rem; background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.03);">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin: 0;">Active Issues</h3>
-                    <span style="background: #f1f5f9; color: #64748b; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-                        <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; animation: pulse 2s infinite;"></span>
-                        LIVE STATUS
-                    </span>
+            content.innerHTML = `
+                <div style="margin-bottom: 2.5rem; animation: fadeIn 0.4s ease-out;">
+                    <h2 class="page-header" style="margin: 0; font-size: 1.75rem;">System Notification Center</h2>
+                    <p style="color: #6b7280; font-size: 0.9375rem; margin-top: 0.5rem;">Real-time stream of all events and system alerts.</p>
                 </div>
-                
-                <div>
-                    ${alertsList.length > 0 ? alertsHTML : `
-                        <div style="padding: 4rem 2rem; text-align: center;">
-                            <div style="width: 5rem; height: 5rem; background: #ecfdf5; color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
-                                <i data-lucide="check-circle" style="width: 2.5rem; height: 2.5rem;"></i>
+
+                <div class="module-container" style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 2rem; align-items: start;">
+                    
+                    <div class="glass-panel" style="border-radius: 1.25rem; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
+                        <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b; margin: 0;">Live Notification Stream</h3>
+                                <div style="display: flex; gap: 0.75rem;">${alertsBadges}</div>
                             </div>
-                            <h4 style="font-weight: 800; color: #1e293b; font-size: 1.25rem; margin-bottom: 0.5rem;">Optimal Performance</h4>
-                            <p style="color: #64748b;">No system alerts or bottlenecks detected.</p>
+                            <button onclick="renderAlertsModule()" style="background: none; border: none; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; font-weight: 600;">
+                                <i data-lucide="rotate-cw" style="width: 14px; height: 14px;"></i> Refresh
+                            </button>
                         </div>
-                    `}
-                </div>
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 2rem;">
-                <div class="luxury-broadcast" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 1.5rem; padding: 2rem; color: white; position: relative; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
-                    <div style="position: absolute; top: -20%; right: -10%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);"></div>
-                    
-                    <h3 style="font-size: 1.5rem; font-weight: 800; margin: 0 0 0.5rem 0;">Omni-Broadcast</h3>
-                    <p style="color: #94a3b8; font-size: 0.875rem; margin-bottom: 2rem;">Instant reach across entire customer base.</p>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <label style="display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Target Audience</label>
-                        <select class="input-modern" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 1rem;">
-                            <option style="background: #1e293b;">Verified Active Accounts</option>
-                            <option style="background: #1e293b;">New Subscribers (7 Days)</option>
-                            <option style="background: #1e293b;">High-Value VIPs</option>
-                        </select>
+                        
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="background: #fafbfc;">
+                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;"></th>
+                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Source</th>
+                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Notification Details</th>
+                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Timestamp</th>
+                                        <th style="padding: 1rem 1.5rem; text-align: right; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${notificationRows}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <div style="margin-bottom: 2rem;">
-                        <label style="display: block; font-size: 0.65rem; font-weight: 800; color: #64748b; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;">Transmission Content</label>
-                        <textarea class="input-modern" rows="5" placeholder="Compose message..." style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; resize: none;"></textarea>
+                    <div style="display: flex; flex-direction: column; gap: 2rem;">
+                        <div class="luxury-broadcast" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 1.5rem; padding: 2rem; color: white; position: relative; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
+                            <div style="position: absolute; top: -10%; right: -5%; width: 50%; height: 50%; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);"></div>
+                            
+                            <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0 0 0.5rem 0;">Omni-Broadcast</h3>
+                            <p style="color: #94a3b8; font-size: 0.8125rem; margin-bottom: 2rem;">Unified message gateway.</p>
+                            
+                            <div style="margin-bottom: 1.25rem;">
+                                <label style="display: block; font-size: 0.6rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Target Audience</label>
+                                <select style="width: 100%; height: 45px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 0 1rem; font-size: 0.875rem; outline: none;">
+                                    <option>Verified Active Accounts</option>
+                                    <option>New Subscribers</option>
+                                    <option>High-Value VIPs</option>
+                                </select>
+                            </div>
+
+                            <div style="margin-bottom: 1.5rem;">
+                                <label style="display: block; font-size: 0.6rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Content</label>
+                                <textarea rows="4" placeholder="Compose system update..." style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 1rem; font-size: 0.875rem; resize: none; outline: none;"></textarea>
+                            </div>
+
+                            <button class="btn-base" style="width: 100%; background: #6366f1; color: white; padding: 1rem; border-radius: 10px; font-weight: 700; border: none; cursor: pointer;"
+                                onmouseover="this.style.background='#4f46e5'" onmouseout="this.style.background='#6366f1'"
+                                onclick="showCustomActionModal('Initiate Broadcast', 'Are you sure you want to deploy this message?', 'Initiate', () => console.log('Sent'))">
+                                <i data-lucide="zap" style="width: 1rem; height: 1rem; vertical-align: middle; margin-right: 4px;"></i> Deploy Message
+                            </button>
+                        </div>
                     </div>
-
-                    <button class="btn-base" style="width: 100%; background: #6366f1; color: white; padding: 1.25rem; border-radius: 1rem; font-weight: 700; font-size: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.75rem; transition: all 0.3s;"
-                        onmouseover="this.style.background='#4f46e5'; this.style.transform='translateY(-2px)'"
-                        onmouseout="this.style.background='#6366f1'; this.style.transform='translateY(0)'"
-                        onclick="showCustomActionModal('Initiate Broadcast', 'Are you sure you want to deploy this message to the selected segment?', 'Initiate', () => console.log('Broadcast Sent'))">
-                        <i data-lucide="zap" style="width: 1.25rem; height: 1.25rem;"></i>
-                        Deploy Broadcast
-                    </button>
                 </div>
-            </div>
-        </div>
 
-        <div style="margin-top: 4rem;">
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                <i data-lucide="activity" style="width: 1.5rem; height: 1.5rem; color: #6366f1;"></i>
-                Audit Trail
-            </h3>
-            <div class="glass-panel" style="border-radius: 1.25rem; overflow: hidden; background: white; border: 1px solid #f1f5f9;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="background: #f8fafc;">
-                            <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Event / Service</th>
-                            <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Metric</th>
-                            <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Timestamp</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid #f8fafc;">
-                            <td style="padding: 1.25rem 2rem; font-size: 0.9375rem; color: #1e293b; font-weight: 600;">Inventory Synchronization</td>
-                            <td style="padding: 1.25rem 2rem;"><span style="background: #ecfdf5; color: #10b981; font-weight: 800; font-size: 0.65rem; padding: 0.25rem 0.75rem; border-radius: 1rem;">SUCCESS</span></td>
-                            <td style="padding: 1.25rem 2rem; font-size: 0.875rem; color: #94a3b8;">Recently</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 1.25rem 2rem; font-size: 0.9375rem; color: #1e293b; font-weight: 600;">Payment Gateway Listener</td>
-                            <td style="padding: 1.25rem 2rem;"><span style="background: #eff6ff; color: #3b82f6; font-weight: 800; font-size: 0.65rem; padding: 0.25rem 0.75rem; border-radius: 1rem;">POLLING</span></td>
-                            <td style="padding: 1.25rem 2rem; font-size: 0.875rem; color: #94a3b8;">Active</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    `;
-    lucide.createIcons();
+                <div style="margin-top: 4rem;">
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+                        <i data-lucide="activity" style="width: 1.5rem; height: 1.5rem; color: #6366f1;"></i>
+                        Audit Trail
+                    </h3>
+                    <div class="glass-panel" style="border-radius: 1.25rem; overflow: hidden; background: white; border: 1px solid #f1f5f9;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="background: #f8fafc;">
+                                    <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Event / Service</th>
+                                    <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Metric</th>
+                                    <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Timestamp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid #f8fafc;">
+                                    <td style="padding: 1.25rem 2rem; font-size: 0.9375rem; color: #1e293b; font-weight: 600;">Inventory Synchronization</td>
+                                    <td style="padding: 1.25rem 2rem;"><span style="background: #ecfdf5; color: #10b981; font-weight: 800; font-size: 0.65rem; padding: 0.25rem 0.75rem; border-radius: 1rem;">SUCCESS</span></td>
+                                    <td style="padding: 1.25rem 2rem; font-size: 0.875rem; color: #94a3b8;">Recently</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1.25rem 2rem; font-size: 0.9375rem; color: #1e293b; font-weight: 600;">Payment Gateway Listener</td>
+                                    <td style="padding: 1.25rem 2rem;"><span style="background: #eff6ff; color: #3b82f6; font-weight: 800; font-size: 0.65rem; padding: 0.25rem 0.75rem; border-radius: 1rem;">POLLING</span></td>
+                                    <td style="padding: 1.25rem 2rem; font-size: 0.875rem; color: #94a3b8;">Active</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        })
+        .catch(error => {
+            console.error('Error loading notifications:', error);
+            content.innerHTML = `<div style="padding: 2rem; color: #ef4444;">Failed to load live notification stream.</div>`;
+        });
 }
+
+
 
 
 // 8. System Settings & Security
@@ -1675,7 +1670,7 @@ function renderSettingsModule() {
     setPageTitle('System Settings & Security');
     const content = document.getElementById('content-container');
     content.innerHTML = `
-        <h2 class="page-header">System Settings & Security</h2>
+    < h2 class="page-header" > System Settings & Security</h2 >
         <p class="mb-6 text-gray-500">Protect system integrity and ensure compliance.</p>
 
                             <div class="module-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
@@ -1722,7 +1717,7 @@ function showModule(moduleName, element = null) {
 
     let navElement = element;
     if (!navElement) {
-        navElement = document.querySelector(`.nav-menu a[onclick*="'${moduleName}'"]`);
+        navElement = document.querySelector(`.nav - menu a[onclick *= "'${moduleName}'"]`);
     }
     if (navElement) {
         setActiveNav(navElement);
@@ -1792,7 +1787,7 @@ function showSubModule(modulePrefix, submodule) {
 
         // --- Navigation Fix for Submodules ---
         // 1. Find the specific submenu link
-        const submenuLink = document.querySelector(`.submenu a[onclick*="'${submodule}'"]`);
+        const submenuLink = document.querySelector(`.submenu a[onclick *= "'${submodule}'"]`);
 
         // 2. Clear all active states
         document.querySelectorAll('.nav-menu a').forEach(item => item.classList.remove('active-nav'));
@@ -1829,11 +1824,11 @@ function showProductForm(productId = null) {
     const product = productId ? productsData.find(p => p.id == productId) : null;
     const isEdit = !!product;
     const categoryOptions = categoriesData.map(cat =>
-        `<option value="${cat.id}" ${product && product.category_id == cat.id ? 'selected' : ''}>${cat.name}</option>`
+        `< option value = "${cat.id}" ${product && product.category_id == cat.id ? 'selected' : ''}> ${cat.name}</option > `
     ).join('');
 
     const formHTML = `
-        <form id="product-form" method="POST" action="index.php">
+    < form id = "product-form" method = "POST" action = "index.php" >
         <input type="hidden" name="action" value="${isEdit ? 'edit_product' : 'add_product'}">
             <input type="hidden" name="module" value="product">
                 <input type="hidden" name="submodule" value="products">
@@ -1841,7 +1836,7 @@ function showProductForm(productId = null) {
 
                     <div class="form-group" style="margin-bottom: 1.5rem;">
                         <label>Product Name *</label>
-                        <input type="text" name="name" value="${product ? product.name.replace(/"/g, '&quot;') : ''}" required 
+                        <input type="text" name="name" value="${product ? product.name.replace(/" /g, '&quot;') : ''}" required 
                                         style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
                     </div>
 
@@ -1947,10 +1942,10 @@ function clearAllProducts() {
             form.method = 'POST';
             form.action = 'index.php';
             form.innerHTML = `
-                <input type="hidden" name="action" value="clear_all_products">
-                <input type="hidden" name="module" value="product">
-                <input type="hidden" name="submodule" value="products">
-            `;
+                    <input type="hidden" name="action" value="clear_all_products">
+                        <input type="hidden" name="module" value="product">
+                            <input type="hidden" name="submodule" value="products">
+                                `;
             document.body.appendChild(form);
             form.submit();
         }
@@ -1963,49 +1958,49 @@ function showCategoryForm(categoryId = null) {
     const isEdit = !!category;
 
     const formHTML = `
-        <form id="category-form" method="POST" action="index.php">
-            <input type="hidden" name="action" value="${isEdit ? 'edit_category' : 'add_category'}">
-            <input type="hidden" name="module" value="product">
-            <input type="hidden" name="submodule" value="categories">
-            ${isEdit ? `<input type="hidden" name="id" value="${category.id}">` : ''}
+                                <form id="category-form" method="POST" action="index.php">
+                                    <input type="hidden" name="action" value="${isEdit ? 'edit_category' : 'add_category'}">
+                                        <input type="hidden" name="module" value="product">
+                                            <input type="hidden" name="submodule" value="categories">
+                                                ${isEdit ? `<input type="hidden" name="id" value="${category.id}">` : ''}
 
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label>Category Name *</label>
-                <input type="text" name="name" value="${category ? category.name.replace(/"/g, '&quot;') : ''}" required 
+                                                <div class="form-group" style="margin-bottom: 1.5rem;">
+                                                    <label>Category Name *</label>
+                                                    <input type="text" name="name" value="${category ? category.name.replace(/" /g, '&quot;') : ''}" required 
                     style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-            </div>
+                                                </div>
 
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label>Description</label>
-                <textarea name="description" rows="3"
-                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">${category ? (category.description || '').replace(/"/g, '&quot;') : ''}</textarea>
-            </div>
+                                                <div class="form-group" style="margin-bottom: 1.5rem;">
+                                                    <label>Description</label>
+                                                    <textarea name="description" rows="3"
+                                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">${category ? (category.description || '').replace(/"/g, '&quot;') : ''}</textarea>
+                                                </div>
 
-            <div class="form-group" style="margin-bottom: 1.5rem;">
-                <label>Status</label>
-                <select name="status"
-                    style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                    <option value="Active" ${category && category.status === 'Active' ? 'selected' : ''}>Active</option>
-                    <option value="Inactive" ${category && category.status === 'Inactive' ? 'selected' : ''}>Inactive</option>
-                </select>
-            </div>
+                                                <div class="form-group" style="margin-bottom: 1.5rem;">
+                                                    <label>Status</label>
+                                                    <select name="status"
+                                                        style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
+                                                        <option value="Active" ${category && category.status === 'Active' ? 'selected' : ''}>Active</option>
+                                                        <option value="Inactive" ${category && category.status === 'Inactive' ? 'selected' : ''}>Inactive</option>
+                                                    </select>
+                                                </div>
 
-            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                <button type="submit" class="btn-base btn-primary" style="flex: 1;">
-                    ${isEdit ? 'Update Category' : 'Add Category'}
-                </button>
-                <button type="button" class="btn-base btn-secondary" onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" style="flex: 1;">
-                    Cancel
-                </button>
-            </div>
-        </form>
-    `;
+                                                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                                                    <button type="submit" class="btn-base btn-primary" style="flex: 1;">
+                                                        ${isEdit ? 'Update Category' : 'Add Category'}
+                                                    </button>
+                                                    <button type="button" class="btn-base btn-secondary" onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" style="flex: 1;">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            `;
 
     const modalContainer = document.getElementById('modal-container');
     modalContainer.innerHTML = `
-        <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">${isEdit ? 'Edit Category' : 'Add New Category'}</h3>
-        <div id="modal-form-content">${formHTML}</div>
-    `;
+                                            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">${isEdit ? 'Edit Category' : 'Add New Category'}</h3>
+                                            <div id="modal-form-content">${formHTML}</div>
+                                            `;
     document.getElementById('custom-modal-backdrop').classList.remove('hidden');
 }
 
