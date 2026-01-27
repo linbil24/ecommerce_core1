@@ -666,6 +666,8 @@ if ($is_logged_in) {
                             if (notif.type === 'chat') {
                                 showSubModule('support', 'chat');
                                 toggleNotificationPanel();
+                            } else {
+                                showNotificationDetails(notif);
                             }
                         };
 
@@ -693,6 +695,62 @@ if ($is_logged_in) {
             } catch (error) {
                 console.error('Error loading notifications:', error);
             }
+        }
+
+        function showNotificationDetails(notif) {
+            const modal = document.getElementById('custom-modal-backdrop');
+            const container = document.getElementById('modal-container');
+            
+            let content = '';
+            if (notif.type === 'review') {
+                content = `
+                    <div style="text-align: left;">
+                        <h3 style="color: #1e293b; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                            <i data-lucide="star" style="color: #ffc107; fill: #ffc107;"></i> Product Review
+                        </h3>
+                        <p style="color: #64748b; font-size: 14px;"><strong>${notif.title}</strong></p>
+                        <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin: 15px 0;">
+                            "${notif.message}"
+                        </div>
+                        <p style="color: #94a3b8; font-size: 12px; text-align: right;">${notif.time_ago}</p>
+                        <div style="margin-top: 20px; text-align: right;">
+                            <button onclick="closeCustomModal()" style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">Close</button>
+                        </div>
+                    </div>
+                `;
+            } else if (notif.type === 'support') {
+                content = `
+                    <div style="text-align: left;">
+                        <h3 style="color: #1e293b; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                            <i data-lucide="life-buoy" style="color: #f59e0b;"></i> Support Ticket
+                        </h3>
+                        <p style="color: #64748b; font-size: 14px;"><strong>${notif.message}</strong></p>
+                        <p style="color: #94a3b8; font-size: 12px;">Submitted ${notif.time_ago}</p>
+                        <div style="margin-top: 20px; text-align: right; display: flex; gap: 10px; justify-content: flex-end;">
+                            <button onclick="showSubModule('support', 'tickets'); closeCustomModal();" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer;">View Tickets</button>
+                            <button onclick="closeCustomModal()" style="padding: 8px 16px; background: #e2e8f0; color: #475569; border: none; border-radius: 6px; cursor: pointer;">Close</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                content = `
+                    <div style="text-align: center;">
+                        <h3 style="color: #1e293b; margin-top: 0;">${notif.title}</h3>
+                        <p style="color: #64748b;">${notif.message}</p>
+                        <button onclick="closeCustomModal()" style="margin-top: 15px; padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">Close</button>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = content;
+            modal.classList.remove('hidden');
+            lucide.createIcons();
+            toggleNotificationPanel(); // Close the dropdown
+        }
+
+        function closeCustomModal() {
+            const modal = document.getElementById('custom-modal-backdrop');
+            modal.classList.add('hidden');
         }
 
         async function markAllAsRead() {

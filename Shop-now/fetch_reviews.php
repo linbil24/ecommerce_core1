@@ -1,7 +1,7 @@
 <?php
 include("../Database/config.php");
 $product_name = $_GET['product_name'] ?? '';
-$product_id = abs(crc32($product_name));
+$product_id = abs(crc32($product_name)) % 2147483647;
 
 $sql = "SELECT r.*, u.fullname FROM reviews r 
         LEFT JOIN users u ON r.user_id = u.id 

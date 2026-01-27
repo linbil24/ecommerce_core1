@@ -5,7 +5,8 @@ include("../Database/config.php");
 $product_name = $_GET['product_name'] ?? 'Product';
 // Generate a pseudo-unique ID for the product based on its name
 // This allows us to link reviews to specific products without a dedicated products table for now
-$product_id = abs(crc32($product_name));
+// Use modulo to ensure it fits in a standard signed INT (max ~2 billion)
+$product_id = abs(crc32($product_name)) % 2147483647;
 
 $success_msg = '';
 $error_msg = '';
@@ -200,6 +201,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php echo htmlspecialchars($product_name); ?>
                 </div>
             </div>
+
+            <?php if ($error_msg): ?>
+                <div
+                    style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 6px; margin-bottom: 20px; text-align: center; border: 1px solid #f5c6cb;">
+                    <?php echo $error_msg; ?>
+                </div>
+            <?php endif; ?>
 
             <form method="POST">
                 <div class="form-group">
