@@ -1,0 +1,215 @@
+<?php
+session_start();
+$product_name = $_GET['product_name'] ?? 'Product';
+$success_msg = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Simulate saving review
+    $rating = $_POST['rating'] ?? 5;
+    $comment = $_POST['comment'] ?? '';
+    $success_msg = "Thank you! Your review for <strong>" . htmlspecialchars($product_name) . "</strong> has been submitted.";
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Product -
+        <?php echo htmlspecialchars($product_name); ?> | iMarket
+    </title>
+    <link rel="icon" type="image/x-icon" href="../image/logo.png">
+
+    <!-- Link Shop CSS -->
+    <link rel="stylesheet" href="../css/shop/shop.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .rate-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .rate-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .rate-header h1 {
+            font-size: 24px;
+            color: #2A3B7E;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Star Rating Input */
+        .rating-input {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .rating-input input {
+            display: none;
+        }
+
+        .rating-input label {
+            cursor: pointer;
+            font-size: 30px;
+            color: #ddd;
+            transition: color 0.2s;
+        }
+
+        .rating-input input:checked~label,
+        .rating-input label:hover,
+        .rating-input label:hover~label {
+            color: #ffc107;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            min-height: 120px;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #2A3B7E;
+        }
+
+        .btn-submit {
+            background: #2A3B7E;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #1a2552;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #2A3B7E;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <?php $path_prefix = '../';
+        include '../Components/header.php'; ?>
+    </nav>
+
+    <div class="rate-container">
+        <?php if ($success_msg): ?>
+            <div class="alert-success">
+                <?php echo $success_msg; ?>
+            </div>
+            <div style="text-align: center;">
+                <a href="index.php" class="btn-submit"
+                    style="display: inline-block; width: auto; text-decoration: none;">Return to Shop</a>
+            </div>
+        <?php else: ?>
+            <div class="rate-header">
+                <h1>Rate Product</h1>
+                <div class="product-name">
+                    <?php echo htmlspecialchars($product_name); ?>
+                </div>
+            </div>
+
+            <form method="POST">
+                <div class="form-group">
+                    <label style="text-align: center;">How would you rate this product?</label>
+                    <div class="rating-input">
+                        <input type="radio" name="rating" id="star5" value="5" required>
+                        <label for="star5" title="5 Stars"><i class="fas fa-star"></i></label>
+
+                        <input type="radio" name="rating" id="star4" value="4">
+                        <label for="star4" title="4 Stars"><i class="fas fa-star"></i></label>
+
+                        <input type="radio" name="rating" id="star3" value="3">
+                        <label for="star3" title="3 Stars"><i class="fas fa-star"></i></label>
+
+                        <input type="radio" name="rating" id="star2" value="2">
+                        <label for="star2" title="2 Stars"><i class="fas fa-star"></i></label>
+
+                        <input type="radio" name="rating" id="star1" value="1">
+                        <label for="star1" title="1 Star"><i class="fas fa-star"></i></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comment">Write a Review</label>
+                    <textarea name="comment" id="comment"
+                        placeholder="Share your experience with this product..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Submit Review</button>
+            </form>
+
+            <a href="javascript:history.back()" class="back-link">
+                <i class="fas fa-arrow-left"></i> Cancel and go back
+            </a>
+        <?php endif; ?>
+    </div>
+</body>
+
+</html>

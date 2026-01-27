@@ -472,25 +472,34 @@
 
 /* Left Side: Image */
 .modal-left {
+    flex: 1;
+    /* Ensure equal growth */
     width: 50%;
+    /* Force 50% split */
     background-color: #f8f9fa;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 0;
+    /* Remove padding to maximize image */
     position: relative;
+    overflow: hidden;
 }
 
 .modal-product-img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+    /* Fill space but preserve aspect ratio */
+    display: block;
 }
 
 /* Right Side: Details */
 .modal-right {
+    flex: 1;
+    /* Ensure equal growth */
     width: 50%;
+    /* Force 50% split */
     padding: 40px;
     display: flex;
     flex-direction: column;
