@@ -148,8 +148,11 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
 <body>
     <div class="login-container">
         <div class="header">
-            <i data-lucide="<?php echo $is_otp_page ? 'shield-check' : 'lock'; ?>" class="logo-icon"></i>
-            <span class="logo-text">IMARKETPH ADMIN <?php echo $is_otp_page ? 'VERIFICATION' : 'LOGIN'; ?></span>
+            <a href="login.php"
+                style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                <i data-lucide="<?php echo $is_otp_page ? 'shield-check' : 'lock'; ?>" class="logo-icon"></i>
+                <span class="logo-text">IMARKETPH ADMIN <?php echo $is_otp_page ? 'VERIFICATION' : 'LOGIN'; ?></span>
+            </a>
             <p style="color: var(--color-gray-500); font-size: 0.875rem; margin-top: 0.5rem;">
                 <?php
                 if ($is_otp_page) {
