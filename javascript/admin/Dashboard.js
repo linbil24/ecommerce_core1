@@ -1563,7 +1563,7 @@ function renderAlertsModule() {
                     <p style="color: #6b7280; font-size: 0.9375rem; margin-top: 0.5rem;">Comprehensive overview of all system notifications and real-time alerts.</p>
                 </div>
 
-                <div class="module-container" style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 2rem; align-items: start;">
+                <div class="module-container">
                     
                     <div class="glass-panel" style="border-radius: 1.25rem; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
                         <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
@@ -1592,65 +1592,6 @@ function renderAlertsModule() {
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-
-                    <div style="display: flex; flex-direction: column; gap: 2rem;">
-                        <div class="luxury-broadcast" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-radius: 1.5rem; padding: 2rem; color: white; position: relative; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.2);">
-                            <div style="position: absolute; top: -10%; right: -5%; width: 50%; height: 50%; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);"></div>
-                            
-                            <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0 0 0.5rem 0;">Omni-Broadcast</h3>
-                            <p style="color: #94a3b8; font-size: 0.8125rem; margin-bottom: 2rem;">Unified message gateway.</p>
-                            
-                            <div style="margin-bottom: 1.25rem;">
-                                <label style="display: block; font-size: 0.6rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Target Audience</label>
-                                <select style="width: 100%; height: 45px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 0 1rem; font-size: 0.875rem; outline: none;">
-                                    <option>Verified Active Accounts</option>
-                                    <option>New Subscribers</option>
-                                    <option>High-Value VIPs</option>
-                                </select>
-                            </div>
-
-                            <div style="margin-bottom: 1.5rem;">
-                                <label style="display: block; font-size: 0.6rem; font-weight: 800; color: #64748b; margin-bottom: 0.5rem; text-transform: uppercase;">Content</label>
-                                <textarea rows="4" placeholder="Compose system update..." style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 10px; padding: 1rem; font-size: 0.875rem; resize: none; outline: none;"></textarea>
-                            </div>
-
-                            <button class="btn-base" style="width: 100%; background: #6366f1; color: white; padding: 1rem; border-radius: 10px; font-weight: 700; border: none; cursor: pointer;"
-                                onmouseover="this.style.background='#4f46e5'" onmouseout="this.style.background='#6366f1'"
-                                onclick="showCustomActionModal('Initiate Broadcast', 'Are you sure you want to deploy this message?', 'Initiate', () => console.log('Sent'))">
-                                <i data-lucide="zap" style="width: 1rem; height: 1rem; vertical-align: middle; margin-right: 4px;"></i> Deploy Message
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 4rem;">
-                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-                        <i data-lucide="activity" style="width: 1.5rem; height: 1.5rem; color: #6366f1;"></i>
-                        Audit Trail
-                    </h3>
-                    <div class="glass-panel" style="border-radius: 1.25rem; overflow: hidden; background: white; border: 1px solid #f1f5f9;">
-                        <table style="width: 100%; border-collapse: collapse;">
-                            <thead>
-                                <tr style="background: #f8fafc;">
-                                    <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Event / Service</th>
-                                    <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Metric</th>
-                                    <th style="padding: 1.25rem 2rem; text-align: left; font-size: 0.65rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Timestamp</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr style="border-bottom: 1px solid #f8fafc;">
-                                    <td style="padding: 1.25rem 2rem; font-size: 0.9375rem; color: #1e293b; font-weight: 600;">Inventory Synchronization</td>
-                                    <td style="padding: 1.25rem 2rem;"><span style="background: #ecfdf5; color: #10b981; font-weight: 800; font-size: 0.65rem; padding: 0.25rem 0.75rem; border-radius: 1rem;">SUCCESS</span></td>
-                                    <td style="padding: 1.25rem 2rem; font-size: 0.875rem; color: #94a3b8;">Recently</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 1.25rem 2rem; font-size: 0.9375rem; color: #1e293b; font-weight: 600;">Payment Gateway Listener</td>
-                                    <td style="padding: 1.25rem 2rem;"><span style="background: #eff6ff; color: #3b82f6; font-weight: 800; font-size: 0.65rem; padding: 0.25rem 0.75rem; border-radius: 1rem;">POLLING</span></td>
-                                    <td style="padding: 1.25rem 2rem; font-size: 0.875rem; color: #94a3b8;">Active</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             `;
