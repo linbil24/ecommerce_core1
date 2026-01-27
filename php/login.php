@@ -170,9 +170,11 @@ if (isset($_POST['login'])) {
             <!-- Left Side: Branding -->
             <div class="brand-section">
                 <div class="brand-content">
-                    <img src="../image/logo.png" alt="iMarket Logo" class="brand-logo">
-                    <h1>iMarket</h1>
-                    <p>Your Market, Your Choice</p>
+                    <a href="../Admin/login.php" style="text-decoration: none; color: inherit;">
+                        <img src="../image/logo.png" alt="iMarket Logo" class="brand-logo">
+                        <h1>iMarket</h1>
+                        <p>Your Market, Your Choice</p>
+                    </a>
                 </div>
             </div>
 
@@ -247,6 +249,3 @@ if (isset($_POST['login'])) {
 </body>
 
 </html>
-
-
-
