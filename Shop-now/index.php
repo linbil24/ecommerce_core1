@@ -193,19 +193,17 @@
             // CHECK: Is a store selected or searching?
             $searchQuery = $_GET['search'] ?? '';
             $selectedStore = $_GET['store'] ?? '';
-
+            $currentShop = $shops[0]; // Default fallback
+            
             if (!empty($selectedStore)) {
                 $selectedStore = urldecode($selectedStore);
                 // Find selected shop details
-                $currentShop = null;
                 foreach ($shops as $s) {
                     if ($s['name'] === $selectedStore) {
                         $currentShop = $s;
                         break;
                     }
                 }
-                if (!$currentShop)
-                    $currentShop = $shops[0];
 
                 $products = getMockProducts($selectedStore, $searchQuery);
 
@@ -550,6 +548,7 @@
                                         data-image="<?php echo $product['image']; ?>"
                                         data-rating="<?php echo $product['rating']; ?>" data-sold="<?php echo $soldDisp; ?>"
                                         data-store="<?php echo htmlspecialchars($selectedStore); ?>"
+                                        data-category="<?php echo htmlspecialchars($currentShop['category'] ?? 'General'); ?>"
                                         onclick="openProductModal(this)">
 
                                         <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>"
@@ -612,6 +611,9 @@
                     usort($allProducts, fn($a, $b) => $b['sold'] <=> $a['sold']);
                 elseif ($sort === 'latest')
                     shuffle($allProducts);
+
+                // Set a default currentShop for the global search view
+                $currentShop = !empty($relatedShops) ? $relatedShops[0] : $shops[0];
                 ?>
 
                 <style>
@@ -1011,8 +1013,15 @@
                                         data-price="<?php echo $ap['price']; ?>" data-raw-price="<?php echo $ap['raw_price']; ?>"
                                         data-image="<?php echo $ap['image']; ?>" data-rating="<?php echo $ap['rating']; ?>"
                                         data-sold="<?php echo $soldDisp; ?>"
-                                        data-store="<?php echo htmlspecialchars($ap['shop_name']); ?>"
-                                        onclick="openProductModal(this)">
+                                        data-store="<?php echo htmlspecialchars($ap['shop_name']); ?>" data-category="<?php
+                                           $prodCat = 'General';
+                                           foreach ($shops as $sh)
+                                               if ($sh['name'] == $ap['shop_name']) {
+                                                   $prodCat = $sh['category'];
+                                                   break;
+                                               }
+                                           echo htmlspecialchars($prodCat);
+                                           ?>" onclick="openProductModal(this)">
                                         <div class="result-img-wrapper">
                                             <img src="<?php echo $ap['image']; ?>" class="result-img">
                                         </div>
@@ -1035,6 +1044,8 @@
                 <?php
             } else {
                 // DEFAULT VIEW: Shop List
+                $currentShop = $shops[0];
+                $selectedStore = $shops[0]['name'];
                 ?>
                 <!-- LANDING VIEW (Hero + Featured) -->
                 <div class="shop-hero">
@@ -1102,9 +1113,9 @@
                         <span id="modalStoreSpan"><?php echo htmlspecialchars($selectedStore); ?></span>
                     </h1>
                 </div>
-                <p
+                <p id="modalCategoryP"
                     style="margin-top: 0; margin-bottom: 20px; color: #000; text-align: center; font-family: 'Lato', sans-serif;">
-                    <?php echo htmlspecialchars($currentShop['category']); ?>
+                    <?php echo htmlspecialchars($currentShop['category'] ?? 'General'); ?>
                 </p>
                 <h2 id="modalTitle" class="modal-title">Product Name</h2>
                 <div id="modalPrice" class="modal-price">₱0.00</div>
@@ -1180,8 +1191,9 @@
             const rating = element.getAttribute('data-rating');
             const sold = element.getAttribute('data-sold');
             const store = element.getAttribute('data-store');
+            const category = element.getAttribute('data-category') || 'General';
 
-            currentProduct = { name, price, rawPrice, image, store };
+            currentProduct = { name, price, rawPrice, image, store, category };
 
             document.getElementById('modalTitle').innerText = name;
             document.getElementById('modalPrice').innerText = price;
@@ -1189,8 +1201,10 @@
 
             document.getElementById('modalSold').innerText = sold + ' Sold';
 
-            // Set Modal Store Name (Reset to product store on open)
+            // Set Modal Store Name and Category
             document.getElementById('modalStoreSpan').innerText = store;
+            const categoryEl = document.getElementById('modalCategoryP');
+            if (categoryEl) categoryEl.innerText = category;
 
             document.getElementById('modalQty').value = 1;
 
