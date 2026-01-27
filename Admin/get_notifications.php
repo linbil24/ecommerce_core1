@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+error_reporting(0);
+ini_set('display_errors', 0);
 session_start();
 require_once('../Database/config.php');
 
@@ -26,7 +26,7 @@ function timeAgo($timestamp)
     $diff = time() - $time;
 
     if ($diff < 0)
-        return 'Just now'; // Future dates handled as just now
+        return 'Just now';
     if ($diff < 60)
         return $diff . ' seconds ago';
     if ($diff < 120)
@@ -47,7 +47,7 @@ function timeAgo($timestamp)
 
 $notifications = [];
 
-// 1. Get Chat Notifications (Strictly unread)
+// 1. Get Chat Notifications
 $chat_sql = "SELECT scm.*, u.fullname as customer_name 
              FROM store_chat_messages scm 
              LEFT JOIN users u ON scm.user_id = u.id 
@@ -58,11 +58,12 @@ $chat_result = mysqli_query($conn, $chat_sql);
 
 if ($chat_result) {
     while ($row = mysqli_fetch_assoc($chat_result)) {
+        $msg_text = $row['message'] ?? $row['message_text'] ?? '';
         $notifications[] = [
             'id' => 'chat_' . $row['id'],
             'type' => 'chat',
             'title' => 'Message from ' . ($row['customer_name'] ?? 'Customer'),
-            'message' => substr($row['message_text'], 0, 60) . (strlen($row['message_text']) > 60 ? '...' : ''),
+            'message' => substr($msg_text, 0, 60) . (strlen($msg_text) > 60 ? '...' : ''),
             'time_ago' => timeAgo($row['created_at']),
             'raw_time' => strtotime($row['created_at']),
             'is_read' => false,
@@ -71,7 +72,7 @@ if ($chat_result) {
     }
 }
 
-// 2. Get Recent Support Tickets (Focus on 'Open' status)
+// 2. Get Recent Support Tickets
 $ticket_sql = "SELECT * FROM support_tickets WHERE status = 'Open' ORDER BY created_at DESC LIMIT 10";
 $ticket_result = mysqli_query($conn, $ticket_sql);
 
@@ -90,7 +91,7 @@ if ($ticket_result) {
     }
 }
 
-// 3. Get Recent Reviews (High importance for store reputation)
+// 3. Get Recent Reviews
 $review_sql = "SELECT r.*, u.fullname as customer_name 
                FROM reviews r 
                LEFT JOIN users u ON r.user_id = u.id 
@@ -100,11 +101,12 @@ $review_result = mysqli_query($conn, $review_sql);
 
 if ($review_result) {
     while ($row = mysqli_fetch_assoc($review_result)) {
+        $comment = $row['comment'] ?? '';
         $notifications[] = [
             'id' => 'review_' . $row['id'],
             'type' => 'review',
             'title' => 'New ' . $row['rating'] . '-Star Review',
-            'message' => '"' . substr($row['comment'], 0, 45) . (strlen($row['comment']) > 45 ? '...' : '') . '"',
+            'message' => '"' . substr($comment, 0, 45) . (strlen($comment) > 45 ? '...' : '') . '"',
             'time_ago' => timeAgo($row['created_at']),
             'raw_time' => strtotime($row['created_at']),
             'is_read' => false,
@@ -113,7 +115,7 @@ if ($review_result) {
     }
 }
 
-// 4. Get Order Notifications (Pending/Ready)
+// 4. Get Order Notifications
 $order_sql = "SELECT id, full_name, total_amount, status, created_at 
               FROM orders 
               WHERE status IN ('Pending', 'Processing') 

@@ -1506,7 +1506,7 @@ function renderAlertsModule() {
         .then(response => response.json())
         .then(data => {
             let notificationRows = '';
-            if (data.success && data.notifications.length > 0) {
+            if (data.success && data.notifications && data.notifications.length > 0) {
                 notificationRows = data.notifications.map(notif => {
                     const iconColor = notif.type === 'chat' ? '#3b82f6' : notif.type === 'order' ? '#8b5cf6' : notif.type === 'review' ? '#f59e0b' : '#64748b';
                     const iconName = notif.type === 'chat' ? 'message-circle' : notif.type === 'order' ? 'shopping-bag' : notif.type === 'review' ? 'star' : 'bell';
