@@ -3,11 +3,9 @@ session_start();
 include("../Database/config.php");
 
 $product_name = $_GET['product_name'] ?? 'Product';
-// Try to look up product ID by name if possible, or default to 0
-$product_id = 0;
-// If there's a products table, we could look it up:
-// $p_query = mysqli_query($conn, "SELECT id FROM products WHERE name = '$product_name' LIMIT 1");
-// if($p_row = mysqli_fetch_assoc($p_query)) $product_id = $p_row['id'];
+// Generate a pseudo-unique ID for the product based on its name
+// This allows us to link reviews to specific products without a dedicated products table for now
+$product_id = abs(crc32($product_name));
 
 $success_msg = '';
 $error_msg = '';
@@ -24,8 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comment = mysqli_real_escape_string($conn, $_POST['comment'] ?? '');
 
     // Insert into reviews table
-    // Note: order_id is required by schema but we don't have it here. 
-    // We will set order_id = 0 for direct product ratings from shop view.
+    // Using the generated product_id
     $sql = "INSERT INTO reviews (user_id, product_id, order_id, rating, comment, created_at) 
             VALUES ('$user_id', '$product_id', 0, '$rating', '$comment', NOW())";
 
