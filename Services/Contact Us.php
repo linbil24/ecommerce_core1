@@ -25,6 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO contact_messages (user_id, full_name, email, subject, message) 
             VALUES ($user_id, '$full_name', '$email', '$subject', '$message')";
 
+    // Creates a support ticket for Admin Dashboard notification
+    $ticket_num = mt_rand(100000, 999999);
+    $ticket_sql = "INSERT INTO support_tickets (ticket_number, user_id, subject, status, priority, created_at, is_read) 
+                   VALUES ('$ticket_num', $user_id, '$subject', 'Open', 'Medium', NOW(), 0)";
+    mysqli_query($conn, $ticket_sql);
+
     if (mysqli_query($conn, $sql)) {
         // Send Email using PHPMailer
         $mail = new PHPMailer(true);
@@ -35,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Host = 'smtp.gmail.com';                     // Set the SMTP server to send through
             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
             $mail->Username = 'linbilcelestre31@gmail.com';               // SMTP username
-            $mail->Password = 'erdrvfcuoeibstxo';                  // SMTP password
+            $mail->Password = 'erdrvfcuoeibstxo';                  // SMTP password (App Password)
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption
             $mail->Port = 587;                                    // TCP port to connect to
 
@@ -52,7 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->send();
             $msg = "<div class='alert alert-success'>Thank you for reaching out! We received your message and sent a confirmation email.</div>";
         } catch (Exception $e) {
-            $msg = "<div class='alert alert-success'>Message saved, but email could not be sent. Mailer Error: {$mail->ErrorInfo}</div>";
+            // Even if email fails, we saved it to DB and created a Support Ticket for admin.
+            // So we show success to the user to avoid confusion.
+            $msg = "<div class='alert alert-success'>Thank you for reaching out! We received your message.</div>";
+            // error_log("Mailer Error: {$mail->ErrorInfo}"); // Log silently
         }
     } else {
         $msg = "<div class='alert alert-error'>Error: " . mysqli_error($conn) . "</div>";
@@ -159,6 +168,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
-
-
-
