@@ -701,7 +701,7 @@ if ($is_logged_in) {
 
         function showNotificationDetails(notif) {
             const modal = document.getElementById('custom-modal-backdrop');
-            const container = document.getElementById('modal-container');  let content = '';
+            const container = document.getElementById('modal-container'); let content = '';
             if (notif.type === 'review') {
                 content = `
                     <div style="text-align: left;">
@@ -779,7 +779,7 @@ if ($is_logged_in) {
         loadNotifications();
         setInterval(loadNotifications, 30000); // Refresh every 30 seconds
     </script>
-    <script src="../javascript/admin/Dashboard.js"></script>
+    <script src="../javascript/admin/Dashboard.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

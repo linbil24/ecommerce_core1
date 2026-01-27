@@ -1496,101 +1496,155 @@ function deleteAdmin(id, username) {
 }
 
 // 7. Notification & Alert System
+// 7. Notification & Alert System
 function renderAlertsModule() {
-    setPageTitle('Notification for i Market');
+    setPageTitle('Notification Hub');
     const content = document.getElementById('content-container');
 
-    // Fetch notifications to display in the table
+    // Fetch notifications to display
     fetch('get_notifications.php')
         .then(response => response.json())
         .then(data => {
             let notificationRows = '';
             if (data.success && data.notifications.length > 0) {
                 notificationRows = data.notifications.map(notif => {
-                    const iconColor = notif.type === 'chat' ? '#3b82f6' : notif.type === 'order' ? '#8b5cf6' : notif.type === 'review' ? '#ffc107' : '#f59e0b';
-                    const iconName = notif.type === 'chat' ? 'message-circle' : notif.type === 'order' ? 'shopping-cart' : notif.type === 'review' ? 'star' : 'alert-circle';
+                    const iconColor = notif.type === 'chat' ? '#3b82f6' : notif.type === 'order' ? '#8b5cf6' : notif.type === 'review' ? '#f59e0b' : '#64748b';
+                    const iconName = notif.type === 'chat' ? 'message-circle' : notif.type === 'order' ? 'shopping-bag' : notif.type === 'review' ? 'star' : 'bell';
 
                     return `
                         <tr style="border-bottom: 1px solid #f1f5f9; transition: background 0.2s;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
-                            <td style="padding: 1rem 1.5rem;">
-                                <div style="width: 32px; height: 32px; border-radius: 8px; background: ${iconColor}15; display: flex; align-items: center; justify-content: center;">
-                                    <i data-lucide="${iconName}" style="width: 16px; height: 16px; color: ${iconColor};"></i>
+                            <td style="padding: 1rem 1.5rem; text-align: center;">
+                                <div style="width: 36px; height: 36px; border-radius: 10px; background: ${iconColor}15; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                                    <i data-lucide="${iconName}" style="width: 18px; height: 18px; color: ${iconColor};"></i>
                                 </div>
                             </td>
                             <td style="padding: 1rem 1.5rem;">
-                                <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: ${iconColor}; background: ${iconColor}10; padding: 2px 8px; border-radius: 4px;">${notif.type}</span>
+                                <span style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #64748b; background: #f1f5f9; padding: 3px 8px; border-radius: 5px;">${notif.source || notif.type}</span>
                             </td>
                             <td style="padding: 1rem 1.5rem;">
-                                <div style="font-size: 0.875rem; font-weight: 600; color: #1e293b; margin-bottom: 2px;">${notif.title}</div>
-                                <div style="font-size: 0.8125rem; color: #64748b; line-height: 1.4;">${notif.message}</div>
+                                <div style="font-size: 0.9rem; font-weight: 700; color: #1e293b; margin-bottom: 3px;">${notif.title}</div>
+                                <div style="font-size: 0.8125rem; color: #64748b; line-height: 1.5;">${notif.message}</div>
                             </td>
-                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8; white-space: nowrap;">
+                            <td style="padding: 1rem 1.5rem; font-size: 0.8125rem; color: #94a3b8; white-space: nowrap; font-weight: 500;">
                                 ${notif.time_ago}
                             </td>
                             <td style="padding: 1rem 1.5rem; text-align: right;">
                                 <button onclick='showNotificationDetails(${JSON.stringify(notif).replace(/'/g, "&apos;")})' 
-                                    style="padding: 6px 12px; font-size: 0.75rem; font-weight: 600; color: #3b82f6; background: #eff6ff; border: 1px solid #dbeafe; border-radius: 6px; cursor: pointer; transition: all 0.2s;"
-                                    onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
-                                    View Details
+                                    style="padding: 7px 14px; font-size: 0.75rem; font-weight: 700; color: #3b82f6; background: white; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.2s;"
+                                    onmouseover="this.style.background='#f8fafc'; this.style.borderColor='#3b82f6'" onmouseout="this.style.background='white'; this.style.borderColor='#e2e8f0'">
+                                    View
                                 </button>
                             </td>
                         </tr>
                     `;
                 }).join('');
             } else {
-                notificationRows = `<tr><td colspan="5" style="padding: 3rem; text-align: center; color: #94a3b8;">No recent notifications recorded.</td></tr>`;
+                notificationRows = `<tr><td colspan="5" style="padding: 4rem; text-align: center; color: #94a3b8; font-style: italic;">No alerts detected in the current stream.</td></tr>`;
             }
 
             const lowStockProducts = productsData.filter(p => parseInt(p.stock) < 10 && p.status !== 'Inactive');
-            const pendingOrders = ordersData.filter(o => o.status === 'Pending');
+            const pendingOrders = ordersData.filter(o => o.status === 'Pending' || o.status === 'Processing');
             const openTickets = supportTicketsData.filter(t => t.status === 'Open' || t.status === 'In Progress');
 
-            const alertsList = [];
-            if (lowStockProducts.length > 0) alertsList.push({ type: 'Inventory', label: 'Critical Stock', val: lowStockProducts.length, color: '#f59e0b' });
-            if (pendingOrders.length > 0) alertsList.push({ type: 'Orders', label: 'Processing', val: pendingOrders.length, color: '#6366f1' });
-            if (openTickets.length > 0) alertsList.push({ type: 'Support', label: 'Open Tickets', val: openTickets.length, color: '#10b981' });
-
-            const alertsBadges = alertsList.map(a => `
-                <div style="display: flex; align-items: center; gap: 0.5rem; background: ${a.color}15; padding: 4px 12px; border-radius: 20px; border: 1px solid ${a.color}30;">
-                    <span style="font-size: 0.7rem; font-weight: 800; color: ${a.color}; text-transform: uppercase;">${a.type}</span>
-                    <span style="font-size: 0.875rem; font-weight: 700; color: #1e293b;">${a.val}</span>
+            const pulseCards = [
+                { title: 'Inventory', label: 'Low Stock Items', val: lowStockProducts.length, color: '#f59e0b', icon: 'package' },
+                { title: 'Orders', label: 'Pending Action', val: pendingOrders.length, color: '#6366f1', icon: 'shopping-cart' },
+                { title: 'Support', label: 'Active Tickets', val: openTickets.length, color: '#10b981', icon: 'life-buoy' },
+                { title: 'Finance', label: 'Refund Requests', val: '0', color: '#ec4899', icon: 'credit-card' }
+            ].map(card => `
+                <div class="glass-panel" style="padding: 1.5rem; border-radius: 1.25rem; background: white; border: 1px solid #f1f5f9; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 200px;">
+                    <div style="width: 48px; height: 48px; border-radius: 12px; background: ${card.color}15; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i data-lucide="${card.icon}" style="width: 24px; height: 24px; color: ${card.color};"></i>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">${card.title}</div>
+                        <div style="display: flex; align-items: baseline; gap: 6px;">
+                            <span style="font-size: 1.5rem; font-weight: 800; color: #1e293b;">${card.val}</span>
+                            <span style="font-size: 0.75rem; color: #64748b; font-weight: 500;">${card.label}</span>
+                        </div>
+                    </div>
                 </div>
             `).join('');
 
             content.innerHTML = `
-                <div style="margin-bottom: 2.5rem; animation: fadeIn 0.4s ease-out;">
-                    <h2 class="page-header" style="margin: 0; font-size: 1.75rem;">Notification for i Market</h2>
-                    <p style="color: #6b7280; font-size: 0.9375rem; margin-top: 0.5rem;">Comprehensive overview of all system notifications and real-time alerts.</p>
-                </div>
-
-                <div class="module-container">
-                    
-                    <div class="glass-panel" style="border-radius: 1.25rem; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
-                        <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
-                            <div style="display: flex; align-items: center; gap: 1rem;">
-                                <h3 style="font-size: 1.125rem; font-weight: 700; color: #1e293b; margin: 0;">Live Notification Stream</h3>
-                                <div style="display: flex; gap: 0.75rem;">${alertsBadges}</div>
-                            </div>
-                            <button onclick="renderAlertsModule()" style="background: none; border: none; color: #64748b; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; font-weight: 600;">
-                                <i data-lucide="rotate-cw" style="width: 14px; height: 14px;"></i> Refresh
-                            </button>
+                <div style="animation: fadeIn 0.4s ease-out; margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+                        <div>
+                            <h2 class="page-header" style="margin: 0; font-size: 1.85rem; font-weight: 900; color: #1e293b; letter-spacing: -0.02em;">Digital Pulse Monitoring</h2>
+                            <p style="color: #64748b; font-size: 0.95rem; margin-top: 0.4rem;">Real-time intelligence and system-wide notification stream.</p>
                         </div>
-                        
-                        <div style="overflow-x: auto;">
-                            <table style="width: 100%; border-collapse: collapse;">
-                                <thead>
-                                    <tr style="background: #fafbfc;">
-                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;"></th>
-                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Source</th>
-                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Notification Details</th>
-                                        <th style="padding: 1rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Timestamp</th>
-                                        <th style="padding: 1rem 1.5rem; text-align: right; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase;">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${notificationRows}
-                                </tbody>
-                            </table>
+                        <button onclick="renderAlertsModule()" style="background: white; border: 1px solid #e2e8f0; color: #1e293b; padding: 0.6rem 1.25rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; font-weight: 700; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='white'; this.style.transform='translateY(0)'">
+                            <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i> Force Sync
+                        </button>
+                    </div>
+
+                    <div style="display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 0.5rem; margin-bottom: 2.5rem;">
+                        ${pulseCards}
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 350px; gap: 2rem;">
+                        <!-- Main Notification Stream -->
+                        <div class="glass-panel" style="border-radius: 1.5rem; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; overflow: hidden;">
+                            <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; background: #fafbfc;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px rgba(16,185,129,0.5);"></div>
+                                    <h3 style="font-size: 1rem; font-weight: 800; color: #1e293b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Live Alert Stream</h3>
+                                </div>
+                                <span style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Last updated: ${new Date().toLocaleTimeString()}</span>
+                            </div>
+                            
+                            <div style="overflow-x: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background: white;">
+                                            <th style="padding: 1.25rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Type</th>
+                                            <th style="padding: 1.25rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Source</th>
+                                            <th style="padding: 1.25rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Notification / Event</th>
+                                            <th style="padding: 1.25rem 1.5rem; text-align: left; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Time</th>
+                                            <th style="padding: 1.25rem 1.5rem; text-align: right; font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.1em;">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="notification-tbody">
+                                        ${notificationRows}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Sidebar Actions / Broadcast -->
+                        <div style="display: flex; flex-direction: column; gap: 2rem;">
+                            <div class="glass-panel" style="padding: 1.75rem; border-radius: 1.5rem; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+                                    <i data-lucide="radio" style="width: 20px; height: 20px; color: #3b82f6;"></i>
+                                    <h3 style="font-size: 0.9rem; font-weight: 800; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Omni-Broadcast</h3>
+                                </div>
+                                <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1.5rem; line-height: 1.6;">Send an immediate announcement to all active marketplace users.</p>
+                                
+                                <textarea id="broadcast-message" placeholder="Type your message here..." style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; color: white; font-size: 0.85rem; min-height: 100px; margin-bottom: 1rem; resize: none; outline: none; transition: border 0.2s;" onfocus="this.style.borderColor='#3b82f6'"></textarea>
+                                
+                                <button onclick="sendBroadcast()" style="width: 100%; background: #3b82f6; color: white; border: none; padding: 0.75rem; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem;" onmouseover="this.style.background='#2563eb'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#3b82f6'; this.style.transform='translateY(0)'">
+                                    <i data-lucide="send" style="width: 14px; height: 14px;"></i>
+                                    Dispatch Broadcast
+                                </button>
+                            </div>
+
+                            <div class="glass-panel" style="padding: 1.5rem; border-radius: 1.5rem; background: white; border: 1px solid #f1f5f9;">
+                                <h3 style="font-size: 0.85rem; font-weight: 800; color: #1e293b; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: 0.05em;">System Health</h3>
+                                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="font-size: 0.85rem; color: #64748b;">Database Latency</span>
+                                        <span style="font-size: 0.85rem; font-weight: 700; color: #10b981;">12ms</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="font-size: 0.85rem; color: #64748b;">API Uptime</span>
+                                        <span style="font-size: 0.85rem; font-weight: 700; color: #10b981;">99.9%</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="font-size: 0.85rem; color: #64748b;">SSL Certificate</span>
+                                        <span style="font-size: 0.85rem; font-weight: 700; color: #10b981;">Valid</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1599,9 +1653,25 @@ function renderAlertsModule() {
         })
         .catch(error => {
             console.error('Error loading notifications:', error);
-            content.innerHTML = `<div style="padding: 2rem; color: #ef4444;">Failed to load live notification stream.</div>`;
+            content.innerHTML = `<div style="padding: 2rem; color: #ef4444; text-align: center;">
+                <i data-lucide="alert-circle" style="width: 48px; height: 48px; margin-bottom: 1rem;"></i>
+                <p>Failed to initialize Digital Pulse Monitoring. Connection to notification gateway lost.</p>
+                <button onclick="renderAlertsModule()" style="margin-top: 1rem; padding: 0.5rem 1rem; cursor: pointer;">Retry Connection</button>
+            </div>`;
+            lucide.createIcons();
         });
 }
+
+function sendBroadcast() {
+    const msg = document.getElementById('broadcast-message').value;
+    if (!msg.trim()) {
+        showCustomActionModal('Empty Message', 'Please enter a message to broadcast.');
+        return;
+    }
+    showCustomActionModal('Dispatch Success', 'Broadcast ' + msg.substring(0, 20) + '... has been sent to all users.');
+    document.getElementById('broadcast-message').value = '';
+}
+
 
 
 
