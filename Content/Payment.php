@@ -199,6 +199,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         .item-card:last-child {
             border-bottom: none;
         }
+
+        /* Detect Location Button */
+        .btn-detect-location {
+            background: none;
+            border: 1px solid #2A3B7E;
+            color: #2A3B7E;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .btn-detect-location:hover {
+            background: #2A3B7E;
+            color: #fff;
+        }
+
+        .btn-detect-location.loading {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .fa-spin-custom {
+            animation: spin 1s infinite linear;
+        }
     </style>
 </head>
 
@@ -409,8 +449,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                             </div>
 
                             <!-- Link to User Account setting -->
-                            <a href="user-account.php?return_url=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
-                                class="address-change-link">Change</a>
+                            <div style="display: flex; align-items: center; gap: 15px; margin-top: 10px;">
+                                <a href="user-account.php?return_url=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
+                                    class="address-change-link" style="margin-left: 20px;">Change</a>
+                                <button type="button" id="btn-detect-location" class="btn-detect-location">
+                                    <i class="fas fa-location-arrow"></i> Detect My Location
+                                </button>
+                            </div>
                         </div>
 
                         <input type="hidden" name="full_name" value="<?php echo htmlspecialchars($d_name); ?>">
@@ -582,6 +627,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                 // placeOrderBtn.style.opacity = '1';
             }
         }
+
+        // Detect Location Logic
+        const detectBtn = document.getElementById('btn-detect-location');
+        const addressDetails = document.querySelector('.address-details');
+        const mapIframe = document.querySelector('iframe');
+
+        detectBtn.addEventListener('click', function () {
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported by your browser.");
+                return;
+            }
+
+            detectBtn.classList.add('loading');
+            detectBtn.innerHTML = '<i class="fas fa-spinner fa-spin-custom"></i> Detecting...';
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                try {
+                    // Use OpenStreetMap Nominatim for Reverse Geocoding (Free)
+                    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+                    const data = await response.json();
+
+                    if (data && data.address) {
+                        const addr = data.display_name;
+                        const city = data.address.city || data.address.town || data.address.village || data.address.province || "";
+                        const zip = data.address.postcode || "";
+
+                        // Update UI
+                        addressDetails.innerHTML = `<strong>${document.getElementsByName('full_name')[0].value}</strong> | ${document.getElementsByName('phone_number')[0].value}<br>${addr}`;
+
+                        // Update Map
+                        mapIframe.src = `https://maps.google.com/maps?q=${lat},${lon}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
+
+                        // Update Hidden Inputs
+                        document.getElementsByName('address')[0].value = addr;
+                        document.getElementsByName('city')[0].value = city;
+                        document.getElementsByName('postal_code')[0].value = zip;
+
+                        // Background Update to DB (Self-Healing)
+                        const formData = new FormData();
+                        formData.append('update_address', '1');
+                        formData.append('address', addr);
+                        formData.append('city', city);
+                        formData.append('zip', zip);
+
+                        fetch('update_user_address.php', {
+                            method: 'POST',
+                            body: formData
+                        }).catch(err => console.error("Failed to sync address to DB", err));
+
+                    } else {
+                        alert("Could not determine your address. Please enter it manually.");
+                    }
+                } catch (error) {
+                    console.error("Geocoding error:", error);
+                    alert("Error fetching address details.");
+                } finally {
+                    detectBtn.classList.remove('loading');
+                    detectBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Detect My Location';
+                }
+
+            }, (error) => {
+                detectBtn.classList.remove('loading');
+                detectBtn.innerHTML = '<i class="fas fa-location-arrow"></i> Detect My Location';
+                let msg = "Geolocation failed.";
+                if (error.code == 1) msg = "Permission denied. Please enable location access.";
+                alert(msg);
+            });
+        });
 
         // Initialize state on page load
         document.addEventListener('DOMContentLoaded', function () {
