@@ -1368,6 +1368,7 @@
         }
 
         // Chat Modal Functionality
+        let chatPollInterval = null;
         let currentStoreName = '';
 
         function openChatModal(event, storeName) {
@@ -1379,9 +1380,13 @@
                 document.getElementById('chatModal').classList.add('show');
             }, 10);
             loadChatHistory(storeName);
+
+            if (chatPollInterval) clearInterval(chatPollInterval);
+            chatPollInterval = setInterval(() => loadChatHistory(storeName), 3000);
         }
 
         function closeChatModal() {
+            if (chatPollInterval) clearInterval(chatPollInterval);
             const modal = document.getElementById('chatModal');
             modal.classList.remove('show');
             setTimeout(() => {
@@ -1389,34 +1394,44 @@
             }, 300);
         }
 
+        let lastMessageCount = 0;
         async function loadChatHistory(storeName) {
             try {
                 const response = await fetch(`get_chat_messages.php?store_name=${encodeURIComponent(storeName)}`);
                 const data = await response.json();
 
-                if (data.success && data.messages.length > 0) {
+                if (data.success) {
                     const messagesContainer = document.getElementById('chatMessages');
-                    messagesContainer.innerHTML = '';
 
-                    data.messages.forEach(msg => {
-                        const messageDiv = document.createElement('div');
-                        const isCustomer = msg.sender_type === 'customer';
-                        messageDiv.style.cssText = `
-                            background: ${isCustomer ? 'linear-gradient(135deg, #2c4c7c 0%, #1e3a5f 100%)' : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)'}; 
-                            color: ${isCustomer ? 'white' : '#1e293b'}; 
-                            padding: 12px 18px; 
-                            border-radius: 18px; 
-                            margin-bottom: 12px; 
-                            max-width: 70%; 
-                            align-self: ${isCustomer ? 'flex-end' : 'flex-start'}; 
-                            ${isCustomer ? 'margin-left: auto;' : ''}
-                            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-                            word-wrap: break-word;
-                        `;
-                        messageDiv.textContent = msg.message;
-                        messagesContainer.appendChild(messageDiv);
-                    });
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    // Only update if count changed
+                    if (data.messages.length !== lastMessageCount) {
+                        const isAtBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop <= messagesContainer.clientHeight + 50;
+
+                        messagesContainer.innerHTML = '';
+                        data.messages.forEach(msg => {
+                            const messageDiv = document.createElement('div');
+                            const isCustomer = msg.sender_type === 'customer';
+                            messageDiv.style.cssText = `
+                                background: ${isCustomer ? 'linear-gradient(135deg, #2c4c7c 0%, #1e3a5f 100%)' : 'linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%)'}; 
+                                color: ${isCustomer ? 'white' : '#1e293b'}; 
+                                padding: 12px 18px; 
+                                border-radius: 18px; 
+                                margin-bottom: 12px; 
+                                max-width: 70%; 
+                                align-self: ${isCustomer ? 'flex-end' : 'flex-start'}; 
+                                ${isCustomer ? 'margin-left: auto;' : ''}
+                                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                                word-wrap: break-word;
+                            `;
+                            messageDiv.textContent = msg.message;
+                            messagesContainer.appendChild(messageDiv);
+                        });
+
+                        if (isAtBottom || lastMessageCount === 0) {
+                            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                        }
+                        lastMessageCount = data.messages.length;
+                    }
                 }
             } catch (error) {
                 console.error('Error loading chat history:', error);

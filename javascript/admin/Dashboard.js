@@ -1343,7 +1343,12 @@ function validateProfileForm(event) {
 }
 
 // 6. Customer Support Center
-function renderSupportModule() {
+function renderSupportModule(submodule = 'tickets') {
+    if (submodule === 'chat') {
+        renderChatModule();
+        return;
+    }
+
     setPageTitle('Customer Support Center');
     const content = document.getElementById('content-container');
 
@@ -1408,6 +1413,204 @@ function renderSupportModule() {
             `;
     lucide.createIcons();
 }
+
+let activeChatUser = null;
+let activeChatStore = null;
+let chatInterval = null;
+
+function renderChatModule() {
+    setPageTitle('Store Chat Messages');
+    const content = document.getElementById('content-container');
+
+    content.innerHTML = `
+        <div style="display: flex; height: calc(100vh - 160px); background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+            <!-- Chat List -->
+            <div id="chat-list-container" style="width: 350px; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column;">
+                <div style="padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #111827;">Messages</h3>
+                    <div style="margin-top: 1rem; position: relative;">
+                        <i data-lucide="search" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; color: #9ca3af;"></i>
+                        <input type="text" placeholder="Search chats..." style="width: 100%; padding: 0.5rem 0.5rem 0.5rem 2.25rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 0.875rem;">
+                    </div>
+                </div>
+                <div id="admin-chat-list" style="flex: 1; overflow-y: auto;">
+                    <div style="padding: 2rem; text-align: center; color: #6b7280;">Loading chats...</div>
+                </div>
+            </div>
+            
+            <!-- Chat Window -->
+            <div id="chat-window" style="flex: 1; display: flex; flex-direction: column; background: #f9fafb;">
+                <div id="chat-window-content" style="display: flex; flex-direction: column; height: 100%;">
+                    <div style="flex: 1; display: flex; align-items: center; justify-content: center; color: #9ca3af; flex-direction: column;">
+                        <i data-lucide="message-square" style="width: 4rem; height: 4rem; margin-bottom: 1rem; opacity: 0.2;"></i>
+                        <p>Select a conversation to start chatting</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    loadAdminChatList();
+    lucide.createIcons();
+
+    // Clear interval if exists
+    if (chatInterval) clearInterval(chatInterval);
+    chatInterval = setInterval(loadAdminChatList, 10000); // Refresh list every 10s
+}
+
+function loadAdminChatList() {
+    fetch('get_chat_list.php')
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const listContainer = document.getElementById('admin-chat-list');
+                if (!listContainer) return;
+
+                if (data.chats.length === 0) {
+                    listContainer.innerHTML = '<div style="padding: 2rem; text-align: center; color: #6b7280;">No messages yet.</div>';
+                    return;
+                }
+
+                listContainer.innerHTML = data.chats.map(chat => `
+                    <div onclick="openAdminChat(${chat.user_id}, '${chat.store_name}', '${chat.customer_name}')" 
+                         style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; cursor: pointer; transition: background 0.2s; position: relative;
+                         ${(activeChatUser == chat.user_id && activeChatStore == chat.store_name) ? 'background: #eff6ff; border-left: 4px solid #3b82f6;' : 'background: white;'}"
+                         onmouseover="this.style.background='#f9fafb'" 
+                         onmouseout="this.style.background='${(activeChatUser == chat.user_id && activeChatStore == chat.store_name) ? '#eff6ff' : 'white'}'">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem;">
+                            <span style="font-weight: 700; color: #111827;">${chat.customer_name}</span>
+                            <span style="font-size: 0.75rem; color: #6b7280;">${chat.store_name}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <p style="font-size: 0.875rem; color: #6b7280; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; margin: 0;">
+                                ${chat.last_message}
+                            </p>
+                            ${chat.unread_count > 0 ? `
+                                <span style="background: #ef4444; color: white; font-size: 0.75rem; font-weight: 700; padding: 2px 6px; border-radius: 9999px;">
+                                    ${chat.unread_count}
+                                </span>
+                            ` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        });
+}
+
+function openAdminChat(userId, storeName, customerName) {
+    activeChatUser = userId;
+    activeChatStore = storeName;
+
+    // Update active state in list
+    loadAdminChatList();
+
+    const windowContainer = document.getElementById('chat-window');
+    windowContainer.innerHTML = `
+        <div style="padding: 1rem 1.5rem; background: white; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+                ${customerName.charAt(0)}
+            </div>
+            <div>
+                <h4 style="font-weight: 700; color: #111827; margin: 0;">${customerName}</h4>
+                <p style="font-size: 0.75rem; color: #6b7280; margin: 0;">Chatting via ${storeName}</p>
+            </div>
+        </div>
+        <div id="admin-chat-messages" style="flex: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; background: #f3f4f6;">
+            <div style="text-align: center; color: #9ca3af;">Loading messages...</div>
+        </div>
+        <div style="padding: 1.25rem; background: white; border-top: 1px solid #e5e7eb;">
+            <form id="admin-chat-form" onsubmit="sendAdminChatReply(event)" style="display: flex; gap: 0.75rem;">
+                <input type="text" id="admin-chat-input" placeholder="Type your reply..." required
+                       style="flex: 1; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; outline: none; focus:border-blue-500;">
+                <button type="submit" style="background: #3b82f6; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="send" style="width: 1rem; height: 1rem;"></i>
+                    Send
+                </button>
+            </form>
+        </div>
+    `;
+
+    lucide.createIcons();
+    loadAdminMessages();
+
+    // Set interval to refresh messages
+    if (window.msgInterval) clearInterval(window.msgInterval);
+    window.msgInterval = setInterval(loadAdminMessages, 3000);
+}
+
+function loadAdminMessages() {
+    if (!activeChatUser || !activeChatStore) return;
+
+    fetch(`get_admin_chat_messages.php?user_id=${activeChatUser}&store_name=${encodeURIComponent(activeChatStore)}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                const msgContainer = document.getElementById('admin-chat-messages');
+                if (!msgContainer) return;
+
+                const isAtBottom = msgContainer.scrollHeight - msgContainer.scrollTop <= msgContainer.clientHeight + 50;
+
+                msgContainer.innerHTML = data.messages.map(msg => {
+                    const isAdmin = msg.sender_type === 'admin';
+                    return `
+                        <div style="display: flex; flex-direction: column; align-items: ${isAdmin ? 'flex-end' : 'flex-start'};">
+                            <div style="max-width: 70%; padding: 0.75rem 1rem; border-radius: 1rem; font-size: 0.9375rem; 
+                                 ${isAdmin ? 'background: #3b82f6; color: white; border-bottom-right-radius: 0.25rem;' : 'background: white; color: #111827; border-bottom-left-radius: 0.25rem;'}">
+                                ${msg.message}
+                            </div>
+                            <span style="font-size: 0.7rem; color: #9ca3af; margin-top: 0.25rem;">${new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                if (isAtBottom) {
+                    msgContainer.scrollTop = msgContainer.scrollHeight;
+                }
+            }
+        });
+}
+
+function sendAdminChatReply(event) {
+    event.preventDefault();
+    const input = document.getElementById('admin-chat-input');
+    const message = input.value.trim();
+
+    if (!message || !activeChatUser || !activeChatStore) return;
+
+    const formData = new FormData();
+    formData.append('user_id', activeChatUser);
+    formData.append('store_name', activeChatStore);
+    formData.append('message', message);
+
+    // Optimistic UI
+    const msgContainer = document.getElementById('admin-chat-messages');
+    const tempDiv = document.createElement('div');
+    tempDiv.style = "display: flex; flex-direction: column; align-items: flex-end;";
+    tempDiv.innerHTML = `
+        <div style="max-width: 70%; padding: 0.75rem 1rem; border-radius: 1rem; font-size: 0.9375rem; background: #3b82f6; color: white; border-bottom-right-radius: 0.25rem; opacity: 0.7;">
+            ${message}
+        </div>
+        <span style="font-size: 0.7rem; color: #9ca3af; margin-top: 0.25rem;">Sending...</span>
+    `;
+    msgContainer.appendChild(tempDiv);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+
+    input.value = '';
+
+    fetch('send_chat_reply.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                loadAdminMessages();
+            } else {
+                alert('Failed to send message: ' + data.message);
+            }
+        });
+}
+
 
 function showTicketDetails(ticketId) {
     const ticket = supportTicketsData.find(t => t.id == ticketId);
@@ -1752,6 +1955,7 @@ function showSubModule(modulePrefix, submodule) {
         'order': renderOrderModule,
         'shipping': renderShippingModule,
         'user': renderUserModule,
+        'support': renderSupportModule,
     };
 
     if (moduleMap[modulePrefix]) {
