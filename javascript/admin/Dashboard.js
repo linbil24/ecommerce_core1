@@ -1552,10 +1552,8 @@ function renderAlertsModule() {
                 { title: 'Support', label: 'Active Tickets', val: openTickets.length, color: '#10b981', icon: 'life-buoy' },
                 { title: 'Finance', label: 'Refund Requests', val: '0', color: '#ec4899', icon: 'credit-card' }
             ].map(card => `
-                <div class="glass-panel" style="padding: 1.5rem; border-radius: 1.25rem; background: white; border: 1px solid #f1f5f9; display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 200px;">
-                    <div style="width: 48px; height: 48px; border-radius: 12px; background: ${card.color}15; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i data-lucide="${card.icon}" style="width: 24px; height: 24px; color: ${card.color};"></i>
-                    </div>
+                <div class="glass-panel" style="padding: 1.5rem; border-radius: 1.25rem; background: white; border: 1px solid #f1f5f9; display: flex; align-items: center; gap: 1.25rem; flex: 1; min-width: 200px;">
+                    <i data-lucide="${card.icon}" style="width: 28px; height: 28px; color: ${card.color}; opacity: 0.8; flex-shrink: 0;"></i>
                     <div>
                         <div style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">${card.title}</div>
                         <div style="display: flex; align-items: baseline; gap: 6px;">
@@ -1571,7 +1569,7 @@ function renderAlertsModule() {
                     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
                         <div>
                             <h2 class="page-header" style="margin: 0; font-size: 1.85rem; font-weight: 900; color: #1e293b; letter-spacing: -0.02em;">Notification market</h2>
-                            <p style="color: #64748b; font-size: 0.95rem; margin-top: 0.4rem;">Real-time intelligence and system-wide notification stream.</p>
+                            <p style="color: #64748b; font-size: 0.95rem; margin-top: 0.4rem;">Monitor active marketplace events and system alerts. </p>
                         </div>
                         <button onclick="renderAlertsModule()" style="background: white; border: 1px solid #e2e8f0; color: #1e293b; padding: 0.6rem 1.25rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; font-weight: 700; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05);" onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-1px)'" onmouseout="this.style.background='white'; this.style.transform='translateY(0)'">
                             <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i> Force Sync
@@ -1587,7 +1585,6 @@ function renderAlertsModule() {
                         <div class="glass-panel" style="border-radius: 1.5rem; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; overflow: hidden;">
                             <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; background: #fafbfc;">
                                 <div style="display: flex; align-items: center; gap: 0.75rem;">
-                                    <div style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px rgba(16,185,129,0.5);"></div>
                                     <h3 style="font-size: 1rem; font-weight: 800; color: #1e293b; margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">Live Alert Stream</h3>
                                 </div>
                                 <span style="font-size: 0.8rem; color: #64748b; font-weight: 600;">Last updated: ${new Date().toLocaleTimeString()}</span>

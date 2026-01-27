@@ -106,19 +106,7 @@ if (isset($_SESSION['user_id'])) {
 
         <!-- Center Section: Search -->
         <div class="header-center">
-            <div class="search-container">
-                <input type="text" placeholder="Search for products, brands and more..." class="search-input">
-
-                <!-- AI Features (Camera & Voice) -->
-                <button class="ai-btn" onclick="openCameraSearch()" title="Image Search">
-                    <i class="fas fa-camera"></i>
-                </button>
-                <button class="ai-btn" onclick="openVoiceCommand()" title="Voice Search">
-                    <i class="fas fa-microphone"></i>
-                </button>
-
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-            </div>
+            <?php include $path_prefix . 'Search-bar.php'; ?>
         </div>
 
         <!-- Right Section: Icons -->

@@ -124,7 +124,8 @@
             ];
 
             // Mock Products Data
-            function getMockProducts($storeName)
+            // Mock Products Data with Search Support
+            function getMockProducts($storeName, $searchQuery = '')
             {
                 // Generate some deterministic mock products based on store name
                 $seed = crc32($storeName);
@@ -138,8 +139,7 @@
                 $safeStoreName = rtrim($storeName, '.');
                 $exactFile = 'Content/' . $safeStoreName . '.php';
                 $dashedFile = 'Content/' . str_replace(' ', '-', $safeStoreName) . '.php';
-                $fileToLoad = 'Content/UrbanWear-PH.php'; // Default
-            
+                $fileToLoad = 'Content/UrbanWear-PH.php';
 
                 if (file_exists($exactFile) && filesize($exactFile) > 0) {
                     $fileToLoad = $exactFile;
@@ -150,37 +150,51 @@
                 // 2. Check for Manual Product List (No Loop Mode)
                 $manualProducts = [];
                 $definingProducts = true; // Signal to included file
-                include $fileToLoad;
+                if (file_exists($fileToLoad)) {
+                    include $fileToLoad;
+                }
 
                 if (!empty($manualProducts)) {
-                    return $manualProducts;
+                    $sourceProducts = $manualProducts;
+                } else {
+                    // 3. Fallback: Generate Mock Products Loop
+                    $sourceProducts = [];
+                    for ($i = 0; $i < 20; $i++) {
+                        $price = rand(150, 2500);
+                        $name = $adjectives[array_rand($adjectives)] . ' ' . $productNames[array_rand($productNames)];
+                        $image = 'https://via.placeholder.com/300x400/f5f5f5/999999?text=' . urlencode($name);
+
+                        $sourceProducts[] = [
+                            'name' => $name,
+                            'price' => is_numeric($price) ? '₱' . number_format($price) : $price,
+                            'raw_price' => is_numeric($price) ? $price : floatval(preg_replace('/[^0-9.]/', '', $price)),
+                            'image' => $image,
+                            'rating' => 4.0 + (rand(0, 9) / 10),
+                            'sold' => rand(100, 5000)
+                        ];
+                    }
                 }
 
-                // 3. Fallback: Generate Mock Products Loop
-                for ($i = 0; $i < 15; $i++) {
-                    $price = rand(150, 1500);
-                    $name = $adjectives[array_rand($adjectives)] . ' ' . $productNames[array_rand($productNames)];
-                    $image = 'https://via.placeholder.com/300x400/f5f5f5/999999?text=' . urlencode($name);
-
-                    // image/Override selection logic
-                    include $fileToLoad;
-
-                    $products[] = [
-                        'name' => $name,
-                        'price' => is_numeric($price) ? '₱' . number_format($price) : $price,
-                        'raw_price' => is_numeric($price) ? $price : floatval(preg_replace('/[^0-9.]/', '', $price)),
-                        'image' => $image,
-                        'rating' => 4.0 + (rand(0, 9) / 10),
-                        'sold' => rand(100, 5000)
-                    ];
+                // Apply Filtering if search query exists
+                if (!empty($searchQuery)) {
+                    $filtered = [];
+                    foreach ($sourceProducts as $p) {
+                        if (stripos($p['name'], $searchQuery) !== false) {
+                            $filtered[] = $p;
+                        }
+                    }
+                    return $filtered;
                 }
-                return $products;
+
+                return $sourceProducts;
             }
 
 
-            // CHECK: Is a store selected?
-            if (isset($_GET['store'])) {
-                $selectedStore = urldecode($_GET['store']);
+            // CHECK: Is a store selected or searching?
+            $searchQuery = $_GET['search'] ?? '';
+            if (isset($_GET['store']) || !empty($searchQuery)) {
+                $selectedStore = $_GET['store'] ?? 'UrbanWear PH';
+                $selectedStore = urldecode($selectedStore);
 
                 // Find selected shop details
                 $currentShop = null;
@@ -193,7 +207,7 @@
                 if (!$currentShop)
                     $currentShop = $shops[0];
 
-                $products = getMockProducts($selectedStore);
+                $products = getMockProducts($selectedStore, $searchQuery);
 
                 // --- Sorting Logic ---
                 $sort = $_GET['sort'] ?? 'best';
@@ -204,11 +218,8 @@
                 } elseif ($sort === 'sales') {
                     usort($products, fn($a, $b) => $b['sold'] <=> $a['sold']);
                 } elseif ($sort === 'latest') {
-                    // Start deterministic, but if sorted by latest, shuffle properly
                     shuffle($products);
                 }
-                // 'best' is default order
-                // ---------------------
                 ?>
 
                 <!-- Mimic Category UI: Link CSS -->
@@ -375,7 +386,7 @@
                                         style="display: flex; align-items: center; padding: 10px; text-decoration: none; color: #555; border-radius: 6px; transition: all 0.2s; <?php echo $isActive ? 'background-color: #f0f7ff; color: #2A3B7E; font-weight: 600;' : ''; ?>">
 
                                         <div class="sidebar-checkbox"
-                                            style="margin-right: 10px; width: 30px; height: 30px; background: #<?php echo $shopColor; ?>; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold;">
+                                            style="margin-right: 10px; width: 30px; height: 30px; background: #<?php echo $shopColor; ?>; color: #fff; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold;">
                                             <?php echo $shopInitial; ?>
                                         </div>
 
