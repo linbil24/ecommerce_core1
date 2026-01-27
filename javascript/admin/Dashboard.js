@@ -1497,7 +1497,7 @@ function deleteAdmin(id, username) {
 
 // 7. Notification & Alert System
 function renderAlertsModule() {
-    setPageTitle('Notification Center');
+    setPageTitle('Notification for i Market');
     const content = document.getElementById('content-container');
 
     // Fetch notifications to display in the table
@@ -1559,7 +1559,7 @@ function renderAlertsModule() {
 
             content.innerHTML = `
                 <div style="margin-bottom: 2.5rem; animation: fadeIn 0.4s ease-out;">
-                    <h2 class="page-header" style="margin: 0; font-size: 1.75rem;">Notification Table</h2>
+                    <h2 class="page-header" style="margin: 0; font-size: 1.75rem;">Notification for i Market</h2>
                     <p style="color: #6b7280; font-size: 0.9375rem; margin-top: 0.5rem;">Comprehensive overview of all system notifications and real-time alerts.</p>
                 </div>
 
