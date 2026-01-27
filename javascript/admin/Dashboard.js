@@ -1497,7 +1497,7 @@ function deleteAdmin(id, username) {
 
 // 7. Notification & Alert System
 function renderAlertsModule() {
-    setPageTitle('Live System Pulse');
+    setPageTitle('Notification Center');
     const content = document.getElementById('content-container');
 
     // Fetch notifications to display in the table
@@ -1559,8 +1559,8 @@ function renderAlertsModule() {
 
             content.innerHTML = `
                 <div style="margin-bottom: 2.5rem; animation: fadeIn 0.4s ease-out;">
-                    <h2 class="page-header" style="margin: 0; font-size: 1.75rem;">System Notification Center</h2>
-                    <p style="color: #6b7280; font-size: 0.9375rem; margin-top: 0.5rem;">Real-time stream of all events and system alerts.</p>
+                    <h2 class="page-header" style="margin: 0; font-size: 1.75rem;">Notification Table</h2>
+                    <p style="color: #6b7280; font-size: 0.9375rem; margin-top: 0.5rem;">Comprehensive overview of all system notifications and real-time alerts.</p>
                 </div>
 
                 <div class="module-container" style="display: grid; grid-template-columns: 1.8fr 1fr; gap: 2rem; align-items: start;">
