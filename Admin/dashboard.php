@@ -620,6 +620,7 @@ if ($is_logged_in) {
 
                 const notificationList = document.getElementById('notificationList');
                 const bellBadge = document.getElementById('notificationBellBadge');
+                if (bellBadge) bellBadge.style.pointerEvents = 'none'; // Fix: Badge shouldn't block clicks
 
                 if (data.success && data.notifications.length > 0) {
                     notificationList.innerHTML = '';
@@ -700,7 +701,7 @@ if ($is_logged_in) {
         function showNotificationDetails(notif) {
             const modal = document.getElementById('custom-modal-backdrop');
             const container = document.getElementById('modal-container');
-            
+
             let content = '';
             if (notif.type === 'review') {
                 content = `
