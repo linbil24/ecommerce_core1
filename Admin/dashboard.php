@@ -559,7 +559,7 @@ if ($is_logged_in) {
         const adminUsersData = <?php echo json_encode($mock_admin_users); ?>;
 
         const formatCurrency = (amount) => {
-            return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+            return new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount);
         };
 
         // Additional configuration for JS

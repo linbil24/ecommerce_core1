@@ -1257,7 +1257,7 @@ function renderUserModule(submodule) {
                                         <td>${c.email}</td>
                                         <td>${c.phone_number || 'N/A'}</td>
                                         <td>${c.total_orders || 0}</td>
-                                        <td>${c.total_spent ? formatCurrency(parseFloat(c.total_spent)) : '$0.00'}</td>
+                                        <td>${c.total_spent ? formatCurrency(parseFloat(c.total_spent)) : '₱0.00'}</td>
                                         <td><span class="status-badge ${statusClass}">${c.status}</span></td>
                                         <td>${new Date(c.created_at).toLocaleDateString()}</td>
                                     </tr>
