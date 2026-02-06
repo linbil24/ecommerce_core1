@@ -195,6 +195,8 @@ $products_data = [
     // Refresh current product after data fix
     $product = isset($products_data[$p_id]) ? $products_data[$p_id] : $products_data[101];
     $price = $product['price_range'];
+    $name = $product['name'];
+    $img = $product['image'];
 ?>
 
 <link rel="stylesheet" href="../../css/components/shared-product-view.css?v=<?php echo time(); ?>">

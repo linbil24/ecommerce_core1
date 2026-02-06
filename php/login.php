@@ -208,6 +208,14 @@ if (isset($_POST['login'])) {
                         <a href="forget.php" class="forgot-password">Forgot Password?</a>
                     </div>
 
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                         <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #555;">
+                            <input type="checkbox" name="agree_terms" required style="width: auto; margin: 0;">
+                            <span>I agree to the <a href="../About/Terms & Conditions.php" target="_blank" style="color: #007bff; text-decoration: none;">Terms & Conditions</a></span>
+                        </label>
+                    </div>
+
                     <button type="submit" name="login" class="btn-login">Log In</button>
 
                     <div class="divider">
@@ -225,8 +233,7 @@ if (isset($_POST['login'])) {
 
                     <div class="form-footer">
                         Don't have an account? <a href="register.php">Create an account</a>
-                        <br>
-                        <small>By logging in, you agree to our <a href="../About/Terms & Conditions.php" target="_blank">Terms & Conditions</a>.</small>
+
                     </div>
                 </form>
             </div>
