@@ -115,9 +115,27 @@ if (isset($_SESSION['user_id'])) {
                     class="fas fa-shopping-cart"></i></a>
 
             <?php if (isset($_SESSION['user_name'])): ?>
+                <?php
+                    // Fetch latest profile pic
+                    $header_profile_pic = '';
+                    if (isset($conn) && isset($_SESSION['user_id'])) {
+                         $h_uid = $_SESSION['user_id'];
+                         $h_sql = "SELECT profile_pic FROM users WHERE id = '$h_uid'";
+                         $h_res = mysqli_query($conn, $h_sql);
+                         if ($h_res && mysqli_num_rows($h_res) > 0) {
+                             $h_row = mysqli_fetch_assoc($h_res);
+                             if (!empty($h_row['profile_pic'])) {
+                                 // Construct path based on $path_prefix
+                                 $header_profile_pic = $path_prefix . 'uploads/profile/' . $h_row['profile_pic'];
+                             }
+                         }
+                    }
+                ?>
                 <div class="user-profile-container">
-                    <div class="user-avatar-circle">
-                        <i class="far fa-user"></i>
+                    <div class="user-avatar-circle" style="<?php echo !empty($header_profile_pic) ? "background-image: url('$header_profile_pic'); background-size: cover; background-position: center;" : ""; ?>">
+                        <?php if (empty($header_profile_pic)): ?>
+                            <i class="far fa-user"></i>
+                        <?php endif; ?>
                         <?php if ($unread_tickets_count > 0): ?>
                             <span class="notification-badge"><?php echo $unread_tickets_count; ?></span>
                         <?php endif; ?>
