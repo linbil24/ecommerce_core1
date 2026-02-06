@@ -1,0 +1,317 @@
+<?php
+// Centralized Product Data
+// Groceries Category (701-715)
+
+$products_data = [
+
+    //Product 1
+    901 => [
+        'name' => 'Organic Rolled Oats (1kg)',
+        'price_range' => '₱250',
+        'original_price' => '₱300',
+        'discount' => '17% OFF',
+        'image' => '../../image/Groceries/Organic Rolled Oats (1kg).jpeg',
+        'stock' => 200,
+        'colors' => ['Standard'],
+        'sizes' => ['1kg']
+    ],
+
+    //Product 2
+    902 => [
+        'name' => 'Unsweetened Almond Milk (1L)',
+        'price_range' => '₱180',
+        'original_price' => '₱220',
+        'discount' => '18% OFF',
+        'image' => '../../image/Groceries/Unsweetened Almond Milk (1L).jpeg',
+        'stock' => 150,
+        'colors' => ['Standard'],
+        'sizes' => ['1L']
+    ],
+
+    //Product 3
+    903 => [
+        'name' => 'Extra Virgin Olive Oil (500ml)',
+        'price_range' => '₱450',
+        'original_price' => '₱550',
+        'discount' => '18% OFF',
+        'image' => '../../image/Groceries/Extra Virgin Olive Oil (500ml).jpeg',
+        'stock' => 100,
+        'colors' => ['Standard'],
+        'sizes' => ['500ml']
+    ],
+
+    //Product 4
+    904 => [
+        'name' => 'Premium Brown Rice (2kg)',
+        'price_range' => '₱320',
+        'original_price' => '₱400',
+        'discount' => '20% OFF',
+        'image' => '../../image/Groceries/Premium Brown Rice (2kg).jpeg',
+        'stock' => 300,
+        'colors' => ['Standard'],
+        'sizes' => ['2kg']
+    ],
+
+    //Product 5
+    905 => [
+        'name' => 'Japanese Green Tea Bags (50pcs)',
+        'price_range' => '₱280',
+        'original_price' => '₱350',
+        'discount' => '20% OFF',
+        'image' => '../../image/Groceries/Japanese Green Tea Bags (50pcs).jpeg',
+        'stock' => 250,
+        'colors' => ['Standard'],
+        'sizes' => ['Box of 50']
+    ],
+
+    //Product 6
+    906 => [
+        'name' => 'Jasmine Rice',
+        'price_range' => '₱150',
+        'original_price' => '₱180',
+        'discount' => '16% OFF',
+        'image' => '../../image/Groceries/Jasmine Rice.jpeg',
+        'stock' => 500,
+        'colors' => ['Standard'],
+        'sizes' => ['100g bar']
+    ],
+
+    //Product 7
+    907 => [
+        'name' => 'Pure Raw Honey (500g)',
+        'price_range' => '₱380',
+        'original_price' => '₱450',
+        'discount' => '15% OFF',
+        'image' => '../../image/Groceries/Pure Raw Honey (500g).jpeg',
+        'stock' => 120,
+        'colors' => ['Standard'],
+        'sizes' => ['500g']
+    ],
+
+    //Product 8
+    908 => [
+        'name' => 'Creamy Peanut Butter (No Added Sugar)',
+        'price_range' => '₱220',
+        'original_price' => '₱280',
+        'discount' => '21% OFF',
+        'image' => '../../image/Groceries/Creamy Peanut Butter (No Added Sugar).jpeg',
+        'stock' => 200,
+        'colors' => ['Standard'],
+        'sizes' => ['340g']
+    ],
+
+    //Product 9
+    909 => [
+        'name' => 'Organic Chia Seeds (250g)',
+        'price_range' => '₱180',
+        'original_price' => '₱250',
+        'discount' => '28% OFF',
+        'image' => '../../image/Groceries/Organic Chia Seeds (250g).jpeg',
+        'stock' => 300,
+        'colors' => ['Standard'],
+        'sizes' => ['250g']
+    ],
+
+    //Product 10
+    910 => [
+        'name' => 'White Quinoa (500g)',
+        'price_range' => '₱350',
+        'original_price' => '₱450',
+        'discount' => '22% OFF',
+        'image' => '../../image/Groceries/White Quinoa (500g).jpeg',
+        'stock' => 150,
+        'colors' => ['Standard'],
+        'sizes' => ['500g']
+    ],
+
+
+    //Product 11
+    911 => [
+        'name' => 'Pure Coconut Water (1L)',
+        'price_range' => '₱120',
+        'original_price' => '₱150',
+        'discount' => '20% OFF',
+        'image' => '../../image/Groceries/Pure Coconut Water (1L).jpeg',
+        'stock' => 100,
+        'colors' => ['Standard'],
+        'sizes' => ['1L']
+    ],
+
+    //Product 12
+    912 => [
+        'name' => 'Crunchy Granola (Honey Almond)',
+        'price_range' => '₱280',
+        'original_price' => '₱350',
+        'discount' => '20% OFF',
+        'image' => '../../image/Groceries/Crunchy Granola (Honey Almond).jpeg',
+        'stock' => 180,
+        'colors' => ['Standard'],
+        'sizes' => ['500g']
+    ],
+
+    //Product 13
+    913 => [
+        'name' => 'High Protein Energy Bar (Box of 12)',
+        'price_range' => '₱600',
+        'original_price' => '₱800',
+        'discount' => '25% OFF',
+        'image' => '../../image/Groceries/High Protein Energy Bar (Box of 12).jpeg',
+        'stock' => 100,
+        'colors' => ['Chocolate', 'Vanilla'],
+        'sizes' => ['Box of 12']
+    ],
+
+    //Product 14
+    914 => [
+        'name' => 'Apple Cider Vinegar with Mother',
+        'price_range' => '₱250',
+        'original_price' => '₱300',
+        'discount' => '17% OFF',
+        'image' => '../../image/Groceries/Apple Cider Vinegar with Mother.jpeg',
+        'stock' => 200,
+        'colors' => ['Standard'],
+        'sizes' => ['500ml']
+    ],
+
+    915 => [
+        'name' => 'Mixed Nuts (Roasted & Salted)',
+        'price_range' => '₱320',
+        'original_price' => '₱400',
+        'discount' => '20% OFF',
+        'image' => '../../image/Groceries/Mixed Nuts (Roasted & Salted).jpeg',
+        'stock' => 180,
+        'colors' => ['Standard'],
+        'sizes' => ['250g']
+    ],
+
+];
+
+    // Fix pricing data for consistency
+    foreach ($products_data as $id => &$p) {
+        // Groceries already look mostly okay, but let's ensure consistency
+        if (!isset($p['original_price'])) {
+            $raw_price = floatval(preg_replace('/[^0-9.]/', '', $p['price_range']));
+            $p['original_price'] = '₱' . number_format($raw_price * 1.25);
+            $p['discount'] = '20% OFF';
+        }
+    }
+    unset($p);
+
+    // Get ID correctly
+    $p_id = isset($product_id) ? $product_id : 901;
+
+    // Refresh current product after data fix
+    $product = isset($products_data[$p_id]) ? $products_data[$p_id] : $products_data[901];
+    $price = $product['price_range'];
+?>
+
+<link rel="stylesheet" href="../../css/components/shared-product-view.css?v=<?php echo time(); ?>">
+
+<div class="pv-left">
+    <img class="pv-product-img" src="<?php echo $img; ?>" alt="Product">
+</div>
+<div class="pv-right">
+    <div class="pv-header">
+        <div class="pv-header-title">
+            <img src="../../image/logo.png" alt="IMarket" class="pv-header-logo"> |
+            <span>IMarket Official Store</span>
+        </div>
+        <p class="pv-category">
+            <?php echo isset($category_name) ? $category_name : "Groceries"; ?>
+        </p>
+    </div>
+
+    <h2 class="pv-title"><?php echo htmlspecialchars($name); ?></h2>
+    
+    <div class="pv-meta">
+        <div class="pv-rating">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+        <span>1.5k Ratings</span>
+        <span>|</span>
+        <span>4.2k Sold</span>
+    </div>
+
+    <div class="pv-price-container">
+        <?php if (isset($product['original_price'])): ?>
+            <span class="pv-original-price"><?php echo $product['original_price']; ?></span>
+        <?php endif; ?>
+        <span class="pv-price"><?php echo $price; ?></span>
+        <?php if (isset($product['discount'])): ?>
+            <span class="pv-discount-badge"><?php echo $product['discount']; ?></span>
+        <?php endif; ?>
+    </div>
+
+    <!-- Variant Options -->
+    <div class="pv-option-group">
+        <span class="pv-option-label">Variant</span>
+        <div class="pv-options" id="color-options">
+            <?php foreach ($product['colors'] as $index => $color): ?>
+                <button class="pv-option-btn <?php echo $index === 0 ? 'selected' : ''; ?>" data-val="<?php echo $color; ?>">
+                    <?php echo $color; ?>
+                </button>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <!-- Weight/Size Options -->
+    <div class="pv-option-group">
+        <span class="pv-option-label">Weight/Size</span>
+        <div class="pv-options" id="size-options">
+            <?php foreach ($product['sizes'] as $index => $size): ?>
+                <button class="pv-option-btn <?php echo $index === 0 ? 'selected' : ''; ?>" data-val="<?php echo $size; ?>"><?php echo $size; ?></button>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <!-- Quantity -->
+    <div class="pv-option-group">
+        <span class="pv-option-label">Quantity</span>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="pv-quantity-control">
+                <button class="pv-qty-btn" onclick="let q=document.getElementById('qty'); if(q.value>1)q.value--;">-</button>
+                <input type="text" id="qty" class="pv-qty-input" value="1">
+                <button class="pv-qty-btn" onclick="document.getElementById('qty').value++;">+</button>
+            </div>
+            <span style="font-size: 14px; color: #757575;"><?php echo number_format($product['stock']); ?> pieces available</span>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="pv-actions">
+        <a class="pv-btn pv-btn-cart" href="#" onclick="addToCart()">
+            <i class="fas fa-cart-plus" style="margin-right: 8px;"></i> Add To Cart
+        </a>
+        <a href="#"
+            onclick="const qty = document.getElementById('qty').value; window.location.href='../../Content/Payment.php?product_name=<?php echo urlencode($name); ?>&price=<?php echo floatval(preg_replace('/[^0-9.]/', '', $price)); ?>&image=<?php echo urlencode($img); ?>&quantity=' + qty + '&product_id=<?php echo $p_id; ?>'; return false;"
+            class="pv-btn pv-btn-buy">Buy Now</a>
+    </div>
+
+    <script>
+        function addToCart() {
+            const colorBtn = document.querySelector('#color-options .pv-option-btn.selected');
+            const sizeBtn = document.querySelector('#size-options .pv-option-btn.selected');
+            const color = colorBtn ? colorBtn.getAttribute('data-val') : 'Default';
+            const size = sizeBtn ? sizeBtn.getAttribute('data-val') : 'Default';
+            const qty = document.getElementById('qty').value;
+            const fullName = `<?php echo addslashes($name); ?> (${color}, ${size})`;
+            const price = <?php echo floatval(preg_replace('/[^0-9.]/', '', $price)); ?>;
+            const img = '<?php echo $img; ?>';
+
+            window.location.href = `../../Content/add-to-cart.php?add_to_cart=1&product_name=${encodeURIComponent(fullName)}&price=${price}&image=${img}&quantity=${qty}&store=IMarket%20Best%20Selling`;
+        }
+
+        document.querySelectorAll('.pv-options').forEach(container => {
+            container.querySelectorAll('.pv-option-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    container.querySelectorAll('.pv-option-btn').forEach(btn => btn.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        });
+    </script>
+</div>

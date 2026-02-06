@@ -1,0 +1,276 @@
+/* Customer Service / Support Page Styles */
+:root {
+    --primary-color: #2A3B7E;
+    /* Deep Blue */
+    --accent-color: #007bff;
+    /* Bright Blue */
+    --bg-light: #f8f9fa;
+    --text-dark: #333;
+    --text-muted: #6c757d;
+    --white: #ffffff;
+    --border-color: #dee2e6;
+    --success: #28a745;
+    --warning: #ffc107;
+    --danger: #dc3545;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: 'Poppins', sans-serif;
+}
+
+.service-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 30px;
+}
+
+/* Sidebar Navigation */
+.service-sidebar {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+}
+
+.service-sidebar h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--bg-light);
+    padding-bottom: 10px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar-nav a i {
+    margin-right: 12px;
+    width: 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: rgba(42, 59, 126, 0.1);
+    color: var(--primary-color);
+}
+
+.sidebar-nav a:hover i,
+.sidebar-nav a.active i {
+    color: var(--primary-color);
+}
+
+/* Main Content Area */
+.service-content {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    min-height: 500px;
+}
+
+.section-header {
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    color: var(--primary-color);
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Form Styles */
+.ticket-form .form-group {
+    margin-bottom: 20px;
+}
+
+.ticket-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.ticket-form input,
+.ticket-form select,
+.ticket-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.ticket-form input:focus,
+.ticket-form select:focus,
+.ticket-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(42, 59, 126, 0.1);
+}
+
+.btn-submit {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #1a2656;
+    transform: translateY(-2px);
+}
+
+/* Ticket List Styles */
+.ticket-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ticket-list th,
+.ticket-list td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ticket-list th {
+    background-color: #f1f3f9;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.ticket-list tr:last-child td {
+    border-bottom: none;
+}
+
+.ticket-list tr:hover {
+    background-color: #fafafa;
+}
+
+/* Status Badges */
+.badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-open {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-inprogress {
+    background-color: #fff8e1;
+    color: #ffa000;
+}
+
+.status-resolved {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.status-closed {
+    background-color: #eceff1;
+    color: #546e7a;
+}
+
+/* Alert */
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-muted);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #e9ecef;
+}
+
+/* Response */
+.ticket-response {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border-left: 4px solid var(--accent-color);
+}
+
+@media (max-width: 768px) {
+    .service-container {
+        grid-template-columns: 1fr;
+    }
+
+    .service-sidebar {
+        margin-bottom: 20px;
+    }
+}
+
+

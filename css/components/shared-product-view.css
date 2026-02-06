@@ -1,0 +1,311 @@
+/* Shared Product View Styles (Modal & Page) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap');
+
+:root {
+    --primary-color: #2A3B7E;
+    --primary-hover: #1a2552;
+    --text-main: #1a1a1a;
+    --text-muted: #666;
+    --bg-light: #f8f9fa;
+    --border-color: #e2e8f0;
+}
+
+/* Base product container (used in page) */
+.product-view-container {
+    display: flex;
+    background-color: #fff;
+    width: 1000px;
+    max-width: 95%;
+    margin: 40px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal specific parts are handled by .modal-content wrapping these same inner parts */
+
+.pv-left {
+    flex: 1;
+    width: 50%;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+}
+
+.pv-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.pv-right {
+    flex: 1;
+    width: 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Header Area */
+.pv-header {
+    margin-bottom: 20px;
+}
+
+.pv-header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 5px;
+    justify-content: center;
+}
+
+.pv-header-logo {
+    height: 32px;
+    width: auto;
+}
+
+.pv-category {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #666;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pv-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 10px 0;
+    line-height: 1.2;
+}
+
+.pv-price-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    background-color: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.pv-original-price {
+    font-size: 1rem;
+    color: #94a3b8;
+    text-decoration: line-through;
+}
+
+.pv-price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.pv-discount-badge {
+    background-color: #ee4d2d;
+    /* Using Shopee-like orange for discount emphasis */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.pv-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.pv-rating {
+    color: #ffc107;
+    display: flex;
+    gap: 2px;
+}
+
+/* Options */
+.pv-options {
+    margin-bottom: 25px;
+}
+
+.pv-option-group {
+    margin-bottom: 15px;
+}
+
+.pv-option-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pv-option-btn {
+    border: 1px solid var(--border-color);
+    background: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    transition: all 0.2s;
+    display: inline-block;
+}
+
+.pv-option-btn:hover {
+    border-color: #cbd5e0;
+    background: #f7fafc;
+}
+
+.pv-option-btn.selected {
+    border-color: var(--primary-color);
+    background: #ebf8ff;
+    color: var(--primary-color);
+    font-weight: 600;
+    box-shadow: 0 0 0 2px rgba(42, 59, 126, 0.1);
+}
+
+/* Quantity */
+.pv-quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 30px;
+    background: #f7fafc;
+    width: fit-content;
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid #edf2f7;
+}
+
+.pv-qty-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pv-qty-btn:hover {
+    background: #edf2f7;
+}
+
+.pv-qty-input {
+    width: 50px;
+    height: 32px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    outline: none;
+}
+
+/* Actions */
+.pv-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.pv-btn {
+    flex: 1;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.pv-btn-cart {
+    background: #fff;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.pv-btn-cart:hover {
+    background: #f0f4ff;
+}
+
+.pv-btn-buy {
+    background: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    color: white !important;
+    box-shadow: 0 4px 6px rgba(42, 59, 126, 0.2);
+}
+
+.pv-btn-buy:hover {
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(42, 59, 126, 0.3);
+}
+
+/* Reviews */
+.pv-reviews {
+    margin-top: 40px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.pv-reviews h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .product-view-container {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .pv-left,
+    .pv-right {
+        width: 100%;
+    }
+
+    .pv-left {
+        min-height: 300px;
+    }
+}

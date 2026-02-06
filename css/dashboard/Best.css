@@ -1,0 +1,216 @@
+/* Paste the CSS from Product-1.php here, or link to a shared CSS file */
+.content {
+    display: flex;
+    padding: 50px 50px;
+}
+
+.product {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-image {
+    width: 450px;
+    /* Fixed width for consistency */
+    flex-shrink: 0;
+}
+
+.product-image .img1 {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+
+    /* Matches the box size exactly */
+    background-color: #FAFAFA;
+}
+
+.product-info {
+    flex: 1;
+    max-width: 600px;
+    padding-top: 10px;
+    /* align slightly with image top */
+}
+
+.product-info .box-check {
+    display: inline-block;
+    padding: 2px 5px;
+    background-color: #2A3B7E;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.product-info .box-check::before {
+    content: "\2713";
+    margin-right: 2px;
+}
+
+.product-info h2 {
+    display: inline;
+    font-size: 20px;
+    vertical-align: middle;
+    color: #333;
+}
+
+.price-section {
+    background-color: #fafafa;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.price {
+    color: #2A3B7E;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #929292;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.discount {
+    color: #2A3B7E;
+    font-size: 12px;
+    border: 1px solid #2A3B7E;
+    padding: 2px 4px;
+    border-radius: 2px;
+    background-color: #fff;
+    vertical-align: middle;
+}
+
+.row-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: #757575;
+}
+
+.row-label {
+    width: 110px;
+    flex-shrink: 0;
+}
+
+.shipping-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.shipping-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #222;
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.option-btn {
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #000000CC;
+}
+
+.option-btn:hover,
+.option-btn.selected {
+    border-color: #2A3B7E;
+    color: #2A3B7E;
+}
+
+.option-btn img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+}
+
+.quantity-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e8e8e8;
+}
+
+.qty-btn {
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #757575;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qty-val {
+    width: 50px;
+    height: 32px;
+    border: none;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    text-align: center;
+    font-size: 16px;
+    outline: none;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-add-cart {
+    background-color: #ffe6e1;
+    border-radius: 5px;
+    color: #2A3B7E;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.btn-add-cart:hover {
+    background-color: #0f8392ff;
+    color: #000 !important;
+}
+
+.btn-buy-now {
+    background-color: #0f8392ff;
+    border-radius: 5px;
+    color: #fff !important;
+    padding: 12px 40px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-buy-now:hover {
+    color: #000 !important;
+}
+
+

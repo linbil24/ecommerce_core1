@@ -1,0 +1,30 @@
+# Disable caching for index files to fix persistent errors
+<FilesMatch "^(index\.html|index\.php)$">
+    Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+</FilesMatch>
+
+# Prioritize index.php over index.html
+DirectoryIndex index.php index.html
+
+# Prevent file concatenation issues
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Ensure clean URLs without extra characters
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)1$ $1 [L,R=301]
+</IfModule>
+
+# Set proper MIME types
+<IfModule mod_mime.c>
+    AddType image/png .png
+    AddType image/x-icon .ico
+    AddType image/webp .webp
+</IfModule>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>

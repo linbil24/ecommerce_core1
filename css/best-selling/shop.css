@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.best-selling-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    gap: 4rem;
+}
+
+/* Text Section (Left) */
+.text-section {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    /* Align text to the right (towards slider) */
+    padding-right: 2rem;
+}
+
+.text-section h1 {
+    font-size: 6rem;
+    font-weight: 900;
+    color: #0033cc;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    text-align: right;
+}
+
+/* Slider Section (Right) */
+.slider-section {
+    flex: 1;
+    position: relative;
+    max-width: 50%;
+    height: 500px;
+    /* Fixed height for consistent look */
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.fade-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.fade-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-slide.active {
+    opacity: 1;
+}
+
+/* Indicators */
+.slider-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 40px;
+    height: 4px;
+    /* Thin white line */
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.indicator.active {
+    background: #fff;
+    /* Solid white for active */
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .best-selling-container {
+        flex-direction: column;
+        /* Text on top */
+        text-align: center;
+    }
+
+    .slider-section {
+        max-width: 100%;
+        width: 100%;
+        height: 400px;
+    }
+
+    .text-section {
+        justify-content: center;
+        padding-right: 0;
+        margin-bottom: 2rem;
+    }
+
+    .text-section h1 {
+        text-align: center;
+        font-size: 4rem;
+    }
+}
+
+

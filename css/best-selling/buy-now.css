@@ -1,0 +1,410 @@
+/* General Layout */
+body {
+    background-color: #f5f7f9;
+    /* Light grey background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.checkout-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Stepper */
+.stepper-wrapper {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.stepper-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    z-index: 2;
+}
+
+.stepper-item::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    background-color: #e0e0e0;
+    z-index: -1;
+}
+
+.stepper-item:first-child::before {
+    content: none;
+}
+
+.step-counter {
+    width: 30px;
+    height: 30px;
+    background-color: #e0e0e0;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.stepper-item.active .step-counter {
+    background-color: #2A3B7E;
+    /* Brand color */
+}
+
+.stepper-item.completed .step-counter {
+    background-color: #4caf50;
+}
+
+.step-name {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.stepper-item.active .step-name {
+    color: #333;
+    font-weight: 700;
+}
+
+/* Main Content Grid */
+.checkout-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+/* Left Column */
+.checkout-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.card h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.alert-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 1rem;
+    border-radius: 4px;
+    border: 1px solid #badbcc;
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.item-card {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    background-color: #ddd;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-right: 1.5rem;
+}
+
+.item-info {
+    flex-grow: 1;
+}
+
+.item-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.item-price {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.item-qty {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Form Styles */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.form-control {
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #f0f4f8;
+    /* Very light blue/grey bg similar to image */
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-control:focus {
+    border-color: #2A3B7E;
+    background-color: #fff;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Payment Methods */
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.payment-card-label {
+    position: relative;
+    cursor: pointer;
+    min-width: 0;
+    /* flex fix */
+}
+
+/* Hide the radio button visually but keep it accessible if needed (or display:none) */
+.payment-card-label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.payment-card-content {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    transition: all 0.2s ease;
+    height: 140px;
+    /* Fixed height for uniformity */
+    text-align: center;
+}
+
+.payment-card-label:hover .payment-card-content {
+    border-color: #aaa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Selected State */
+.payment-card-label input[type="radio"]:checked+.payment-card-content,
+.payment-card-label.selected .payment-card-content {
+    border: 2px solid #2A3B7E;
+    background-color: #f0f4ff;
+}
+
+/* Icon / Logo Styling */
+.payment-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+}
+
+.icon-gcash {
+    color: #007bff;
+}
+
+.icon-paymaya {
+    color: #000;
+}
+
+/* PayMaya uses black/green usually */
+.icon-card {
+    color: #1a73e8;
+}
+
+.icon-cod {
+    color: #333;
+}
+
+.payment-title {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.payment-subtitle {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Right Column - Summary */
+.summary-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+}
+
+.summary-card h3 {
+    font-size: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.summary-row.total {
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.btn-place-order {
+    width: 100%;
+    background-color: #2A3B7E;
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background-color 0.2s;
+}
+
+.btn-place-order:hover {
+    background-color: #1f2c5e;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .checkout-content {
+        grid-template-columns: 1fr;
+    }
+
+    .stepper-wrapper {
+        padding: 1rem;
+    }
+
+    .step-name {
+        display: none;
+        /* Hide labels on small screens if needed, or adjust font */
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Address Card */
+.address-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #ccc;
+}
+
+.address-card-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.address-title-icon {
+    color: #d9534f;
+    margin-right: 5px;
+}
+
+.address-details {
+    background: #ccc;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.address-change-link {
+    font-size: 12px;
+    color: #0f8392ff;
+    text-decoration: none;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.address-change-link:hover {
+    text-decoration: underline;
+}
+
+

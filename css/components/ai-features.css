@@ -1,0 +1,201 @@
+/* AI Features Modal Styling */
+.ai-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.ai-modal-content {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.ai-modal-header {
+    margin-bottom: 20px;
+}
+
+.ai-modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.ai-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.ai-modal-body {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Camera Specific */
+.camera-preview-box {
+    width: 100%;
+    height: 250px;
+    background: #f0f0f0;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    color: #888;
+    position: relative;
+    overflow: hidden;
+}
+
+.camera-preview-box video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.btn-capture {
+    background: #007bff;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Voice Specific */
+.voice-wave {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    gap: 5px;
+}
+
+.bar {
+    width: 6px;
+    height: 20px;
+    background: #ff4b2b;
+    border-radius: 3px;
+    animation: sound 0.5s ease-in-out infinite alternate;
+}
+
+.bar:nth-child(1) {
+    animation-delay: 0.1s;
+    height: 30px;
+}
+
+.bar:nth-child(2) {
+    animation-delay: 0.2s;
+    height: 50px;
+}
+
+.bar:nth-child(3) {
+    animation-delay: 0.3s;
+    height: 40px;
+}
+
+.bar:nth-child(4) {
+    animation-delay: 0.4s;
+    height: 60px;
+}
+
+.bar:nth-child(5) {
+    animation-delay: 0.5s;
+    height: 30px;
+}
+
+@keyframes sound {
+    0% {
+        height: 10px;
+        opacity: 0.5;
+    }
+
+    100% {
+        height: 60px;
+        opacity: 1;
+    }
+}
+
+.voice-status {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Google Lens Scanning Effect */
+.scanner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    display: none;
+    /* Hidden until searching */
+}
+
+.scanner-line {
+    width: 100%;
+    height: 2px;
+    background: #00ff00;
+    /* Green scan line */
+    box-shadow: 0 0 10px #00ff00;
+    position: absolute;
+    top: 0;
+    animation: scanMove 2s infinite linear;
+}
+
+@keyframes scanMove {
+    0% {
+        top: 0;
+    }
+
+    50% {
+        top: 100%;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+

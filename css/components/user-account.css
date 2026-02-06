@@ -1,0 +1,433 @@
+/* Main Container */
+.user-account-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    min-height: 600px;
+}
+
+/* Sidebar */
+.account-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+}
+
+.sidebar-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #efefef;
+    margin-bottom: 20px;
+}
+
+.sidebar-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    background-image: url('../../image/default-avatar.png');
+    /* Fallback */
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #e0e0e0;
+}
+
+.sidebar-username {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebar-edit-link {
+    font-size: 12px;
+    color: #888;
+    text-decoration: none;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu-item {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sidebar-menu-title i {
+    width: 20px;
+    text-align: center;
+    color: #2A3B7E;
+    /* Brand Color */
+}
+
+.sidebar-menu-title:hover {
+    color: #0f8392;
+}
+
+.sidebar-submenu {
+    list-style: none;
+    padding-left: 30px;
+    margin-top: 8px;
+}
+
+.sidebar-submenu a {
+    display: block;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.sidebar-submenu a:hover,
+.sidebar-submenu a.active {
+    color: #0f8392;
+    /* Highlight Color */
+}
+
+/* Seller Button */
+.seller-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 12px;
+    background: #0f8392;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.seller-btn:hover {
+    background: #0a6572;
+}
+
+/* Main Content Area */
+.account-content {
+    flex: 1;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    position: relative;
+}
+
+.content-header {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.content-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+}
+
+.content-subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Tabs (for My Purchase) */
+.order-tabs {
+    display: flex;
+    border-bottom: 2px solid #efefef;
+    margin-bottom: 20px;
+}
+
+.order-tab {
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.order-tab.active {
+    color: #2A3B7E;
+    /* Brand Color */
+    font-weight: 500;
+    border-bottom: 2px solid #2A3B7E;
+    margin-bottom: -2px;
+}
+
+.order-tab:hover {
+    color: #2A3B7E;
+}
+
+/* Product/Order List */
+.empty-state {
+    text-align: center;
+    padding: 50px 0;
+    color: #888;
+}
+
+.order-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.order-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+}
+
+.shop-name {
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.order-status {
+    color: #0f8392;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.order-items {
+    padding: 20px;
+}
+
+.order-item-row {
+    display: flex;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.order-item-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border: 1px solid #f0f0f0;
+    background: #fff;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.item-meta {
+    font-size: 13px;
+    color: #999;
+}
+
+.item-price {
+    font-size: 16px;
+    color: #333;
+}
+
+.order-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    background: #fffafb;
+    /* Slight tint */
+}
+
+.order-total-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.order-total-price {
+    font-size: 20px;
+    color: #2A3B7E;
+    /* Price Color */
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+.btn-primary {
+    background: #0f8392;
+    /* Main Brand Color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: #0a6572;
+}
+
+.btn-outline {
+    background: white;
+    border: 1px solid #ddd;
+    color: #555;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn-outline:hover {
+    background: #f9f9f9;
+}
+
+/* Tracking Page */
+.tracking-container {
+    padding: 20px;
+}
+
+.track-stepper {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px 0;
+    position: relative;
+    padding: 0 20px;
+}
+
+.track-stepper::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+    background: #e0e0e0;
+    z-index: 0;
+}
+
+.track-step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    width: 100px;
+}
+
+.step-icon {
+    width: 35px;
+    height: 35px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.track-step.active .step-icon {
+    background: #2cbba9;
+    /* Shopee-like Green or Brand Color */
+}
+
+.track-step.active~.track-step .step-icon {
+    background: #e0e0e0;
+}
+
+/* Fill the line */
+/* This is harder with pure CSS for variable steps, but we can do a simple active class logic in JS or PHP to style previous steps */
+
+.step-label {
+    font-size: 13px;
+    color: #999;
+}
+
+.track-step.active .step-label {
+    color: #333;
+    font-weight: 500;
+}
+
+.track-time {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+/* Form inputs for profile */
+.profile-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.profile-input-label {
+    width: 150px;
+    /* Fixed width for alignment */
+    text-align: right;
+    margin-right: 30px;
+    color: #555;
+    font-size: 14px;
+}
+
+.profile-input-field {
+    flex: 1;
+}
+
+.profile-input-field input,
+.profile-input-field textarea,
+.profile-input-field select {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    outline: none;
+    font-size: 14px;
+}
+
+.profile-input-field input:focus {
+    border-color: #777;
+}
+
+.save-btn-container {
+    margin-left: 180px;
+    /* label width + gap */
+    margin-top: 30px;
+}

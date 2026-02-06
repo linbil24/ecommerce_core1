@@ -1,0 +1,139 @@
+/* styling.css for Order History */
+
+body {
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.order-history-container {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+/* Header Section */
+.history-header {
+    background: linear-gradient(90deg, #2A3B7E 0%, #00bfa5 100%);
+    border-radius: 12px 12px 0 0;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.history-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.history-header p {
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* Order Card */
+.order-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #2A3B7E;
+    /* Accent border */
+    position: relative;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-id {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.order-status {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #2A3B7E;
+    letter-spacing: 0.5px;
+}
+
+.order-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.detail-value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.track-btn-container {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-track {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.btn-track:hover {
+    background-color: #e2e6ea;
+    border-color: #adb5bd;
+}
+
+/* Empty State */
+.no-orders {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    background: white;
+    border-radius: 8px;
+}
+
+

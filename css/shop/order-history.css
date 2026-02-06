@@ -1,0 +1,154 @@
+/* order-history.css - Shopee Aesthetic Revamp */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
+    background-color: #f5f5f5;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.order-history-container {
+    max-width: 1000px;
+    margin: 20px auto 50px;
+    padding: 0 10px;
+}
+
+/* Header Section - Modernized */
+.history-header {
+    background: #fff;
+    border-radius: 4px;
+    padding: 25px 20px;
+    text-align: left;
+    color: #222;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    border-bottom: 3px solid #ee4d2d;
+    /* Shopee Orange accent */
+}
+
+.history-header h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.history-header p {
+    margin-top: 5px;
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+/* Order Card - Shopee-like Shop Header style */
+.order-card {
+    background: white;
+    border-radius: 4px;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s;
+}
+
+.order-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-id {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.order-status {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #ee4d2d;
+    /* Orange for status */
+    letter-spacing: 0.5px;
+}
+
+/* Details Grid - More compact */
+.order-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #757575;
+    text-transform: capitalize;
+    margin-bottom: 3px;
+}
+
+.detail-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Buttons */
+.track-btn-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding-top: 15px;
+    border-top: 1px solid #f5f5f5;
+}
+
+.btn-track {
+    background-color: white;
+    color: #555;
+    border: 1px solid #e8e8e8;
+    padding: 8px 16px;
+    border-radius: 2px;
+    font-weight: 400;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.btn-track:hover {
+    background-color: #fbfbfb;
+    border-color: #ddd;
+}
+
+.btn-track.primary {
+    background-color: #ee4d2d;
+    color: white;
+    border: none;
+}
+
+.btn-track.primary:hover {
+    background-color: #d73d17;
+}
+
+/* Empty State */
+.no-orders {
+    text-align: center;
+    padding: 50px 20px;
+    color: #666;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}

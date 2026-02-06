@@ -1,0 +1,417 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Header Reset & Base */
+.header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Poppins', sans-serif;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1002;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Left: Logo & Nav */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+.logo-img {
+    height: 35px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #2c4c7c;
+    /* Dark blue from logo */
+    margin-top: 2px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #2c4c7c;
+    background-color: #f5f8fa;
+}
+
+.nav-item i {
+    font-size: 14px;
+}
+
+/* Center: Search */
+.header-center {
+    flex: 1;
+    max-width: 600px;
+}
+
+.search-container {
+    display: flex;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 44px;
+}
+
+.ai-btn {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    color: #888;
+    padding: 0 12px;
+    font-size: 18px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #eee !important;
+    height: 60%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.ai-btn:first-of-type {
+    border-left: none !important;
+    /* No border for the first AI btn if we want */
+}
+
+.ai-btn:hover {
+    color: #2c4c7c;
+    background-color: #f9f9f9 !important;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 0 15px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    color: #333;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-btn {
+    background-color: #2c4c7c;
+    /* Logo blue */
+    border: none;
+    width: 60px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn:hover {
+    background-color: #1a3b6e;
+}
+
+/* Right: Icons */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #2c4c7c;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: #f5f8fa;
+    transition: all 0.2s;
+}
+
+.header-icon:hover {
+    background-color: #e1e8ed;
+    color: #1a3b6e;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .header-nav {
+        display: none;
+        /* Hide nav links on smaller screens for now */
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .header-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .header-center {
+        width: 100%;
+    }
+
+    .header-right {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+    padding: 0;
+    /* Remove padding from container, applied to toggle */
+}
+
+.dropdown-toggle {
+    text-decoration: none;
+    /* Keep consistent with other links */
+    color: inherit;
+    display: flex;
+    /* Ensure flex layout is kept */
+    align-items: center;
+    /* Align icon and text */
+    gap: 6px;
+    /* Spacing */
+    padding: 8px 12px;
+    /* Add padding here so hover works on toggle */
+    height: 100%;
+    /* Fill container */
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    min-width: 220px;
+    padding: 10px 0;
+    z-index: 1000;
+    list-style: none;
+    margin-top: 5px;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu li {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #f5f8fa;
+    color: #2c4c7c;
+}
+
+.dropdown-menu li a i {
+    width: 20px;
+    /* Fixed width for icons alignment */
+    text-align: center;
+    color: #999;
+}
+
+.dropdown-menu li a:hover i {
+    color: #2c4c7c;
+}
+
+/* User Profile Styles */
+.user-profile-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px;
+}
+
+.user-avatar-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #f5f8fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c4c7c;
+    font-size: 18px;
+}
+
+.user-display-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2c4c7c;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-dropdown-toggle {
+    width: 32px;
+    height: 32px;
+    background-color: #f5f8fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c4c7c;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s;
+    z-index: 1001;
+}
+
+/* .user-dropdown-toggle:hover {
+    background-color: #e1e8ed;
+} */
+
+.user-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    min-width: 180px;
+    padding: 10px 0;
+    z-index: 1000;
+    list-style: none;
+    margin-top: 10px;
+}
+
+.user-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: transparent;
+}
+
+/* Show menu on hover of the toggle container */
+/* Show menu on click (JS adds .show) */
+.user-dropdown-menu.show {
+    display: block;
+}
+
+.user-dropdown-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.user-dropdown-menu li a:hover {
+    background-color: #f5f8fa;
+    color: #2c4c7c;
+}
+
+.user-dropdown-menu li a i {
+    width: 20px;
+    text-align: center;
+}
+
+/* Notification Badge Styles */
+.user-avatar-circle {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4d4f;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.badge-mini {
+    background-color: #ff4d4f;
+    color: white;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-left: auto;
+}
