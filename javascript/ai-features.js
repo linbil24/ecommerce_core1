@@ -295,7 +295,7 @@ function openVoiceCommand() {
     modal.style.display = 'flex';
     content.innerHTML = `
         <div class="ai-modal-header">
-            <h3 class="ai-modal-title"><i class="fas fa-microphone"></i> Voice Assistant</h3>
+            <h3 class="ai-modal-title"><i class="fas fa-microphone"></i> Voice Commander</h3>
             <span class="ai-modal-close" onclick="closeAiModal()">&times;</span>
         </div>
         <div class="ai-modal-body">
@@ -306,8 +306,8 @@ function openVoiceCommand() {
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
-            <p class="voice-status" id="voice-status-text">Listening...</p>
-            <p style="color:#999; font-size: 0.8rem;">Try saying "Hello" or "Best Sellers"</p>
+            <p class="voice-status" id="voice-status-text">I'm listening...</p>
+            <p id="voice-subtext" style="color:#64748b; font-size: 0.85rem; font-weight: 500;">Command anything: "Go to cart", "Show orders", "Find shoes"...</p>
         </div>
     `;
 
@@ -315,12 +315,12 @@ function openVoiceCommand() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
-        document.getElementById('voice-status-text').innerText = "Browser does not support Voice API.";
+        document.getElementById('voice-status-text').innerText = "Browser doesn't support Voice API.";
         return;
     }
 
     const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US'; // Default to English but it usually picks up simple Tagalog/English mix
+    recognition.lang = 'en-US';
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
@@ -328,46 +328,60 @@ function openVoiceCommand() {
 
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript.toLowerCase();
-        console.log("Voice Result:", transcript);
+        console.log("Voice Command Recognized:", transcript);
 
         const statusText = document.getElementById('voice-status-text');
-        statusText.innerText = `You said: "${transcript}"`;
+        const subText = document.getElementById('voice-subtext');
+        statusText.innerText = `Executing: "${transcript}"`;
+        subText.innerText = "Processing command...";
 
-        if (transcript.includes('hello') || transcript.includes('hi')) {
-            speakResponse("Hello! How can I help you today?");
-            statusText.innerText = "Hello! How can I help you?";
+        // System-wide "Auto" Commands
+        const commands = [
+            { keywords: ['home', 'dashboard', 'main page', 'pumunta sa home', 'balik sa home'], action: '../Content/Dashboard.php' },
+            { keywords: ['cart', 'shopping cart', 'bucket', 'buksan ang cart', 'check out'], action: '../Content/Cart.php' },
+            { keywords: ['order', 'orders', 'history', 'mga order', 'binili'], action: '../Account/index.php?tab=orders' },
+            { keywords: ['profile', 'account', 'setting', 'security', 'sarili', 'impormasyon'], action: '../Account/index.php' },
+            { keywords: ['support', 'help', 'customer service', 'chat', 'tulong'], action: '../Services/Customer_Service.php' },
+            { keywords: ['logout', 'sign out', 'alis', 'log out'], action: '../php/logout.php' },
+            { keywords: ['best seller', 'best selling', 'sikat', 'mabenta'], action: '../Shop/index.php?search_query=best+sellers' },
+            { keywords: ['mall', 'shops', 'stores', 'tindahan'], action: '../Mall/index.php' }
+        ];
+
+        let foundAction = null;
+        for (const cmd of commands) {
+            if (cmd.keywords.some(k => transcript.includes(k))) {
+                foundAction = cmd.action;
+                break;
+            }
         }
-        else if (transcript.includes('best selling') || transcript.includes('best seller') || transcript.includes('best sellers')) {
-            speakResponse("Showing you our Best Selling products.");
-            statusText.innerText = "Opening Best Sellers...";
+
+        if (foundAction) {
+            speakResponse("Affirmative. Navigating to your request.");
+            setTimeout(() => {
+                closeAiModal();
+                window.location.href = foundAction;
+            }, 1200);
+        } else if (transcript.includes('hello') || transcript.includes('hi') || transcript.includes('kumusta')) {
+            speakResponse("Hello! I am your I-Market assistant. I can navigate you through the store. Try saying 'Go to my orders' or 'Search for gadgets'.");
+            statusText.innerText = "System: Hello! How can I help?";
+            subText.innerText = "Listening for next command...";
+            setTimeout(() => recognition.start(), 3000);
+        } else {
+            // Default to Search
+            speakResponse("Searching the marketplace for " + transcript);
+            statusText.innerText = "Finding products...";
 
             setTimeout(() => {
                 closeAiModal();
-                window.location.href = '../Shop/index.php?store=UrbanWear+PH&search_query=best+sellers';
-            }, 1500);
-        }
-        else {
-            speakResponse("Searching for " + transcript);
-            statusText.innerText = "Searching for " + transcript + "...";
-
-            setTimeout(() => {
-                closeAiModal();
-                // Determine path prefix based on current location (simple check)
                 let prefix = '../';
                 if (window.location.pathname.includes('/Shop/')) prefix = '';
-
-                // Redirect to Shop Search
                 window.location.href = prefix + '../Shop/index.php?search_query=' + encodeURIComponent(transcript);
             }, 1500);
         }
     };
 
     recognition.onerror = (event) => {
-        document.getElementById('voice-status-text').innerText = "Error occurred in recognition: " + event.error;
-    };
-
-    recognition.onend = () => {
-        // Optionally restart or just let it stop
+        document.getElementById('voice-status-text').innerText = "Recognition error: " + event.error;
     };
 }
 
