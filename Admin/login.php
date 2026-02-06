@@ -214,11 +214,22 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
                     </div>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; font-size: 0.875rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.875rem;">
                     <label style="display: flex; align-items: center; gap: 0.5rem; color: #64748b; cursor: pointer;">
                         <input type="checkbox" name="remember_me"> Remember me
                     </label>
                     <a href="forgot_password.php" style="color: #4f46e5; font-weight: 600; text-decoration: none;">Forgot password?</a>
+                </div>
+
+                <!-- Terms & Conditions Acceptance -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+                    <label style="display: flex; align-items: start; gap: 0.75rem; cursor: pointer;">
+                        <input type="checkbox" name="accept_terms" id="accept_terms_login" required 
+                            style="width: 1.1rem; height: 1.1rem; cursor: pointer; margin-top: 2px; accent-color: #4f46e5; flex-shrink: 0;">
+                        <span style="font-size: 0.8125rem; color: #475569; line-height: 1.5;">
+                            By logging in, you agree to our <a href="../About/Terms & Conditions.php" target="_blank" style="color: #4f46e5; font-weight: 600; text-decoration: none; border-bottom: 1px solid rgba(79, 70, 229, 0.3);">Terms & Conditions</a> and acknowledge that you will handle all platform data responsibly.
+                        </span>
+                    </label>
                 </div>
 
                 <button type="submit" class="btn-base btn-primary" style="width: 100%; justify-content: center; padding: 1rem;">
