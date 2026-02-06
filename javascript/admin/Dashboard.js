@@ -121,11 +121,20 @@ function renderDashboard() {
     lucide.createIcons();
 }
 
+// --- MOCK SELLERS DATA ---
+const sellersData = [
+    { id: 1, name: "UrbanWear PH", category: "Streetwear & Casual Outfits", rating: "4.8", sold: "25k", initials: "UW", bg: "000000", status: "Active" },
+    { id: 2, name: "StyleHub Manila", category: "Trendy Men & Women Fashion", rating: "4.9", sold: "18k", initials: "SH", bg: "d68910", status: "Active" },
+    { id: 3, name: "DailyFits Co.", category: "Pang-daily na damit", rating: "4.7", sold: "30k", initials: "DF", bg: "27ae60", status: "Active" },
+    { id: 4, name: "LuxeBasics", category: "Minimalist & Basic Wear", rating: "4.8", sold: "22k", initials: "LB", bg: "333333", status: "Active" },
+    { id: 5, name: "TechZone PH", category: "Gadgets & Accessories", rating: "4.9", sold: "40k", initials: "TZ", bg: "2980b9", status: "Active" }
+];
+
 // 1. Product & Storefront Management
-function renderProductModule(submodule) {
-    setPageTitle('Product & Storefront Management');
+function renderProductModule(submodule, filterValue = null) {
+    setPageTitle('Inventory & Seller Management');
     const content = document.getElementById('content-container');
-    let moduleTitle = 'Product & Storefront Management';
+    let moduleTitle = 'Inventory Management';
     let submoduleContent = '';
 
     const getProductStatusBadge = (stock) => {
@@ -135,9 +144,22 @@ function renderProductModule(submodule) {
         return 'inactive';
     };
 
-    const productRows = productsData.map((p, index) => {
+    // Assign mock stores to products if not present
+    const enhancedProductsData = productsData.map((p, idx) => {
+        if (!p.store_name) {
+            p.store_name = sellersData[idx % sellersData.length].name;
+        }
+        return p;
+    });
+
+    const filteredProducts = filterValue
+        ? enhancedProductsData.filter(p => p.store_name === filterValue)
+        : enhancedProductsData;
+
+    const productRows = filteredProducts.map((p, index) => {
         const statusClass = p.status === 'Active' ? 'active' : (p.status === 'Low Stock' ? 'low-stock' : (p.status === 'Critical Stock' ? 'critical-stock' : 'inactive'));
         return `
+
                 <tr style="transition: all 0.2s; border-bottom: 1px solid #f3f4f6;" 
                     onmouseover="this.style.backgroundColor='#f9fafb'; this.style.transform='scale(1.01)';" 
                     onmouseout="this.style.backgroundColor='transparent'; this.style.transform='scale(1)';">
@@ -161,25 +183,16 @@ function renderProductModule(submodule) {
                     <td style="padding: 1rem 1.5rem;">
                         <span class="status-badge ${statusClass}" style="font-weight: 600; padding: 0.375rem 0.75rem; border-radius: 0.375rem; font-size: 0.8125rem; text-transform: capitalize;">${p.status}</span>
                     </td>
-                    <td style="padding: 1rem 1.5rem; width: 200px;">
+                    <td style="padding: 1rem 1.5rem; width: 100px;">
                         <div style="display: flex; gap: 0.5rem; align-items: center; justify-content: center;">
                             <button class="btn-base" 
-                                onclick="showProductForm(${p.id})" 
-                                title="Edit Product"
+                                onclick="showProductDetails(${p.id})" 
+                                title="View Details"
                                 style="padding: 0.5rem 0.875rem; font-size: 0.8125rem; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 0.5rem; font-weight: 500; display: flex; align-items: center; gap: 0.375rem; transition: all 0.2s; cursor: pointer;"
                                 onmouseover="this.style.background='#dbeafe'; this.style.borderColor='#93c5fd'; this.style.transform='translateY(-1px)'"
                                 onmouseout="this.style.background='#eff6ff'; this.style.borderColor='#bfdbfe'; this.style.transform='translateY(0)'">
-                                <i data-lucide="edit-2" style="width: 0.875rem; height: 0.875rem;"></i>
-                                <span>Edit</span>
-                            </button>
-                            <button class="btn-base"
-                                onclick="deleteProduct(${p.id}, '${p.name.replace(/'/g, "\\'")}')" 
-                                title="Delete Product"
-                                style="padding: 0.5rem 0.875rem; font-size: 0.8125rem; background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; border-radius: 0.5rem; font-weight: 500; display: flex; align-items: center; gap: 0.375rem; transition: all 0.2s; cursor: pointer;"
-                                onmouseover="this.style.background='#fee2e2'; this.style.borderColor='#fca5a5'; this.style.transform='translateY(-1px)'"
-                                onmouseout="this.style.background='#fef2f2'; this.style.borderColor='#fecaca'; this.style.transform='translateY(0)'">
-                                <i data-lucide="trash-2" style="width: 0.875rem; height: 0.875rem;"></i>
-                                <span>Delete</span>
+                                <i data-lucide="eye" style="width: 0.875rem; height: 0.875rem;"></i>
+                                <span>View</span>
                             </button>
                         </div>
                     </td>
@@ -190,54 +203,41 @@ function renderProductModule(submodule) {
 
     switch (submodule) {
         case 'products':
-            moduleTitle = 'Product List (Inventory & Pricing)';
+            moduleTitle = filterValue ? `Products from ${filterValue}` : 'Global Product Inventory';
             submoduleContent = `
                                     <div class="mb-6">
                                         <!-- Header Section -->
-                                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 0.75rem; padding: 2rem; margin-bottom: 1.5rem; color: white;">
+                                        <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); border-radius: 0.75rem; padding: 2rem; margin-bottom: 1.5rem; color: white;">
                                             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                                                 <div>
-                                                    <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: white;">Product Management</h2>
-                                                    <p style="opacity: 0.9; font-size: 0.9375rem; margin: 0;">Manage your product inventory. Add, edit, or delete products easily.</p>
+                                                    <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; color: white;">
+                                                        ${filterValue ? `<i data-lucide="store" class="inline-block mr-2"></i> ${filterValue} Catalog` : 'Central Product Directory'}
+                                                    </h2>
+                                                    <p style="opacity: 0.9; font-size: 0.9375rem; margin: 0;">
+                                                        ${filterValue ? `Viewing all products currently listed by ${filterValue}.` : 'Comprehensive list of all products across all connected sellers.'}
+                                                    </p>
                                                 </div>
                                                 <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                                                    ${productsData.length > 0 ? `
-                                        <button class="btn-base" onclick="clearAllProducts()" 
-                                            style="background: rgba(255, 255, 255, 0.2); color: white; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.625rem 1.25rem; font-weight: 500; transition: all 0.2s;"
-                                            onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'" 
-                                            onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">
-                                            <i data-lucide="trash-2" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
-                                            Clear All
-                                        </button>
-                                        ` : ''}
-                                                    <button class="btn-base" onclick="showProductForm()" 
-                                                        style="background: white; color: #667eea; padding: 0.625rem 1.25rem; font-weight: 600; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); transition: all 0.2s;"
-                                                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px -1px rgba(0, 0, 0, 0.15)'" 
-                                                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(0, 0, 0, 0.1)'">
-                                                        <i data-lucide="plus" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
-                                                        Add New Product
-                                                    </button>
+                                                     ${filterValue ? `
+                                                        <button onclick="renderProductModule('sellers')" style="background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; color: white; cursor: pointer;">
+                                                            Back to Sellers
+                                                        </button>
+                                                     ` : '<span style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem;">View-Only Administrator Mode</span>'}
                                                 </div>
                                             </div>
                                         </div>
                             
-                                        ${productsData.length === 0 ? `
+                                        ${filteredProducts.length === 0 ? `
                             <div class="kpi-card p-8 mb-4" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%); border: 2px dashed #c7d2fe; text-align: center; border-radius: 1rem;">
                                 <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
                                     <i data-lucide="package" style="width: 2.5rem; height: 2.5rem; color: white;"></i>
                                 </div>
-                                <h3 style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.75rem;">No Products Yet</h3>
-                                <p style="color: #6b7280; font-size: 1rem; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">Start building your inventory by adding your first product. You can manage all your products from here.</p>
-                                <button class="btn-base" onclick="showProductForm()" 
-                                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: 600; padding: 0.875rem 2rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgba(102, 126, 234, 0.4); transition: all 0.2s;"
-                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px -1px rgba(102, 126, 234, 0.5)'" 
-                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(102, 126, 234, 0.4)'">
-                                    <i data-lucide="plus" style="width: 1.125rem; height: 1.125rem; margin-right: 0.5rem;"></i>
-                                    Add Your First Product
-                                </button>
+                                <h3 style="font-size: 1.5rem; font-weight: 700; color: #1f2937; margin-bottom: 0.75rem;">No Products Found</h3>
+                                <p style="color: #6b7280; font-size: 1rem; max-width: 500px; margin-left: auto; margin-right: auto;">No products match the selected criteria.</p>
                             </div>
                             ` : ''}
                                     </div>
+
                         
                                     <!-- Products Table Card -->
                                     <div class="kpi-card" style="padding: 0; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);">
@@ -266,19 +266,64 @@ function renderProductModule(submodule) {
                                                 </thead>
                                                 <tbody>
                                                     ${productsData.length > 0 ? productRows : `
-                                        <tr>
-                                            <td colspan="7" style="text-align: center; padding: 3rem; color: #9ca3af;">
+                                    <td colspan="7" style="text-align: center; padding: 3rem; color: #9ca3af;">
                                                 <i data-lucide="package-x" style="width: 3rem; height: 3rem; margin: 0 auto 1rem; display: block; opacity: 0.5;"></i>
                                                 <p style="font-size: 1rem; font-weight: 500; margin-bottom: 0.5rem;">No products found</p>
-                                                <p style="font-size: 0.875rem;">Click "Add New Product" to create your first product.</p>
+                                                <p style="font-size: 0.875rem;">The catalog for this selection is empty.</p>
                                             </td>
-                                        </tr>
+
                                         `}
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 `;
+            break;
+        case 'sellers':
+            moduleTitle = 'Marketplace Sellers';
+            const sellerCards = sellersData.map(seller => `
+                <div class="kpi-card" style="padding: 1.5rem; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px -5px rgba(0,0,0,0.1)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;">
+                        <div style="width: 50px; height: 50px; border-radius: 12px; background: #${seller.bg}; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.25rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                            ${seller.initials}
+                        </div>
+                        <div>
+                            <h4 style="margin: 0; font-size: 1.1rem; color: #1e293b;">${seller.name}</h4>
+                            <p style="margin: 0; font-size: 0.8rem; color: #64748b;">${seller.category}</p>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <span class="status-badge active" style="font-size: 0.7rem;">${seller.status}</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; background: #f8fafc; padding: 1rem; border-radius: 8px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.1rem; font-weight: 700; color: #1e293b;">${seller.rating}</div>
+                            <div style="font-size: 0.7rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.05em;">Rating</div>
+                        </div>
+                        <div style="text-align: center; border-left: 1px solid #e2e8f0;">
+                            <div style="font-size: 1.1rem; font-weight: 700; color: #1e293b;">${seller.sold}</div>
+                            <div style="font-size: 0.7rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 0.05em;">Sold</div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="showSubModule('product', 'products', '${seller.name}')" 
+                        style="width: 100%; padding: 0.75rem; background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;"
+                        onmouseover="this.style.background='#dbeafe'" onmouseout="this.style.background='#eff6ff'">
+                        View Products
+                    </button>
+                </div>
+            `).join('');
+
+            submoduleContent = `
+                <div style="margin-bottom: 2rem;">
+                    <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Store Marketplace</h2>
+                    <p style="color: #64748b;">Manage and monitor registered sellers in the IMARKET hierarchy.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                    ${sellerCards}
+                </div>
+            `;
             break;
         case 'categories':
             moduleTitle = 'Category Management';
@@ -288,27 +333,17 @@ function renderProductModule(submodule) {
                                         <td style="color: #1f2937; font-weight: 500;">${cat.name}</td>
                                         <td>${cat.description || 'N/A'}</td>
                                         <td><span class="status-badge ${cat.status === 'Active' ? 'active' : 'inactive'}">${cat.status}</span></td>
-                                        <td style="width: 150px;">
-                                            <button class="btn-base" style="padding: 0.25rem 0.5rem; margin-right: 0.5rem; background-color: var(--color-light-grey);" 
-                                                onclick="showCategoryForm(${cat.id})">
-                                                <i data-lucide="edit" style="width: 1rem; height: 1rem;"></i>
-                                            </button>
-                                            <button class="btn-base" style="padding: 0.25rem 0.5rem; background-color: var(--color-red-600); color: white;"
-                                                onclick="deleteCategory(${cat.id}, '${cat.name}')">
-                                                <i data-lucide="trash-2" style="width: 1rem; height: 1rem;"></i>
+                                        <td style="width: 100px;">
+                                            <button class="btn-base" style="padding: 0.25rem 0.5rem; background-color: var(--color-light-grey);" 
+                                                onclick="showCategoryDetails(${cat.id})">
+                                                <i data-lucide="eye" style="width: 1rem; height: 1rem;"></i>
                                             </button>
                                         </td>
                                     </tr>
                                 `).join('');
 
             submoduleContent = `
-                                    <div class="mb-6 flex justify-between items-center">
-                                        <p class="text-gray-500">Create and manage product categories.</p>
-                                        <button class="btn-base btn-primary text-sm" onclick="showCategoryForm()">
-                                            <i data-lucide="plus" style="width: 1rem; height: 1rem; margin-right: 0.5rem;"></i>
-                                            Add New Category
-                                        </button>
-                                    </div>
+                                        <p class="text-gray-500">Categories are managed by the System Administrator.</p>
                                     <div class="kpi-card p-6">
                                         <h3 class="text-xl font-semibold mb-4">Category List (${categoriesData.length} Categories)</h3>
                                         <div class="table-container" style="overflow-x: auto;">
@@ -323,7 +358,7 @@ function renderProductModule(submodule) {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    ${categoriesData.length > 0 ? categoryRows : `<tr><td colspan="5" class="text-center text-gray-500 py-4">No categories found. Click "Add New Category" to create one.</td></tr>`}
+                                                     ${categoriesData.length > 0 ? categoryRows : `<tr><td colspan="5" class="text-center text-gray-500 py-4">No categories found in the system.</td></tr>`}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -367,28 +402,10 @@ function renderProductModule(submodule) {
                                                 </button>
                                             </div>
                                         </div>
-                                        <div style="border: 2px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; background-color: #f9fafb;">
-                                            <div style="background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-dark-grey) 100%); color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center;">
-                                                <div>
-                                                    <h4 style="font-size: 1.25rem; font-weight: 700; margin: 0;">iMARKET Store</h4>
-                                                    <p style="font-size: 0.875rem; margin: 0.25rem 0 0 0; opacity: 0.9;">Your one-stop shop</p>
-                                                </div>
-                                                <div style="display: flex; gap: 1rem; align-items: center;">
-                                                    <i data-lucide="search" style="width: 1.25rem; height: 1.25rem; opacity: 0.9;"></i>
-                                                    <i data-lucide="shopping-cart" style="width: 1.25rem; height: 1.25rem; opacity: 0.9;"></i>
-                                                </div>
-                                            </div>
-                                            <div style="padding: 1.5rem;">
-                                                <div style="margin-bottom: 1.5rem;">
-                                                    <h5 style="font-size: 1.125rem; font-weight: 600; color: #1f2937; margin-bottom: 1rem;">Featured Products</h5>
-                                                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem;">
-                                                        ${productCards}
-                                                    </div>
-                                                </div>
-                                                <div style="text-align: center; padding: 2rem; background: #f3f4f6; border-radius: 0.5rem;">
-                                                    <p style="color: #6b7280; margin: 0;">Showing ${activeProducts.length} of ${productsData.filter(p => p.status === 'Active').length} active products</p>
-                                                </div>
-                                            </div>
+                                        <div style="border: 2px solid #e5e7eb; border-radius: 0.75rem; overflow: hidden; background-color: #f9fafb; padding: 3rem; text-align: center;">
+                                            <i data-lucide="layout" style="width: 3rem; height: 3rem; color: #94a3b8; margin: 0 auto 1rem; display: block;"></i>
+                                            <h4 style="font-weight: 600; color: #1f2937; margin-bottom: 0.5rem;">Storefront Preview Information</h4>
+                                            <p style="color: #6b7280; max-width: 400px; margin: 0 auto;">The live storefront layout is now optimized for better conversion. Click the preview buttons above to see the layout on different devices.</p>
                                         </div>
                                     </div>
                                 `;
@@ -1342,340 +1359,12 @@ function validateProfileForm(event) {
     return false;
 }
 
-// 6. Customer Support Center
-function renderSupportModule(submodule = 'tickets') {
-    if (submodule === 'chat') {
-        renderChatModule();
-        return;
-    }
+// 6. Customer Support Center - Moved to Support Portal
 
-    setPageTitle('Customer Support Center');
-    const content = document.getElementById('content-container');
-
-    const ticketRows = supportTicketsData.map(t => {
-        const statusClass = t.status === 'Resolved' ? 'active' : (t.status === 'In Progress' ? 'processing' : (t.status === 'Closed' ? 'inactive' : 'pending'));
-        const priorityClass = t.priority === 'Urgent' ? 'critical-stock' : (t.priority === 'High' ? 'low-stock' : 'active');
-        return `
-                <tr>
-                                <td>${t.ticket_number}</td>
-                                <td>${t.customer_name || 'N/A'}</td>
-                                <td>${t.subject}</td>
-                                <td><span class="status-badge ${statusClass}">${t.status}</span></td>
-                                <td><span class="status-badge ${priorityClass}">${t.priority}</span></td>
-                                <td>${t.assigned_admin || 'Unassigned'}</td>
-                                <td>${new Date(t.created_at).toLocaleDateString()}</td>
-                                <td style="width: 100px;">
-                                    <button class="btn-base" style="padding: 0.25rem 0.5rem; background-color: var(--color-light-grey);" 
-                                        onclick="showTicketDetails(${t.id})">
-                                        <i data-lucide="eye" style="width: 1rem; height: 1rem;"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                `;
-    }).join('');
-
-    const openTickets = supportTicketsData.filter(t => t.status === 'Open' || t.status === 'In Progress').length;
-    const resolvedTickets = supportTicketsData.filter(t => t.status === 'Resolved' || t.status === 'Closed').length;
-
-    content.innerHTML = `
-                <h2 class="page-header">Customer Support Center</h2>
-                            <p class="mb-6 text-gray-500">Manage support tickets and customer communications.</p>
-                
-                            <div class="kpi-card-grid" style="margin-bottom: 2rem;">
-                                ${createKPICard('Open Tickets', openTickets, 'message-square', 'kpi-yellow')}
-                                ${createKPICard('Resolved', resolvedTickets, 'check-circle', 'kpi-green')}
-                                ${createKPICard('Total Tickets', supportTicketsData.length, 'ticket', 'kpi-indigo')}
-                                ${createKPICard('High Priority', supportTicketsData.filter(t => t.priority === 'High' || t.priority === 'Urgent').length, 'alert-triangle', 'kpi-red')}
-                            </div>
-                
-                            <div class="kpi-card p-6">
-                                <h3 class="text-xl font-semibold mb-4">Support Tickets (${supportTicketsData.length} Total)</h3>
-                                <div class="table-container" style="overflow-x: auto;">
-                                    <table class="data-table" style="text-align: center;">
-                                        <thead>
-                                            <tr>
-                                                <th>Ticket #</th>
-                                                <th>Customer</th>
-                                                <th>Subject</th>
-                                                <th>Status</th>
-                                                <th>Priority</th>
-                                                <th>Assigned To</th>
-                                                <th>Created</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            ${supportTicketsData.length > 0 ? ticketRows : `<tr><td colspan="8" class="text-center text-gray-500 py-4">No support tickets found.</td></tr>`}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-            `;
-    lucide.createIcons();
-}
-
-let activeChatUser = null;
-let activeChatStore = null;
-let chatInterval = null;
-
-function renderChatModule() {
-    setPageTitle('Store Chat Messages');
-    const content = document.getElementById('content-container');
-
-    content.innerHTML = `
-        <div style="display: flex; height: calc(100vh - 160px); background: white; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-            <!-- Chat List -->
-            <div id="chat-list-container" style="width: 350px; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column;">
-                <div style="padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #111827;">Messages</h3>
-                    <div style="margin-top: 1rem; position: relative;">
-                        <i data-lucide="search" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 1rem; height: 1rem; color: #9ca3af;"></i>
-                        <input type="text" placeholder="Search chats..." style="width: 100%; padding: 0.5rem 0.5rem 0.5rem 2.25rem; border: 1px solid #d1d5db; border-radius: 0.5rem; font-size: 0.875rem;">
-                    </div>
-                </div>
-                <div id="admin-chat-list" style="flex: 1; overflow-y: auto;">
-                    <div style="padding: 2rem; text-align: center; color: #6b7280;">Loading chats...</div>
-                </div>
-            </div>
-            
-            <!-- Chat Window -->
-            <div id="chat-window" style="flex: 1; display: flex; flex-direction: column; background: #f9fafb;">
-                <div id="chat-window-content" style="display: flex; flex-direction: column; height: 100%;">
-                    <div style="flex: 1; display: flex; align-items: center; justify-content: center; color: #9ca3af; flex-direction: column;">
-                        <i data-lucide="message-square" style="width: 4rem; height: 4rem; margin-bottom: 1rem; opacity: 0.2;"></i>
-                        <p>Select a conversation to start chatting</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-
-    loadAdminChatList();
-    lucide.createIcons();
-
-    // Clear interval if exists
-    if (chatInterval) clearInterval(chatInterval);
-    chatInterval = setInterval(loadAdminChatList, 10000); // Refresh list every 10s
-}
-
-function loadAdminChatList() {
-    fetch('get_chat_list.php')
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                const listContainer = document.getElementById('admin-chat-list');
-                if (!listContainer) return;
-
-                if (data.chats.length === 0) {
-                    listContainer.innerHTML = '<div style="padding: 2rem; text-align: center; color: #6b7280;">No messages yet.</div>';
-                    return;
-                }
-
-                listContainer.innerHTML = data.chats.map(chat => `
-                    <div onclick="openAdminChat(${chat.user_id}, '${chat.store_name}', '${chat.customer_name}')" 
-                         style="padding: 1rem 1.5rem; border-bottom: 1px solid #f3f4f6; cursor: pointer; transition: background 0.2s; position: relative;
-                         ${(activeChatUser == chat.user_id && activeChatStore == chat.store_name) ? 'background: #eff6ff; border-left: 4px solid #3b82f6;' : 'background: white;'}"
-                         onmouseover="this.style.background='#f9fafb'" 
-                         onmouseout="this.style.background='${(activeChatUser == chat.user_id && activeChatStore == chat.store_name) ? '#eff6ff' : 'white'}'">
-                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem;">
-                            <span style="font-weight: 700; color: #111827;">${chat.customer_name}</span>
-                            <span style="font-size: 0.75rem; color: #6b7280;">${chat.store_name}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <p style="font-size: 0.875rem; color: #6b7280; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; margin: 0;">
-                                ${chat.last_message}
-                            </p>
-                            ${chat.unread_count > 0 ? `
-                                <span style="background: #ef4444; color: white; font-size: 0.75rem; font-weight: 700; padding: 2px 6px; border-radius: 9999px;">
-                                    ${chat.unread_count}
-                                </span>
-                            ` : ''}
-                        </div>
-                    </div>
-                `).join('');
-            }
-        });
-}
-
-function openAdminChat(userId, storeName, customerName) {
-    activeChatUser = userId;
-    activeChatStore = storeName;
-
-    // Update active state in list
-    loadAdminChatList();
-
-    const windowContainer = document.getElementById('chat-window');
-    windowContainer.innerHTML = `
-        <div style="padding: 1rem 1.5rem; background: white; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; gap: 1rem;">
-            <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700;">
-                ${customerName.charAt(0)}
-            </div>
-            <div>
-                <h4 style="font-weight: 700; color: #111827; margin: 0;">${customerName}</h4>
-                <p style="font-size: 0.75rem; color: #6b7280; margin: 0;">Chatting via ${storeName}</p>
-            </div>
-        </div>
-        <div id="admin-chat-messages" style="flex: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; background: #f3f4f6;">
-            <div style="text-align: center; color: #9ca3af;">Loading messages...</div>
-        </div>
-        <div style="padding: 1.25rem; background: white; border-top: 1px solid #e5e7eb;">
-            <form id="admin-chat-form" onsubmit="sendAdminChatReply(event)" style="display: flex; gap: 0.75rem;">
-                <input type="text" id="admin-chat-input" placeholder="Type your reply..." required
-                       style="flex: 1; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.5rem; outline: none; focus:border-blue-500;">
-                <button type="submit" style="background: #3b82f6; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
-                    <i data-lucide="send" style="width: 1rem; height: 1rem;"></i>
-                    Send
-                </button>
-            </form>
-        </div>
-    `;
-
-    lucide.createIcons();
-    loadAdminMessages();
-
-    // Set interval to refresh messages
-    if (window.msgInterval) clearInterval(window.msgInterval);
-    window.msgInterval = setInterval(loadAdminMessages, 3000);
-}
-
-function loadAdminMessages() {
-    if (!activeChatUser || !activeChatStore) return;
-
-    fetch(`get_admin_chat_messages.php?user_id=${activeChatUser}&store_name=${encodeURIComponent(activeChatStore)}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                const msgContainer = document.getElementById('admin-chat-messages');
-                if (!msgContainer) return;
-
-                const isAtBottom = msgContainer.scrollHeight - msgContainer.scrollTop <= msgContainer.clientHeight + 50;
-
-                msgContainer.innerHTML = data.messages.map(msg => {
-                    const isAdmin = msg.sender_type === 'admin';
-                    return `
-                        <div style="display: flex; flex-direction: column; align-items: ${isAdmin ? 'flex-end' : 'flex-start'};">
-                            <div style="max-width: 70%; padding: 0.75rem 1rem; border-radius: 1rem; font-size: 0.9375rem; 
-                                 ${isAdmin ? 'background: #3b82f6; color: white; border-bottom-right-radius: 0.25rem;' : 'background: white; color: #111827; border-bottom-left-radius: 0.25rem;'}">
-                                ${msg.message}
-                            </div>
-                            <span style="font-size: 0.7rem; color: #9ca3af; margin-top: 0.25rem;">${new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-                        </div>
-                    `;
-                }).join('');
-
-                if (isAtBottom) {
-                    msgContainer.scrollTop = msgContainer.scrollHeight;
-                }
-            }
-        });
-}
-
-function sendAdminChatReply(event) {
-    event.preventDefault();
-    const input = document.getElementById('admin-chat-input');
-    const message = input.value.trim();
-
-    if (!message || !activeChatUser || !activeChatStore) return;
-
-    const formData = new FormData();
-    formData.append('user_id', activeChatUser);
-    formData.append('store_name', activeChatStore);
-    formData.append('message', message);
-
-    // Optimistic UI
-    const msgContainer = document.getElementById('admin-chat-messages');
-    const tempDiv = document.createElement('div');
-    tempDiv.style = "display: flex; flex-direction: column; align-items: flex-end;";
-    tempDiv.innerHTML = `
-        <div style="max-width: 70%; padding: 0.75rem 1rem; border-radius: 1rem; font-size: 0.9375rem; background: #3b82f6; color: white; border-bottom-right-radius: 0.25rem; opacity: 0.7;">
-            ${message}
-        </div>
-        <span style="font-size: 0.7rem; color: #9ca3af; margin-top: 0.25rem;">Sending...</span>
-    `;
-    msgContainer.appendChild(tempDiv);
-    msgContainer.scrollTop = msgContainer.scrollHeight;
-
-    input.value = '';
-
-    fetch('send_chat_reply.php', {
-        method: 'POST',
-        body: formData
-    })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                loadAdminMessages();
-            } else {
-                alert('Failed to send message: ' + data.message);
-            }
-        });
-}
+// Chat module removed - Moved to Support Portal
 
 
-function showTicketDetails(ticketId) {
-    const ticket = supportTicketsData.find(t => t.id == ticketId);
-    if (!ticket) return;
-
-    const formHTML = `
-                <form id="ticket-form" method="POST" action="dashboard.php">
-                    <input type="hidden" name="action" value="update_ticket">
-                        <input type="hidden" name="id" value="${ticket.id}">
-                            <input type="hidden" name="module" value="support">
-
-                                <div style="margin-bottom: 1.5rem;">
-                                    <p><strong>Ticket:</strong> ${ticket.ticket_number}</p>
-                                    <p><strong>Customer:</strong> ${ticket.customer_name || 'N/A'}</p>
-                                    <p><strong>Subject:</strong> ${ticket.subject}</p>
-                                    <p><strong>Message:</strong></p>
-                                    <div style="padding: 1rem; background: #f3f4f6; border-radius: 0.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">${ticket.message}</div>
-                                    
-                                    <!-- Admin Reply Section -->
-                                    <div class="form-group" style="margin-top: 1rem;">
-                                        <label>Reply Message</label>
-                                        <textarea name="reply_message" rows="4" 
-                                            placeholder="Write your response here..."
-                                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;"></textarea>
-                                    </div>
-                                </div>
-
-                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-                                    <div class="form-group">
-                                        <label>Status</label>
-                                        <select name="status"
-                                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                            <option value="Open" ${ticket.status === 'Open' ? 'selected' : ''}>Open</option>
-                                            <option value="In Progress" ${ticket.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
-                                            <option value="Resolved" ${ticket.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
-                                            <option value="Closed" ${ticket.status === 'Closed' ? 'selected' : ''}>Closed</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Priority</label>
-                                        <select name="priority"
-                                            style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-gray-300); border-radius: 0.5rem;">
-                                            <option value="Low" ${ticket.priority === 'Low' ? 'selected' : ''}>Low</option>
-                                            <option value="Medium" ${ticket.priority === 'Medium' ? 'selected' : ''}>Medium</option>
-                                            <option value="High" ${ticket.priority === 'High' ? 'selected' : ''}>High</option>
-                                            <option value="Urgent" ${ticket.priority === 'Urgent' ? 'selected' : ''}>Urgent</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                                    <button type="submit" class="btn-base btn-primary" style="flex: 1;">Update & Send Reply</button>
-                                    <button type="button" class="btn-base btn-secondary" onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" style="flex: 1;">Close</button>
-                                </div>
-                            </form>
-                            `;
-
-    const modalContainer = document.getElementById('modal-container');
-    modalContainer.innerHTML = `
-                            <h3 style="font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-bottom: 1.5rem;">Ticket Details</h3>
-                            <div id="modal-form-content">${formHTML}</div>
-                            `;
-    document.getElementById('custom-modal-backdrop').classList.remove('hidden');
-}
+// Ticket Detials removed - Moved to Support Portal
 
 function deleteAdmin(id, username) {
     showCustomActionModal(
@@ -1949,7 +1638,7 @@ function showModule(moduleName, element = null) {
     window.scrollTo(0, 0);
 }
 
-function showSubModule(modulePrefix, submodule) {
+function showSubModule(modulePrefix, submodule, filterValue = null) {
     const moduleMap = {
         'product': renderProductModule,
         'order': renderOrderModule,
@@ -1959,7 +1648,7 @@ function showSubModule(modulePrefix, submodule) {
     };
 
     if (moduleMap[modulePrefix]) {
-        moduleMap[modulePrefix](submodule);
+        moduleMap[modulePrefix](submodule, filterValue);
 
         // --- Navigation Fix for Submodules ---
         // 1. Find the specific submenu link
@@ -1986,11 +1675,12 @@ function showSubModule(modulePrefix, submodule) {
             }
         }
 
-        // Update URL state for submodule
-        const newUrl = new URL(window.location);
-        newUrl.searchParams.set('module', modulePrefix);
-        newUrl.searchParams.set('submodule', submodule);
-        window.history.pushState({ module: modulePrefix, submodule: submodule }, '', newUrl);
+        if (filterValue) {
+            newUrl.searchParams.set('filter', filterValue);
+        } else {
+            newUrl.searchParams.delete('filter');
+        }
+        window.history.pushState({ module: modulePrefix, submodule: submodule, filter: filterValue }, '', newUrl);
     }
     window.scrollTo(0, 0);
 }
