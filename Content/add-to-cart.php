@@ -467,7 +467,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                         empty</div>
                     <div class="empty-cart-text" style="color: #888; margin-bottom: 20px;">Looks like you haven't added any
                         items to your cart yet.</div>
-                    <a href="../Shop-now/index.php" class="btn-continue-shopping"
+                    <a href="../Shop/index.php" class="btn-continue-shopping"
                         style="display: inline-block; padding: 10px 30px; background: #2A3B7E; color: #fff; text-decoration: none; border-radius: 4px;">Continue
                         Shopping</a>
                 </div>

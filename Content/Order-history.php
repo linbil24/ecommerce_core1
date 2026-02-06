@@ -200,7 +200,7 @@ $result = mysqli_query($conn, $sql);
                 <i class="fas fa-box-open" style="font-size: 3rem; color: #ddd; margin-bottom: 1rem;"></i>
                 <h2>No orders yet</h2>
                 <p>Looks like you haven't placed any orders yet.</p>
-                <a href="../Categories/best-selling/selling.php"
+                <a href="../Shop/index.php"
                     style="display:inline-block; margin-top:1rem; color:white; background-color:#2A3B7E; font-weight:600; padding: 10px 20px; border-radius: 4px; text-decoration: none;">Start
                     Shopping</a>
             </div>

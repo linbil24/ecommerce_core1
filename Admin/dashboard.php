@@ -456,17 +456,36 @@ if ($is_logged_in) {
                 <h1 class="header-title" id="page-title">Dashboard & Analytics</h1>
             </div>
 
-            <div class="header-right">
-                <!-- Notification Bell -->
-                <div class="notification-bell-container" style="position: relative; margin-right: 1.5rem;">
-                    <div class="notification-bell" onclick="toggleNotificationPanel()"
-                        style="width: 2.8rem; height: 2.8rem; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; position: relative;"
-                        onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
-                        <i data-lucide="bell"
-                            style="width: 1.4rem; height: 1.4rem; color: #64748b; pointer-events: none;"></i>
-                        <span id="notificationBellBadge" class="notification-bell-badge"
-                            style="display: none; position: absolute; top: 0px; right: 0px; background: #ef4444; color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); pointer-events: none; z-index: 1;"></span>
-                    </div>
+            <div class="header-right" style="flex: 1; justify-content: space-between;">
+                <!-- Global Admin Search -->
+                <div class="admin-search-container" style="position: relative; flex: 1; max-width: 500px; margin-left: 2rem;">
+                    <i data-lucide="search" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 1.1rem; height: 1.1rem; color: #64748b; pointer-events: none;"></i>
+                    <input type="text" placeholder="Search orders, products, or customers..." 
+                        style="width: 100%; padding: 0.7rem 1rem 0.7rem 2.8rem; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 0.9rem; background: #f8fafc; transition: all 0.2s; outline: none;"
+                        onfocus="this.style.background='white'; this.style.borderColor='#3b82f6'; this.style.boxShadow='0 0 0 3px rgba(59, 130, 246, 0.1)'"
+                        onblur="this.style.background='#f8fafc'; this.style.borderColor='#e2e8f0'; this.style.boxShadow='none'">
+                    
+                    <!-- AI Assistant Button -->
+                    <button onclick="openAdminAiChat()" title="Ask AI Assistant"
+                        style="position: absolute; right: 0.5rem; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(79, 70, 233, 0.2);"
+                        onmouseover="this.style.transform='translateY(-50%) scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(79, 70, 233, 0.3)'"
+                        onmouseout="this.style.transform='translateY(-50%) scale(1)'; this.style.boxShadow='0 2px 4px rgba(79, 70, 233, 0.2)'">
+                        <i data-lucide="sparkles" style="width: 1rem; height: 1rem;"></i>
+                        AI Assistant
+                    </button>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1rem; margin-left: auto;">
+                    <!-- Notification Bell -->
+                    <div class="notification-bell-container" style="position: relative;">
+                        <div class="notification-bell" onclick="toggleNotificationPanel()"
+                            style="width: 2.8rem; height: 2.8rem; border-radius: 50%; background: #f1f5f9; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; position: relative;"
+                            onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                            <i data-lucide="bell"
+                                style="width: 1.4rem; height: 1.4rem; color: #64748b; pointer-events: none;"></i>
+                            <span id="notificationBellBadge" class="notification-bell-badge"
+                                style="display: none; position: absolute; top: 0px; right: 0px; background: #ef4444; color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; min-width: 18px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2); pointer-events: none; z-index: 1;"></span>
+                        </div>
 
                     <!-- Notification Dropdown Panel -->
                     <div id="notificationPanel" class="notification-panel"

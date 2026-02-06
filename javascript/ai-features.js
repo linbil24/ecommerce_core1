@@ -169,7 +169,7 @@ async function captureAndSearch() {
                 let product = null;
 
                 if (detectedName.includes('telephone') || detectedName.includes('phone')) {
-                    product = { id: "iphone15", name: "iPhone 15 Pro Max", price: "₱84,990.00", store: "TechZone PH", image: "../image/Electronics/Portable Power Bank 20,000mAh.jpeg" };
+                    product = { id: "iphone15", name: "iPhone 15 Pro Max", price: "₱84,990.00", store: "TechZone PH", image: "../image/electronics/Portable Power Bank 20,000mAh.jpeg" };
                 } else if (detectedName.includes('shoe') || detectedName.includes('sneaker') || detectedName.includes('sandal')) {
                     product = { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/Casual Sneakers.jpeg" };
                 } else if (detectedName.includes('shirt') || detectedName.includes('jersey') || detectedName.includes('clothing')) {
@@ -343,7 +343,7 @@ function openVoiceCommand() {
 
             setTimeout(() => {
                 closeAiModal();
-                window.location.href = '../Shop-now/index.php?store=UrbanWear+PH&search_query=best+sellers';
+                window.location.href = '../Shop/index.php?store=UrbanWear+PH&search_query=best+sellers';
             }, 1500);
         }
         else {
@@ -354,10 +354,10 @@ function openVoiceCommand() {
                 closeAiModal();
                 // Determine path prefix based on current location (simple check)
                 let prefix = '../';
-                if (window.location.pathname.includes('/Shop-now/')) prefix = '';
+                if (window.location.pathname.includes('/Shop/')) prefix = '';
 
                 // Redirect to Shop Search
-                window.location.href = prefix + '../Shop-now/index.php?search_query=' + encodeURIComponent(transcript);
+                window.location.href = prefix + '../Shop/index.php?search_query=' + encodeURIComponent(transcript);
             }, 1500);
         }
     };
@@ -395,3 +395,77 @@ function stopCamera() {
 
 
 
+function openAiChat() {
+    stopCamera();
+    const modal = document.getElementById('ai-modal-overlay');
+    const content = document.getElementById('ai-modal-content-inject');
+
+    modal.style.display = 'flex';
+    content.innerHTML = `
+        <div class="ai-modal-header">
+            <h3 class="ai-modal-title"><i class="fas fa-comments"></i> IMarket Support AI</h3>
+            <span class="ai-modal-close" onclick="closeAiModal()">&times;</span>
+        </div>
+        <div class="ai-modal-body" style="padding: 0; display: flex; flex-direction: column; height: 500px;">
+            <div id="ai-chat-messages" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; background: #f8fafc;">
+                <div class="ai-msg ai-msg-bot" style="align-self: flex-start; background: white; padding: 12px 18px; border-radius: 15px 15px 15px 0; max-width: 80%; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; font-size: 14px;">
+                    Hello! I'm your IMarket AI assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="ai-chat-input-area" style="padding: 15px; background: white; border-top: 1px solid #e2e8f0; display: flex; gap: 10px;">
+                <input type="text" id="ai-chat-input" placeholder="Type your message..." style="flex: 1; border: 1px solid #e2e8f0; border-radius: 20px; padding: 10px 15px; outline: none; font-size: 14px;">
+                <button onclick="sendAiChatMessage()" style="background: #2A3B7E; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    `;
+
+    const input = document.getElementById('ai-chat-input');
+    input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendAiChatMessage();
+    });
+}
+
+async function sendAiChatMessage() {
+    const input = document.getElementById('ai-chat-input');
+    const container = document.getElementById('ai-chat-messages');
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    // User Message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'ai-msg ai-msg-user';
+    userMsg.style = "align-self: flex-end; background: #2A3B7E; color: white; padding: 12px 18px; border-radius: 15px 15px 0 15px; max-width: 80%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-size: 14px;";
+    userMsg.innerText = text;
+    container.appendChild(userMsg);
+
+    input.value = '';
+    container.scrollTop = container.scrollHeight;
+
+    // Bot Typing
+    const typing = document.createElement('div');
+    typing.innerText = 'AI is thinking...';
+    typing.style = "font-size: 12px; color: #94a3b8; font-style: italic; margin-left: 5px;";
+    container.appendChild(typing);
+
+    // AI logic (Simplified for now - can be expanded with real API)
+    setTimeout(() => {
+        container.removeChild(typing);
+        const botMsg = document.createElement('div');
+        botMsg.className = 'ai-msg ai-msg-bot';
+        botMsg.style = "align-self: flex-start; background: white; padding: 12px 18px; border-radius: 15px 15px 15px 0; max-width: 80%; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; font-size: 14px;";
+
+        // Simple responses
+        let response = "I'm not sure about that, but you can check our Support Tickets for help!";
+        if (text.toLowerCase().includes('order')) response = "You can track your orders in your Account page under 'My Orders'.";
+        if (text.toLowerCase().includes('hello') || text.toLowerCase().includes('hi')) response = "Hi there! How can I assist you with your shopping today?";
+        if (text.toLowerCase().includes('refund')) response = "Refunds take 3-5 banking days. Please submit a ticket for specific requests.";
+        if (text.toLowerCase().includes('best')) response = "Our current best sellers include Wireless Earbuds and the Nike Basketball collection!";
+
+        botMsg.innerText = response;
+        container.appendChild(botMsg);
+        container.scrollTop = container.scrollHeight;
+    }, 1000);
+}

@@ -127,10 +127,7 @@ body {
 
 /* Stats */
 .stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 40px;
+    display: none !important;
 }
 
 .stat-box {
@@ -291,5 +288,3 @@ body {
         padding: 0 20px;
     }
 }
-
-

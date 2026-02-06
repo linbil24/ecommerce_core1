@@ -16,7 +16,7 @@ $search_categories = [
 ];
 ?>
 <div class="shopee-search-bar">
-    <form action="<?php echo $path_prefix; ?>Shop-now/index.php" method="GET" class="search-form">
+    <form action="<?php echo $path_prefix; ?>Shop/index.php" method="GET" class="search-form">
         <div class="search-input-wrapper">
             <input type="text" name="search" placeholder="Search for products, brands and more..."
                 class="shopee-search-input" autocomplete="off"
@@ -27,6 +27,9 @@ $search_categories = [
                 </button>
                 <button type="button" class="ai-icon-btn" onclick="openVoiceCommand()" title="Search by Voice">
                     <i class="fas fa-microphone"></i>
+                </button>
+                <button type="button" class="ai-icon-btn" onclick="openAiChat()" title="Chat with AI">
+                    <i class="fas fa-robot"></i>
                 </button>
             </div>
         </div>

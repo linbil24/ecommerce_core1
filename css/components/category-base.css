@@ -37,13 +37,13 @@ body {
     width: 100%;
     position: relative;
     max-width: 100%;
-    height: 500px;
-    /* Enhanced height for better coverage */
+    height: 450px; /* Adjusted for landscape profile */
     border-radius: 0;
     overflow: hidden;
     box-shadow: none;
     background: #fff;
     border: none;
+    margin-top: -20px; /* Pull up to join header if needed */
 }
 
 .fade-slider {

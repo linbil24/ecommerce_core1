@@ -1077,7 +1077,7 @@ function renderUserModule(submodule) {
                                                 </div>
                                             </div>
 
-                                            <form id="profile-edit-form" method="POST" action="index.php" enctype="multipart/form-data" onsubmit="return validateProfileForm(event);">
+                                            <form id="profile-edit-form" method="POST" action="dashboard.php" enctype="multipart/form-data" onsubmit="return validateProfileForm(event);">
                                                 <input type="hidden" name="action" value="update_profile">
                                                 <input type="hidden" name="module" value="user">
                                                 <input type="hidden" name="submodule" value="profile">
@@ -1617,7 +1617,7 @@ function showTicketDetails(ticketId) {
     if (!ticket) return;
 
     const formHTML = `
-                <form id="ticket-form" method="POST" action="index.php">
+                <form id="ticket-form" method="POST" action="dashboard.php">
                     <input type="hidden" name="action" value="update_ticket">
                         <input type="hidden" name="id" value="${ticket.id}">
                             <input type="hidden" name="module" value="support">
@@ -1685,7 +1685,7 @@ function deleteAdmin(id, username) {
         () => {
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'index.php';
+            form.action = 'dashboard.php';
             form.innerHTML = `
                                     <input type="hidden" name="action" value="delete_admin">
                                     <input type="hidden" name="id" value="${id}">
@@ -2004,7 +2004,7 @@ function showProductForm(productId = null) {
     ).join('');
 
     const formHTML = `
-    < form id = "product-form" method = "POST" action = "index.php" >
+    < form id = "product-form" method = "POST" action = "dashboard.php" >
         <input type="hidden" name="action" value="${isEdit ? 'edit_product' : 'add_product'}">
             <input type="hidden" name="module" value="product">
                 <input type="hidden" name="submodule" value="products">
@@ -2094,7 +2094,7 @@ function deleteProduct(id, name) {
         () => {
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'index.php';
+            form.action = 'dashboard.php';
             form.innerHTML = `
                 <input type="hidden" name="action" value="delete_product">
                 <input type="hidden" name="id" value="${id}">
@@ -2116,7 +2116,7 @@ function clearAllProducts() {
         () => {
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'index.php';
+            form.action = 'dashboard.php';
             form.innerHTML = `
                     <input type="hidden" name="action" value="clear_all_products">
                         <input type="hidden" name="module" value="product">
@@ -2134,7 +2134,7 @@ function showCategoryForm(categoryId = null) {
     const isEdit = !!category;
 
     const formHTML = `
-                                <form id="category-form" method="POST" action="index.php">
+                                <form id="category-form" method="POST" action="dashboard.php">
                                     <input type="hidden" name="action" value="${isEdit ? 'edit_category' : 'add_category'}">
                                         <input type="hidden" name="module" value="product">
                                             <input type="hidden" name="submodule" value="categories">
@@ -2188,7 +2188,7 @@ function deleteCategory(id, name) {
         () => {
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'index.php';
+            form.action = 'dashboard.php';
             form.innerHTML = `
                 <input type="hidden" name="action" value="delete_category">
                 <input type="hidden" name="id" value="${id}">
@@ -2238,4 +2238,99 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// --- AI ADMIN ASSISTANT ---
+function openAdminAiChat() {
+    const backdrop = document.getElementById('custom-modal-backdrop');
+    const container = document.getElementById('modal-container');
 
+    container.innerHTML = `
+        <div style="text-align: left; max-width: 600px; width: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                <div>
+                    <h3 style="color: #1e293b; margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 800;">
+                        <i data-lucide="sparkles" style="color: #7c3aed;"></i> AI Admin Assistant
+                    </h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin: 0;">How can I help you manage the marketplace today?</p>
+                </div>
+                <button onclick="closeCustomModal()" style="background: #f1f5f9; border: none; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #64748b;">
+                    <i data-lucide="x" style="width: 1.2rem; height: 1.2rem;"></i>
+                </button>
+            </div>
+            
+            <div id="ai-chat-messages" style="height: 350px; overflow-y: auto; background: #f8fafc; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth;">
+                <div style="background: white; padding: 1rem; border-radius: 1rem; border-bottom-left-radius: 0.25rem; align-self: flex-start; max-width: 85%; font-size: 0.9375rem; border: 1px solid #f1f5f9; box-shadow: 0 2px 4px rgba(0,0,0,0.02); line-height: 1.5;">
+                    Hello, <strong>${adminConfig.username}</strong>! I'm your AI operations assistant. I have real-time access to your marketplace data. <br><br>You can ask me things like:<br>
+                    • "What's our revenue this month?"<br>
+                    • "Which products are low on stock?"<br>
+                    • "Show me recent orders from Metro Manila"
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 0.75rem; background: white; padding: 0.5rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <input type="text" id="ai-chat-input" placeholder="Ask anything about your store..." 
+                    style="flex: 1; padding: 0.75rem 1rem; border: none; outline: none; font-size: 0.95rem;"
+                    onkeypress="if(event.key === 'Enter') sendAdminAiMessage()">
+                <button onclick="sendAdminAiMessage()" style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; border: none; width: 42px; height: 42px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;"
+                    onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <i data-lucide="send" style="width: 1.2rem; height: 1.2rem;"></i>
+                </button>
+            </div>
+        </div>
+    `;
+
+    backdrop.classList.remove('hidden');
+    lucide.createIcons();
+    setTimeout(() => document.getElementById('ai-chat-input').focus(), 100);
+}
+
+function sendAdminAiMessage() {
+    const input = document.getElementById('ai-chat-input');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    const chatContainer = document.getElementById('ai-chat-messages');
+
+    // Add user message
+    const userDiv = document.createElement('div');
+    userDiv.style.cssText = "background: #4f46e5; color: white; padding: 0.875rem 1rem; border-radius: 1rem; border-bottom-right-radius: 0.25rem; align-self: flex-end; max-width: 85%; font-size: 0.9375rem; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); margin-top: 8px;";
+    userDiv.textContent = msg;
+    chatContainer.appendChild(userDiv);
+    input.value = '';
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // AI Response Logic (Mock Intel)
+    setTimeout(() => {
+        const responseDiv = document.createElement('div');
+        responseDiv.style.cssText = "background: white; padding: 1rem; border-radius: 1rem; border-bottom-left-radius: 0.25rem; align-self: flex-start; max-width: 85%; font-size: 0.9375rem; border: 1px solid #f1f5f9; box-shadow: 0 4px 15px rgba(0,0,0,0.03); line-height: 1.5; margin-top: 8px; border-left: 4px solid #7c3aed;";
+
+        let responseText = "I'm analyzing that for you...";
+        const query = msg.toLowerCase();
+
+        if (query.includes('revenue') || query.includes('sales')) {
+            responseText = `Based on your Intelligence Hub data, your MTD Revenue is <strong>${formatCurrency(kpiData.totalRevenue || 0)}</strong>. This is performing within expected growth parameters.`;
+        } else if (query.includes('stock') || query.includes('inventory')) {
+            const lowStock = productsData.filter(p => parseInt(p.stock) < 10);
+            if (lowStock.length > 0) {
+                responseText = `You currently have <strong>${lowStock.length} items</strong> with critical stock levels. <button onclick="closeCustomModal(); showSubModule('product', 'products')" style="color: #4f46e5; background: none; border: none; padding: 0; font-weight: 700; cursor: pointer; text-decoration: underline;">Open Inventory</button> to restock them.`;
+            } else {
+                responseText = "Your inventory levels are looking healthy across all categories. No critical stock alerts at the moment.";
+            }
+        } else if (query.includes('order')) {
+            responseText = `You have <strong>${ordersData.length} total orders</strong> in the system. <strong>${ordersData.filter(o => o.status === 'Pending').length}</strong> are still pending.`;
+        } else if (query.includes('hello') || query.includes('hi')) {
+            responseText = `Hello! I'm ready to assist you with marketplace operations. What can I look up for you?`;
+        } else {
+            responseText = "I'm not sure I understand that yet. You can ask about sales, stock, or orders, and I'll pull the data for you!";
+        }
+
+        responseDiv.innerHTML = responseText;
+        chatContainer.appendChild(responseDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        lucide.createIcons();
+    }, 800);
+}
+
+function closeCustomModal() {
+    const backdrop = document.getElementById('custom-modal-backdrop');
+    if (backdrop) backdrop.classList.add('hidden');
+}

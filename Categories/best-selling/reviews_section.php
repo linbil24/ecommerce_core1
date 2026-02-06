@@ -157,7 +157,7 @@
 
         if ($result === false) {
             echo "Error: " . mysqli_error($conn);
-        } elseif (mysqli_num_rows($result) > 0) {
+        } elseif ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $display_name = !empty($row['user_name']) ? $row['user_name'] : "User";
                 $user_initial = strtoupper(substr($display_name, 0, 1));

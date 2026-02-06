@@ -26,19 +26,19 @@
                 <div class="fade-slider">
                     <!-- Slides -->
                     <div class="fade-slide active"
-                        style="background-image: url('../../image/Electronics/Wireless%20Bluetooth%20Earbuds.jpeg');">
+                        style="background-image: url('../../image/electronics/Wireless%20Bluetooth%20Earbuds.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/Smart%20Watch%20(Fitness%20Tracker).jpeg');">
+                        style="background-image: url('../../image/electronics/Smart%20Watch%20(Fitness%20Tracker).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/Portable%20Power%20Bank%2020%2C000mAh.jpeg');">
+                        style="background-image: url('../../image/electronics/Portable%20Power%20Bank%2020%2C000mAh.jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/Bluetooth%20Speaker%20(Waterproof).jpeg');">
+                        style="background-image: url('../../image/electronics/Bluetooth%20Speaker%20(Waterproof).jpeg');">
                     </div>
                     <div class="fade-slide"
-                        style="background-image: url('../../image/Electronics/USB-C%20Fast%20Charging%20Cable.jpeg');">
+                        style="background-image: url('../../image/electronics/USB-C%20Fast%20Charging%20Cable.jpeg');">
                     </div>
 
                     <!-- Indicators (White Lines) -->

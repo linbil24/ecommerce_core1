@@ -16,6 +16,12 @@ $view = isset($_GET['view']) ? $_GET['view'] : 'profile'; // profile, orders, tr
 // SELF-HEALING DB: Ensure 'users' table has profile columns
 // ---------------------------------------------------------
 if (isset($conn)) {
+    // Check for 'profile_pic' column
+    $pic_check = mysqli_query($conn, "SHOW COLUMNS FROM users LIKE 'profile_pic'");
+    if (mysqli_num_rows($pic_check) == 0) {
+        mysqli_query($conn, "ALTER TABLE users ADD COLUMN profile_pic VARCHAR(255) DEFAULT NULL");
+    }
+
     // Check for 'address' column as a proxy for the update
     $cols_check = mysqli_query($conn, "SHOW COLUMNS FROM users LIKE 'address'");
     if (mysqli_num_rows($cols_check) == 0) {
@@ -116,6 +122,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $update_sql = "UPDATE users SET fullname='$fullname', phone='$phone', address='$address', city='$city', zip='$zip', gender='$gender' $bd_sql_part WHERE id='$user_id'";
 
     if (mysqli_query($conn, $update_sql)) {
+        // Handle Profile Picture Upload
+        if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
+            $target_dir = "../uploads/profile/";
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+            $file_ext = strtolower(pathinfo($_FILES['profile_pic']['name'], PATHINFO_EXTENSION));
+            $new_filename = "user_" . $user_id . "_" . time() . "." . $file_ext;
+            $target_file = $target_dir . $new_filename;
+
+            if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $target_file)) {
+                mysqli_query($conn, "UPDATE users SET profile_pic='$new_filename' WHERE id='$user_id'");
+            }
+        }
         $msg = "<div class='alert-success'><i class='fas fa-check-circle'></i> Profile updated successfully!</div>";
     } else {
         $msg = "<div class='alert-error'>Error updating profile: " . mysqli_error($conn) . "</div>";
@@ -241,7 +261,9 @@ if ($view == 'orders' || $view == 'tracking') {
         <!-- SIDEBAR -->
         <aside class="account-sidebar">
             <div class="sidebar-profile">
-                <div class="sidebar-avatar"></div>
+                <div class="sidebar-avatar" style="background-image: url('<?php echo !empty($user['profile_pic']) ? '../uploads/profile/'.$user['profile_pic'] : '../image/logo.png'; ?>'); background-size: cover; background-position: center;">
+                    <?php if(empty($user['profile_pic'])): ?><i class="far fa-user"></i><?php endif; ?>
+                </div>
                 <div>
                     <div class="sidebar-username">
                         <?php echo htmlspecialchars(!empty($user['username']) ? $user['username'] : (!empty($user['fullname']) ? $user['fullname'] : $user['email'])); ?>
@@ -371,19 +393,36 @@ if ($view == 'orders' || $view == 'tracking') {
 
                         </div>
 
-                        <!-- Avatar Section (Visual Only for now) -->
+                        <!-- Avatar Section -->
                         <div
                             style="width: 280px; border-left: 1px solid #efefef; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 40px;">
-                            <div
-                                style="width: 100px; height: 100px; background: #eee; border-radius: 50%; margin-bottom: 20px; display:flex; align-items:center; justify-content:center; color:#ccc; font-size:40px;">
-                                <i class="fas fa-user"></i>
+                            <div id="avatarPreview"
+                                style="width: 100px; height: 100px; background: #eee; border-radius: 50%; margin-bottom: 20px; display:flex; align-items:center; justify-content:center; color:#ccc; font-size:40px; overflow:hidden; border:1px solid #ddd; background-image: url('<?php echo !empty($user['profile_pic']) ? '../uploads/profile/'.$user['profile_pic'] : ''; ?>'); background-size: cover; background-position: center;">
+                                <?php if(empty($user['profile_pic'])): ?>
+                                    <i class="fas fa-user"></i>
+                                <?php endif; ?>
                             </div>
-                            <button type="button" class="btn-outline">Select Image</button>
+                            <input type="file" name="profile_pic" id="profile_pic_input" style="display:none;" onchange="previewImage(this)">
+                            <button type="button" class="btn-outline" onclick="document.getElementById('profile_pic_input').click()">Select Image</button>
                             <div style="margin-top: 15px; font-size: 12px; color: #999; text-align: center;">
                                 File size: maximum 1 MB<br>
                                 File extension: .JPEG, .PNG
                             </div>
                         </div>
+
+                        <script>
+                        function previewImage(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    const preview = document.getElementById('avatarPreview');
+                                    preview.style.backgroundImage = 'url(' + e.target.result + ')';
+                                    preview.innerHTML = '';
+                                }
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                        </script>
                     </div>
                 </form>
 

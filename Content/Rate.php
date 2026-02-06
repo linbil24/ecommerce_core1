@@ -45,8 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    // AI Sentiment Analysis
+    include("../Categories/nlp_processor.php");
+    $ai_res = analyzeSentiment($comment);
+    $sentiment = $ai_res['sentiment'];
+    $confidence = $ai_res['confidence'];
+
     // Insert
-    $sql = "INSERT INTO reviews (user_id, product_id, order_id, rating, comment, media_url, created_at) VALUES ('$user_id', '$product_id_post', '$order_id_post', '$rating', '$comment', '$media_path', NOW())";
+    $sql = "INSERT INTO reviews (user_id, product_id, order_id, rating, comment, media_url, sentiment, confidence, created_at) VALUES ('$user_id', '$product_id_post', '$order_id_post', '$rating', '$comment', '$media_path', '$sentiment', '$confidence', NOW())";
 
     if (mysqli_query($conn, $sql)) {
         $success = true;

@@ -71,7 +71,7 @@
 
 <div class="result-card">
     <div class="rc-image">
-        <img src="<?php echo isset($image_path) ? $image_path : '../image/Electronics/Portable Power Bank 20,000mAh.jpeg'; ?>"
+        <img src="<?php echo isset($image_path) ? $image_path : '../image/electronics/Portable Power Bank 20,000mAh.jpeg'; ?>"
             alt="Product">
     </div>
     <div class="rc-details">

@@ -151,13 +151,13 @@ if ($result && mysqli_num_rows($result) > 0) {
                         $possible_paths = [
                             '../image/Best-seller/' . $clean_img_name, // Corrected Best-seller path
                             '../image/New-arrivals/' . $clean_img_name, // New Arrivals
-                            '../image/Electronics/' . $clean_img_name,
+                            '../image/electronics/' . $clean_img_name,
                             '../image/Fashion & Apparel/' . $clean_img_name,
                             '../image/Beauty & Health/' . $clean_img_name,
                             '../image/Home & Living/' . $clean_img_name,
                             '../image/Sports & Outdoor/' . $clean_img_name,
                             '../image/Toys & Games/' . $clean_img_name,
-                            '../image/Groceries/' . $clean_img_name,
+                            '../image/groceries/' . $clean_img_name,
                             // Specific Shop Directories in image/Shop
                             '../image/Shop/CozyLiving Store/' . $clean_img_name,
                             '../image/Shop/DailyFits Co/' . $clean_img_name,
@@ -347,8 +347,14 @@ if ($result && mysqli_num_rows($result) > 0) {
 
         function proceedToCheckout() {
             const selected = [];
+            let total = 0;
             document.querySelectorAll('.item-checkbox:checked').forEach(cb => {
                 selected.push(cb.value);
+                const id = cb.value;
+                const qtyInput = document.getElementById('qty-' + id);
+                const price = parseFloat(qtyInput.getAttribute('data-price'));
+                const qty = parseInt(qtyInput.value);
+                total += (price * qty);
             });
 
             if (selected.length === 0) {
@@ -357,8 +363,8 @@ if ($result && mysqli_num_rows($result) > 0) {
             }
 
             const ids = selected.join(',');
-            // Redirect to the UNIFIED PAYMENT PAGE
-            window.location.href = 'Payment.php?from_cart=1&selected_ids=' + ids;
+            // Redirect to the UNIFIED PAYMENT PAGE with total amount
+            window.location.href = 'Payment.php?from_cart=1&selected_ids=' + ids + '&amount=' + total;
         }
     </script>
 

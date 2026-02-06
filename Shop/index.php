@@ -408,23 +408,28 @@
                     <!-- Main Content (Hero + Products) -->
                     <div class="store-main" style="flex: 1; min-width: 0;">
 
-                        <!-- Existing Hero Split (Seller Profile + Banner) -->
+                        <!-- Full Width Hero/Banner -->
                         <div class="best-selling-container"
-                            style="display: block; width: 100%; position: relative; padding: 0 !important; margin: 0 !important; border-radius: 0; box-shadow: none; border: none;">
+                            style="display: block; width: 100%; position: relative; padding: 0 !important; margin: 0 !important; border-radius: 0; box-shadow: none; border: none; height: 350px;">
 
-                            <!-- Right: Banner/Slider -->
+                            <!-- Banner/Slider (Now Full Width) -->
                             <div class="slider-section"
-                                style="flex: 1.2; position: relative; overflow: hidden; background: #f8f8f8; margin: 0; min-height: 100%;">
+                                style="width: 100%; height: 100%; position: relative; overflow: hidden; background: #f8f8f8; margin: 0;">
 
                                 <!-- Dynamic Dark Background with Shop Color Tint -->
                                 <div
-                                    style="position: absolute; inset: 0; background: linear-gradient(to right, #1a1a1a 40%, #<?php echo $currentShop['bg']; ?> 100%); opacity: 0.9;">
+                                    style="position: absolute; inset: 0; background: linear-gradient(to right, #<?php echo $currentShop['bg']; ?> 0%, #1a1a1a 100%); opacity: 0.8;">
                                 </div>
-                                <div style="position: absolute; inset: 0; background: #1a1a1a; opacity: 0.7;"></div>
+                                <div style="position: absolute; inset: 0; background: #1a1a1a; opacity: 0.4;"></div>
 
                                 <!-- Geometric Pattern Overlay -->
                                 <div
                                     style="position: absolute; inset: 0; background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px; opacity: 0.03;">
+                                </div>
+                                
+                                <!-- Store Name as Subtle Watermark -->
+                                <div style="position: absolute; bottom: 30px; left: 40px; color: rgba(255,255,255,0.2); font-size: 4rem; font-weight: 900; pointer-events: none; text-transform: uppercase; letter-spacing: -2px;">
+                                    <?php echo htmlspecialchars($currentShop['name']); ?>
                                 </div>
 
                             </div>
@@ -983,47 +988,108 @@
                 $currentShop = $shops[0];
                 $selectedStore = $shops[0]['name'];
                 ?>
-                <!-- LANDING VIEW (Hero + Featured) -->
-                <div class="shop-hero">
-                    <div class="shop-hero-overlay"></div>
-                    <div class="shop-hero-content">
-                        <h1 class="shop-hero-title">SHOP ALL PRODUCTS</h1>
-                        <a href="?store=UrbanWear+PH" class="btn-hero-shop style-user">
-                            <i class="fas fa-shopping-bag"></i> Shop Now
-                        </a>
+                <!-- LANDING VIEW (Refined Hero) -->
+                <div class="shop-hero" style="height: 350px; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); border-radius: 12px; position: relative; overflow: hidden; margin-top: 10px; display: flex; align-items: center; padding: 0 50px;">
+                    <div style="flex: 1; color: white; z-index: 2;">
+                        <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 15px; line-height: 1.1;">Welcome to <br>IMarket Mall</h1>
+                        <p style="font-size: 1.1rem; opacity: 0.9; max-width: 450px; margin-bottom: 25px;">Discover the best deals from verified official stores across the Philippines.</p>
+                        <a href="?search=" class="btn-seller-primary" style="padding: 12px 35px; font-size: 1rem; text-decoration: none;">Browse All Products</a>
+                    </div>
+                    <div style="flex: 1; display: flex; justify-content: flex-end; z-index: 2;">
+                        <img src="../image/Dashboard/brand new bag.jpeg" style="height: 300px; width: 300px; object-fit: cover; border-radius: 20px; box-shadow: 20px 20px 0px rgba(255,255,255,0.1);">
                     </div>
                 </div>
 
-                <div class="featured-section" style="margin-top: -3px; margin-bottom: 50px;">
-                    <div class="featured-row" style="margin-top: 0; border-radius: 3px; overflow: hidden;">
+                <div class="featured-section" style="margin-top: 40px; margin-bottom: 50px;">
+                    <div class="section-header" style="margin-bottom: 25px;">
+                        <h2 style="font-size: 1.5rem; color: #1e293b;"><i class="fas fa-gem" style="color: #f59e0b;"></i> Premium Store Collections</h2>
+                    </div>
+                    <div class="featured-row" style="margin-top: 0; border-radius: 12px; overflow: hidden; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                         <!-- Item 1 -->
-                        <div class="featured-card">
-                            <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" alt="H&M Hoodie"
-                                    style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 0; margin-bottom: 0;">
+                        <div class="featured-card" style="height: 350px; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                            <a href="?store=UrbanWear+PH" style="display:block; width:100%; height: 100%;">
+                                <img src="../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" alt="UrbanWear"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white;">
+                                    <h3 style="margin: 0;">UrbanWear PH</h3>
+                                    <p style="margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8;">Streetwear & Lifestyle</p>
+                                </div>
                             </a>
                         </div>
 
                         <!-- Item 2 -->
-                        <div class="featured-card">
-                            <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../image/Shop/UrbanWear PH/Pilipinas Hoodie.avif" alt="Pilipinas Hoodie"
-                                    style="width: 100%; height: 350px; object-fit: cover; object-position: center; border-radius: 0; margin-bottom: 0;">
+                        <div class="featured-card" style="height: 350px; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                            <a href="?store=TechZone+PH" style="display:block; width:100%; height: 100%;">
+                                <img src="../image/electronics/Apple iPad Pro (M2 Chip).jpeg" alt="TechZone"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white;">
+                                    <h3 style="margin: 0;">TechZone PH</h3>
+                                    <p style="margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8;">Gadgets & Innovation</p>
+                                </div>
                             </a>
                         </div>
 
                         <!-- Item 3 -->
-                        <div class="featured-card">
-                            <a href="?store=UrbanWear+PH" style="display:block; width:100%;">
-                                <img src="../image/Shop/UrbanWear PH/Team SKOOP Denim Jacket.jpeg" alt="Team SKOOP"
-                                    style="width: 100%; height: 350px; object-fit: cover; object-position: top; border-radius: 0; margin-bottom: 0;">
+                        <div class="featured-card" style="height: 350px; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+                            <a href="?store=GlowUp+Beauty" style="display:block; width:100%; height: 100%;">
+                                <img src="../image/beauty-health/Charcoal Face Mask.jpeg" alt="GlowUp"
+                                    style="width: 100%; height: 100%; object-fit: cover;">
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); color: white;">
+                                    <h3 style="margin: 0;">GlowUp Beauty</h3>
+                                    <p style="margin: 5px 0 0; font-size: 0.9rem; opacity: 0.8;">Skin Care & Cosmetics</p>
+                                </div>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Featured / Shop Grid (Keeping original grid below mostly for functionality, but stylized) -->
-                <!-- Featured / Shop Grid removed as per request -->
+                <!-- Featured / Shop Grid (Stylized Mall Landing) -->
+                <div class="content-card" style="margin-top: 30px;">
+                    <div class="section-header" style="text-align: center; margin-bottom: 30px;">
+                        <h2 style="font-size: 2rem; color: #1e293b; margin-bottom: 10px;">Mall Highlights</h2>
+                        <p style="color: #64748b;">Discover our most trusted official stores</p>
+                    </div>
+
+                    <div class="product-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                        <?php 
+                        // Fetch a few products from top shops for the landing page
+                        $landing_products = [];
+                        $shops_to_sample = ['UrbanWear PH', 'TechZone PH', 'TrendyBags PH', 'GlowUp Beauty'];
+                        foreach($shops_to_sample as $sname) {
+                            $sprod = getMockProducts($sname);
+                            if(!empty($sprod)) {
+                                $p = $sprod[0];
+                                $p['shop_name'] = $sname;
+                                $landing_products[] = $p;
+                            }
+                        }
+                        
+                        foreach ($landing_products as $ap):
+                            $soldDisp = ($ap['sold'] > 1000) ? number_format($ap['sold'] / 1000, 1) . 'k' : $ap['sold'];
+                        ?>
+                            <div class="product-card" 
+                                data-name="<?php echo htmlspecialchars($ap['name']); ?>"
+                                data-price="<?php echo $ap['price']; ?>" 
+                                data-raw-price="<?php echo $ap['raw_price']; ?>"
+                                data-original-price="<?php echo $ap['original_price'] ?? ''; ?>"
+                                data-discount="<?php echo $ap['discount'] ?? ''; ?>"
+                                data-image="<?php echo $ap['image']; ?>" 
+                                data-rating="<?php echo $ap['rating'] ?? 4.5; ?>" 
+                                data-sold="<?php echo $soldDisp; ?>"
+                                data-store="<?php echo htmlspecialchars($ap['shop_name']); ?>" 
+                                onclick="openProductModal(this)">
+                                <div class="result-img-wrapper" style="aspect-ratio: 1; overflow: hidden;">
+                                    <img src="<?php echo $ap['image']; ?>" class="result-img" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <div class="result-info" style="padding: 15px;">
+                                    <div class="result-title" style="font-weight: 500; font-size: 14px; margin-bottom: 8px; height: 2.8em; overflow: hidden;"><?php echo htmlspecialchars($ap['name']); ?></div>
+                                    <div class="result-price" style="color: #2A3B7E; font-weight: 700; font-size: 16px;"><?php echo $ap['price']; ?></div>
+                                    <div style="font-size: 11px; color: #999; margin-top: 5px;"><i class="fas fa-store"></i> <?php echo htmlspecialchars($ap['shop_name']); ?></div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
                 <!-- You can add featured categories or other content here later -->
                 <?php
             }

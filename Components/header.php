@@ -75,7 +75,7 @@ if (isset($_SESSION['user_id'])) {
                 <a href="<?php echo $path_prefix; ?>Content/Dashboard.php" class="nav-item active"><i
                         class="fas fa-home"></i>
                     Home</a>
-                <a href="<?php echo $path_prefix; ?>Shop-now/index.php" class="nav-item"><i class="fas fa-store"></i> Mall</a>
+                <a href="<?php echo $path_prefix; ?>Shop/index.php" class="nav-item"><i class="fas fa-store"></i> Mall</a>
                 <a href="<?php echo $path_prefix; ?>Categories/best-selling/index.php" class="nav-item"><i class="fas fa-percent"></i> Flash Deals</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="dropdown-toggle"><i class="fas fa-list"></i> Categories <i

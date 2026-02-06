@@ -8,10 +8,10 @@ $products_data = [
     //Product 1
     301 => [
         'name' => 'Wireless Bluetooth Earbuds',
-        'price_range' => '₱149 - ₱170',
-        'original_price' => '₱198',
-        'discount' => '35% OFF',
-        'image' => '../../image/Electronics/Wireless Bluetooth Earbuds.jpeg',
+        'price_range' => '₱1,250',
+        'original_price' => '₱1,850',
+        'discount' => '32% OFF',
+        'image' => '../../image/electronics/Wireless Bluetooth Earbuds.jpeg',
         'stock' => 1209,
         'colors' => ['Black', 'Grey', 'Blue'],
         'sizes' => ['S', 'M', 'L']
@@ -20,10 +20,10 @@ $products_data = [
     //Product 2
     302 => [
         'name' => 'Smart Watch (Fitness Tracker)',
-        'price_range' => '₱340',
-        'original_price' => '₱500',
+        'price_range' => '₱2,450',
+        'original_price' => '₱3,600',
         'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Smart Watch (Fitness Tracker).jpeg',
+        'image' => '../../image/electronics/Smart Watch (Fitness Tracker).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -32,10 +32,10 @@ $products_data = [
     //Product 3
     303 => [
         'name' => 'Portable Power Bank 20,000mAh',
-        'price_range' => '₱340',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Portable Power Bank 20,000mAh.jpeg',
+        'price_range' => '₱1,150',
+        'original_price' => '₱1,650',
+        'discount' => '30% OFF',
+        'image' => '../../image/electronics/Portable Power Bank 20,000mAh.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -45,9 +45,9 @@ $products_data = [
     304 => [
         'name' => 'Bluetooth Speaker (Waterproof)',
         'price_range' => '₱1,500',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Bluetooth Speaker (Waterproof).jpeg',
+        'original_price' => '₱2,100',
+        'discount' => '28% OFF',
+        'image' => '../../image/electronics/Bluetooth Speaker (Waterproof).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -56,10 +56,10 @@ $products_data = [
     //Product 5
     305 => [
         'name' => 'USB-C Fast Charging Cable',
-        'price_range' => '₱2,500',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/USB-C Fast Charging Cable.jpeg',
+        'price_range' => '₱250',
+        'original_price' => '₱450',
+        'discount' => '44% OFF',
+        'image' => '../../image/electronics/USB-C Fast Charging Cable.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -67,61 +67,61 @@ $products_data = [
 
     //Product 6
     306 => [
-        'name' => 'Smart Watch (Fitness Tracker)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Smart Watch (Fitness Tracker).jpeg',
+        'name' => 'High-End Gaming Mouse',
+        'price_range' => '₱3,200',
+        'original_price' => '₱4,500',
+        'discount' => '29% OFF',
+        'image' => '../../image/electronics/Smart Watch (Fitness Tracker).jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['Black', 'RGB'],
         'sizes' => ['Standard']
     ],
 
     //Product 7
     307 => [
         'name' => 'Noise Cancelling Headphones',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Noise Cancelling Headphones.jpeg',
+        'price_range' => '₱8,990',
+        'original_price' => '₱12,500',
+        'discount' => '28% OFF',
+        'image' => '../../image/electronics/Noise Cancelling Headphones.jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['Black', 'Silver'],
         'sizes' => ['Standard']
     ],
 
     //Product 8
     308 => [
         'name' => 'Mini WiFi Router / Pocket WiFi',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Mini WiFi Router Pocket WiFi.jpeg',
+        'price_range' => '₱1,850',
+        'original_price' => '₱2,600',
+        'discount' => '29% OFF',
+        'image' => '../../image/electronics/Mini WiFi Router Pocket WiFi.jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['White', 'Black'],
         'sizes' => ['Standard']
     ],
 
     //Product 9
     309 => [
         'name' => 'Smart LED Light Bulb (WiFi Controlled)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Smart LED Light Bulb (WiFi Controlled).jpeg',
+        'price_range' => '₱450',
+        'original_price' => '₱750',
+        'discount' => '40% OFF',
+        'image' => '../../image/electronics/Smart LED Light Bulb (WiFi Controlled).jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['RGB'],
         'sizes' => ['Standard']
     ],
 
     //Product 10
     310 => [
         'name' => 'Laptop Cooling Pad (RGB Fan)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Laptop Cooling Pad RGB Fan.jpeg',
+        'price_range' => '₱1,200',
+        'original_price' => '₱1,800',
+        'discount' => '33% OFF',
+        'image' => '../../image/electronics/Laptop Cooling Pad RGB Fan.jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['Black'],
         'sizes' => ['Standard']
     ],
 
@@ -129,81 +129,62 @@ $products_data = [
     //Product 11
     311 => [
         'name' => '1080p HD Web Camera',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/1080p HD Web Camera.jpeg',
+        'price_range' => '₱1,450',
+        'original_price' => '₱2,200',
+        'discount' => '34% OFF',
+        'image' => '../../image/electronics/1080p HD Web Camera.jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['Black'],
         'sizes' => ['Standard']
     ],
 
     //Product 12
     312 => [
         'name' => 'Smart Plug (App Controlled)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Smart Plug (App Controlled).jpeg',
+        'price_range' => '₱550',
+        'original_price' => '₱850',
+        'discount' => '35% OFF',
+        'image' => '../../image/electronics/Smart Plug (App Controlled).jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['White'],
         'sizes' => ['Standard']
     ],
 
     //Product 13
     313 => [
         'name' => 'Portable SSD 500GB',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Portable SSD 500GB.jpeg',
+        'price_range' => '₱4,500',
+        'original_price' => '₱6,200',
+        'discount' => '27% OFF',
+        'image' => '../../image/electronics/Portable SSD 500GB.jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['Black', 'Blue'],
         'sizes' => ['Standard']
     ],
 
     //Product 14
     314 => [
         'name' => 'Digital Alarm Clock with LED Display',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Digital Alarm Clock with LED Display.jpeg',
+        'price_range' => '₱380',
+        'original_price' => '₱600',
+        'discount' => '37% OFF',
+        'image' => '../../image/electronics/Digital Alarm Clock with LED Display.jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['White', 'Black', 'Wood'],
         'sizes' => ['Standard']
     ],
 
     315 => [
         'name' => 'Car Phone Holder (Magnetic)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Electronics/Car Phone Holder (Magnetic).jpeg',
+        'price_range' => '₱250',
+        'original_price' => '₱450',
+        'discount' => '44% OFF',
+        'image' => '../../image/electronics/Car Phone Holder (Magnetic).jpeg',
         'stock' => 500,
-        'colors' => ['Black', 'Pink', 'White'],
+        'colors' => ['Black', 'Silver'],
         'sizes' => ['Standard']
     ],
-
-    // Fix pricing data for consistency
-    foreach ($products_data as $id => &$p) {
-        if ($id == 301) continue; // Skip already correct one
-        // Default logic: original price should be higher than current price
-        if (strpos($p['price_range'], '10,200') !== false) {
-            $p['original_price'] = '₱15,000';
-            $p['price_range'] = '₱10,200';
-        } elseif ($id == 304) {
-            $p['original_price'] = '₱2,200';
-            $p['price_range'] = '₱1,500';
-        } elseif ($id == 305) {
-            $p['original_price'] = '₱3,800';
-            $p['price_range'] = '₱2,500';
-        } else {
-            $p['original_price'] = '₱500';
-            $p['price_range'] = '₱340';
-        }
-    }
-    unset($p);
+];
 
     // Get ID correctly
     $p_id = isset($product_id) ? $product_id : 301;

@@ -170,9 +170,10 @@ $products_data = [
 
     // Fix pricing data for consistency
     foreach ($products_data as $id => &$p) {
+        if (!$p) continue;
         if ($id == 101) continue; // Skip already correct one
         // Default logic: original price should be higher than current price
-        if (strpos($p['price_range'], '10,200') !== false) {
+        if (isset($p['price_range']) && strpos($p['price_range'], '10,200') !== false) {
             $p['original_price'] = '₱15,000';
             $p['price_range'] = '₱10,200';
         } elseif ($id == 104) {

@@ -4,7 +4,7 @@ $products = [
     [
         'name' => 'Wireless Bluetooth Earbuds',
         'price' => '₱100.00',
-        'image' => '../../image/Electronics/Wireless Bluetooth Earbuds.jpeg',
+        'image' => '../../image/electronics/Wireless Bluetooth Earbuds.jpeg',
         'link' => 'view-product.php?id=301',
         'discount' => '-20%'
     ],
@@ -13,7 +13,7 @@ $products = [
     [
         'name' => 'Smart Watch (Fitness Tracker)',
         'price' => '₱340.00',
-        'image' => '../../image/Electronics/Smart Watch (Fitness Tracker).jpeg',
+        'image' => '../../image/electronics/Smart Watch (Fitness Tracker).jpeg',
         'link' => 'view-product.php?id=302',
         'discount' => '-20%'
     ],
@@ -22,7 +22,7 @@ $products = [
     [
         'name' => 'Portable Power Bank 20,000mAh',
         'price' => '₱50.00',
-        'image' => '../../image/Electronics/Portable Power Bank 20,000mAh.jpeg',
+        'image' => '../../image/electronics/Portable Power Bank 20,000mAh.jpeg',
         'link' => 'view-product.php?id=303',
         'discount' => '-20%'
     ],
@@ -31,7 +31,7 @@ $products = [
     [
         'name' => 'Bluetooth Speaker (Waterproof)',
         'price' => '₱1,500.00',
-        'image' => '../../image/Electronics/Bluetooth Speaker (Waterproof).jpeg',
+        'image' => '../../image/electronics/Bluetooth Speaker (Waterproof).jpeg',
         'link' => 'view-product.php?id=304',
         'discount' => '-20%'
     ],
@@ -40,7 +40,7 @@ $products = [
     [
         'name' => 'USB-C Fast Charging Cable',
         'price' => '₱2,500.00',
-        'image' => '../../image/Electronics/USB-C Fast Charging Cable.jpeg',
+        'image' => '../../image/electronics/USB-C Fast Charging Cable.jpeg',
         'link' => 'view-product.php?id=305',
         'discount' => '-20%'
     ],
@@ -49,7 +49,7 @@ $products = [
     [
         'name' => 'Wireless Charging Pad',
         'price' => '₱10,200.00',
-        'image' => '../../image/Electronics/Wireless Charging Pad.jpeg',
+        'image' => '../../image/electronics/Wireless Charging Pad.jpeg',
         'link' => 'view-product.php?id=306',
         'discount' => '-20%'
     ],
@@ -59,7 +59,7 @@ $products = [
     [
         'name' => 'Noise Cancelling Headphones',
         'price' => '₱15,000.00',
-        'image' => '../../image/Electronics/Noise Cancelling Headphones.jpeg',
+        'image' => '../../image/electronics/Noise Cancelling Headphones.jpeg',
         'link' => 'view-product.php?id=307',
         'discount' => '-20%'
     ],
@@ -68,7 +68,7 @@ $products = [
     [
         'name' => 'Mini WiFi Router / Pocket WiFi',
         'price' => '₱15,000.00',
-        'image' => '../../image/Electronics/Mini WiFi Router Pocket WiFi.jpeg',
+        'image' => '../../image/electronics/Mini WiFi Router Pocket WiFi.jpeg',
         'link' => 'view-product.php?id=308',
         'discount' => '-20%'
     ],
@@ -77,7 +77,7 @@ $products = [
     [
         'name' => 'Smart LED Light Bulb (WiFi Controlled)',
         'price' => '₱20,000.00',
-        'image' => '../../image/Electronics/Smart LED Light Bulb (WiFi Controlled).jpeg',
+        'image' => '../../image/electronics/Smart LED Light Bulb (WiFi Controlled).jpeg',
         'link' => 'view-product.php?id=309',
         'discount' => '-20%'
     ],
@@ -86,7 +86,7 @@ $products = [
     [
         'name' => 'Laptop Cooling Pad (RGB Fan)',
         'price' => '₱59,000.00',
-        'image' => '../../image/Electronics/Laptop Cooling Pad (RGB Fan).jpeg',
+        'image' => '../../image/electronics/Laptop Cooling Pad (RGB Fan).jpeg',
         'link' => 'view-product.php?id=310',
         'discount' => '-20%'
     ],
@@ -95,7 +95,7 @@ $products = [
     [
         'name' => '1080p HD Web Camera',
         'price' => '₱100.00',
-        'image' => '../../image/Electronics/1080p HD Web Camera.jpeg',
+        'image' => '../../image/electronics/1080p HD Web Camera.jpeg',
         'link' => 'view-product.php?id=311',
         'discount' => '-20%'
     ],
@@ -104,7 +104,7 @@ $products = [
     [
         'name' => 'Smart Plug (App Controlled)',
         'price' => '₱1,000.00',
-        'image' => '../../image/Electronics/Smart Plug (App Controlled).jpeg',
+        'image' => '../../image/electronics/Smart Plug (App Controlled).jpeg',
         'link' => 'view-product.php?id=312',
         'discount' => '-20%'
     ],
@@ -113,7 +113,7 @@ $products = [
     [
         'name' => 'Portable SSD 500GB',
         'price' => '₱100.00',
-        'image' => '../../image/Electronics/Portable SSD 500GB.jpeg',
+        'image' => '../../image/electronics/Portable SSD 500GB.jpeg',
         'link' => 'view-product.php?id=313',
         'discount' => '-20%'
     ],
@@ -122,7 +122,7 @@ $products = [
     [
         'name' => 'Digital Alarm Clock with LED Display',
         'price' => '₱299.00',
-        'image' => '../../image/Electronics/Digital Alarm Clock with LED Display.jpeg',
+        'image' => '../../image/electronics/Digital Alarm Clock with LED Display.jpeg',
         'link' => 'view-product.php?id=314',
         'discount' => '-20%'
     ],
@@ -131,7 +131,7 @@ $products = [
     [
         'name' => 'Car Phone Holder (Magnetic)',
         'price' => '₱299',
-        'image' => '../../image/Electronics/Car Phone Holder (Magnetic).jpeg',
+        'image' => '../../image/electronics/Car Phone Holder (Magnetic).jpeg',
         'link' => 'view-product.php?id=315',
         'discount' => '-20%'
     ],

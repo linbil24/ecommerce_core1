@@ -1,4 +1,5 @@
 <!-- Product Details Modal (AI Search Result) -->
+<link rel="stylesheet" href="../css/components/shared-product-view.css?v=<?php echo time(); ?>">
 <style>
     .product-modal-overlay {
         position: fixed;
@@ -16,16 +17,14 @@
     }
 
     .product-modal-content {
-        background: #b2e0f0;
-        /* Light blue/cyan background from image */
-        width: 800px;
-        max-width: 90%;
-        height: 500px;
+        background: #fff;
+        width: 1000px;
+        max-width: 95%;
         display: flex;
-        border-radius: 10px;
+        border-radius: 12px;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         animation: slideUp 0.4s ease-out;
     }
 
@@ -33,180 +32,72 @@
         position: absolute;
         top: 15px;
         right: 20px;
-        font-size: 24px;
-        color: #fff;
+        font-size: 32px;
+        color: #666;
         cursor: pointer;
-        z-index: 10;
-        background: rgba(0, 0, 0, 0.1);
-        width: 30px;
-        height: 30px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.8);
+        width: 40px;
+        height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
+        transition: all 0.2s;
     }
 
-    /* Left Side: Image */
-    .pm-image-section {
-        width: 50%;
+    .product-modal-close:hover {
         background: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-    }
-
-    .pm-image-section img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* Right Side: Details */
-    .pm-details-section {
-        width: 50%;
-        padding: 40px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .pm-store-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .pm-store-logo {
-        width: 40px;
-        height: 40px;
-        border: 1px solid #ccc;
-        margin-right: 10px;
-    }
-
-    .pm-store-name {
-        font-weight: 600;
-        font-size: 1.2rem;
-        color: #333;
-    }
-
-    .pm-product-title {
-        font-size: 1.8rem;
-        font-weight: bold;
         color: #000;
-        margin-bottom: 5px;
-        line-height: 1.2;
+        transform: rotate(90deg);
     }
 
-    .pm-price {
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: #000;
-        margin-bottom: 10px;
-    }
-
-    .pm-rating {
-        color: #333652;
-        margin-bottom: 30px;
-        font-size: 0.9rem;
-    }
-
-    .pm-options {
-        margin-bottom: 30px;
-    }
-
-    .pm-label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 8px;
-        font-size: 0.9rem;
-    }
-
-    .pm-btn-group {
-        display: flex;
-        gap: 10px;
-    }
-
-    .pm-btn-option {
-        padding: 8px 15px;
-        background: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: 500;
-    }
-
-    .pm-btn-option.selected {
-        background: #2A3B7E;
-        color: white;
-    }
-
-    .pm-actions {
-        display: flex;
-        gap: 15px;
-        margin-top: auto;
-    }
-
-    .pm-btn-action {
-        flex: 1;
-        padding: 15px;
-        border: none;
-        border-radius: 5px;
-        font-weight: bold;
-        font-size: 1rem;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-    }
-
-    .pm-btn-cart {
-        background: #2A3B7E;
-        color: #fff;
-    }
-
-    .pm-btn-buy {
-        background: #2A3B7E;
-        /* Assuming same color or darker */
-        color: #fff;
-        opacity: 0.9;
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 </style>
 
-<div id="product-modal-overlay" class="product-modal-overlay">
+<div id="product-modal-overlay" class="product-modal-overlay" onclick="if(event.target === this) closeProductModal()">
     <div class="product-modal-content">
         <span class="product-modal-close" onclick="closeProductModal()">&times;</span>
 
-        <div class="pm-image-section">
-            <img id="pm-img" src="" alt="Product Image">
+        <div class="pv-left">
+            <img id="pm-img" src="" alt="Product Image" class="pv-product-img">
         </div>
 
-        <div class="pm-details-section">
-            <div class="pm-store-header">
-                <img src="../image/logo.png" class="pm-store-logo"> <!-- Placeholder Logo -->
-                <span class="pm-store-name" id="pm-store">TechZone PH</span>
+        <div class="pv-right">
+            <div class="pv-header">
+                <div class="pv-header-title">
+                    <img src="../image/logo.png" class="pv-header-logo"> |
+                    <span id="pm-store">IMarket Official Store</span>
+                </div>
+                <p class="pv-category" id="pm-category">Category</p>
             </div>
 
-            <h2 class="pm-product-title" id="pm-title">iPhone 15 Pro Max</h2>
-            <div class="pm-price" id="pm-price">₱84,990.00</div>
-
-            <div class="pm-rating">
-                <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-                    class="fas fa-star"></i> <i class="far fa-star"></i>
-                433 Sold
+            <h2 class="pm-product-title pv-title" id="pm-title">Product Title</h2>
+            
+            <div class="pv-meta">
+                <div class="pv-rating" id="pm-rating">
+                    <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+                </div>
+                <span id="pm-sold">Sold Out</span>
             </div>
 
-            <div class="pm-options">
-                <span class="pm-label">Color</span>
-                <div class="pm-btn-group">
-                    <button class="pm-btn-option selected">Black</button>
-                    <button class="pm-btn-option">White</button>
-                    <button class="pm-btn-option">Blue</button>
+            <div class="pv-price-container">
+                <span class="pv-price" id="pm-price">₱0.00</span>
+            </div>
+
+            <div class="pv-options">
+                <div class="pv-option-group">
+                    <span class="pv-option-label">Color</span>
+                    <div class="pv-options">
+                        <button class="pv-option-btn selected">Standard</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="pm-actions">
-                <button class="pm-btn-action pm-btn-cart">Add to Cart</button>
-                <button class="pm-btn-action pm-btn-buy">Buy Now</button>
+            <div class="pv-actions">
+                <a href="#" id="pm-cart-link" class="pv-btn pv-btn-cart">Add to Cart</a>
+                <a href="#" id="pm-buy-link" class="pv-btn pv-btn-buy">Buy Now</a>
             </div>
         </div>
     </div>
@@ -220,6 +111,13 @@
             if (productData.image) document.getElementById('pm-img').src = productData.image;
             if (productData.price) document.getElementById('pm-price').innerText = productData.price;
             if (productData.name) document.getElementById('pm-title').innerText = productData.name;
+            if (productData.store) document.getElementById('pm-store').innerText = productData.store;
+            if (productData.category) document.getElementById('pm-category').innerText = productData.category;
+            
+            const rawPrice = productData.raw_price || parseFloat(productData.price.replace(/[^0-9.]/g, '')) || 0;
+            
+            document.getElementById('pm-cart-link').href = `../Content/add-to-cart.php?add_to_cart=1&product_name=${encodeURIComponent(productData.name)}&price=${rawPrice}&image=${encodeURIComponent(productData.image)}&quantity=1&store=${encodeURIComponent(productData.store || 'IMarket')}`;
+            document.getElementById('pm-buy-link').href = `../Content/Payment.php?product_name=${encodeURIComponent(productData.name)}&price=${rawPrice}&image=${encodeURIComponent(productData.image)}&quantity=1`;
         }
     }
 
@@ -258,7 +156,9 @@
                 id: productId,
                 price: urlParams.get('price'),
                 image: imageUrl,
-                name: productName
+                name: productName,
+                store: "TechZone PH",
+                category: "Gadgets"
             };
             openProductModal(productData);
         }

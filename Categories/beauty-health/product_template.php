@@ -8,10 +8,10 @@ $products_data = [
     //Product 1 -> 601
     601 => [
         'name' => 'Facial Cleanser (Gentle Formula)',
-        'price_range' => '₱149 - ₱170',
-        'original_price' => '₱198',
-        'discount' => '35% OFF',
-        'image' => '../../image/Beauty & Health/Facial Cleanser (Gentle Formula).jpeg',
+        'price_range' => '₱240',
+        'original_price' => '₱350',
+        'discount' => '31% OFF',
+        'image' => '../../image/beauty-health/Facial Cleanser (Gentle Formula).jpeg',
         'stock' => 1209,
         'colors' => ['Black', 'Grey', 'Blue'],
         'sizes' => ['S', 'M', 'L']
@@ -23,7 +23,7 @@ $products_data = [
         'price_range' => '₱340',
         'original_price' => '₱500',
         'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Vitamin C Serum.jpeg',
+        'image' => '../../image/beauty-health/Vitamin C Serum.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -32,10 +32,10 @@ $products_data = [
     //Product 3 -> 603
     603 => [
         'name' => 'Aloe Vera Soothing Gel',
-        'price_range' => '₱340',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Aloe Vera Soothing Gel.jpeg',
+        'price_range' => '₱180',
+        'original_price' => '₱250',
+        'discount' => '28% OFF',
+        'image' => '../../image/beauty-health/Aloe Vera Soothing Gel.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -44,10 +44,10 @@ $products_data = [
     //Product 4 -> 604
     604 => [
         'name' => 'Sunscreen SPF 50+',
-        'price_range' => '₱1,500',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Sunscreen SPF 50+.jpeg',
+        'price_range' => '₱450',
+        'original_price' => '₱650',
+        'discount' => '30% OFF',
+        'image' => '../../image/beauty-health/Sunscreen SPF 50+.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -56,22 +56,22 @@ $products_data = [
     //Product 5 -> 605
     605 => [
         'name' => 'Moisturizing Face Cream',
-        'price_range' => '₱2,500',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Moisturizing Face Cream.jpeg',
+        'price_range' => '₱320',
+        'original_price' => '₱480',
+        'discount' => '33% OFF',
+        'image' => '../../image/beauty-health/Moisturizing Face Cream.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
     ],
 
-    //Product 6 -> 606
+    //Product 6 -> 606 (As seen in User Image)
     606 => [
         'name' => 'Charcoal Face Mask',
         'price_range' => '₱10,200',
-        'original_price' => '₱500',
+        'original_price' => '₱15,000',
         'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Charcoal Face Mask.jpeg',
+        'image' => '../../image/beauty-health/Charcoal Face Mask.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -80,10 +80,10 @@ $products_data = [
     //Product 7 -> 607
     607 => [
         'name' => 'Hair Growth Shampoo',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Hair Growth Shampoo.jpeg',
+        'price_range' => '₱290',
+        'original_price' => '₱420',
+        'discount' => '31% OFF',
+        'image' => '../../image/beauty-health/Hair Growth Shampoo.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -92,10 +92,10 @@ $products_data = [
     //Product 8 -> 608
     608 => [
         'name' => 'Hair Conditioner (Repair Care)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Hair Conditioner (Repair Care).jpeg',
+        'price_range' => '₱270',
+        'original_price' => '₱380',
+        'discount' => '29% OFF',
+        'image' => '../../image/beauty-health/Hair Conditioner (Repair Care).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -104,10 +104,10 @@ $products_data = [
     //Product 9 -> 609
     609 => [
         'name' => 'Makeup Brush Set (10pcs)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Makeup Brush Set (10pcs).jpeg',
+        'price_range' => '₱350',
+        'original_price' => '₱550',
+        'discount' => '36% OFF',
+        'image' => '../../image/beauty-health/Makeup Brush Set (10pcs).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -116,10 +116,10 @@ $products_data = [
     //Product 10 -> 610
     610 => [
         'name' => 'Lip Tint - Lip Gloss Set',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
+        'price_range' => '₱190',
+        'original_price' => '₱280',
         'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Lip Tint - Lip Gloss Set.jpeg',
+        'image' => '../../image/beauty-health/Lip Tint - Lip Gloss Set.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -129,10 +129,10 @@ $products_data = [
     //Product 11 -> 611
     611 => [
         'name' => 'Body Scrub (Whitening & Exfoliating)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Body Scrub (Whitening & Exfoliating).jpeg',
+        'price_range' => '₱220',
+        'original_price' => '₱320',
+        'discount' => '31% OFF',
+        'image' => '../../image/beauty-health/Body Scrub (Whitening & Exfoliating).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -141,10 +141,10 @@ $products_data = [
     //Product 12 -> 612
     612 => [
         'name' => 'Electric Facial Cleanser Brush',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Electric Facial Cleanser Brush.jpeg',
+        'price_range' => '₱950',
+        'original_price' => '₱1,500',
+        'discount' => '37% OFF',
+        'image' => '../../image/beauty-health/Electric Facial Cleanser Brush.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -153,10 +153,10 @@ $products_data = [
     //Product 13 -> 613
     613 => [
         'name' => 'Nail Care Kit (Manicure Set)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Nail Care Kit (Manicure Set).jpeg',
+        'price_range' => '₱120',
+        'original_price' => '₱180',
+        'discount' => '33% OFF',
+        'image' => '../../image/beauty-health/Nail Care Kit (Manicure Set).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -165,10 +165,10 @@ $products_data = [
     //Product 14 -> 614
     614 => [
         'name' => 'Essential Oil Set (Relaxing Blend)',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Essential Oil Set (Relaxing Blend).jpeg',
+        'price_range' => '₱380',
+        'original_price' => '₱550',
+        'discount' => '31% OFF',
+        'image' => '../../image/beauty-health/Essential Oil Set (Relaxing Blend).jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
@@ -176,44 +176,22 @@ $products_data = [
 
     615 => [
         'name' => 'Foot Spa Massager Roller',
-        'price_range' => '₱10,200',
-        'original_price' => '₱500',
-        'discount' => '32% OFF',
-        'image' => '../../image/Beauty & Health/Foot Spa Massager Roller.jpeg',
+        'price_range' => '₱850',
+        'original_price' => '₱1,200',
+        'discount' => '29% OFF',
+        'image' => '../../image/beauty-health/Foot Spa Massager Roller.jpeg',
         'stock' => 500,
         'colors' => ['Black', 'Pink', 'White'],
         'sizes' => ['Standard']
     ],
+];
 
-    // Fix pricing data for consistency
-    foreach ($products_data as $id => &$p) {
-        if ($id == 601) continue; // Skip already correct one
-        // Default logic: original price should be higher than current price
-        // The current data has price_range as 10,200 and original as 500 for many.
-        // Let's swap or set reasonable values.
-        if (strpos($p['price_range'], '10,200') !== false) {
-            $p['original_price'] = '₱15,000';
-            $p['price_range'] = '₱10,200';
-        } elseif ($id == 604) {
-            $p['original_price'] = '₱2,200';
-            $p['price_range'] = '₱1,500';
-        } elseif ($id == 605) {
-            $p['original_price'] = '₱3,800';
-            $p['price_range'] = '₱2,500';
-        } else {
-            // General fix for others like 602, 603
-            $p['original_price'] = '₱500';
-            $p['price_range'] = '₱340';
-        }
-    }
-    unset($p);
+// Get ID correctly
+$p_id = isset($product_id) ? $product_id : 601;
 
-    // Get ID correctly
-    $p_id = isset($product_id) ? $product_id : 601;
-
-    // Refresh current product after data fix
-    $product = isset($products_data[$p_id]) ? $products_data[$p_id] : $products_data[601];
-    $price = $product['price_range'];
+// Refresh current product after data fix
+$product = isset($products_data[$p_id]) ? $products_data[$p_id] : $products_data[601];
+$price = $product['price_range'];
 ?>
 
 <link rel="stylesheet" href="../../css/components/shared-product-view.css?v=<?php echo time(); ?>">
