@@ -226,7 +226,7 @@ if (isset($_POST['login'])) {
                     <div class="form-footer">
                         Don't have an account? <a href="register.php">Create an account</a>
                         <br>
-                        <small>By logging in, you agree to our <a href="#">Terms & Conditions</a>.</small>
+                        <small>By logging in, you agree to our <a href="../About/Terms & Conditions.php" target="_blank">Terms & Conditions</a>.</small>
                     </div>
                 </form>
             </div>
