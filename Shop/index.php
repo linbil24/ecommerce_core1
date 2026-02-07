@@ -900,6 +900,7 @@
                                                 <?php 
                                                     $tp_img = $tp['image'];
                                                     if(strpos($tp_img, '../../') === 0) $tp_img = str_replace('../../', '../', $tp_img);
+                                                    $tp_img = str_replace(' ', '%20', $tp_img);
                                                 ?>
                                                 <img src="<?php echo $tp_img; ?>" class="mini-product-img">
                                                 <div class="mini-product-price"><?php echo $tp['price']; ?></div>
@@ -962,6 +963,7 @@
                                             <?php 
                                                 $img_path = $ap['image'];
                                                 if(strpos($img_path, '../../') === 0) $img_path = str_replace('../../', '../', $img_path);
+                                                $img_path = str_replace(' ', '%20', $img_path);
                                             ?>
                                             <img src="<?php echo $img_path; ?>" class="result-img">
                                             <?php if (!empty($ap['discount'])): ?>
@@ -1175,7 +1177,7 @@
                         <!-- Item 1: UrbanWear -->
                         <div class="premium-card" onclick="window.location.href='?store=UrbanWear+PH'">
                             <div class="premium-shop-badge">Official Store</div>
-                            <img src="../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" alt="UrbanWear">
+                            <img src="../image/Shop/UrbanWear%20PH/Men_HM_Loose_Fit_Sweatshirt.jpeg" alt="UrbanWear">
                             <div class="premium-overlay">
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                                     <i class="fas fa-tshirt" style="color: #60a5fa;"></i>
@@ -1190,7 +1192,7 @@
                         <!-- Item 2: TechZone -->
                         <div class="premium-card" onclick="window.location.href='?store=TechZone+PH'">
                             <div class="premium-shop-badge">Tech Partner</div>
-                            <img src="../image/Shop/TechZone%20PH/Samsung%20Galaxy%20S25%20Ultra%20(512GB).jpeg" alt="TechZone">
+                            <img src="../image/electronics/Noise_Cancelling_Headphones.jpeg" alt="TechZone">
                             <div class="premium-overlay" style="background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 40%, transparent 100%);">
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                                     <i class="fas fa-bolt" style="color: #a855f7;"></i>
@@ -1204,7 +1206,7 @@
                         <!-- Item 3: GlowUp -->
                         <div class="premium-card" onclick="window.location.href='?store=GlowUp+Beauty'">
                             <div class="premium-shop-badge">Beauty Expert</div>
-                            <img src="../image/beauty-health/Charcoal Face Mask.jpeg" alt="GlowUp">
+                            <img src="../image/Shop/GlowUp%20Beauty/I_White_Korea_Glow_Up_Whip.jpeg" alt="GlowUp">
                             <div class="premium-overlay">
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                                     <i class="fas fa-magic" style="color: #f472b6;"></i>
@@ -1264,7 +1266,7 @@
                                 onclick="openProductModal(this)">
                                 
                                 <div class="result-img-wrapper" style="aspect-ratio: 1; overflow: hidden; position: relative; background: #f8fafc;">
-                                    <img src="<?php echo $ap['image']; ?>" class="result-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                                    <img src="<?php echo str_replace(' ', '%20', $ap['image']); ?>" class="result-img" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                                     <?php if (!empty($ap['discount'])): ?>
                                         <div style="position: absolute; top: 12px; left: 12px; background: #ef4444; color: white; padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);">
                                             <?php echo $ap['discount']; ?>
