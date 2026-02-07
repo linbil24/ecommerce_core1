@@ -418,6 +418,63 @@ function renderProductModule(submodule, filterValue = null) {
     lucide.createIcons();
 }
 
+
+// --- PRODUCT VIEW FUNCTIONS ---
+function showProductDetails(productId) {
+    const product = productsData.find(p => p.id == productId);
+    if (!product) {
+        showCustomActionModal('Error', 'Product not found.', 'OK');
+        return;
+    }
+
+    const detailsHTML = `
+        <div style="padding: 1.5rem;">
+            <div style="display: flex; gap: 2rem; align-items: start; margin-bottom: 2rem;">
+                <div style="width: 200px; height: 200px; background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; font-weight: 800; flex-shrink: 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);">
+                    ${product.name.charAt(0)}
+                </div>
+                <div style="flex: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h3 style="font-size: 1.5rem; font-weight: 800; color: #1e293b; margin: 0 0 0.5rem 0;">${product.name}</h3>
+                            <span class="status-badge ${product.status.toLowerCase().replace(' ', '-')}" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;">${product.status}</span>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 1.5rem; font-weight: 800; color: #059669;">${formatCurrency(parseFloat(product.price))}</div>
+                            <div style="font-size: 0.8125rem; color: #64748b; font-weight: 500;">Retail Price</div>
+                        </div>
+                    </div>
+                    <p style="color: #4b5563; font-size: 0.9375rem; line-height: 1.6; margin: 1.5rem 0;">${product.description || 'No detailed description available for this item.'}</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; background: #f8fafc; padding: 1.5rem; border-radius: 1rem; border: 1px solid #f1f5f9; margin-bottom: 2rem;">
+                <div>
+                    <div style="font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.5rem;">Current Stock</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #1e293b;">${product.stock} Units</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.5rem;">Category</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #1e293b;">${product.category || 'Uncategorized'}</div>
+                </div>
+                <div>
+                    <div style="font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.5rem;">Product ID</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #1e293b;">#${product.id}</div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                <button onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" class="btn-base btn-secondary" style="padding: 0.75rem 1.5rem; font-weight: 700;">Close Preview</button>
+            </div>
+        </div>
+    `;
+
+    const modalContainer = document.getElementById('modal-container');
+    modalContainer.innerHTML = detailsHTML;
+    document.getElementById('custom-modal-backdrop').classList.remove('hidden');
+    lucide.createIcons();
+}
+
 // 2. Order & Checkout Management
 function renderOrderModule(submodule) {
     setPageTitle('Order & Checkout Management');
@@ -1230,15 +1287,21 @@ function renderUserModule(submodule) {
                                         <td>${a.email || 'N/A'}</td>
                                         <td>${a.role}</td>
                                         <td>${new Date(a.created_at).toLocaleDateString()}</td>
-                                        <td style="width: 100px;">
-                                            ${a.id != adminConfig.currentAdminId ? `
-                                            <button class="btn-base" style="padding: 0.25rem 0.5rem; background-color: var(--color-red-600); color: white;"
-                                                onclick="deleteAdmin(${a.id}, '${a.username.replace(/'/g, "\\'")}')">
-                                                <i data-lucide="trash-2" style="width: 1rem; height: 1rem;"></i>
-                                            </button>
-                                            ` : '<span class="text-gray-400 text-sm">Current User</span>'
-                }
-                                        </td >
+                                        <td style="width: 140px;">
+                                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                                <button class="btn-base" 
+                                                    onclick="viewUserDetails(${a.id}, 'admin')" 
+                                                    style="padding: 0.4rem 0.75rem; font-size: 0.75rem; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 6px; font-weight: 700; cursor: pointer;">
+                                                    <i data-lucide="eye" style="width: 0.8rem; height: 0.8rem; margin-right: 0.25rem;"></i> View
+                                                </button>
+                                                ${a.id != adminConfig.currentAdminId ? `
+                                                <button class="btn-base" style="padding: 0.4rem 0.5rem; background-color: #fef2f2; color: #dc2626; border: 1px solid #fee2e2; border-radius: 6px; cursor: pointer;"
+                                                    onclick="deleteAdmin(${a.id}, '${a.username.replace(/'/g, "\\'")}')">
+                                                    <i data-lucide="trash-2" style="width: 0.8rem; height: 0.8rem;"></i>
+                                                </button>
+                                                ` : ''}
+                                            </div>
+                                        </td>
                                     </tr>
                 `).join('');
 
@@ -1279,6 +1342,13 @@ function renderUserModule(submodule) {
                                         <td>${c.total_spent ? formatCurrency(parseFloat(c.total_spent)) : '₱0.00'}</td>
                                         <td><span class="status-badge ${statusClass}">${c.status}</span></td>
                                         <td>${new Date(c.created_at).toLocaleDateString()}</td>
+                                        <td style="width: 100px;">
+                                            <button class="btn-base" 
+                                                onclick="viewUserDetails(${c.id}, 'customer')" 
+                                                style="padding: 0.4rem 0.75rem; font-size: 0.75rem; background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; border-radius: 6px; font-weight: 700; cursor: pointer;">
+                                                <i data-lucide="eye" style="width: 0.8rem; height: 0.8rem; margin-right: 0.25rem;"></i> View
+                                            </button>
+                                        </td>
                                     </tr>
                 `;
             }).join('');
@@ -1298,6 +1368,7 @@ function renderUserModule(submodule) {
                                         <th>Total Spent</th>
                                         <th>Status</th>
                                         <th>Joined</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1311,6 +1382,87 @@ function renderUserModule(submodule) {
     }
 
     content.innerHTML = `<h2 class="page-header">${moduleTitle}</h2>${submoduleContent}`;
+    lucide.createIcons();
+}
+
+
+// --- USER VIEW FUNCTIONS ---
+function viewUserDetails(userId, roleType = 'customer') {
+    let user;
+    let title = 'Member Profile';
+
+    if (roleType === 'admin') {
+        user = (window.adminUsersData || adminUsersData).find(u => u.id == userId);
+        title = 'Administrator Profile';
+    } else {
+        user = (window.customersData || customersData).find(u => u.id == userId);
+        title = 'Customer Profile';
+    }
+
+    if (!user) {
+        showCustomActionModal('Error', 'Account record not found in system.', 'OK');
+        return;
+    }
+
+    const detailsHTML = `
+        <div style="padding: 1.5rem;">
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1.5rem;">
+                <div style="width: 70px; height: 70px; border-radius: 50%; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: 800;">
+                    ${(user.username || user.full_name || 'U').charAt(0).toUpperCase()}
+                </div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 800; color: #1e293b; margin: 0;">${user.full_name || user.username}</h3>
+                    <p style="color: #64748b; font-size: 0.875rem; margin: 0.25rem 0 0 0;">${user.email || 'No email provided'}</p>
+                    <span style="display: inline-block; margin-top: 0.5rem; padding: 3px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe;">${roleType}</span>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+                <div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem;">Account Information</div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.75rem; border: 1px solid #f1f5f9;">
+                        <div style="margin-bottom: 0.75rem;">
+                            <span style="font-size: 0.8125rem; color: #64748b; display: block;">System ID</span>
+                            <span style="font-weight: 700; color: #1e293b;">#${user.id}</span>
+                        </div>
+                        <div style="margin-bottom: 0.75rem;">
+                            <span style="font-size: 0.8125rem; color: #64748b; display: block;">Username</span>
+                            <span style="font-weight: 700; color: #1e293b;">${user.username || 'N/A'}</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.8125rem; color: #64748b; display: block;">Joined On</span>
+                            <span style="font-weight: 700; color: #1e293b;">${user.created_at || 'Jan 20, 2024'}</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem;">Contact & Status</div>
+                    <div style="background: #f8fafc; padding: 1rem; border-radius: 0.75rem; border: 1px solid #f1f5f9;">
+                        <div style="margin-bottom: 0.75rem;">
+                            <span style="font-size: 0.8125rem; color: #64748b; display: block;">Phone Number</span>
+                            <span style="font-weight: 700; color: #1e293b;">${user.phone_number || 'Not Linked'}</span>
+                        </div>
+                        <div style="margin-bottom: 0.75rem;">
+                            <span style="font-size: 0.8125rem; color: #64748b; display: block;">Account Status</span>
+                            <span style="color: #059669; font-weight: 700;">● Active</span>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.8125rem; color: #64748b; display: block;">Verification</span>
+                            <span style="color: #0284c7; font-weight: 700;">✓ Verified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                <button onclick="document.getElementById('custom-modal-backdrop').classList.add('hidden')" class="btn-base btn-secondary" style="padding: 0.75rem 1.5rem; font-weight: 700;">Dismiss View</button>
+            </div>
+        </div>
+    `;
+
+    const modalContainer = document.getElementById('modal-container');
+    modalContainer.innerHTML = detailsHTML;
+    document.getElementById('custom-modal-backdrop').classList.remove('hidden');
     lucide.createIcons();
 }
 
