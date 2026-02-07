@@ -1182,7 +1182,7 @@
                         <!-- Item 2: TechZone -->
                         <div class="premium-card" onclick="window.location.href='?store=TechZone+PH'">
                             <div class="premium-shop-badge">Tech Partner</div>
-                            <img src="../image/electronics/Noise Cancelling Headphones.jpeg" alt="TechZone">
+                            <img src="../image/electronics/Noise%20Cancelling%20Headphones.jpeg" alt="TechZone">
                             <div class="premium-overlay" style="background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 40%, transparent 100%);">
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                                     <i class="fas fa-bolt" style="color: #a855f7;"></i>
