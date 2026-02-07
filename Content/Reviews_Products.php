@@ -205,7 +205,7 @@ $result = mysqli_query($conn, $sql);
 
         <div class="rate-link-footer">
             <!-- Link back to Product or Home? -->
-            <a href="../Categories/best-selling/selling.php">Continue Shopping <i class="fas fa-chevron-right"></i></a>
+            <a href="../Categories/best_selling/index.php">Continue Shopping <i class="fas fa-chevron-right"></i></a>
         </div>
     </div>
 

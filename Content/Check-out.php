@@ -50,7 +50,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <link rel="icon" type="image/x-icon" href="../image/logo.png">
 
     <!-- External CSS - We should unify this, but for now using the request's style source -->
-    <link rel="stylesheet" href="../css/best-selling/checkout_cart.css">
+    <link rel="stylesheet" href="../css/best_selling/checkout_cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- User requested Montserrat font -->
@@ -121,7 +121,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                     // Determine shop/Brand Display
                     $is_best_selling = false;
                     $img_check = strtolower($item['image']);
-                    $bs_keywords = ['bag-women', 'bag-men', 'notebooks', 'earphone', 'shoes', 'watch', 'best-selling'];
+                    $bs_keywords = ['bag-women', 'bag-men', 'notebooks', 'earphone', 'shoes', 'watch', 'best_selling'];
                     foreach ($bs_keywords as $kw) {
                         if (strpos($img_check, $kw) !== false) {
                             $is_best_selling = true;
@@ -175,7 +175,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                             '../image/Best/' . $clean_img_name,
                             '../image/Shop/' . $clean_img_name,
                             '../image/' . $clean_img_name,
-                            '../Categories/best-selling/image/' . $clean_img_name,
+                            '../Categories/best_selling/image/' . $clean_img_name,
                             '../shop/image/' . $clean_img_name,
                             '../shop/image/UrbanWear PH/' . $clean_img_name, // Legacy specific
                             '../shop/image/' . $clean_img_name,
@@ -265,7 +265,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                 <i class="fas fa-shopping-cart" style="font-size:3rem; margin-bottom:1rem; color:#ddd;"></i>
                 <h3 style="color: #333;">Your cart is empty</h3>
                 <p style="color: #777;">Looks like you haven't added any items to your cart yet.</p>
-                <a href="../Categories/best-selling/index.php"
+                <a href="../Categories/best_selling/index.php"
                     style="color:#2A3B7E; text-decoration:none; font-weight:600; margin-top: 10px; display: inline-block;">Start
                     Shopping</a>
             </div>

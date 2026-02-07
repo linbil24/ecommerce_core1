@@ -77,7 +77,7 @@ $result = mysqli_query($conn, $sql);
                             $clean_path,
                             '../image/Best-seller/' . $basename,
                             '../image/Best-seller/' . $basename_dashed,
-                            '../image/Best-selling/' . $basename,
+                            '../image/best_selling/' . $basename,
                             '../image/' . $basename,
                             '../image/Shop/' . $basename,
                             '../image/Shop/UrbanWear PH/' . $basename,
@@ -88,7 +88,7 @@ $result = mysqli_query($conn, $sql);
                         foreach ($candidates as $candidate) {
                             if (!empty($candidate) && file_exists($candidate) && !is_dir($candidate)) {
                                 $final_img_src = $candidate;
-                                if (strpos(strtolower($candidate), 'best-seller') !== false || strpos(strtolower($candidate), 'best-selling') !== false) {
+                                if (strpos(strtolower($candidate), 'best-seller') !== false || strpos(strtolower($candidate), 'best_selling') !== false) {
                                     $is_best_selling = true;
                                 }
                                 break;
@@ -129,7 +129,7 @@ $result = mysqli_query($conn, $sql);
                         }
 
                         // FIX LINK: linking to the known view-product.php
-                        $product_link = "../Categories/best-selling/view-product.php?id=" . $pid;
+                        $product_link = "../Categories/best_selling/view-product.php?id=" . $pid;
                         ?>
                         <div class="order-top">
                             <div class="order-id">Order #<?php echo str_pad($order['id'], 6, '0', STR_PAD_LEFT); ?></div>

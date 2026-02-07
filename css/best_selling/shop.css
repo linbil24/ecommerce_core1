@@ -14,7 +14,7 @@ body {
     overflow: hidden;
 }
 
-.best-selling-container {
+.best_selling-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -105,7 +105,7 @@ body {
 
 /* Responsive */
 @media (max-width: 992px) {
-    .best-selling-container {
+    .best_selling-container {
         flex-direction: column;
         /* Text on top */
         text-align: center;

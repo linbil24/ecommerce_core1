@@ -17,7 +17,7 @@
     </nav>
 
     <div class="content">
-        <div class="best-selling-container">
+        <div class="best_selling-container">
             <!-- Text Section (Left) -->
             
 

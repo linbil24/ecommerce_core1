@@ -508,7 +508,7 @@ if ($view == 'orders' || $view == 'tracking') {
 
                                 <div class="order-actions" style="display:flex; gap:12px; justify-content: flex-end; width: 100%; margin-top: 5px;">
                                     <!-- TRACK ORDER -->
-                                    <a href="../Categories/best-selling/Tracking.php?order_id=<?php echo $order['id']; ?>" 
+                                    <a href="../Categories/best_selling/Tracking.php?order_id=<?php echo $order['id']; ?>" 
                                        style="display: flex; align-items: center; gap: 8px; padding: 10px 18px; font-size: 14px; font-weight: 500; border-radius: 4px; background: #fff; border: 1px solid #e0e0e0; color: #333; text-decoration: none; transition: all 0.2s;">
                                         <i class="fas fa-truck-fast"></i> Track Order
                                     </a>

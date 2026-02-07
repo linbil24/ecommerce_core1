@@ -105,7 +105,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../image/logo.png">
-    <link rel="stylesheet" href="../css/best-selling/cart.css">
+    <link rel="stylesheet" href="../css/best_selling/cart.css">
     <!-- Using Shop's CSS as base, can override -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -311,7 +311,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <div class="cart-header-bar">
         <div class="cart-header-content">
             <div class="cart-branding">
-                <a href="../Categories/best-selling/index.php" class="cart-logo-link">
+                <a href="../Categories/best_selling/index.php" class="cart-logo-link">
                     <img src="../image/Logo/logo.png" alt="Imarket Logo">
                     <span class="cart-logo-text">IMARKET</span>
                 </a>
@@ -365,7 +365,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                             // Determine if this item is Best Selling or Shop based
                             $is_best_selling_item = false;
                             $img_check_cart = strtolower($item['image']);
-                            $best_selling_kws = ['bag-women', 'bag-men', 'notebooks', 'earphone', 'shoes', 'watch', 'best-selling'];
+                            $best_selling_kws = ['bag-women', 'bag-men', 'notebooks', 'earphone', 'shoes', 'watch', 'best_selling'];
                             foreach ($best_selling_kws as $kw) {
                                 if (strpos($img_check_cart, $kw) !== false) {
                                     $is_best_selling_item = true;
@@ -398,7 +398,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                                 '../image/Shop/' . basename($display_img),
                                                 '../image/Best/' . basename($display_img),
                                                 '../image/' . basename($display_img),
-                                                '../Categories/best-selling/image/' . basename($display_img)
+                                                '../Categories/best_selling/image/' . basename($display_img)
                                             ];
 
                                             // Add Shop-specific path if shop_name exists

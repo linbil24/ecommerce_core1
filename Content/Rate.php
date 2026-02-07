@@ -292,9 +292,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <script>
                 setTimeout(function () {
                     // Redirect to the product view page (picture 2)
-                    // Assuming path is relative to Content/Rate.php -> Categories/best-selling/view-product.php
-                    // Adjust path if product_id implies a different directory, but user pointed to picture 2 which is Best-selling
-                    window.location.href = "../Categories/best-selling/view-product.php?id=<?php echo $product_id_post; ?>";
+                    // Assuming path is relative to Content/Rate.php -> Categories/best_selling/view-product.php
+                    // Adjust path if product_id implies a different directory, but user pointed to picture 2 which is best_selling
+                    window.location.href = "../Categories/best_selling/view-product.php?id=<?php echo $product_id_post; ?>";
                 }, 2000);
             </script>
         <?php endif; ?>

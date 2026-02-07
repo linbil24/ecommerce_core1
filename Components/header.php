@@ -69,12 +69,12 @@ if (isset($_SESSION['user_id'])) {
                         class="fas fa-home"></i>
                     Home</a>
                 <a href="<?php echo $path_prefix; ?>Shop/index.php" class="nav-item"><i class="fas fa-store"></i> Mall</a>
-                <a href="<?php echo $path_prefix; ?>Categories/best-selling/index.php" class="nav-item"><i class="fas fa-percent"></i> Flash Deals</a>
+                <a href="<?php echo $path_prefix; ?>Categories/best_selling/index.php" class="nav-item"><i class="fas fa-percent"></i> Flash Deals</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="dropdown-toggle"><i class="fas fa-list"></i> Categories <i
                             class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo $path_prefix; ?>Categories/best-selling/index.php"><i
+                        <li><a href="<?php echo $path_prefix; ?>Categories/best_selling/index.php"><i
                                     class="fas fa-fire"></i> Best Selling</a></li>
                         <li><a href="<?php echo $path_prefix; ?>Categories/new-arrivals/index.php"><i
                                     class="fas fa-star"></i> New Arrivals</a></li>

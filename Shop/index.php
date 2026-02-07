@@ -228,7 +228,7 @@
                 <link rel="stylesheet" href="../css/components/category-base.css?v=<?php echo time(); ?>">
                 <style>
                     /* Specific Overrides for Shop View */
-                    .best-selling-container {
+                    .best_selling-container {
                         margin-top: 20px;
                         margin-bottom: 40px;
                         padding: 0 !important;
@@ -409,7 +409,7 @@
                     <div class="store-main" style="flex: 1; min-width: 0;">
 
                         <!-- Full Width Hero/Banner -->
-                        <div class="best-selling-container"
+                        <div class="best_selling-container"
                             style="display: block; width: 100%; position: relative; padding: 0 !important; margin: 0 !important; border-radius: 0; box-shadow: none; border: none; height: 350px;">
 
                             <!-- Banner/Slider (Now Full Width) -->

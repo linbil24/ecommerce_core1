@@ -65,7 +65,7 @@ header("X-Content-Type-Options: nosniff");
                 <a href="../Shop/index.php?store=UrbanWear+PH" class="btn-shop">
                     <i class="fas fa-shopping-bag"></i> Shop Now
                 </a>
-                <a href="../Categories/best-selling/index.php" class="btn-best">
+                <a href="../Categories/best_selling/index.php" class="btn-best">
                     <i class="fas fa-fire"></i> Best Sellers
                 </a>
             </div>
