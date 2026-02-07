@@ -26,40 +26,51 @@ foreach ($sample_users as $user) {
     }
 }
 
-// 2. Add Sample Reviews for Product 115 (Phone Ring Holder)
-$product_id = 115;
-$sample_reviews = [
-    // Positive Reviews
-    ['user_idx' => 0, 'rating' => 5, 'comment' => 'Sulit na sulit! The adhesive is very strong and the design is premium. Highly recommended!'],
-    ['user_idx' => 1, 'rating' => 5, 'comment' => 'Ganda ng quality, ayos na ayos sa phone ko. Mabilis din dumating yung item.'],
-    ['user_idx' => 3, 'rating' => 5, 'comment' => 'Amazing product! Best ring holder I have ever used. Very satisfied.'],
-    ['user_idx' => 2, 'rating' => 4, 'comment' => 'Maganda siya, legit na durable. Worth the price!'],
-    
-    // Negative Reviews
-    ['user_idx' => 4, 'rating' => 1, 'comment' => 'Pangit ng quality, madaling natanggal yung paint. Waste of money, wag niyo na bilhin.'],
-    ['user_idx' => 2, 'rating' => 1, 'comment' => 'Sira agad after 1 week. Sobrang bagal pa ng shipping. Sayang lang pera dito.'],
-    ['user_idx' => 0, 'rating' => 1, 'comment' => 'Bad experience. The ring became loose after just 2 days. Terrible quality.'],
-    ['user_idx' => 1, 'rating' => 2, 'comment' => 'Disappointed. Not as described. It feels very cheap and weak.'],
+// 2. Add Sample Reviews for all Best Selling Products (101-115)
+$product_ids = range(101, 115);
 
-    // Neutral Reviews
-    ['user_idx' => 3, 'rating' => 3, 'comment' => 'Okay naman siya, sakto lang sa presyo. Durable enough for daily use.'],
-    ['user_idx' => 1, 'rating' => 3, 'comment' => 'sakto lang, pwede na for its price. standard quality.'],
-    ['user_idx' => 4, 'rating' => 3, 'comment' => 'Fine product. Not great but not bad either. Just average.'],
-    ['user_idx' => 2, 'rating' => 3, 'comment' => 'Okay naman, normal lang na ring holder. Matagal lang shipping.']
+$sample_pool = [
+    // Positive
+    ['rating' => 5, 'comment' => 'Sulit na sulit! The quality is way better than expected.'],
+    ['rating' => 5, 'comment' => 'Ganda ng item, legit na legit. Mabilis din ang delivery.'],
+    ['rating' => 5, 'comment' => 'Amazing design and very durable. 5 stars for this!'],
+    ['rating' => 4, 'comment' => 'Good quality product. Worth the price. Will buy again.'],
+    ['rating' => 5, 'comment' => 'Best purchase so far! Highly recommended to everyone.'],
+    ['rating' => 5, 'comment' => 'Satisfied customer here. Items were well-packaged.'],
+    
+    // Negative
+    ['rating' => 1, 'comment' => 'Pangit ng quality, wag niyo na bilhin. Sayang lang pera.'],
+    ['rating' => 2, 'comment' => 'Disappointed. The item looks different from the pictures.'],
+    ['rating' => 1, 'comment' => 'Sira agad after a few uses. Terrible experience.'],
+    ['rating' => 1, 'comment' => 'Bad customer service and very slow shipping.'],
+    
+    // Neutral
+    ['rating' => 3, 'comment' => 'Sakto lang, pwede na for its price.'],
+    ['rating' => 3, 'comment' => 'Okay naman, normal standard quality.'],
+    ['rating' => 3, 'comment' => 'Fine product. Nothing special but works as intended.'],
+    ['rating' => 3, 'comment' => 'Average quality. You get what you pay for.']
 ];
 
-// Clear existing reviews for this product to avoid duplicates for this demo
-mysqli_query($conn, "DELETE FROM reviews WHERE product_id = '$product_id'");
+// Clear all existing reviews for these products first
+$id_list = implode(',', $product_ids);
+mysqli_query($conn, "DELETE FROM reviews WHERE product_id IN ($id_list)");
 
-foreach ($sample_reviews as $review) {
-    $uid = $user_ids[$review['user_idx']];
-    $rating = $review['rating'];
-    $comment = mysqli_real_escape_string($conn, $review['comment']);
+foreach ($product_ids as $pid) {
+    // Add 4-6 random reviews for each product
+    $num_reviews = rand(4, 7);
+    shuffle($sample_pool);
     
-    $sql = "INSERT INTO reviews (user_id, product_id, order_id, rating, comment, created_at) 
-            VALUES ('$uid', '$product_id', 0, '$rating', '$comment', NOW())";
-    mysqli_query($conn, $sql);
+    for ($i = 0; $i < $num_reviews; $i++) {
+        $review = $sample_pool[$i];
+        $uid = $user_ids[array_rand($user_ids)]; // Random user
+        $rating = $review['rating'];
+        $comment = mysqli_real_escape_string($conn, $review['comment']);
+        
+        $sql = "INSERT INTO reviews (user_id, product_id, order_id, rating, comment, created_at) 
+                VALUES ('$uid', '$pid', 0, '$rating', '$comment', DATE_SUB(NOW(), INTERVAL ".rand(1, 30)." DAY))";
+        mysqli_query($conn, $sql);
+    }
 }
 
-echo "Sample users and reviews added successfully for Product 115!";
+echo "Sample users and reviews added successfully for all Best-Selling products (101-115)!";
 ?>
