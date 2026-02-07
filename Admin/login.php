@@ -238,11 +238,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
             </form>
         <?php endif; ?>
 
-        <p class="switch-link" style="margin-top: 1.5rem; color: #64748b;">
-            Don't have an account? <a href="register.php" style="color: #4f46e5; border-bottom: 2px solid rgba(79, 70, 229, 0.1);">Register as Admin</a>
-        </p>
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <p style="color: #64748b; margin-bottom: 0.5rem; font-size: 0.875rem;">
+                Don't have an account? <a href="register.php" style="color: #4f46e5; border-bottom: 2px solid rgba(79, 70, 229, 0.1); font-weight: 600; text-decoration: none;">Register as Admin</a>
+            </p>
+        </div>
 
-        <div style="text-align: center;">
+        <div style="text-align: center; margin-top: 1rem;">
             <a href="../Shop/index.php" class="back-to-site">
                 <i data-lucide="globe" style="width: 1rem; height: 1rem;"></i>
                 Back to Public Marketplace

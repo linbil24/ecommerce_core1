@@ -1,5 +1,5 @@
 <?php
-session_start();
+include("../Components/security.php"); // Handles session_start()
 include("../Database/config.php");
 
 $msg = "";
@@ -14,6 +14,7 @@ if (isset($_SESSION['email_to_verify'])) {
 }
 
 if (isset($_POST['verify'])) {
+    // Optional: verify_csrf_token(); // You can enable this if you want to protect verification too
     $verification_code = mysqli_real_escape_string($conn, $_POST['verification_code']);
 
     $query = "SELECT * FROM users WHERE email='$email' AND verification_code='$verification_code'";
@@ -99,6 +100,7 @@ if (isset($_POST['verify'])) {
                 ?>
 
                 <form action="" method="post">
+                    <?php echo get_csrf_input_field(); ?>
                     <div class="input-group">
                         <label for="verification_code">Verification Code</label>
                         <input type="text" id="verification_code" name="verification_code"
@@ -117,6 +119,7 @@ if (isset($_POST['verify'])) {
                     style="text-align: center; margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
                     <p style="margin-bottom: 10px; font-size: 0.9rem; color: #666;">Didn't receive the code?</p>
                     <form action="login.php" method="post">
+                        <?php echo get_csrf_input_field(); ?>
                         <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
                         <button type="submit" name="resend"
                             style="background:none; border:none; color: #007bff; cursor: pointer; text-decoration: none; font-weight: 500;">Resend
