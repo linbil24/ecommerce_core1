@@ -1225,6 +1225,18 @@
 
                     <div class="product-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
                         <?php 
+                        // Fetch a few products from top shops for the landing page
+                        $landing_products = [];
+                        $shops_to_sample = ['UrbanWear PH', 'TechZone PH', 'TrendyBags PH', 'GlowUp Beauty'];
+                        foreach($shops_to_sample as $sname) {
+                            $sprod = getMockProducts($sname);
+                            if(!empty($sprod)) {
+                                $p = $sprod[0];
+                                $p['shop_name'] = $sname;
+                                $landing_products[] = $p;
+                            }
+                        }
+
                         foreach ($landing_products as $ap):
                             $soldDisp = ($ap['sold'] > 1000) ? number_format($ap['sold'] / 1000, 1) . 'k' : $ap['sold'];
                         ?>
