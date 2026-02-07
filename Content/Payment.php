@@ -227,17 +227,7 @@ if (mysqli_num_rows($check_addr) > 0) {
                             </div>
                         </label>
 
-                        <!-- COD -->
-                        <label class="payment-card-label" onclick="selectMethod('cod')">
-                            <input type="radio" name="payment_method" value="cod" id="radio-cod">
-                            <div class="payment-card-content">
-                                <div class="payment-icon">
-                                    <i class="fas fa-hand-holding-dollar" style="font-size: 2.5rem; color: #333;"></i>
-                                </div>
-                                <div class="payment-title">Cash on Delivery</div>
-                                <div class="payment-subtitle">Pay when delivered</div>
-                            </div>
-                        </label>
+
                     </div>
 
                     <!-- Method Specific Details -->
@@ -263,10 +253,7 @@ if (mysqli_num_rows($check_addr) > 0) {
                                 </div>
                             </div>
                         </div>
-                        <div id="cod-info" style="display:none;">
-                            <strong>Cash on Delivery Details:</strong><br>
-                            Cash Tendered: <input type="number" class="form-control" placeholder="0.00" style="display:inline-block; width:150px; margin: 10px;">
-                        </div>
+
                     </div>
                 </div>
             </div>
