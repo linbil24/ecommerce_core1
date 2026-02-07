@@ -66,34 +66,88 @@ if (mysqli_num_rows($check_addr) > 0) {
     <link rel="stylesheet" href="../css/shop/payment.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary-navy: #2A3B7E;
+            --accent-blue: #3b82f6;
+            --soft-gray: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
         .payment-option-details {
             display: none;
-            padding: 15px;
-            background: #f8fafc;
+            padding: 20px;
+            background: #f1f5f9;
             margin-top: 15px;
-            border-radius: 8px;
-            border: 1px dashed #2A3B7E;
-            animation: fadeIn 0.3s;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e1;
+            animation: slideDown 0.4s ease-out;
         }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @keyframes slideDown { 
+            from { opacity: 0; transform: translateY(-10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
         
+        .payment-card-label {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .payment-card-content {
+            border: 2px solid #f1f5f9;
+            border-radius: 16px;
+            padding: 20px 15px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #fff;
+            height: 100%;
+        }
+
+        .payment-card-label:hover .payment-card-content {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1);
+        }
+
         .payment-card-label.active .payment-card-content {
-            border: 2px solid #2A3B7E;
+            border: 2px solid var(--primary-navy);
             background-color: #f0f7ff;
             box-shadow: 0 4px 12px rgba(42, 59, 126, 0.1);
         }
 
+        .payment-card-label.active .payment-card-content::after {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+        }
+
         .payment-methods-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 20px;
             margin-bottom: 30px;
         }
 
-        @media (max-width: 768px) {
-            .payment-methods-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .payment-icon img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: grayscale(10%);
+            transition: filter 0.3s;
+        }
+
+        .payment-card-label:hover .payment-icon img {
+            filter: grayscale(0%);
+        }
+
+        .summary-card {
+            position: sticky;
+            top: 100px;
         }
     </style>
 </head>
@@ -217,17 +271,27 @@ if (mysqli_num_rows($check_addr) > 0) {
 
                         <!-- BDO -->
                         <label class="payment-card-label" onclick="selectMethod('bdo')">
-                            <input type="radio" name="payment_method" value="bdo" id="radio-bdo">
+                            <input type="radio" name="payment_method" value="bdo" id="radio-bdo" style="display:none;">
                             <div class="payment-card-content">
                                 <div class="payment-icon">
-                                    <img src="../image/Banks/BDO.png" alt="BDO" style="width: 50px; height: 50px; object-fit: contain;">
+                                    <img src="../image/Banks/BDO.png" alt="BDO">
                                 </div>
-                                <div class="payment-title">BDO</div>
-                                <div class="payment-subtitle">Bank Transfer</div>
+                                <div class="payment-title" style="font-weight: 700; font-size: 0.95rem; margin-top: 10px;">BDO</div>
+                                <div class="payment-subtitle" style="font-size: 0.75rem; color: #64748b;">Bank Transfer</div>
                             </div>
                         </label>
 
-
+                        <!-- Cash on Delivery -->
+                        <label class="payment-card-label" onclick="selectMethod('cod')">
+                            <input type="radio" name="payment_method" value="cod" id="radio-cod" style="display:none;">
+                            <div class="payment-card-content">
+                                <div class="payment-icon">
+                                    <i class="fas fa-hand-holding-dollar" style="font-size: 40px; color: #10b981;"></i>
+                                </div>
+                                <div class="payment-title" style="font-weight: 700; font-size: 0.95rem; margin-top: 10px;">COD</div>
+                                <div class="payment-subtitle" style="font-size: 0.75rem; color: #64748b;">Cash on Delivery</div>
+                            </div>
+                        </label>
                     </div>
 
                     <!-- Method Specific Details -->
@@ -237,20 +301,28 @@ if (mysqli_num_rows($check_addr) > 0) {
                         </div>
                         <div id="card-info" style="display:none;">
                             <div class="form-row">
-                                <div class="form-group">
-                                    <label>Card Number</label>
-                                    <input type="text" class="form-control" placeholder="0000 0000 0000 0000">
+                                <div class="form-group grid-row" style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                    <div>
+                                        <label style="display:block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Card Number</label>
+                                        <input type="text" class="form-control" placeholder="0000 0000 0000 0000" style="width:100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px;">
+                                    </div>
+                                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                        <div>
+                                            <label style="display:block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">Expiry</label>
+                                            <input type="text" class="form-control" placeholder="MM/YY" style="width:100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px;">
+                                        </div>
+                                        <div>
+                                            <label style="display:block; font-size: 13px; font-weight: 600; margin-bottom: 5px;">CVV</label>
+                                            <input type="text" class="form-control" placeholder="123" style="width:100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px;">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Expiry Date</label>
-                                    <input type="text" class="form-control" placeholder="MM/YY">
-                                </div>
-                                <div class="form-group">
-                                    <label>CVV</label>
-                                    <input type="text" class="form-control" placeholder="123">
-                                </div>
+                        </div>
+                        <div id="cod-info" style="display:none;">
+                            <div style="display:flex; gap:12px; align-items:center;">
+                                <i class="fas fa-info-circle" style="color: #10b981; font-size: 1.2rem;"></i>
+                                <span style="font-size: 0.9rem; color: #475569;">You will pay for your order via cash when it arrives at your doorstep. Please prepare the exact amount if possible.</span>
                             </div>
                         </div>
 
@@ -318,10 +390,12 @@ if (mysqli_num_rows($check_addr) > 0) {
             // Hide all sub-infos
             document.getElementById('gcash-info').style.display = 'none';
             document.getElementById('card-info').style.display = 'none';
+            document.getElementById('cod-info').style.display = 'none';
 
 
             if (method === 'gcash') document.getElementById('gcash-info').style.display = 'block';
             if (method === 'card') document.getElementById('card-info').style.display = 'block';
+            if (method === 'cod') document.getElementById('cod-info').style.display = 'block';
 
         }
 

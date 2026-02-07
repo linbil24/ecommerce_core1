@@ -170,6 +170,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
+// Handle Order Cancellation
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] == 'cancel_order') {
+    $order_id_to_cancel = intval($_POST['order_id']);
+    $cancel_sql = "UPDATE orders SET status='Cancelled' WHERE id='$order_id_to_cancel' AND user_id='$user_id'";
+    if (mysqli_query($conn, $cancel_sql)) {
+        $msg = "<div class='alert-success'>Order cancelled successfully.</div>";
+    } else {
+        $msg = "<div class='alert-error'>Error cancelling order.</div>";
+    }
+}
+
 // ---------------------------------------------------------
 // FETCH USER DATA
 // ---------------------------------------------------------
@@ -192,11 +203,18 @@ if ($view == 'address') {
 // FETCH ORDERS (If view is orders or tracking)
 // ---------------------------------------------------------
 $my_orders = [];
+$tab = isset($_GET['tab']) ? $_GET['tab'] : 'All';
 if ($view == 'orders' || $view == 'tracking') {
-    // Ensure table exists (in case Payment.php wasn't run yet)
     $check_orders = mysqli_query($conn, "SHOW TABLES LIKE 'orders'");
     if (mysqli_num_rows($check_orders) > 0) {
-        $order_sql = "SELECT * FROM orders WHERE user_id='$user_id' ORDER BY created_at DESC";
+        $filter_sql = "";
+        if ($tab == 'To Pay') $filter_sql = " AND status='Pending'";
+        if ($tab == 'To Ship') $filter_sql = " AND status='Paid'";
+        if ($tab == 'To Receive') $filter_sql = " AND status='Shipped'";
+        if ($tab == 'Completed') $filter_sql = " AND status IN ('Delivered', 'Completed')";
+        if ($tab == 'Cancelled') $filter_sql = " AND status='Cancelled'";
+
+        $order_sql = "SELECT * FROM orders WHERE user_id='$user_id' $filter_sql ORDER BY created_at DESC";
         $order_res = mysqli_query($conn, $order_sql);
         while ($r = mysqli_fetch_assoc($order_res)) {
             $my_orders[] = $r;
@@ -430,12 +448,12 @@ if ($view == 'orders' || $view == 'tracking') {
             <?php elseif ($view == 'orders'): ?>
 
                 <div class="order-tabs">
-                    <a href="#" class="order-tab active">All</a>
-                    <a href="#" class="order-tab">To Pay</a>
-                    <a href="#" class="order-tab">To Ship</a>
-                    <a href="#" class="order-tab">To Receive</a>
-                    <a href="#" class="order-tab">Completed</a>
-                    <a href="#" class="order-tab">Cancelled</a>
+                    <a href="?view=orders&tab=All" class="order-tab <?php echo $tab == 'All' ? 'active' : ''; ?>">All</a>
+                    <a href="?view=orders&tab=To Pay" class="order-tab <?php echo $tab == 'To Pay' ? 'active' : ''; ?>">To Pay</a>
+                    <a href="?view=orders&tab=To Ship" class="order-tab <?php echo $tab == 'To Ship' ? 'active' : ''; ?>">To Ship</a>
+                    <a href="?view=orders&tab=To Receive" class="order-tab <?php echo $tab == 'To Receive' ? 'active' : ''; ?>">To Receive</a>
+                    <a href="?view=orders&tab=Completed" class="order-tab <?php echo $tab == 'Completed' ? 'active' : ''; ?>">Completed</a>
+                    <a href="?view=orders&tab=Cancelled" class="order-tab <?php echo $tab == 'Cancelled' ? 'active' : ''; ?>">Cancelled</a>
                 </div>
 
                 <!-- Search Bar for Orders -->
@@ -482,13 +500,25 @@ if ($view == 'orders' || $view == 'tracking') {
                                 </div>
                             </a>
 
-                            <div class="order-footer">
-                                <div class="order-total-label">Order Total:</div>
-                                <div class="order-total-price">₱<?php echo number_format($order['total_amount'], 2); ?></div>
+                            <div class="order-footer" style="padding-top: 15px; border-top: 1px solid #f1f5f9; display: flex; flex-direction: column; align-items: flex-end;">
+                                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                                    <span style="font-size: 0.9rem; color: #64748b;">Order Total:</span>
+                                    <span style="font-size: 1.4rem; font-weight: 700; color: #2A3B7E;">₱<?php echo number_format($order['total_amount'], 2); ?></span>
+                                </div>
 
-                                <a href="?view=tracking&order_id=<?php echo $order['id']; ?>" class="btn-primary">Track Order</a>
-                                <button class="btn-outline">Buy Again</button>
-                                <button class="btn-outline">Contact Seller</button>
+                                <div class="order-actions" style="display:flex; gap:10px; justify-content: flex-end; width: 100%;">
+                                    <a href="?view=tracking&order_id=<?php echo $order['id']; ?>" class="btn-primary" style="padding: 8px 18px; font-size: 13px; font-weight: 600; border-radius: 6px;">Track Order</a>
+                                    
+                                    <?php if ($order['status'] == 'Pending'): ?>
+                                        <button class="btn-outline" style="padding: 8px 18px; font-size: 13px; font-weight: 600; border-radius: 6px; color: #ef4444; border-color: #fca5a5;" onclick="cancelOrder(<?php echo $order['id']; ?>)">Cancel Order</button>
+                                    <?php endif; ?>
+
+                                    <?php if (in_array($order['status'], ['Delivered', 'Completed'])): ?>
+                                        <a href="Rate.php?product_id=<?php echo urlencode($order['product_id']); ?>&order_id=<?php echo $order['id']; ?>" class="btn-primary" style="background: #10b981; border-color: #10b981; padding: 8px 18px; font-size: 13px; font-weight: 600; border-radius: 6px;">Rate / Review</a>
+                                    <?php endif; ?>
+
+                                    <button class="btn-outline" style="padding: 8px 18px; font-size: 13px; font-weight: 600; border-radius: 6px;">Buy Again</button>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -625,6 +655,17 @@ if ($view == 'orders' || $view == 'tracking') {
                                 </div>
                             </div>
                         </div>
+                        
+                        <?php if ($curr_order['status'] == 'Pending'): ?>
+                            <div style="margin-top: 30px; display: flex; justify-content: center; border-top: 1px solid #eee; padding-top: 25px;">
+                                <button class="btn-outline" style="padding: 12px 30px; border-radius: 8px; color: #ef4444; border: 2px solid #fca5a5; font-weight: 700; background: #fffcfc; cursor: pointer; transition: all 0.2s;" 
+                                        onmouseover="this.style.background='#ef4444'; this.style.color='white';" 
+                                        onmouseout="this.style.background='#fffcfc'; this.style.color='#ef4444';"
+                                        onclick="cancelOrder(<?php echo $curr_order['id']; ?>)">
+                                    <i class="fas fa-times-circle" style="margin-right: 8px;"></i> Cancel Order
+                                </button>
+                            </div>
+                        <?php endif; ?>
 
                     </div>
 
@@ -813,6 +854,7 @@ if ($view == 'orders' || $view == 'tracking') {
     <form id="actionForm" method="POST" style="display:none;">
         <input type="hidden" name="action" id="formAction">
         <input type="hidden" name="address_id" id="formAddrId">
+        <input type="hidden" name="order_id" id="formOrderId">
     </form>
 
     <script>
@@ -851,6 +893,14 @@ if ($view == 'orders' || $view == 'tracking') {
             document.getElementById('formAction').value = 'set_default';
             document.getElementById('formAddrId').value = id;
             document.getElementById('actionForm').submit();
+        }
+
+        function cancelOrder(id) {
+            if (confirm('Are you sure you want to cancel this order?')) {
+                document.getElementById('formAction').value = 'cancel_order';
+                document.getElementById('formOrderId').value = id;
+                document.getElementById('actionForm').submit();
+            }
         }
 
         // Detect Location in Account Modal
