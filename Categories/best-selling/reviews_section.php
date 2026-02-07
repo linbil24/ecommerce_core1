@@ -249,6 +249,15 @@
         } elseif ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $display_name = !empty($row['user_name']) ? $row['user_name'] : "User";
+                $is_sample = (isset($row['order_id']) && $row['order_id'] == 0);
+                
+                if ($is_sample) {
+                    $random_names = ['Maria Clara', 'Juan Dela Cruz', 'Sophia Reyes', 'Kevin Lee', 'Elena Gilbert', 'James Bondoc', 'Rico Blanco', 'Sarah Chen', 'David Kim', 'Jessica Lim', 'Bong Go', 'Robin Padilla', 'Liza Soberano', 'Enrique Gil'];
+                    // Use the review ID as a seed so the name stays the same for that specific review on refresh
+                    $name_index = $row['id'] % count($random_names);
+                    $display_name = $random_names[$name_index];
+                }
+
                 $user_initial = strtoupper(substr($display_name, 0, 1));
                 $review_id = $row['id']; // Unique ID for JS targeting
                 ?>
