@@ -318,11 +318,11 @@ if (mysqli_num_rows($check_addr) > 0) {
             // Hide all sub-infos
             document.getElementById('gcash-info').style.display = 'none';
             document.getElementById('card-info').style.display = 'none';
-            document.getElementById('cod-info').style.display = 'none';
+
 
             if (method === 'gcash') document.getElementById('gcash-info').style.display = 'block';
             if (method === 'card') document.getElementById('card-info').style.display = 'block';
-            if (method === 'cod') document.getElementById('cod-info').style.display = 'block';
+
         }
 
         function processPayment() {
