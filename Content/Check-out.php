@@ -368,6 +368,12 @@ if ($result && mysqli_num_rows($result) > 0) {
         }
     </script>
 
+    <div style="margin-top: 50px;">
+        <?php
+        $path_prefix = '../';
+        include '../Components/footer.php';
+        ?>
+    </div>
 </body>
 
 </html>

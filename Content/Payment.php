@@ -341,5 +341,12 @@ if (mysqli_num_rows($check_addr) > 0) {
             }, 1500);
         }
     </script>
+    <div style="margin-top: 50px;">
+        <?php
+        $path_prefix = '../';
+        include '../Components/footer.php';
+        ?>
+    </div>
 </body>
+
 </html>

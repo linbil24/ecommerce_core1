@@ -888,6 +888,12 @@ if ($view == 'orders' || $view == 'tracking') {
             }
         }
     </script>
+    <div class="footer-account-wrapper" style="margin-top: 50px;">
+        <?php
+        $path_prefix = '../';
+        include('../Components/footer.php');
+        ?>
+    </div>
 </body>
 
 </html>

@@ -170,6 +170,10 @@ if (isset($_SESSION['user_id'])) {
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+<script>
+    // Site-wide path prefix for AI features navigation
+    const ai_path_prefix = "<?php echo $path_prefix; ?>";
+</script>
 <script src="<?php echo $path_prefix; ?>javascript/ai-features.js"></script>
 
 <script>

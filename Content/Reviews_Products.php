@@ -209,6 +209,12 @@ $result = mysqli_query($conn, $sql);
         </div>
     </div>
 
+    <div style="margin-top: 50px;">
+        <?php
+        $path_prefix = '../';
+        include '../Components/footer.php';
+        ?>
+    </div>
 </body>
 
 </html>

@@ -169,11 +169,11 @@ async function captureAndSearch() {
                 let product = null;
 
                 if (detectedName.includes('telephone') || detectedName.includes('phone')) {
-                    product = { id: "iphone15", name: "iPhone 15 Pro Max", price: "₱84,990.00", store: "TechZone PH", image: "../image/electronics/Portable Power Bank 20,000mAh.jpeg" };
+                    product = { id: "iphone15", name: "iPhone 15 Pro Max", price: "₱84,990.00", store: "TechZone PH", image: ai_path_prefix + "image/electronics/Portable Power Bank 20,000mAh.jpeg" };
                 } else if (detectedName.includes('shoe') || detectedName.includes('sneaker') || detectedName.includes('sandal')) {
-                    product = { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/Casual Sneakers.jpeg" };
+                    product = { id: "sneakers_casual", name: "Casual Sneakers", price: "₱1,299.00", store: "UrbanWear PH", image: ai_path_prefix + "image/Shop/UrbanWear PH/Casual Sneakers.jpeg" };
                 } else if (detectedName.includes('shirt') || detectedName.includes('jersey') || detectedName.includes('clothing')) {
-                    product = { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: "../image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" };
+                    product = { id: "hoodie_black", name: "H&M Loose Fit Hoodie", price: "₱999.00", store: "UrbanWear PH", image: ai_path_prefix + "image/Shop/UrbanWear PH/H&M Loose Fit Hoodie.jpeg" };
                 } else {
                     // NO MATCH IN SYSTEM
                     product = null;
@@ -239,7 +239,7 @@ async function captureAndSearch() {
                 btn.style.display = 'none';
 
                 // Send to PHP Backend for Logging (Background)
-                fetch('../php/ai_search.php', { method: 'POST', body: formData });
+                fetch(ai_path_prefix + 'php/ai_search.php', { method: 'POST', body: formData });
 
                 setTimeout(() => {
                     closeAiModal();
@@ -261,7 +261,7 @@ async function captureAndSearch() {
                                 category = "Fashion";
                             }
 
-                            window.location.href = `../Content/Dashboard.php?ai_action=confirm_scan&detected=${encodeURIComponent(product.name)}&category=${encodeURIComponent(category)}`;
+                            window.location.href = `${ai_path_prefix}Content/Dashboard.php?ai_action=confirm_scan&detected=${encodeURIComponent(product.name)}&category=${encodeURIComponent(category)}`;
                         } else {
                             // If not found, stay on modal so they see "Out of Order" message, then maybe close after delay
                             setTimeout(() => {
@@ -337,14 +337,14 @@ function openVoiceCommand() {
 
         // System-wide "Auto" Commands
         const commands = [
-            { keywords: ['home', 'dashboard', 'main page', 'pumunta sa home', 'balik sa home'], action: '../Content/Dashboard.php' },
-            { keywords: ['cart', 'shopping cart', 'bucket', 'buksan ang cart', 'check out'], action: '../Content/Cart.php' },
-            { keywords: ['order', 'orders', 'history', 'mga order', 'binili'], action: '../Account/index.php?tab=orders' },
-            { keywords: ['profile', 'account', 'setting', 'security', 'sarili', 'impormasyon'], action: '../Account/index.php' },
-            { keywords: ['support', 'help', 'customer service', 'chat', 'tulong'], action: '../Services/Customer_Service.php' },
-            { keywords: ['logout', 'sign out', 'alis', 'log out'], action: '../php/logout.php' },
-            { keywords: ['best seller', 'best selling', 'sikat', 'mabenta'], action: '../Shop/index.php?search_query=best+sellers' },
-            { keywords: ['mall', 'shops', 'stores', 'tindahan'], action: '../Mall/index.php' }
+            { keywords: ['home', 'dashboard', 'main page', 'pumunta sa home', 'balik sa home'], action: ai_path_prefix + 'Content/Dashboard.php' },
+            { keywords: ['cart', 'shopping cart', 'bucket', 'buksan ang cart', 'check out'], action: ai_path_prefix + 'Content/Check-out.php' },
+            { keywords: ['order', 'orders', 'history', 'mga order', 'binili'], action: ai_path_prefix + 'Content/Order-history.php' },
+            { keywords: ['profile', 'account', 'setting', 'security', 'sarili', 'impormasyon'], action: ai_path_prefix + 'Content/user-account.php' },
+            { keywords: ['support', 'help', 'customer service', 'chat', 'tulong'], action: ai_path_prefix + 'Services/Customer_Service.php' },
+            { keywords: ['logout', 'sign out', 'alis', 'log out'], action: ai_path_prefix + 'php/logout.php' },
+            { keywords: ['best seller', 'best selling', 'sikat', 'mabenta'], action: ai_path_prefix + 'Shop/index.php?search=best+sellers' },
+            { keywords: ['mall', 'shops', 'stores', 'tindahan'], action: ai_path_prefix + 'Shop/index.php' }
         ];
 
         let foundAction = null;
@@ -373,9 +373,7 @@ function openVoiceCommand() {
 
             setTimeout(() => {
                 closeAiModal();
-                let prefix = '../';
-                if (window.location.pathname.includes('/Shop/')) prefix = '';
-                window.location.href = prefix + '../Shop/index.php?search_query=' + encodeURIComponent(transcript);
+                window.location.href = ai_path_prefix + 'Shop/index.php?search=' + encodeURIComponent(transcript);
             }, 1500);
         }
     };

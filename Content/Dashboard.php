@@ -128,6 +128,9 @@ header("X-Content-Type-Options: nosniff");
         </script>
 
 
+    <div style="background: white; padding-top: 50px;">
+        <?php include '../Components/footer.php'; ?>
+    </div>
 </body>
 
 </html>
