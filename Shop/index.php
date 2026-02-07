@@ -897,7 +897,11 @@
                                                 data-sold="<?php echo $tp['sold']; ?>"
                                                 data-store="<?php echo htmlspecialchars($rShop['name']); ?>"
                                                 onclick="openProductModal(this)">
-                                                <img src="<?php echo $tp['image']; ?>" class="mini-product-img">
+                                                <?php 
+                                                    $tp_img = $tp['image'];
+                                                    if(strpos($tp_img, '../../') === 0) $tp_img = str_replace('../../', '../', $tp_img);
+                                                ?>
+                                                <img src="<?php echo $tp_img; ?>" class="mini-product-img">
                                                 <div class="mini-product-price"><?php echo $tp['price']; ?></div>
                                             </div>
                                         <?php endforeach; ?>
@@ -955,7 +959,11 @@
                                            echo htmlspecialchars($prodCat);
                                            ?>" onclick="openProductModal(this)">
                                         <div class="result-img-wrapper">
-                                            <img src="<?php echo $ap['image']; ?>" class="result-img">
+                                            <?php 
+                                                $img_path = $ap['image'];
+                                                if(strpos($img_path, '../../') === 0) $img_path = str_replace('../../', '../', $img_path);
+                                            ?>
+                                            <img src="<?php echo $img_path; ?>" class="result-img">
                                             <?php if (!empty($ap['discount'])): ?>
                                                 <div style="position: absolute; top: 0; right: 0; background: #ffe910; color: #ee4d2d; padding: 2px 5px; font-size: 10px; font-weight: 700;">
                                                     <?php echo $ap['discount']; ?>
@@ -1182,7 +1190,7 @@
                         <!-- Item 2: TechZone -->
                         <div class="premium-card" onclick="window.location.href='?store=TechZone+PH'">
                             <div class="premium-shop-badge">Tech Partner</div>
-                            <img src="../image/electronics/Noise%20Cancelling%20Headphones.jpeg" alt="TechZone">
+                            <img src="../image/Shop/TechZone%20PH/Samsung%20Galaxy%20S25%20Ultra%20(512GB).jpeg" alt="TechZone">
                             <div class="premium-overlay" style="background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 40%, transparent 100%);">
                                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                                     <i class="fas fa-bolt" style="color: #a855f7;"></i>

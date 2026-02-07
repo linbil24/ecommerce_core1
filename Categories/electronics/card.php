@@ -59,7 +59,7 @@ $products = [
     [
         'name' => 'Noise Cancelling Headphones',
         'price' => '₱15,000.00',
-        'image' => '../../image/electronics/Noise Cancelling Headphones.jpeg',
+        'image' => '../../image/electronics/Noise_Cancelling_Headphones.jpeg',
         'link' => 'view-product.php?id=307',
         'discount' => '-20%'
     ],
