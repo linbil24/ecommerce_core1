@@ -26,14 +26,26 @@ foreach ($sample_users as $user) {
     }
 }
 
-// 2. Add Sample Reviews for Product 113 (USB C Cable)
-$product_id = 113;
+// 2. Add Sample Reviews for Product 115 (Phone Ring Holder)
+$product_id = 115;
 $sample_reviews = [
-    ['user_idx' => 0, 'rating' => 5, 'comment' => 'Great product, works perfectly for my iPhone. Fast shipping too!'],
-    ['user_idx' => 1, 'rating' => 3, 'comment' => "It's okay but the cable is a bit stiff. Works as expected though."],
-    ['user_idx' => 2, 'rating' => 1, 'comment' => 'Very disappointed, it stopped working after two days. Do not buy!'],
-    ['user_idx' => 3, 'rating' => 5, 'comment' => 'Fast charging is really fast! Highly recommended for everyone.'],
-    ['user_idx' => 4, 'rating' => 2, 'comment' => 'Poor quality, feels very cheap and the connector is loose.']
+    // Positive Reviews
+    ['user_idx' => 0, 'rating' => 5, 'comment' => 'Sulit na sulit! The adhesive is very strong and the design is premium. Highly recommended!'],
+    ['user_idx' => 1, 'rating' => 5, 'comment' => 'Ganda ng quality, ayos na ayos sa phone ko. Mabilis din dumating yung item.'],
+    ['user_idx' => 3, 'rating' => 5, 'comment' => 'Amazing product! Best ring holder I have ever used. Very satisfied.'],
+    ['user_idx' => 2, 'rating' => 4, 'comment' => 'Maganda siya, legit na durable. Worth the price!'],
+    
+    // Negative Reviews
+    ['user_idx' => 4, 'rating' => 1, 'comment' => 'Pangit ng quality, madaling natanggal yung paint. Waste of money, wag niyo na bilhin.'],
+    ['user_idx' => 2, 'rating' => 1, 'comment' => 'Sira agad after 1 week. Sobrang bagal pa ng shipping. Sayang lang pera dito.'],
+    ['user_idx' => 0, 'rating' => 1, 'comment' => 'Bad experience. The ring became loose after just 2 days. Terrible quality.'],
+    ['user_idx' => 1, 'rating' => 2, 'comment' => 'Disappointed. Not as described. It feels very cheap and weak.'],
+
+    // Neutral Reviews
+    ['user_idx' => 3, 'rating' => 3, 'comment' => 'Okay naman siya, sakto lang sa presyo. Durable enough for daily use.'],
+    ['user_idx' => 1, 'rating' => 3, 'comment' => 'sakto lang, pwede na for its price. standard quality.'],
+    ['user_idx' => 4, 'rating' => 3, 'comment' => 'Fine product. Not great but not bad either. Just average.'],
+    ['user_idx' => 2, 'rating' => 3, 'comment' => 'Okay naman, normal lang na ring holder. Matagal lang shipping.']
 ];
 
 // Clear existing reviews for this product to avoid duplicates for this demo
@@ -49,5 +61,5 @@ foreach ($sample_reviews as $review) {
     mysqli_query($conn, $sql);
 }
 
-echo "Sample users and reviews added successfully for Product 113!";
+echo "Sample users and reviews added successfully for Product 115!";
 ?>

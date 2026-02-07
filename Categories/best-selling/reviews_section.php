@@ -68,46 +68,69 @@
     .sentiment-badge {
         display: inline-flex;
         align-items: center;
-        gap: 5px;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 3px 10px;
-        border-radius: 20px;
-        margin-bottom: 8px;
+        gap: 6px;
+        font-size: 10px;
+        font-weight: 800;
+        padding: 4px 12px;
+        border-radius: 50px;
+        margin-bottom: 12px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
+        animation: fadeInScale 0.4s ease-out;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    @keyframes fadeInScale {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
     }
 
     .sentiment-positive {
-        background: #dcfce7;
-        color: #166534;
-        border: 1px solid #bbf7d0;
+        background: #ecfdf5;
+        color: #059669;
+        border: 1px solid #10b981;
     }
 
     .sentiment-negative {
-        background: #fee2e2;
-        color: #991b1b;
-        border: 1px solid #fecaca;
+        background: #fef2f2;
+        color: #dc2626;
+        border: 1px solid #ef4444;
     }
 
     .sentiment-neutral {
-        background: #f1f5f9;
+        background: #f8fafc;
         color: #475569;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #cbd5e1;
     }
 
     .sentiment-icon {
-        font-size: 12px;
+        font-size: 11px;
+    }
+
+    .review-item {
+        background: #fff;
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        border: 1px solid #f1f5f9;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .review-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.03);
     }
 </style>
 
 <div class="reviews-container">
-    <div class="reviews-header" style="display:flex; justify-content:space-between; align-items:center;">
-        <span>Product Ratings</span>
-        <span style="font-size:12px; background:#e0f2fe; color:#0369a1; padding:4px 8px; border-radius:4px;">
-            <i class="fas fa-robot"></i> AI Analysis Enabled
+    <div class="reviews-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 25px;">
+        <span style="font-weight: 800; font-size: 1.2rem; color: #0f172a;">What Customers Say</span>
+        <span style="font-size:11px; font-weight: 700; background:#f0f9ff; color:#0369a1; padding:6px 12px; border-radius:100px; border: 1px solid #bae6fd; display: flex; align-items: center; gap: 6px;">
+            <i class="fas fa-magic"></i> AI Sentiment Analysis
         </span>
     </div>
+
+    <?php include_once __DIR__ . '/../nlp_core.php'; ?>
 
     <?php
     // Connect to DB if not already connected
@@ -178,8 +201,27 @@
                     </div>
                     <div class="review-meta"><?php echo date("F j, Y", strtotime($row['created_at'])); ?></div>
 
-                    <!-- AI Sentiment Container -->
-                    <div id="sentiment-container-<?php echo $review_id; ?>" style="min-height: 20px;"></div>
+                    <!-- AI Sentiment Container (Server-Side Pre-rendered) -->
+                    <div id="sentiment-container-<?php echo $review_id; ?>" style="min-height: 20px;">
+                        <?php 
+                        $analysis = analyzeSentimentAI($row['comment']);
+                        $sentiment = $analysis['result']['sentiment'];
+                        $badgeClass = 'sentiment-neutral';
+                        $icon = '<i class="fas fa-minus"></i>';
+
+                        if ($sentiment === 'Positive') {
+                            $badgeClass = 'sentiment-positive';
+                            $icon = '<i class="fas fa-thumbs-up"></i>';
+                        } else if ($sentiment === 'Negative') {
+                            $badgeClass = 'sentiment-negative';
+                            $icon = '<i class="fas fa-thumbs-down"></i>';
+                        }
+                        ?>
+                        <div class="sentiment-badge <?php echo $badgeClass; ?>">
+                            <span class="sentiment-icon"><?php echo $icon; ?></span>
+                            <?php echo $sentiment; ?>
+                        </div>
+                    </div>
 
                     <div class="review-content" id="review-text-<?php echo $review_id; ?>">
                         <?php echo nl2br(htmlspecialchars($row['comment'])); ?>
@@ -201,20 +243,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <!-- Trigger Analysis -->
-                    <script>
-                        // Queue this for analysis
-                        if (typeof queueReviewAnalysis === 'function') {
-                            queueReviewAnalysis("<?php echo $review_id; ?>", <?php echo json_encode($row['comment']); ?>);
-                        } else {
-                            // Simple fallback if function not ready (though script is at bottom)
-                            document.addEventListener("DOMContentLoaded", function () {
-                                if (typeof analyzeReviewBase === 'function') {
-                                    analyzeReviewBase("<?php echo $review_id; ?>", <?php echo json_encode($row['comment']); ?>);
-                                }
-                            });
-                        }
-                    </script>
+                    <!-- Trigger Analysis (Already handled by server, keeping for future real-time updates) -->
                 </div>
                 <?php
             }
