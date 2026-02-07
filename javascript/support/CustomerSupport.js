@@ -240,7 +240,7 @@ function renderChatModule() {
 
 async function loadAdminChatList() {
     try {
-        const res = await fetch('../Admin/get_chat_list.php');
+        const res = await fetch('get_chat_list.php');
         const data = await res.json();
         const listContainer = document.getElementById('admin-chat-list');
 
@@ -285,7 +285,7 @@ function selectChat(userId, storeName, customerName) {
 async function loadAdminMessages() {
     if (!activeChatUser || !activeChatStore) return;
     try {
-        const res = await fetch(`../Admin/get_admin_chat_messages.php?user_id=${activeChatUser}&store_name=${activeChatStore}`);
+        const res = await fetch(`get_admin_chat_messages.php?user_id=${activeChatUser}&store_name=${activeChatStore}`);
         const data = await res.json();
         const msgContainer = document.getElementById('admin-chat-messages');
 
@@ -316,7 +316,7 @@ async function sendAdminChatReply(event) {
 
     input.value = '';
     try {
-        const res = await fetch('../Admin/send_chat_reply.php', { method: 'POST', body: formData });
+        const res = await fetch('send_chat_reply.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.success) loadAdminMessages();
     } catch (e) { console.error(e); }

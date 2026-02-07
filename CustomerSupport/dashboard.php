@@ -75,7 +75,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$is_logged_in = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
+$is_logged_in = isset($_SESSION['support_logged_in']) && $_SESSION['support_logged_in'] === true;
 
 if (!$is_logged_in) {
     header("Location: login.php");
@@ -103,15 +103,15 @@ function handle_form_submission($pdo, $action, $post_data, $files = [])
 
         // --- ADMIN PROFILE UPDATE LOGIC ---
         case 'update_profile':
-            $admin_id = $_SESSION['admin_id'] ?? null;
-            if (!$admin_id) {
+            $support_id = $_SESSION['support_id'] ?? null;
+            if (!$support_id) {
                 header("Location: " . $redirect_base . "?msg=" . urlencode("Authentication required to update profile."));
                 exit();
             }
 
             $result_message = update_admin_profile(
                 $pdo,
-                $admin_id,
+                $support_id,
                 $post_data['new_username'] ?? '',
                 $post_data['full_name'] ?? '',
                 $post_data['email'] ?? '',
@@ -271,7 +271,7 @@ function handle_form_submission($pdo, $action, $post_data, $files = [])
 
 // NEW ACTION: Handles request to return to login/clear session
 if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
-    handle_login_redirect();
+    handle_support_login_redirect();
 }
 
 // Handle LOGOUT request
@@ -293,8 +293,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 // Check login status
-$is_logged_in = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true;
-$is_awaiting_otp = isset($_SESSION['admin_awaiting_otp']) && $_SESSION['admin_awaiting_otp'] === true;
+$is_logged_in = isset($_SESSION['support_logged_in']) && $_SESSION['support_logged_in'] === true;
+$is_awaiting_otp = isset($_SESSION['support_awaiting_otp']) && $_SESSION['support_awaiting_otp'] === true;
 
 $message = $_GET['msg'] ?? '';
 $view = $_GET['view'] ?? '';
@@ -315,18 +315,18 @@ if ($is_logged_in) {
 }
 
 // Fetch display details
-$admin_username = htmlspecialchars($_SESSION['admin_username'] ?? ($is_awaiting_otp ? $_SESSION['temp_admin_username'] : 'Admin'));
-$admin_role = htmlspecialchars($_SESSION['admin_role'] ?? 'User');
+$support_username = htmlspecialchars($_SESSION['support_username'] ?? ($is_awaiting_otp ? $_SESSION['temp_support_username'] : 'Support'));
+$support_role = htmlspecialchars($_SESSION['support_role'] ?? 'Staff');
 
 // Fetch admin details for the profile page if logged in
-$admin_details = [];
-if ($is_logged_in && isset($_SESSION['admin_id'])) {
-    $admin_details = get_admin_user_details($pdo, $_SESSION['admin_id']) ?: [];
-    unset($admin_details['password_hash'], $admin_details['otp_code'], $admin_details['otp_expiry']);
+$support_details = [];
+if ($is_logged_in && isset($_SESSION['support_id'])) {
+    $support_details = get_support_user_details($pdo, $_SESSION['support_id']) ?: [];
+    unset($support_details['password_hash'], $support_details['otp_code'], $support_details['otp_expiry']);
 
-    $profileImageUrl = get_admin_profile_image_url($_SESSION['admin_id']);
+    $profileImageUrl = get_admin_profile_image_url($_SESSION['support_id']);
     if ($profileImageUrl) {
-        $admin_details['profile_image_url'] = $profileImageUrl;
+        $support_details['profile_image_url'] = $profileImageUrl;
     }
 }
 
@@ -525,19 +525,19 @@ if ($is_logged_in) {
                 <div class="profile-menu-container" tabindex="0">
                     <div class="profile-avatar"
                         style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1rem; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); transition: all 0.2s; border: 2px solid rgba(255, 255, 255, 0.2);">
-                        <?php echo strtoupper(substr($admin_username, 0, 1)); ?>
+                        <?php echo strtoupper(substr($support_username, 0, 1)); ?>
                     </div>
 
                     <div class="profile-dropdown">
                         <div
                             style="padding: 0.75rem 1rem; color: #1f2937; font-weight: 600; border-bottom: 1px solid #f9fafb;">
-                            <?php echo $admin_username; ?>
+                            <?php echo $support_username; ?>
                             <span class="text-xs font-medium"
-                                style="display: block; color: var(--color-indigo-600); margin-top: 0.25rem;"><?php echo $admin_role; ?></span>
+                                style="display: block; color: var(--color-indigo-600); margin-top: 0.25rem;"><?php echo $support_role; ?></span>
                         </div>
                         <a href="#" onclick="showSubModule('user', 'profile'); event.preventDefault();">
                             <i data-lucide="user-cog" style="width: 1.1rem; height: 1.1rem; margin-right: 0.75rem;"></i>
-                            Admin Profile
+                            Support Profile
                         </a>
                         <div class="divider"></div>
                         <a href="logout.php" style="color: var(--color-red-600);">
@@ -584,9 +584,9 @@ if ($is_logged_in) {
 
         // Additional configuration for JS
         const adminConfig = {
-            username: "<?php echo $admin_username; ?>",
-            role: "<?php echo $admin_role; ?>",
-            currentAdminId: <?php echo $_SESSION['admin_id'] ?? 0; ?>
+            username: "<?php echo $support_username; ?>",
+            role: "<?php echo $support_role; ?>",
+            currentSupportId: <?php echo $_SESSION['support_id'] ?? 0; ?>
         };
 
         // Update chat notification badges

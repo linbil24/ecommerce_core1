@@ -218,12 +218,12 @@ if (isset($_POST['login'])) {
 
                     <div class="form-group" style="margin-bottom: 1.5rem;">
                          <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #555;">
-                            <input type="checkbox" name="agree_terms" required style="width: auto; margin: 0;">
+                            <input type="checkbox" name="agree_terms" id="agree_terms" required style="width: auto; margin: 0;">
                             <span>I agree to the <a href="../About/Terms & Conditions.php" target="_blank" style="color: #007bff; text-decoration: none;">Terms & Conditions</a></span>
                         </label>
                     </div>
 
-                    <button type="submit" name="login" class="btn-login">Log In</button>
+                    <button type="submit" name="login" id="login_btn" class="btn-login" disabled style="opacity: 0.5; cursor: not-allowed;">Log In</button>
 
                     <div class="divider">
                         <span>or continue with</span>
@@ -259,6 +259,31 @@ if (isset($_POST['login'])) {
                 icon.classList.add("fa-eye");
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const termsCheckbox = document.getElementById('agree_terms');
+            const loginBtn = document.getElementById('login_btn');
+
+            if (termsCheckbox && loginBtn) {
+                // Initial check
+                toggleLoginButton();
+
+                // Listen for changes
+                termsCheckbox.addEventListener('change', toggleLoginButton);
+
+                function toggleLoginButton() {
+                    if (termsCheckbox.checked) {
+                        loginBtn.removeAttribute('disabled');
+                        loginBtn.style.opacity = '1';
+                        loginBtn.style.cursor = 'pointer';
+                    } else {
+                        loginBtn.setAttribute('disabled', 'disabled');
+                        loginBtn.style.opacity = '0.5';
+                        loginBtn.style.cursor = 'not-allowed';
+                    }
+                }
+            }
+        });
     </script>
 </body>
 
