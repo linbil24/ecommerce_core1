@@ -124,32 +124,43 @@ if (mysqli_num_rows($check_addr) > 0) {
             <!-- Left Side: Payment Methods -->
             <div class="checkout-details">
                 <!-- Delivery Address Section -->
-                <div class="card" style="margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                        <h2 class="section-title" style="margin:0;"><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #f0ad4e;"></i> Delivery Address</h2>
-                        <a href="user-account.php?view=address" style="color: #2A3B7E; font-size: 0.9rem; font-weight: 500; text-decoration: none;">Change</a>
-                    </div>
+                <div class="card" style="margin-bottom: 20px; padding: 0; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                    <!-- Decorative Border -->
+                    <div style="height: 4px; background: repeating-linear-gradient(45deg, #6fa6d6, #6fa6d6 33px, transparent 0, transparent 41px, #f18d9b 0, #f18d9b 74px, transparent 0, transparent 82px); width: 100%;"></div>
+                    
+                    <div style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h2 class="section-title" style="margin:0; font-size: 1.1rem; color: #2A3B7E; display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-map-marker-alt" style="color: #ef4444;"></i> Delivery Address
+                            </h2>
+                            <a href="user-account.php?view=address" style="color: #2A3B7E; font-size: 0.85rem; font-weight: 600; text-decoration: none; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; transition: background 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='transparent'">Change</a>
+                        </div>
 
-                    <?php if ($full_addr_details): ?>
-                        <div style="display: flex; gap: 15px; align-items: flex-start;">
-                            <div style="font-weight: 700; color: #333; min-width: 150px;">
-                                <?php echo htmlspecialchars($full_addr_details['fullname']); ?><br>
-                                <span style="font-weight: 400; color: #777; font-size: 0.9rem;"><?php echo htmlspecialchars($full_addr_details['phone']); ?></span>
-                            </div>
-                            <div style="color: #555; font-size: 0.95rem; flex: 1;">
-                                <?php echo htmlspecialchars($full_addr_details['address']); ?><br>
-                                <?php echo htmlspecialchars($full_addr_details['city']); ?>, <?php echo htmlspecialchars($full_addr_details['zip']); ?>
-                                <div style="margin-top: 5px;">
-                                    <span style="border: 1px solid #2A3B7E; color: #2A3B7E; font-size: 11px; padding: 2px 6px; border-radius: 2px;">Default</span>
+                        <?php if ($full_addr_details): ?>
+                            <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+                                <div style="font-weight: 700; color: #1e293b; min-width: 140px; font-size: 1rem;">
+                                    <?php echo htmlspecialchars($full_addr_details['fullname']); ?>
+                                    <div style="font-weight: 400; color: #64748b; font-size: 0.9rem; margin-top: 4px;">
+                                        <?php echo htmlspecialchars($full_addr_details['phone']); ?>
+                                    </div>
+                                </div>
+                                <div style="color: #334155; font-size: 0.95rem; flex: 1; line-height: 1.5;">
+                                    <div style="margin-bottom: 8px;">
+                                        <?php echo htmlspecialchars($full_addr_details['address']); ?><br>
+                                        <?php echo htmlspecialchars($full_addr_details['city']); ?>, <?php echo htmlspecialchars($full_addr_details['zip']); ?>
+                                    </div>
+                                    <span style="display: inline-block; border: 1px solid #2A3B7E; color: #2A3B7E; background: #eff6ff; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; letter-spacing: 0.02em;">Default</span>
                                 </div>
                             </div>
-                        </div>
-                    <?php else: ?>
-                        <div style="padding: 20px; border: 1px dashed #ccc; text-align: center; border-radius: 6px; background: #fafafa;">
-                            <p style="color: #888; margin-bottom: 10px;">No delivery address found.</p>
-                            <a href="user-account.php?view=address" class="btn-primary" style="display: inline-block; padding: 8px 15px; font-size: 0.9rem; text-decoration: none; color: white; background-color: #2A3B7E; border-radius: 4px;">+ Add Address</a>
-                        </div>
-                    <?php endif; ?>
+                        <?php else: ?>
+                            <div style="padding: 30px; border: 2px dashed #e2e8f0; text-align: center; border-radius: 8px; background: #f8fafc;">
+                                <div style="color: #94a3b8; margin-bottom: 12px; font-size: 0.95rem;">No delivery address found for your account.</div>
+                                <a href="user-account.php?view=address" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 0.9rem; text-decoration: none; color: white; background-color: #2A3B7E; border-radius: 6px; font-weight: 500; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(42, 59, 126, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                    <i class="fas fa-plus"></i> Add New Address
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                 </div>
 
                 <div class="card">
