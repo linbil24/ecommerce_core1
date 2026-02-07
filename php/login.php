@@ -18,9 +18,7 @@ if (isset($_POST['resend'])) {
     if (isset($_SESSION['email_to_verify'])) {
 // ...
 // ...
-if (isset($_POST['login'])) {
-    verify_csrf_token();
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+
         $email = $_SESSION['email_to_verify'];
         $query = "SELECT * FROM users WHERE email='$email'";
         $result = mysqli_query($conn, $query);
