@@ -192,6 +192,8 @@ $p_id = isset($product_id) ? $product_id : 601;
 // Refresh current product after data fix
 $product = isset($products_data[$p_id]) ? $products_data[$p_id] : $products_data[601];
 $price = $product['price_range'];
+$name = isset($product['name']) ? $product['name'] : 'Product';
+$img = isset($product['image']) ? str_replace(' ', '%20', $product['image']) : ''; 
 ?>
 
 <link rel="stylesheet" href="../../css/components/shared-product-view.css?v=<?php echo time(); ?>">
