@@ -32,7 +32,7 @@ function toggleSubMenu(element, submenuId) {
 
 function closeCustomModal() {
     const modal = document.getElementById('custom-modal-backdrop');
-    modal.classList.add('hidden');
+    if (modal) modal.classList.add('hidden');
 }
 
 // Support Dashboard
@@ -144,7 +144,6 @@ function renderSupportModule(submodule = 'tickets') {
     lucide.createIcons();
 }
 
-// ... (fetchSupportTickets and showTicketDetails logic preserved but omitted for brevity if unchanged, but I'll include the fetch logic to be safe)
 async function fetchSupportTickets() {
     try {
         const res = await fetch('get_support_tickets.php');
@@ -221,7 +220,6 @@ async function showTicketDetails(ticketId) {
 }
 
 function createModalElement() {
-    // Fallback if modal container doesn't exist
     const div = document.createElement('div');
     div.id = 'ai-modal-overlay';
     div.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: none; justify-content: center; align-items: center; z-index: 1000;';
@@ -365,18 +363,18 @@ async function loadAdminChatList() {
                             <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 4px;">
                                 <i data-lucide="store" style="width: 12px; height: 12px;"></i> ${storeName}
                             </div>
-                            <div style="font-size: 0.85rem; color: ${chat.unread_count > 0 ? #1e293b' : '#94a3b8'}; font-weight: ${chat.unread_count > 0 ? '600' : '400'}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                ${ chat.last_message ? chat.last_message : '<span style="font-style:italic;">No messages</span>' }
-                            </div >
-                        </div >
-                    ${ chat.unread_count > 0 ? `<div style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; margin-top: 6px; box-shadow: 0 0 0 3px white;"></div>` : '' }
-                    </div >
-                </div >
-                    `;
+                            <div style="font-size: 0.85rem; color: ${chat.unread_count > 0 ? '#1e293b' : '#94a3b8'}; font-weight: ${chat.unread_count > 0 ? '600' : '400'}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                ${chat.last_message ? chat.last_message : '<span style="font-style:italic;">No messages</span>'}
+                            </div>
+                        </div>
+                        ${chat.unread_count > 0 ? `<div style="width: 10px; height: 10px; background: #ef4444; border-radius: 50%; margin-top: 6px; box-shadow: 0 0 0 3px white;"></div>` : ''}
+                    </div>
+                </div>
+            `;
             }).join('');
 
             document.querySelectorAll('.chat-list-item').forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     const uid = this.getAttribute('data-user-id');
                     const store = this.getAttribute('data-store-name');
                     const name = this.getAttribute('data-customer-name');
@@ -387,10 +385,10 @@ async function loadAdminChatList() {
 
         } else {
             listContainer.innerHTML = `
-                    < div style = "padding: 3rem 1.5rem; text-align: center; color: #94a3b8;" >
+                <div style="padding: 3rem 1.5rem; text-align: center; color: #94a3b8;">
                     <i data-lucide="message-square-off" style="width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.5;"></i>
                     <p>No active conversations found.</p>
-                </div > `;
+                </div>`;
             lucide.createIcons();
         }
     } catch (e) { console.error('Error loading chats:', e); }
@@ -406,34 +404,34 @@ function selectChat(userId, storeName, customerName) {
     const inputContainer = document.getElementById('admin-chat-input-container');
     const messagesContainer = document.getElementById('admin-chat-messages');
 
-    if(header) {
+    if (header) {
         header.style.display = 'flex';
         header.style.animation = 'fadeIn 0.2s ease-out';
     }
-    if(inputContainer) {
+    if (inputContainer) {
         inputContainer.style.display = 'block';
         inputContainer.style.animation = 'slideUp 0.2s ease-out';
     }
-    
+
     // Update Header Info
     document.getElementById('chat-user-name').textContent = displayName;
-    // document.getElementById('chat-store-name').innerHTML = `< span style = "width: 6px; height: 6px; background: #22c55e; border-radius: 50%;" ></span > ${ storeName } `;
+    // document.getElementById('chat-store-name').innerHTML = `<span style="width: 6px; height: 6px; background: #22c55e; border-radius: 50%;"></span> ${storeName}`;
     document.getElementById('chat-user-avatar').textContent = displayName.charAt(0).toUpperCase();
 
     // Show loading state
     messagesContainer.innerHTML = `
-                    < div style = "height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8;" >
+        <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8;">
             <div class="loader-spinner" style="margin-bottom: 1rem; border-width: 3px; width: 32px; height: 32px;"></div>
             <p>Loading conversation...</p>
-        </div >
-                    `;
+        </div>
+    `;
 
     loadAdminMessages();
-    
+
     // Highlight active item
     document.querySelectorAll('.chat-list-item').forEach(item => {
         item.classList.remove('active');
-        if(item.getAttribute('data-user-id') == userId && item.getAttribute('data-store-name') == storeName) {
+        if (item.getAttribute('data-user-id') == userId && item.getAttribute('data-store-name') == storeName) {
             item.classList.add('active');
         }
     });
@@ -445,38 +443,38 @@ function selectChat(userId, storeName, customerName) {
 async function loadAdminMessages() {
     if (!activeChatUser || !activeChatStore) return;
     try {
-        const res = await fetch(`get_admin_chat_messages.php ? user_id = ${ activeChatUser }& store_name=${ encodeURIComponent(activeChatStore) } `);
+        const res = await fetch(`get_admin_chat_messages.php?user_id=${activeChatUser}&store_name=${encodeURIComponent(activeChatStore)}`);
         const data = await res.json();
         const msgContainer = document.getElementById('admin-chat-messages');
 
         if (data.success) {
             if (data.messages.length === 0) {
-                 msgContainer.innerHTML = `
-                    < div style = "text-align: center; margin-top: 3rem; color: #94a3b8;" >
+                msgContainer.innerHTML = `
+                    <div style="text-align: center; margin-top: 3rem; color: #94a3b8;">
                         <p>No messages yet.</p>
                         <p style="font-size: 0.85rem;">Start the conversation with ${activeChatStore}!</p>
-                    </div > `;
+                    </div>`;
             } else {
                 msgContainer.innerHTML = data.messages.map(m => {
                     const isAdmin = m.sender_type === 'admin';
                     return `
-                    < div style = "display: flex; flex-direction: column; align-items: ${isAdmin ? 'flex-end' : 'flex-start'}; margin-bottom: 0.5rem;" >
+                    <div style="display: flex; flex-direction: column; align-items: ${isAdmin ? 'flex-end' : 'flex-start'}; margin-bottom: 0.5rem;">
                          <div class="message-bubble ${isAdmin ? 'message-admin' : 'message-customer'}">
                             ${m.message}
                         </div>
                         <span style="font-size: 0.7rem; color: #94a3b8; margin-top: 0.35rem; margin-right: 0.5rem; margin-left: 0.5rem;">
-                            ${m.timestamp || (m.created_at ? new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '')}
+                            ${m.timestamp || (m.created_at ? new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '')}
                         </span>
-                    </div >
-                    `}).join('');
+                    </div>
+                `}).join('');
                 // Scroll to bottom
                 msgContainer.scrollTop = msgContainer.scrollHeight;
             }
         }
-    } catch (e) { 
-        console.error(e); 
+    } catch (e) {
+        console.error(e);
         const msgContainer = document.getElementById('admin-chat-messages');
-        if(msgContainer) msgContainer.innerHTML = '<div style="text-align:center; color: red;">Error loading messages.</div>';
+        if (msgContainer) msgContainer.innerHTML = '<div style="text-align:center; color: red;">Error loading messages.</div>';
     }
 }
 
@@ -491,9 +489,9 @@ async function sendAdminChatReply(event) {
     const tempDiv = document.createElement('div');
     tempDiv.style.cssText = "display: flex; flex-direction: column; align-items: flex-end; margin-bottom: 0.5rem; opacity: 0.7;";
     tempDiv.innerHTML = `
-                    < div class="message-bubble message-admin" > ${ msg }</div >
-                        <span style="font-size: 0.7rem; color: #94a3b8; margin-top: 0.35rem; margin-right: 0.5rem;">Sending...</span>
-                `;
+        <div class="message-bubble message-admin">${msg}</div>
+        <span style="font-size: 0.7rem; color: #94a3b8; margin-top: 0.35rem; margin-right: 0.5rem;">Sending...</span>
+    `;
     msgContainer.appendChild(tempDiv);
     msgContainer.scrollTop = msgContainer.scrollHeight;
 
@@ -503,14 +501,14 @@ async function sendAdminChatReply(event) {
     formData.append('message', msg);
 
     input.value = '';
-    
+
     try {
         const res = await fetch('send_chat_reply.php', { method: 'POST', body: formData });
         const data = await res.json();
         if (data.success) {
             loadAdminMessages(); // Refresh to show real frame
         } else {
-            tempDiv.innerHTML = `< div style = "color: red; font-size: 0.8rem;" > Failed to send.Retrying...</div > `;
+            tempDiv.innerHTML = `<div style="color: red; font-size: 0.8rem;">Failed to send. Retrying...</div>`;
         }
     } catch (e) { console.error(e); }
 }
@@ -523,7 +521,7 @@ function renderCustomersModule() {
     const customerRows = (window.customersData || []).map(c => {
         const statusClass = c.status === 'Active' ? 'active' : (c.status === 'Banned' ? 'cancelled' : 'inactive');
         return `
-            < tr >
+            <tr>
                 <td>${c.full_name}</td>
                 <td>${c.email}</td>
                 <td>${c.phone_number || 'N/A'}</td>
@@ -535,32 +533,32 @@ function renderCustomersModule() {
                         <i data-lucide="message-square" style="width: 1rem; height: 1rem;"></i>
                     </button>
                 </td>
-            </tr >
-                `;
+            </tr>
+        `;
     }).join('');
 
     content.innerHTML = `
-                < h2 class= "page-header" > Customer Management</h2 >
-            <div class="kpi-card p-6">
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Orders</th>
-                                <th>Status</th>
-                                <th>Joined</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${(window.customersData || []).length > 0 ? customerRows : `<tr><td colspan="7" class="text-center py-4">No customers found.</td></tr>`}
-                        </tbody>
-                    </table>
-                </div>
+        <h2 class="page-header">Customer Management</h2>
+        <div class="kpi-card p-6">
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Orders</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${(window.customersData || []).length > 0 ? customerRows : `<tr><td colspan="7" class="text-center py-4">No customers found.</td></tr>`}
+                    </tbody>
+                </table>
             </div>
+        </div>
     `;
     lucide.createIcons();
 }
@@ -569,7 +567,7 @@ function startChatWithCustomer(userId, customerName) {
     renderChatModule();
     // Default store name for support-initiated chats
     activeChatUser = userId;
-    activeChatStore = "General Support"; 
+    activeChatStore = "General Support";
     selectChat(userId, activeChatStore, customerName);
 }
 
@@ -593,7 +591,7 @@ function showSubModule(module, submodule) {
 setInterval(() => {
     if (activeSubmodule === 'tickets') fetchSupportTickets();
     if (activeModule === 'chat') {
-        loadAdminChatList(); 
+        loadAdminChatList();
         if (activeChatUser) loadAdminMessages();
     }
 }, 3000);
