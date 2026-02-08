@@ -1,8 +1,7 @@
 <?php
 // CustomerSupport/get_unread_chat_count.php
 session_start();
-require_once('../Database/config.php');
-
+require_once __DIR__ . '/connection.php';
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['support_logged_in']) || $_SESSION['support_logged_in'] !== true) {
@@ -10,14 +9,13 @@ if (!isset($_SESSION['support_logged_in']) || $_SESSION['support_logged_in'] !==
     exit();
 }
 
-$sql = "SELECT COUNT(*) as unread_count FROM store_chat_messages WHERE sender_type = 'customer' AND is_read = 0";
-$result = mysqli_query($conn, $sql);
-$unread_count = 0;
-
-if ($result) {
-    $row = mysqli_fetch_assoc($result);
-    $unread_count = $row['unread_count'];
+try {
+    $pdo = get_db_connection();
+    // Count total unread messages from customers
+    $stmt = $pdo->query("SELECT COUNT(*) FROM store_chat_messages WHERE is_read = 0 AND sender_type = 'customer'");
+    $count = $stmt->fetchColumn();
+    echo json_encode(['success' => true, 'unread_count' => $count]);
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'unread_count' => 0]);
 }
-
-echo json_encode(['success' => true, 'unread_count' => $unread_count]);
 ?>

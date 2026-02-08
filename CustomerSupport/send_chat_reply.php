@@ -1,7 +1,7 @@
 <?php
 // CustomerSupport/send_chat_reply.php
 session_start();
-require_once('../Database/config.php');
+require_once __DIR__ . '/connection.php';
 
 header('Content-Type: application/json');
 
@@ -19,16 +19,20 @@ if (empty($user_id) || empty($store_name) || empty($message)) {
     exit();
 }
 
-$user_id_esc = mysqli_real_escape_string($conn, $user_id);
-$store_name_esc = mysqli_real_escape_string($conn, $store_name);
-$message_esc = mysqli_real_escape_string($conn, $message);
+try {
+    $pdo = get_db_connection();
 
-$sql = "INSERT INTO store_chat_messages (user_id, store_name, message, sender_type) 
-        VALUES ('$user_id_esc', '$store_name_esc', '$message_esc', 'admin')";
+    // Insert new message
+    $stmt = $pdo->prepare("INSERT INTO store_chat_messages (user_id, store_name, message, sender_type, created_at, is_read) 
+            VALUES (?, ?, ?, 'admin', NOW(), 0)");
+    
+    if ($stmt->execute([$user_id, $store_name, $message])) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Database error']);
+    }
 
-if (mysqli_query($conn, $sql)) {
-    echo json_encode(['success' => true]);
-} else {
-    echo json_encode(['success' => false, 'message' => mysqli_error($conn)]);
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
 ?>

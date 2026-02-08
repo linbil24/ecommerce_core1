@@ -1,7 +1,7 @@
 <?php
 // CustomerSupport/get_admin_chat_messages.php
 session_start();
-require_once('../Database/config.php');
+require_once __DIR__ . '/connection.php';
 
 header('Content-Type: application/json');
 
@@ -18,27 +18,27 @@ if (empty($user_id) || empty($store_name)) {
     exit();
 }
 
-$user_id_esc = mysqli_real_escape_string($conn, $user_id);
-$store_name_esc = mysqli_real_escape_string($conn, $store_name);
+try {
+    $pdo = get_db_connection();
 
-// Mark as read
-$update_sql = "UPDATE store_chat_messages SET is_read = 1 
-               WHERE user_id = '$user_id_esc' AND store_name = '$store_name_esc' 
-               AND sender_type = 'customer'";
-mysqli_query($conn, $update_sql);
+    // Mark messages from customer as read
+    $updateStmt = $pdo->prepare("UPDATE store_chat_messages SET is_read = 1 
+                   WHERE user_id = ? AND store_name = ? 
+                   AND sender_type = 'customer'");
+    $updateStmt->execute([$user_id, $store_name]);
 
-$sql = "SELECT message, sender_type, created_at 
-        FROM store_chat_messages 
-        WHERE user_id = '$user_id_esc' AND store_name = '$store_name_esc' 
-        ORDER BY created_at ASC";
+    // Fetch messages sorted by time asc
+    $stmt = $pdo->prepare("SELECT message, sender_type, created_at 
+            FROM store_chat_messages 
+            WHERE user_id = ? AND store_name = ? 
+            ORDER BY created_at ASC");
+    $stmt->execute([$user_id, $store_name]);
+    
+    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$result = mysqli_query($conn, $sql);
-$messages = [];
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $messages[] = $row;
-    }
+    echo json_encode(['success' => true, 'messages' => $messages]);
+
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }
-
-echo json_encode(['success' => true, 'messages' => $messages]);
 ?>

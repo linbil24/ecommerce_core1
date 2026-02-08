@@ -300,13 +300,23 @@ async function loadAdminChatList() {
         const listContainer = document.getElementById('admin-chat-list');
 
         if (data.success && data.chats.length > 0) {
-            listContainer.innerHTML = data.chats.map(chat => {
+            listContainer.innerHTML = data.chats.map((chat, index) => {
                 const safeCustomerName = chat.customer_name || 'Anonymous User';
-                const safeStoreName = (chat.store_name || 'General Support').replace(/'/g, "\\'");
-                const displayName = safeCustomerName.replace(/'/g, "\\'");
+                const storeName = chat.store_name || 'General Support';
+                const timeStr = chat.time_ago || (chat.last_time ? new Date(chat.last_time).toLocaleTimeString() : '');
+
+                // Escape double quotes for data attributes to prevent HTML breakage
+                const storeNameSafe = storeName.replace(/"/g, '&quot;');
+                const customerNameSafe = safeCustomerName.replace(/"/g, '&quot;');
 
                 return `
-                <div onclick="selectChat(${chat.user_id}, '${safeStoreName}', '${displayName}')" style="padding: 1rem 1.25rem; border-bottom: 1px solid #f3f4f6; cursor: pointer; transition: background 0.2s; ${chat.unread_count > 0 ? 'background: #eff6ff;' : ''}" onmouseover="this.style.background='#f8fafc'">
+                <div class="chat-list-item" 
+                     data-user-id="${chat.user_id}" 
+                     data-store-name="${storeNameSafe}" 
+                     data-customer-name="${customerNameSafe}"
+                     style="padding: 1rem 1.25rem; border-bottom: 1px solid #f3f4f6; cursor: pointer; transition: background 0.2s; ${chat.unread_count > 0 ? 'background: #eff6ff;' : ''}" 
+                     onmouseover="this.style.background='#f8fafc'" 
+                     onmouseout="this.style.background='${chat.unread_count > 0 ? '#eff6ff' : 'white'}'">
                     <div style="display: flex; gap: 0.75rem; align-items: center;">
                         <div style="width: 2.5rem; height: 2.5rem; border-radius: 50%; background: ${chat.unread_count > 0 ? '#3b82f6' : '#94a3b8'}; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; flex-shrink: 0;">
                             ${safeCustomerName.charAt(0).toUpperCase()}
@@ -314,9 +324,9 @@ async function loadAdminChatList() {
                         <div style="flex: 1; min-width: 0;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
                                 <div style="font-weight: 600; font-size: 0.875rem; color: #1e293b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${safeCustomerName}</div>
-                                <span style="font-size: 0.7rem; color: #94a3b8;">${chat.time_ago || (chat.last_time ? new Date(chat.last_time).toLocaleTimeString() : '')}</span>
+                                <span style="font-size: 0.7rem; color: #94a3b8;">${timeStr}</span>
                             </div>
-                            <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 2px;">Store: ${chat.store_name}</div>
+                            <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 2px;">Store: ${storeName}</div>
                             <div style="font-size: 0.75rem; color: ${chat.unread_count > 0 ? '#1e293b' : '#94a3b8'}; font-weight: ${chat.unread_count > 0 ? '600' : '400'}; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${chat.last_message}</div>
                         </div>
                         ${chat.unread_count > 0 ? `<div style="width: 10px; height: 10px; background: #3b82f6; border-radius: 50%;"></div>` : ''}
@@ -324,10 +334,21 @@ async function loadAdminChatList() {
                 </div>
             `;
             }).join('');
+
+            // Attach event listeners safely
+            document.querySelectorAll('.chat-list-item').forEach(item => {
+                item.addEventListener('click', function () {
+                    const uid = this.getAttribute('data-user-id');
+                    const store = this.getAttribute('data-store-name');
+                    const name = this.getAttribute('data-customer-name');
+                    selectChat(uid, store, name);
+                });
+            });
+
         } else {
             listContainer.innerHTML = '<div style="padding: 2rem; text-align: center; color: #94a3b8;">No active chats found.</div>';
         }
-    } catch (e) { console.error(e); }
+    } catch (e) { console.error('Error loading chats:', e); }
 }
 
 function selectChat(userId, storeName, customerName) {
