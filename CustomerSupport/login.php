@@ -162,6 +162,37 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
         
         .alert-success { background-color: #dcfce7; color: #166534; border: 1px solid #bbf7d0; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.875rem; }
         .alert-error { background-color: #fee2e2; color: #991b1b; border: 1px solid #fecaca; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.875rem; }
+
+        /* OTP Input Boxes Styles */
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .otp-box {
+            width: 45px;
+            height: 55px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+            color: #1e293b;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .otp-box:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .otp-box:disabled {
+            background-color: #f8fafc;
+            color: #cbd5e1;
+        }
     </style>
 </head>
 <body>
@@ -231,13 +262,20 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="login.php">
+            <form method="POST" action="login.php" id="otpForm">
                 <input type="hidden" name="action" value="otp_verify">
-                <div class="form-group" style="margin-bottom: 1.5rem;">
-                    <input type="text" name="otp_code" required maxlength="6" placeholder="••••••" autocomplete="off"
-                        style="width: 100%; text-align: center; letter-spacing: 0.75rem; font-size: 1.75rem; padding: 0.75rem; border: 2px solid #e2e8f0; border-radius: 8px; font-weight: 700; color: #1e293b; outline: none; transition: border-color 0.2s;">
+                <input type="hidden" name="otp_code" id="hidden_otp_code">
+                
+                <div class="otp-inputs">
+                    <input type="text" class="otp-box" maxlength="1" oninput="handleOtpInput(this, 'otp2')" id="otp1">
+                    <input type="text" class="otp-box" maxlength="1" oninput="handleOtpInput(this, 'otp3')" onkeydown="handleBackspace(event, 'otp1')" id="otp2">
+                    <input type="text" class="otp-box" maxlength="1" oninput="handleOtpInput(this, 'otp4')" onkeydown="handleBackspace(event, 'otp2')" id="otp3">
+                    <input type="text" class="otp-box" maxlength="1" oninput="handleOtpInput(this, 'otp5')" onkeydown="handleBackspace(event, 'otp3')" id="otp4">
+                    <input type="text" class="otp-box" maxlength="1" oninput="handleOtpInput(this, 'otp6')" onkeydown="handleBackspace(event, 'otp4')" id="otp5">
+                    <input type="text" class="otp-box" maxlength="1" oninput="handleOtpInput(this, 'submit')" onkeydown="handleBackspace(event, 'otp5')" id="otp6">
                 </div>
-                <button type="submit" class="btn-base btn-primary w-full" style="justify-content: center;">Verify & Login</button>
+
+                <button type="button" onclick="submitOtp()" class="btn-base btn-primary w-full" style="justify-content: center;">Verify & Login</button>
             </form>
 
             <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #f1f5f9;">
@@ -254,12 +292,46 @@ if (isset($_GET['action']) && $_GET['action'] === 'return_to_login') {
         window.addEventListener('load', () => {
             setTimeout(() => { document.getElementById('loader-overlay').classList.add('hidden-loader'); }, 600);
             
-            // Focus OTP input if modal is open
+            // Focus first OTP input if modal is open
             <?php if ($is_otp_page): ?>
-                const otpInput = document.querySelector('input[name="otp_code"]');
-                if (otpInput) setTimeout(() => otpInput.focus(), 100);
+                const firstOtpInput = document.getElementById('otp1');
+                if (firstOtpInput) setTimeout(() => firstOtpInput.focus(), 100);
             <?php endif; ?>
         });
+
+        // OTP Input Logic
+        function handleOtpInput(current, nextId) {
+            // Only allow numbers
+            current.value = current.value.replace(/[^0-9]/g, '');
+            
+            if (current.value.length === 1) {
+                if (nextId === 'submit') {
+                    // Start verify process? For now just focus out or do nothing
+                    // submitOtp(); // Optional: Auto-submit
+                } else {
+                    document.getElementById(nextId).focus();
+                }
+            }
+        }
+
+        function handleBackspace(event, prevId) {
+            if (event.key === "Backspace" && event.target.value === "") {
+                document.getElementById(prevId).focus();
+            }
+        }
+
+        function submitOtp() {
+            let code = '';
+            for(let i=1; i<=6; i++) {
+                code += document.getElementById('otp'+i).value;
+            }
+            if (code.length === 6) {
+                document.getElementById('hidden_otp_code').value = code;
+                document.getElementById('otpForm').submit();
+            } else {
+                alert("Please enter the complete 6-digit verification code.");
+            }
+        }
     </script>
 </body>
 </html>
